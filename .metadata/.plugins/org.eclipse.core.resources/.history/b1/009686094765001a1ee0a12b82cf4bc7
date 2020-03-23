@@ -1,0 +1,21 @@
+package com.ds.al.ll;
+
+import java.util.Scanner;
+
+public class Starter {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+       int m,data;
+       Scanner sc=new Scanner(System.in);
+       System.out.println("Enter the size of the node");
+       m=sc.nextInt();
+       LinkedLstOps op=new LinkedOpsImpl();
+       for(int i=0;i<m;i++)
+       {
+    	   System.out.println("Enter the data into the node");
+    	   data=sc.nextInt();
+       }
+	}
+
+}

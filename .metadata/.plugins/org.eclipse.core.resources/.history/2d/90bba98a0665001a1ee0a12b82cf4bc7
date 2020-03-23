@@ -1,0 +1,16 @@
+package com.ds.al.linkedLst;
+
+public class LinkedLstOpsImpl implements LinkedLstOps {
+
+	@Override
+	public LinkedLstEntity AddNode(LinkedLstEntity head, int data) {
+		// TODO Auto-generated method stub
+		
+		if(head==null)
+		{
+			
+		}
+		return null;
+	}
+
+}

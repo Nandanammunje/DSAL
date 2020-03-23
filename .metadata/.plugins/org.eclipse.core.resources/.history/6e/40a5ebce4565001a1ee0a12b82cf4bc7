@@ -1,0 +1,5 @@
+package com.ds.al.ll;
+
+public interface LinkedLstOps {
+
+}

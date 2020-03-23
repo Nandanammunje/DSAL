@@ -1,0 +1,11 @@
+package com.ds.al.ll;
+
+public class Starter {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+       int m;
+       System.out.println("Enter the size of the node");
+	}
+
+}

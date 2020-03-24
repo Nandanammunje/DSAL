@@ -1,7 +1,0 @@
-package com.ds.al.ll;
-
-public class LinkedLst {
-
-	private int data;
-	private LinkedLst next;
-}

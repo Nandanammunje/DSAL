@@ -1,5 +1,0 @@
-package com.ds.al.linkedLst;
-
-public interface LinkedLstOps {
-
-}

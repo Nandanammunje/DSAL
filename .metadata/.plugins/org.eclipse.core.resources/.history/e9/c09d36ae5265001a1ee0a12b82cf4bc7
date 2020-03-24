@@ -1,7 +1,0 @@
-package com.ds.al.ll;
-
-public interface LinkedLstOps {
-
-	
-	public LinkedLst AddNode(LinkedLst head,int data);
-}

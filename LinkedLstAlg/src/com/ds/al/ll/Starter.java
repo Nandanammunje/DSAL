@@ -7,7 +7,7 @@ public class Starter {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
        int m,data;
-       LinkedLst head=null,median;
+       LinkedLst head=null,median,fastnode,slownode;
        Scanner sc=new Scanner(System.in);
        System.out.println("Enter the size of the node");
        m=sc.nextInt();
@@ -18,11 +18,14 @@ public class Starter {
     	   data=sc.nextInt();
     	   head=op.AddNode(head, data);
        }
+       slownode=head;
+       fastnode=slownode.getNext();
        median=op.GetMedian(head);
        System.out.println("Median Node is "+median.getData());
      String status=(op.EvenOdd(head)!=null)?"Odd":"Even";
      System.out.println("The List is of "+status +" length");
-       head=op.SwapList(head);
+     //  head=op.SwapList(head);
+     head=LinkedOpsImpl.RecurseSwapList(head,fastnode, slownode);
        for(LinkedLst i=head;i!=null;i=i.getNext())
        {
     	   System.out.println("Data In The Node Is "+i.getData());

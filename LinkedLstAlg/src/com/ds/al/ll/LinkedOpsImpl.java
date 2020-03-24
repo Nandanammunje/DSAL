@@ -62,7 +62,7 @@ public class LinkedOpsImpl implements LinkedLstOps {
 	@Override
 	public LinkedLst SwapList(LinkedLst head) {
 		// TODO Auto-generated method stub
-		LinkedLst slownode=null,fastnode=null,slownxt=null,fastnxt=null;
+		LinkedLst slownode=null,fastnode=null,fastnxt=null;
 		slownode=head;
 	    fastnode=slownode.getNext();
 	    while(fastnode!=null)
@@ -93,5 +93,32 @@ public class LinkedOpsImpl implements LinkedLstOps {
 		return head;
 		
 	}
-
+	public static LinkedLst RecurseSwapList(LinkedLst head,LinkedLst fastnode,LinkedLst slownode)
+	{
+		LinkedLst fastnxt;
+		if(head==null || fastnode==null)
+		{
+			return head;
+		}
+		if(slownode==head)
+		{
+			fastnxt=fastnode.getNext();
+			slownode.setNext(fastnxt);
+			fastnode.setNext(slownode);
+			head=fastnode;
+			fastnode=fastnxt;
+		return	RecurseSwapList(head, fastnode, slownode);
+		
+		}
+		else
+		{
+		fastnxt=fastnode.getNext();
+ 		slownode.setNext(fastnxt);
+ 		fastnode.setNext(fastnxt.getNext());
+ 		fastnxt.setNext(fastnode);
+ 		slownode=fastnode;
+ 		fastnode=fastnode.getNext();
+ 		return RecurseSwapList(head, fastnode, slownode);
+	}
+	}
 }

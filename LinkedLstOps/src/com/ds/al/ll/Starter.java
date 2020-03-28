@@ -18,12 +18,16 @@ public class Starter {
         	   data=sc.nextInt();
         	   head=op.AddNode(head, data);
            }
-           System.out.println("Enter the block number");
+           head=op.ReorderList(head);
+           for(LinkedLst i=head;i!=null;i=i.getNext())
+        	   System.out.println(i.getData());
+        /*   System.out.println("Enter the block number");
            nodesize=sc.nextInt();
+          
            head=op.ReverseNode(head,nodesize);
            
            for(LinkedLst i=head;i!=null;i=i.getNext())
-        	   System.out.println(i.getData());
+        	   System.out.println(i.getData());*/
            sc.close();
 	}
 

@@ -1,5 +1,6 @@
 package com.ds.al.starter;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.ds.al.Op.LinkedLstOp;
@@ -11,7 +12,8 @@ public class Starter {
 	public static void main(String[] args) {
      		// TODO Auto-generated method stub
            int data,m;
-           LinkedLstEntity head=null;
+          
+           LinkedLstEntity head=null,start=null,end=null;
            Scanner sc=new Scanner(System.in);
            System.out.println("Enter the size of the list");
            m=sc.nextInt();
@@ -23,10 +25,15 @@ public class Starter {
         	   head=op.AddNode(head, data);
         	   
            }
-           LinkedLstEntity fast,slow;
-           fast=slow=head;
+          
+       List<LinkedLstEntity> list=op.SplitNode(head, start, end);
+        head=list.get(0);
+        start=list.get(1);
+        //op.CheckPallindrome(head, start);
+      
+        System.out.println(op.CheckPallindrome(head, start));
         
-           System.out.println(slow.getData());
+        
            sc.close();
 	}
 

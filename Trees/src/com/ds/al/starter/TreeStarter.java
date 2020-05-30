@@ -11,6 +11,7 @@ public class TreeStarter {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		List<Integer> lst;
 		int size, data;
 		TreeEntity root;
 		TreeEntity entity = new TreeEntity();
@@ -27,7 +28,8 @@ public class TreeStarter {
 		root = entity.GetRoot();
 		TraversalOps op = new TraversalOpsImpl();
 		//op.PostorderTraversal(root);
-		List<Integer> lst = op.PreorderTraversalIterative(root);
+	    // lst = op.PreorderTraversalIterative(root);
+		lst=op.InorderTraversalIterative(root);
 		for (Integer i : lst)
 			System.out.println(i);
 

@@ -11,5 +11,6 @@ public interface TraversalOps {
 	public void PostorderTraversal(TreeEntity root);
 	public List<Integer> PreorderTraversalIterative(TreeEntity root);
 	public List<Integer> InorderTraversalIterative(TreeEntity root);
+	public List<Integer> PostOrderTraversalIterartive(TreeEntity root);
 	
 }

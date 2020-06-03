@@ -87,26 +87,35 @@ public class TraversalOpsImpl implements TraversalOps {
 	@Override
 	public List<Integer> PostOrderTraversalIterartive(TreeEntity root) {
 		// TODO Auto-generated method stub
-		TreeEntity left, right;
+		TreeEntity prev=null,currprev=null;
 		Stack<TreeEntity> Treestack = new Stack<TreeEntity>();
 		List<Integer> PostOrderList = new ArrayList<Integer>();
 		Treestack.add(root);
-		boolean done=false;
-		while(!done)
-		{
-		if(root!=null)
-		{
-			root=root.getLeft();
-			Treestack.push(root);
-		}
-		else
-		{
+		boolean done =Boolean.FALSE;
+		while (!done) {
+			if (root.getLeft() != null && root.getLeft() != prev &&root.getLeft()!=currprev && root.getRight()!=prev) {
+                  root = root.getLeft();
+                  Treestack.add(root);
+
+			} else if (root.getRight() != null && root.getRight() != prev && root.getRight()!=currprev) {
+				root = root.getRight();
+				Treestack.add(root);
+				} 
 			
-		}
-		
-		}
-	
+			else {
+				if (!Treestack.empty()) {
+					PostOrderList.add(root.getData());
+					currprev=prev;
+					prev = root;
+					Treestack.pop();
+					if(Treestack.isEmpty())
+						break;
+					root=Treestack.peek();
+				}
+				else
+				done=Boolean.TRUE;
+			}
+			}
 		return PostOrderList;
 	}
-
 }

@@ -2,8 +2,10 @@ package com.ds.al.traversal;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
+import com.ds.al.entity.QueueEntity;
 import com.ds.al.entity.TreeEntity;
 
 public class TraversalOpsImpl implements TraversalOps {
@@ -117,5 +119,37 @@ public class TraversalOpsImpl implements TraversalOps {
 			}
 			}
 		return PostOrderList;
+	}
+
+	@Override
+	public List<Integer> LevelOrderTraversalIterative(TreeEntity root) {
+		// TODO Auto-generated method stub
+		TreeEntity node=null;
+	  QueueEntity TreeQueue=new QueueEntity();
+	  TreeQueue.Enqueue(root);
+	  List<Integer> LevelOrderList=new ArrayList<Integer>();
+	  while(!TreeQueue.IsEmpty())
+	  {
+		  try {
+			node=TreeQueue.Dequeue();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		  
+		if(node!=null)
+		{
+			LevelOrderList.add(node.getData());
+			if(node.getLeft()!=null)
+			TreeQueue.Enqueue(node.getLeft());
+			if(node.getRight()!=null)
+			TreeQueue.Enqueue(node.getRight());
+		}
+		
+			
+	  }
+		
+		
+		return LevelOrderList;
 	}
 }

@@ -30,7 +30,8 @@ public class TreeStarter {
 		//op.PostorderTraversal(root);
 	    // lst = op.PreorderTraversalIterative(root);
 		//lst=op.InorderTraversalIterative(root);
-		lst=op.PostOrderTraversalIterartive(root);
+		//lst=op.PostOrderTraversalIterartive(root);
+		  lst=op.LevelOrderTraversalIterative(root);
 		for (Integer i : lst)
 			System.out.println(i);
 

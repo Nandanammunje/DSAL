@@ -37,6 +37,9 @@ public class TreeStarter {
 		System.out.println("" + status);
 		status = (op.SearchTreeElementIterative(root, SearchData)) ? isfound : notfound;
 		System.out.println(""+status);
+		System.out.println("The size of the Tree is "+op.TreeSizeCalculator(root));
+		System.out.println("The size of the Tree is "+op.TreeSizeCalculatorIterartive(root));
+		System.out.println("The height of the Tree is "+op.GetTreeHeight(root));
 	}
 
 }

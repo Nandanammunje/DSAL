@@ -1,7 +1,7 @@
 package com.ds.al.traversal;
 
 import static java.lang.Integer.MIN_VALUE;
-
+import static java.lang.Math.max;
 import com.ds.al.entity.QueueEntity;
 import com.ds.al.entity.TreeEntity;
 
@@ -119,6 +119,63 @@ public class TraversalOpsImpl implements TraversalOps {
 
 		}
 		return IsFound;
+	}
+     @Override
+	public int TreeSizeCalculator(TreeEntity root) {
+		// TODO Auto-generated method stub
+    	 int count=0;
+    	 if(root!=null)
+    	 {
+    		 count++;
+    		 count=count+TreeSizeCalculator(root.getLeft())+TreeSizeCalculator(root.getRight());
+    	 }
+		return count;
+	}
+
+	@Override
+	public int TreeSizeCalculatorIterartive(TreeEntity root) {
+		// TODO Auto-generated method stub
+		int count=0;
+		TreeEntity node=null;
+		QueueEntity TreeQueue=new QueueEntity();
+		TreeQueue.Enqueue(root);
+		while(!TreeQueue.IsEmpty())
+		{
+			try
+			{
+				node=TreeQueue.Dequeue();
+				
+			}
+			catch(Exception e)
+			{
+				System.out.println(e);
+			}
+			if(node!=null)
+			{
+				count++;
+				if(node.getLeft()!=null)
+				TreeQueue.Enqueue(node.getLeft());
+				if(node.getRight()!=null)
+				TreeQueue.Enqueue(node.getRight());	
+			}
+		}
+		
+		return count;
+	}
+
+	@Override
+	public int GetTreeHeight(TreeEntity root) {
+		// TODO Auto-generated method stub
+		int leftheight=0,rightheight=0;
+		if(root!=null)
+		{
+	       leftheight++;
+	       rightheight++;
+	       leftheight=leftheight+GetTreeHeight(root.getLeft());
+	       rightheight=rightheight+GetTreeHeight(root.getRight());
+		}
+		
+		return max(leftheight, rightheight);
 	}
 
 }

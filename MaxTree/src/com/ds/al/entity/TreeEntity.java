@@ -44,7 +44,7 @@ public class TreeEntity {
 		else
 		{
 			
-			CreateRST(data, RootNode, RootNode, true);
+			CreateBST(data, RootNode, RootNode, true);
 			
 					}
 		
@@ -88,6 +88,44 @@ public class TreeEntity {
 		}
 		
 		
+	}
+	
+	private void CreateBST(int data,TreeEntity node,TreeEntity head,boolean right)
+	{
+		if(node!=null)
+		{
+			if(data > node.getData())
+			{
+				CreateBST(data,node.getRight(),node,true);
+			}
+			else
+			{
+				CreateBST(data, node.getLeft(),node,false);
+			}
+			
+		}
+		else
+		{
+			if(right)
+			{
+				
+				node=new TreeEntity();
+				node.setData(data);
+				node.setLeft(null);
+				node.setRight(null);
+				head.setRight(node);
+				return;
+			}
+			else
+			{
+				node=new TreeEntity();
+				node.setData(data);
+				node.setLeft(null);
+				node.setRight(null);
+				head.setLeft(node);
+				return;
+			}
+		}
 	}
 	
 	public TreeEntity GetRoot()

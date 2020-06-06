@@ -11,8 +11,15 @@ public interface TraversalOps {
 	public int MaxTreeElement(TreeEntity root);
 
 	public int MaxTreeElementIterative(TreeEntity root);
-	
-	public boolean SearchTreeElement(TreeEntity root,int data);
-	public boolean SearchTreeElementIterative(TreeEntity root,int data);
+
+	public boolean SearchTreeElement(TreeEntity root, int data);
+
+	public boolean SearchTreeElementIterative(TreeEntity root, int data);
+
+	public int TreeSizeCalculator(TreeEntity root);
+
+	public int TreeSizeCalculatorIterartive(TreeEntity root);
+
+	public int GetTreeHeight(TreeEntity root);
 
 }

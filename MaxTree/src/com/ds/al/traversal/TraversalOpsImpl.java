@@ -2,6 +2,12 @@ package com.ds.al.traversal;
 
 import static java.lang.Integer.MIN_VALUE;
 import static java.lang.Math.max;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 import com.ds.al.entity.QueueEntity;
 import com.ds.al.entity.TreeEntity;
 
@@ -94,7 +100,7 @@ public class TraversalOpsImpl implements TraversalOps {
 	@Override
 	public boolean SearchTreeElementIterative(TreeEntity root, int data) {
 		// TODO Auto-generated method stub
-		boolean IsFound=Boolean.TRUE;
+		boolean IsFound = Boolean.TRUE;
 		TreeEntity node = null;
 		QueueEntity TreeQueue = new QueueEntity();
 		TreeQueue.Enqueue(root);
@@ -108,9 +114,9 @@ public class TraversalOpsImpl implements TraversalOps {
 			}
 
 			if (node != null) {
-			      IsFound=(node.getData()==data)?Boolean.TRUE:Boolean.FALSE;
-			      if(IsFound)
-			          break;
+				IsFound = (node.getData() == data) ? Boolean.TRUE : Boolean.FALSE;
+				if (IsFound)
+					break;
 				if (node.getLeft() != null)
 					TreeQueue.Enqueue(node.getLeft());
 				if (node.getRight() != null)
@@ -120,62 +126,90 @@ public class TraversalOpsImpl implements TraversalOps {
 		}
 		return IsFound;
 	}
-     @Override
+
+	@Override
 	public int TreeSizeCalculator(TreeEntity root) {
 		// TODO Auto-generated method stub
-    	 int count=0;
-    	 if(root!=null)
-    	 {
-    		 count++;
-    		 count=count+TreeSizeCalculator(root.getLeft())+TreeSizeCalculator(root.getRight());
-    	 }
+		int count = 0;
+		if (root != null) {
+			count++;
+			count = count + TreeSizeCalculator(root.getLeft()) + TreeSizeCalculator(root.getRight());
+		}
 		return count;
 	}
 
 	@Override
 	public int TreeSizeCalculatorIterartive(TreeEntity root) {
 		// TODO Auto-generated method stub
-		int count=0;
-		TreeEntity node=null;
-		QueueEntity TreeQueue=new QueueEntity();
+		int count = 0;
+		TreeEntity node = null;
+		QueueEntity TreeQueue = new QueueEntity();
 		TreeQueue.Enqueue(root);
-		while(!TreeQueue.IsEmpty())
-		{
-			try
-			{
-				node=TreeQueue.Dequeue();
-				
-			}
-			catch(Exception e)
-			{
+		while (!TreeQueue.IsEmpty()) {
+			try {
+				node = TreeQueue.Dequeue();
+
+			} catch (Exception e) {
 				System.out.println(e);
 			}
-			if(node!=null)
-			{
+			if (node != null) {
 				count++;
-				if(node.getLeft()!=null)
-				TreeQueue.Enqueue(node.getLeft());
-				if(node.getRight()!=null)
-				TreeQueue.Enqueue(node.getRight());	
+				if (node.getLeft() != null)
+					TreeQueue.Enqueue(node.getLeft());
+				if (node.getRight() != null)
+					TreeQueue.Enqueue(node.getRight());
 			}
 		}
-		
+
 		return count;
 	}
 
 	@Override
 	public int GetTreeHeight(TreeEntity root) {
 		// TODO Auto-generated method stub
-		int leftheight=0,rightheight=0;
-		if(root!=null)
-		{
-	       leftheight++;
-	       rightheight++;
-	       leftheight=leftheight+GetTreeHeight(root.getLeft());
-	       rightheight=rightheight+GetTreeHeight(root.getRight());
+		int leftheight = 0, rightheight = 0;
+		if (root == null)
+			return 0;
+		if (root != null) {
+
+			leftheight = leftheight + GetTreeHeight(root.getLeft());
+			rightheight = rightheight + GetTreeHeight(root.getRight());
 		}
-		
-		return max(leftheight, rightheight);
+
+		return max(leftheight + 1, rightheight + 1);
+	}
+
+	@Override
+	public int GetTreeHeightIterative(TreeEntity root) {
+		// TODO Auto-generated method stub
+		if (root == null)
+			return 0;
+		Stack<TreeEntity> TreeStack = new Stack<TreeEntity>();
+		int height = 0;
+		TreeEntity curr = null, nxt = null;
+		TreeStack.add(root);
+		while (!TreeStack.empty()) {
+			if (root.getLeft() != null && root.getLeft() != curr && root.getLeft() != nxt && root.getRight() != curr) {
+				root = root.getLeft();
+				TreeStack.add(root);
+			} else if (root.getRight() != null && root.getRight() != curr && root.getRight() != nxt) {
+				root = root.getRight();
+				TreeStack.add(root);
+			} else {
+				if (!TreeStack.isEmpty()) {
+					nxt = curr;
+					if (TreeStack.size() > height)
+						height = TreeStack.size();
+					curr = TreeStack.pop();
+					if (!TreeStack.isEmpty())
+						root = TreeStack.peek();
+
+				}
+
+			}
+		}
+
+		return height;
 	}
 
 }

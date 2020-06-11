@@ -21,5 +21,9 @@ public interface TraversalOps {
 	public int TreeSizeCalculatorIterartive(TreeEntity root);
 
 	public int GetTreeHeight(TreeEntity root);
+	 
+	public int GetTreeHeightIterative(TreeEntity root);
+	
+	
 
 }

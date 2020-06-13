@@ -24,6 +24,8 @@ public interface TraversalOps {
 	 
 	public int GetTreeHeightIterative(TreeEntity root);
 	
+	public int TreeGetDeepestNode(TreeEntity root);
+	
 	
 
 }

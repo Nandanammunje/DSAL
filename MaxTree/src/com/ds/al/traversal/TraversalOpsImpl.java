@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import java.util.logging.Level;
 
 import com.ds.al.entity.QueueEntity;
 import com.ds.al.entity.TreeEntity;
@@ -74,6 +75,7 @@ public class TraversalOpsImpl implements TraversalOps {
 			if (node != null) {
 				max = (max < node.getData()) ? node.getData() : max;
 				if (node.getLeft() != null)
+	
 					TreeQueue.Enqueue(node.getLeft());
 				if (node.getRight() != null)
 					TreeQueue.Enqueue(node.getRight());
@@ -210,6 +212,32 @@ public class TraversalOpsImpl implements TraversalOps {
 		}
 
 		return height;
+	}
+
+	@Override
+	public int TreeGetDeepestNode(TreeEntity root) {
+		// TODO Auto-generated method stub
+		TreeEntity node=null;
+		int data=0;
+		QueueEntity LevelQueue=new QueueEntity();
+		LevelQueue.Enqueue(root);
+		while(!LevelQueue.IsEmpty())
+		{
+		     try {
+				node=LevelQueue.Dequeue();
+				data=node.getData();
+				if(node.getLeft()!=null)
+				LevelQueue.Enqueue(node.getLeft());
+				if(node.getRight()!=null)
+				LevelQueue.Enqueue(node.getRight());	
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}         	
+		}
+		
+		return data;
+		
 	}
 
 }

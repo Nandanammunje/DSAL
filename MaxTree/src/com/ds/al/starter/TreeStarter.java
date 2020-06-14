@@ -17,7 +17,6 @@ public class TreeStarter {
 		TreeEntity root = null;
 		String isfound = "Element exist in the tree";
 		String notfound = "Element does not exist in the tree";
-	     List<String> filename = null;
 		TreeEntity tree = new TreeEntity();
 		System.out.println("Enter the size of the tree");
 		Scanner sc = new Scanner(System.in);
@@ -32,7 +31,6 @@ public class TreeStarter {
 		sc.close();
 		root = tree.GetRoot();
 		TraversalOps op = new TraversalOpsImpl();
-		
 		op.InorderTravsersal(root);
 		op.PreorderTraversal(root);
 		System.out.println("Maximum Tree Element is " + op.MaxTreeElement(root));
@@ -40,12 +38,15 @@ public class TreeStarter {
 		String status = (op.SearchTreeElement(root, SearchData)) ? isfound : notfound;
 		System.out.println("" + status);
 		status = (op.SearchTreeElementIterative(root, SearchData)) ? isfound : notfound;
-		System.out.println(""+status);
-		System.out.println("The size of the Tree is "+op.TreeSizeCalculator(root));
-		System.out.println("The size of the Tree is "+op.TreeSizeCalculatorIterartive(root));
-		System.out.println("The height of the Tree is "+op.GetTreeHeight(root));
-		System.out.println("The height of the Tree is "+op.GetTreeHeightIterative(root));
-		System.out.println("The deepest node is "+op.TreeGetDeepestNode(root));
+		System.out.println("" + status);
+		System.out.println("The size of the Tree is " + op.TreeSizeCalculator(root));
+		System.out.println("The size of the Tree is " + op.TreeSizeCalculatorIterartive(root));
+		System.out.println("The height of the Tree is " + op.GetTreeHeight(root));
+		System.out.println("The height of the Tree is " + op.GetTreeHeightIterative(root));
+		System.out.println("The deepest node is " + op.TreeGetDeepestNode(root));
+		System.out.println("No of Half Nodes is " + op.GetHalfNodes(root));
+		System.out.println("No of Leaf Nodes is " + op.GetLeafNodes(root));
+		System.out.println("No of Full Nodes is "+op.GetFullNodes(root));
 	}
 
 }

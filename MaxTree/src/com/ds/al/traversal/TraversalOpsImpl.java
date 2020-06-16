@@ -285,4 +285,32 @@ public class TraversalOpsImpl implements TraversalOps {
 		return count;
 	}
 
+	@Override
+	public int GetHalfNodesIterative(TreeEntity root) {
+		// TODO Auto-generated method stub
+		TreeEntity node = null;
+		int count = 0;
+		QueueEntity queue = new QueueEntity();
+		queue.Enqueue(root);
+		while (!queue.IsEmpty()) {
+			try {
+				node = queue.Dequeue();
+				if (node.getLeft() != null) {
+					queue.Enqueue(node.getLeft());
+					if (node.getRight() == null)
+						count++;
+				}
+				if (node.getRight() != null) {
+					queue.Enqueue(node.getRight());
+					if (node.getLeft() == null)
+						count++;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
+
 }

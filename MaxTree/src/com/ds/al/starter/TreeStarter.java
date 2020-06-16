@@ -47,6 +47,7 @@ public class TreeStarter {
 		System.out.println("No of Half Nodes is " + op.GetHalfNodes(root));
 		System.out.println("No of Leaf Nodes is " + op.GetLeafNodes(root));
 		System.out.println("No of Full Nodes is "+op.GetFullNodes(root));
+		System.out.println("No of Half Nodes is "+op.GetHalfNodesIterative(root));
 	}
 
 }

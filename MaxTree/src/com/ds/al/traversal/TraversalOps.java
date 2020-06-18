@@ -31,7 +31,11 @@ public interface TraversalOps {
 	public int GetLeafNodes(TreeEntity root);
 
 	public int GetFullNodes(TreeEntity root);
-	
+
 	public int GetHalfNodesIterative(TreeEntity root);
+
+	public int GetLeafNodesIterative(TreeEntity root);
+
+	public int GetFullNodesIterative(TreeEntity root);
 
 }

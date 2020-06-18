@@ -313,4 +313,65 @@ public class TraversalOpsImpl implements TraversalOps {
 		return count;
 	}
 
+	@Override
+	public int GetLeafNodesIterative(TreeEntity root) {
+		// TODO Auto-generated method stub
+		TreeEntity node = null;
+		int count = 0;
+		QueueEntity queue = new QueueEntity();
+		queue.Enqueue(root);
+
+		while (!queue.IsEmpty()) {
+			try {
+				node = queue.Dequeue();
+				if (node.getLeft() != null) {
+					queue.Enqueue(node.getLeft());
+
+				}
+				if (node.getRight() != null) {
+					queue.Enqueue(node.getRight());
+
+				} else if (node.getRight() == null && node.getLeft() == null) {
+					count++;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return count;
+
+	}
+
+	public int GetFullNodesIterative(TreeEntity root) {
+		TreeEntity node = null;
+		int count = 0;
+		QueueEntity queue = new QueueEntity();
+		queue.Enqueue(root);
+
+		while (!queue.IsEmpty()) {
+			try {
+				node = queue.Dequeue();
+				if (node.getRight() != null && node.getLeft() != null) {
+					count++;
+					queue.Enqueue(node.getLeft());
+					queue.Enqueue(node.getRight());
+				} else {
+					if (node.getLeft() != null) {
+						queue.Enqueue(node.getLeft());
+
+					}
+					if (node.getRight() != null) {
+						queue.Enqueue(node.getRight());
+
+					}
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
+
 }

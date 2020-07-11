@@ -1,25 +1,38 @@
 package com.ds.al.trees;
 
-import static java.lang.Boolean.TRUE;
-
-import com.ds.al.entity.constants.Constants;
-
 import static java.lang.Boolean.FALSE;
-import static java.lang.Math.random;
+import static java.lang.Boolean.TRUE;
 
 public class TreeEntity {
 
-	private int data;
+	private int Data;
+	private TreeEntity Root;
 	private TreeEntity Left;
 	private TreeEntity Right;
-	private TreeEntity root;
+	private static TreeCreateHelper GetRankMap;
 
 	private int getData() {
-		return data;
+		return Data;
 	}
 
 	private void setData(int data) {
-		this.data = data;
+		Data = data;
+	}
+
+	private void SetRank() {
+
+		if (GetRankMap == null) {
+			GetRankMap = new TreeCreateHelper();
+
+		}
+	}
+
+	public TreeEntity getRoot() {
+		return Root;
+	}
+
+	private void setRoot(TreeEntity root) {
+		Root = root;
 	}
 
 	private TreeEntity getLeft() {
@@ -38,82 +51,47 @@ public class TreeEntity {
 		Right = right;
 	}
 
-	public TreeEntity getRoot() {
-		return root;
-	}
+	public void AddNode(int data) {
 
-	private void setRoot(TreeEntity root) {
-		this.root = root;
-	}
+		if (Root == null) {
+			Root = new TreeEntity();
+			Root.setData(data);
+			Root.setLeft(null);
+			Root.setRight(null);
+			SetRank();
 
-	public void AddNode(int data, String type) {
-		if (root == null) {
-			root = new TreeEntity();
-			root.setData(data);
-			root.setLeft(null);
-			root.setRight(null);
 		} else {
-
-			if (type.equalsIgnoreCase(Constants.BST)) {
-				CreateBST(data, root, root, TRUE);
-			}
-			else if(type.equalsIgnoreCase(Constants.BT))
-			{
-				CreateBT(data, root, root, TRUE);
-			}
+			
+			CreateBT(data,Root,Root,TRUE);
 
 		}
-
 	}
 
-	private void CreateBST(int data, TreeEntity node, TreeEntity head, boolean isRight) {
-		if (node != null) {
-			if (node.getData() < data) {
+	public void CreateBT(int data, TreeEntity head, TreeEntity node, boolean isRight) {
 
-				CreateBST(data, node.getRight(), node, TRUE);
+		if (node != null) {
+			if (GetRankMap.GetRank(node.getData()) > GetRankMap.GetRank(data)) {
+				CreateBT(data, node, node.getLeft(), FALSE);
 			} else {
-				CreateBST(data, node.getLeft(), node, FALSE);
+				CreateBT(data, node, node.getRight(), TRUE);
 			}
 
 		} else {
-			if (isRight) {
-				node = new TreeEntity();
-				node.setData(data);
-				node.setLeft(null);
-				node.setRight(null);
-				head.setRoot(node);
-			} else {
-
-				node = new TreeEntity();
-				node.setData(data);
-				node.setLeft(null);
-				node.setRight(null);
-				head.setLeft(node);
-			}
-			return;
-		}
-
-	}
-
-	private void CreateBT(int data, TreeEntity node, TreeEntity head, boolean isRight) {
-		if (node != null) {
-			if (random() * 10 > 4) {
-				CreateBT(data, node.getRight(), node, TRUE);
-			} else {
-				CreateBT(data, node.getLeft(), node, FALSE);
-			}
-
-		} else {
-            node = new TreeEntity();
+			node = new TreeEntity();
 			node.setData(data);
 			node.setLeft(null);
 			node.setRight(null);
-			if (isRight)
-				head.setRight(node);
+			
+			if (isRight) {
+              head.setRight(node);  
+			}
 			else
+			{
 				head.setLeft(node);
+			}
+			
+            return;
 		}
 
 	}
-
 }

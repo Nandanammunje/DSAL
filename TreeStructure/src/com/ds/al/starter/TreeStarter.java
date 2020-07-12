@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+import com.ds.al.traversal.TraversalOps;
+import com.ds.al.traversal.TraversalOpsImpl;
 import com.ds.al.trees.TreeCreateHelper;
 import com.ds.al.trees.TreeEntity;
 
@@ -17,6 +19,7 @@ public class TreeStarter {
 		TreeEntity Tree=new TreeEntity();
 		List<Integer> PreorderList = new ArrayList<Integer>();
 		HashMap<Integer, Integer> map = new HashMap<>();
+		TraversalOps op=new TraversalOpsImpl();
 		int data, length;
 		System.out.println("Enter the size of the tree");
 		length = sc.nextInt();
@@ -31,13 +34,16 @@ public class TreeStarter {
 			data = sc.nextInt();
 			map.put(data, i);
 		}
+		sc.close();
 		help.SetRankMap(map);
 		
 		for (Integer i : PreorderList) {
           Tree.AddNode(i);
 		}
-
-		sc.close();
+     System.out.println("Inorder Traversal is ");
+     op.InorderTravsersal(Tree.getRoot());
+     System.out.println("Preorder Traversal is ");
+     op.PreorderTraversal(Tree.getRoot());
 	}
 
 }

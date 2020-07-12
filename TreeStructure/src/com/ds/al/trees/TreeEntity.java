@@ -11,7 +11,7 @@ public class TreeEntity {
 	private TreeEntity Right;
 	private static TreeCreateHelper GetRankMap;
 
-	private int getData() {
+	public int getData() {
 		return Data;
 	}
 
@@ -31,11 +31,7 @@ public class TreeEntity {
 		return Root;
 	}
 
-	private void setRoot(TreeEntity root) {
-		Root = root;
-	}
-
-	private TreeEntity getLeft() {
+	public TreeEntity getLeft() {
 		return Left;
 	}
 
@@ -43,7 +39,7 @@ public class TreeEntity {
 		Left = left;
 	}
 
-	private TreeEntity getRight() {
+	public TreeEntity getRight() {
 		return Right;
 	}
 
@@ -61,8 +57,8 @@ public class TreeEntity {
 			SetRank();
 
 		} else {
-			
-			CreateBT(data,Root,Root,TRUE);
+
+			CreateBT(data, Root, Root, TRUE);
 
 		}
 	}
@@ -81,16 +77,14 @@ public class TreeEntity {
 			node.setData(data);
 			node.setLeft(null);
 			node.setRight(null);
-			
+
 			if (isRight) {
-              head.setRight(node);  
-			}
-			else
-			{
+				head.setRight(node);
+			} else {
 				head.setLeft(node);
 			}
-			
-            return;
+
+			return;
 		}
 
 	}

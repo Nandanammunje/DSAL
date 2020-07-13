@@ -26,9 +26,9 @@ public class TreeOpsImpl implements TreeOps {
 		if(root==null)
 			return 0;
 		int maxheight=GetTreeHeight(root.getLeft())+GetTreeHeight(root.getRight())+1;
-		                                                        
 		Diameter=max(Diameter,maxheight);
-		
+		GetTreeDiameter(root.getLeft());
+		GetTreeDiameter(root.getRight());
 		return Diameter;
 	}
 	

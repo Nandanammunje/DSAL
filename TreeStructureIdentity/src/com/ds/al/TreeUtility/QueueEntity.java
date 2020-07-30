@@ -1,30 +1,27 @@
 package com.ds.al.TreeUtility;
 
 import com.ds.al.tree.TreeEntity;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 
 /**
- * @author nandannayak
- * This is the main class of queue holding tree data
+ * @author nandannayak This is the main class of queue holding tree data
  */
 public class QueueEntity {
 
-	private LinkedLstEntity front, rear;
+	private LinkedLstEntity front, rear,head;
 
 	private int length;
 
-	
-	
 	/**
-	 *  initialization
+	 * initialization of front and rear objects and setting length to zero
 	 */
 	public QueueEntity() {
-		front = rear = null;
+		head=front = rear = null;
 		length = 0;
 
 	}
 
-	
-	
 	/**
 	 * @param treeNode is the tree data to be pushed into the queue
 	 * 
@@ -34,13 +31,16 @@ public class QueueEntity {
 		if (front == null) {
 			front = node.AddNode(front, treeNode);
 			rear = front;
-
+            head=front;
 		} else
 			rear = node.AddNode(front, treeNode);
 
 		length++;
 
 	}
+	
+	
+	
 
 	/**
 	 * @return deletes the first member of the queue
@@ -55,6 +55,7 @@ public class QueueEntity {
 			currNodeData = front.getNode();
 			nxtNode = front.getNext();
 			front = nxtNode;
+			
 			length--;
 
 			return currNodeData;
@@ -94,5 +95,49 @@ public class QueueEntity {
 		}
 
 	}
+    
+	/**
+	 * @returns True if Queue is empty
+	 */
+	public  boolean isEmpty() {
+		if (length == 0) {
+			return TRUE;
+		}
+
+		return FALSE;
+
+	}
+
+	/**
+	 * @returns the size of the Queue
+	 */
+	public int getSize()
+	{
+		return length;
+	}
+	
+	
+	
+	
+	
+	
+    /**
+     * @returns the next node of the queue
+     */
+    public TreeEntity getNextNode()
+    {
+    	if(head==null)
+    	{
+    		head=front;
+    	}
+    	else
+    	{
+    		head=head.getNext();
+    	}
+    	return  head.getNode();
+    	
+    }
+      
+	
 
 }

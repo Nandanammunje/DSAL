@@ -31,7 +31,8 @@ public class StartTree {
 		System.out.println(root2.getData());
 		System.out.println("Output on Comparing TreeStructure " + op.CompareTreeStructure(root1, root2));
 	    System.out.println("Diameter of the Tree "+op.GetTreeDiameter(root1));
-		System.out.println("Diameter of the Tree is "+op.GetTeeDiamterUtility(root1));
+		System.out.println("Diameter of the Tree is "+op.GetTeeDiamterUtility(root1)); 
+		System.out.println("maximum level order sum is "+op.getMaxLevelSum(root1));
 	
 	}
 

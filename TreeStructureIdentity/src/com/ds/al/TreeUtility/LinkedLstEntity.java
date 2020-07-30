@@ -3,8 +3,9 @@ package com.ds.al.TreeUtility;
 import com.ds.al.tree.TreeEntity;
 
 /**
- * @author nandannayak
- * This is utitily class for queue entity where queue is created using LinkedList
+ * @author nandannayak 
+ * This is utitily class for queue entity where queue is
+ *  created using LinkedList
  */
 public class LinkedLstEntity {
 
@@ -28,9 +29,9 @@ public class LinkedLstEntity {
 	}
 
 	/**
-	 * @param head is starting member of the queue
+	 * @param head     is starting member of the queue
 	 * @param Treenode is Tree data to be pushed into the queue
-	 * @return
+	 * @returns the first member of the list i.e is head
 	 */
 	public LinkedLstEntity AddNode(LinkedLstEntity head, TreeEntity Treenode) {
 		// TODO Auto-generated method stub

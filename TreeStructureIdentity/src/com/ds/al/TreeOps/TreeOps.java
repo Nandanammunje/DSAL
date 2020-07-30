@@ -9,5 +9,8 @@ public interface TreeOps {
 	public int GetTreeDiameter(TreeEntity root);
 	
 	public int GetTeeDiamterUtility(TreeEntity root) ;
+	
+	public int getMaxLevelSum(TreeEntity root);
+	
 
 }

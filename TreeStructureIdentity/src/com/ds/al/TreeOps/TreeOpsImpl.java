@@ -118,6 +118,8 @@ public class TreeOpsImpl implements TreeOps {
 					sum = 0;
 					treeQueue.Enqueue(null);
 					treeQueue.Dequeue();
+					if(treeQueue.getFirst()==null)
+						break;
 				} else {
 					sum = sum + node.getData();
 					if (node.getLeft() != null)

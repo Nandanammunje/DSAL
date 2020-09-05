@@ -3,12 +3,14 @@ package com.ds.al.TreeOps;
 import static java.lang.Integer.MIN_VALUE;
 import static java.lang.Math.max;
 
+import java.util.List;
+
+import com.ds.al.TreeUtility.LinkedLstEntity;
 import com.ds.al.TreeUtility.QueueEntity;
 import com.ds.al.tree.TreeEntity;;
 
 /**
- * @author nandannayak
- * This class implements the interface TreeOps 
+ * @author nandannayak This class implements the interface TreeOps
  */
 public class TreeOpsImpl implements TreeOps {
 
@@ -16,7 +18,8 @@ public class TreeOpsImpl implements TreeOps {
 	static int maxSum = 0;
 
 	/**
-	 *This function compares the structure of two BST returns true if identical else returns false
+	 * This function compares the structure of two BST returns true if identical
+	 * else returns false
 	 */
 	@Override
 	public boolean CompareTreeStructure(TreeEntity root1, TreeEntity root2) {
@@ -31,8 +34,9 @@ public class TreeOpsImpl implements TreeOps {
 	}
 
 	/**
-	 * This function returns diameter of the tree i.e the maximum distance from one node to another by recursively calculating leftheight 
-	 * + right height +1 for each node  
+	 * This function returns diameter of the tree i.e the maximum distance from one
+	 * node to another by recursively calculating leftheight + right height +1 for
+	 * each node
 	 * 
 	 */
 	@Override
@@ -46,9 +50,9 @@ public class TreeOpsImpl implements TreeOps {
 		GetTreeDiameter(root.getRight());
 		return Diameter;
 	}
-   
+
 	/**
-	 * @param root takes input of root node and calculates height node of the tree 
+	 * @param root takes input of root node and calculates height node of the tree
 	 * @return the height of the tree maximum of left height and right height
 	 */
 	private int GetTreeHeight(TreeEntity root) {
@@ -62,10 +66,13 @@ public class TreeOpsImpl implements TreeOps {
 
 		return (leftheight > rightheight) ? leftheight + 1 : rightheight + 1;
 	}
-    
-	/** optimized version of the code to calculate diameter of the tree
+
+	/**
+	 * optimized version of the code to calculate diameter of the tree
+	 * 
 	 * @param root takes input root of the tree to calculate height of the tree
-	 * @returns the diameter of the tree by calculating height and diameter for each node in the same recursive call
+	 * @returns the diameter of the tree by calculating height and diameter for each
+	 *          node in the same recursive call
 	 */
 	private int GetTreeDiameterOptimized(TreeEntity root) {
 		// TODO Auto-generated method stub
@@ -83,10 +90,8 @@ public class TreeOpsImpl implements TreeOps {
 		return (left > right) ? left + 1 : right + 1;
 	}
 
-	
-	
 	/**
-	 *calls the optimized function to calculate diameter of the tree
+	 * calls the optimized function to calculate diameter of the tree
 	 */
 	@Override
 	public int GetTeeDiamterUtility(TreeEntity root) {
@@ -97,7 +102,8 @@ public class TreeOpsImpl implements TreeOps {
 	}
 
 	/**
-	 *This function calculates the maximum  level order sum by using null as seperator for each level 
+	 * This function calculates the maximum level order sum by using null as
+	 * seperator for each level
 	 */
 	@Override
 	public int getMaxLevelSum(TreeEntity root) {
@@ -118,7 +124,7 @@ public class TreeOpsImpl implements TreeOps {
 					sum = 0;
 					treeQueue.Enqueue(null);
 					treeQueue.Dequeue();
-					if(treeQueue.getFirst()==null)
+					if (treeQueue.getFirst() == null)
 						break;
 				} else {
 					sum = sum + node.getData();
@@ -139,4 +145,35 @@ public class TreeOpsImpl implements TreeOps {
 		return maxSum;
 	}
 
+	private void printArray(String data, int node) {
+		if(data!=null&&!data.isEmpty())
+		{   System.out.println("The path to the node "+node +" is "+data);
+			
+		}
+		
+		
+		
+
+	}
+      @Override
+	public void getRoottoLeafPath(TreeEntity root,int level,String dataString) {
+		// TODO Auto-generated method stub
+		
+		if (root == null)
+			return;
+		if(root.getLeft()==null && root.getRight()==null)
+		{
+			printArray(dataString,root.getData());
+		}
+		else
+		{
+			level++;
+			dataString=dataString+root.getData()+"->";
+			getRoottoLeafPath(root.getLeft(), level,dataString);
+			getRoottoLeafPath(root.getRight(), level,dataString);
+		}
+		
+
+	}
+    
 }

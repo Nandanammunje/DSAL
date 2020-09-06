@@ -147,7 +147,7 @@ public class TreeOpsImpl implements TreeOps {
 
 	private void printArray(String data, int node) {
 		if(data!=null&&!data.isEmpty())
-		{   System.out.println("The path to the node "+node +" is "+data);
+		{   System.out.println("The path to the node "+node +" is "+data+" "+node);
 			
 		}
 		
@@ -155,8 +155,7 @@ public class TreeOpsImpl implements TreeOps {
 		
 
 	}
-      @Override
-	public void getRoottoLeafPath(TreeEntity root,int level,String dataString) {
+      public void getRoottoLeafPath(TreeEntity root,String dataString) {
 		// TODO Auto-generated method stub
 		
 		if (root == null)
@@ -167,10 +166,10 @@ public class TreeOpsImpl implements TreeOps {
 		}
 		else
 		{
-			level++;
+		
 			dataString=dataString+root.getData()+"->";
-			getRoottoLeafPath(root.getLeft(), level,dataString);
-			getRoottoLeafPath(root.getRight(), level,dataString);
+			getRoottoLeafPath(root.getLeft(),dataString);
+			getRoottoLeafPath(root.getRight(),dataString);
 		}
 		
 

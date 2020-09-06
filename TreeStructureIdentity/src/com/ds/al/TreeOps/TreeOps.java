@@ -12,7 +12,7 @@ public interface TreeOps {
 	
 	public int getMaxLevelSum(TreeEntity root);
 	
-	public 	void getRoottoLeafPath(TreeEntity root,int level,String dataString);
+	public 	void getRoottoLeafPath(TreeEntity root,String dataString);
 	
 
 }

@@ -32,7 +32,7 @@ public class StartTree {
 		root2 = root2.GetRootNode();
 		System.out.println(root1.getData());
 		System.out.println(root2.getData());
-		op.getRoottoLeafPath(root1,0,dataStr);
+		op.getRoottoLeafPath(root1,dataStr);
 		System.out.println("Output on Comparing TreeStructure " + op.CompareTreeStructure(root1, root2));
 		System.out.println("Diameter of the Tree " + op.GetTreeDiameter(root1));
 		System.out.println("Diameter of the Tree is " + op.GetTeeDiamterUtility(root1));

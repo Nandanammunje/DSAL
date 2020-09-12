@@ -14,5 +14,9 @@ public interface TreeOps {
 	
 	public 	void getRoottoLeafPath(TreeEntity root,String dataString);
 	
+	public boolean isSumPathExist(TreeEntity root,int pathSum);
+	
+	public int getBTSum(TreeEntity root);
+	
 
 }

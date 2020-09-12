@@ -3,9 +3,6 @@ package com.ds.al.TreeOps;
 import static java.lang.Integer.MIN_VALUE;
 import static java.lang.Math.max;
 
-import java.util.List;
-
-import com.ds.al.TreeUtility.LinkedLstEntity;
 import com.ds.al.TreeUtility.QueueEntity;
 import com.ds.al.tree.TreeEntity;;
 
@@ -24,81 +21,14 @@ public class TreeOpsImpl implements TreeOps {
 	@Override
 	public boolean CompareTreeStructure(TreeEntity root1, TreeEntity root2) {
 		// TODO Auto-generated method stub
-		if (root1 == null && root2 == null)
+		if (root1 == null && root2 == null) {
 			return true;
-		else if (root1 == null || root2 == null)
+		} else if (root1 == null || root2 == null) {
 			return false;
+		}
 
 		return CompareTreeStructure(root1.getLeft(), root2.getLeft())
 				&& CompareTreeStructure(root1.getRight(), root2.getRight());
-	}
-
-	/**
-	 * This function returns diameter of the tree i.e the maximum distance from one
-	 * node to another by recursively calculating leftheight + right height +1 for
-	 * each node
-	 * 
-	 */
-	@Override
-	public int GetTreeDiameter(TreeEntity root) {
-		// TODO Auto-generated method stub
-		if (root == null)
-			return 0;
-		int maxheight = GetTreeHeight(root.getLeft()) + GetTreeHeight(root.getRight()) + 1;
-		Diameter = max(Diameter, maxheight);
-		GetTreeDiameter(root.getLeft());
-		GetTreeDiameter(root.getRight());
-		return Diameter;
-	}
-
-	/**
-	 * @param root takes input of root node and calculates height node of the tree
-	 * @return the height of the tree maximum of left height and right height
-	 */
-	private int GetTreeHeight(TreeEntity root) {
-		// TODO Auto-generated method stub
-
-		if (root == null)
-			return 0;
-
-		int leftheight = GetTreeHeight(root.getLeft());
-		int rightheight = GetTreeHeight(root.getRight());
-
-		return (leftheight > rightheight) ? leftheight + 1 : rightheight + 1;
-	}
-
-	/**
-	 * optimized version of the code to calculate diameter of the tree
-	 * 
-	 * @param root takes input root of the tree to calculate height of the tree
-	 * @returns the diameter of the tree by calculating height and diameter for each
-	 *          node in the same recursive call
-	 */
-	private int GetTreeDiameterOptimized(TreeEntity root) {
-		// TODO Auto-generated method stub
-
-		if (root == null) {
-			return 0;
-		}
-		int left = 0, right = 0;
-
-		left = GetTreeDiameterOptimized(root.getLeft());
-		right = GetTreeDiameterOptimized(root.getRight());
-		if (left + right + 1 > Diameter) {
-			Diameter = left + right + 1;
-		}
-		return (left > right) ? left + 1 : right + 1;
-	}
-
-	/**
-	 * calls the optimized function to calculate diameter of the tree
-	 */
-	@Override
-	public int GetTeeDiamterUtility(TreeEntity root) {
-		// TODO Auto-generated method stub\
-		Diameter = 0;
-		GetTreeDiameterOptimized(root);
-		return Diameter;
 	}
 
 	/**
@@ -124,14 +54,17 @@ public class TreeOpsImpl implements TreeOps {
 					sum = 0;
 					treeQueue.Enqueue(null);
 					treeQueue.Dequeue();
-					if (treeQueue.getFirst() == null)
+					if (treeQueue.getFirst() == null) {
 						break;
+					}
 				} else {
 					sum = sum + node.getData();
-					if (node.getLeft() != null)
+					if (node.getLeft() != null) {
 						treeQueue.Enqueue(node.getLeft());
-					if (node.getRight() != null)
+					}
+					if (node.getRight() != null) {
 						treeQueue.Enqueue(node.getRight());
+					}
 					treeQueue.Dequeue();
 
 				}
@@ -145,34 +78,132 @@ public class TreeOpsImpl implements TreeOps {
 		return maxSum;
 	}
 
-	private void printArray(String data, int node) {
-		if(data!=null&&!data.isEmpty())
-		{   System.out.println("The path to the node "+node +" is "+data+" "+node);
-			
-		}
-		
-		
-		
-
-	}
-      public void getRoottoLeafPath(TreeEntity root,String dataString) {
+	/**
+	 * This function uses inorder Traversal to create a path form root to leaf
+	 */
+	@Override
+	public void getRoottoLeafPath(TreeEntity root, String dataString) {
 		// TODO Auto-generated method stub
-		
-		if (root == null)
+
+		if (root == null) {
 			return;
-		if(root.getLeft()==null && root.getRight()==null)
-		{
-			printArray(dataString,root.getData());
 		}
-		else
-		{
-		
-			dataString=dataString+root.getData()+"->";
-			getRoottoLeafPath(root.getLeft(),dataString);
-			getRoottoLeafPath(root.getRight(),dataString);
+		if (root.getLeft() == null && root.getRight() == null) {
+			printArray(dataString, root.getData());
+		} else {
+
+			dataString = dataString + root.getData() + "->";
+			getRoottoLeafPath(root.getLeft(), dataString);
+			getRoottoLeafPath(root.getRight(), dataString);
 		}
-		
 
 	}
-    
+
+	/**
+	 * calls the optimized function to calculate diameter of the tree
+	 */
+	@Override
+	public int GetTeeDiamterUtility(TreeEntity root) {
+		// TODO Auto-generated method stub\
+		Diameter = 0;
+		GetTreeDiameterOptimized(root);
+		return Diameter;
+	}
+
+	/**
+	 * This function returns diameter of the tree i.e the maximum distance from one
+	 * node to another by recursively calculating leftheight + right height +1 for
+	 * each node
+	 *
+	 */
+	@Override
+	public int GetTreeDiameter(TreeEntity root) {
+		// TODO Auto-generated method stub
+		if (root == null) {
+			return 0;
+		}
+		int maxheight = GetTreeHeight(root.getLeft()) + GetTreeHeight(root.getRight()) + 1;
+		Diameter = max(Diameter, maxheight);
+		GetTreeDiameter(root.getLeft());
+		GetTreeDiameter(root.getRight());
+		return Diameter;
+	}
+
+	/**
+	 * optimized version of the code to calculate diameter of the tree
+	 *
+	 * @param root takes input root of the tree to calculate height of the tree
+	 * @returns the diameter of the tree by calculating height and diameter for each
+	 *          node in the same recursive call
+	 */
+	private int GetTreeDiameterOptimized(TreeEntity root) {
+		// TODO Auto-generated method stub
+
+		if (root == null) {
+			return 0;
+		}
+		int left = 0, right = 0;
+
+		left = GetTreeDiameterOptimized(root.getLeft());
+		right = GetTreeDiameterOptimized(root.getRight());
+		if (left + right + 1 > Diameter) {
+			Diameter = left + right + 1;
+		}
+		return (left > right) ? left + 1 : right + 1;
+	}
+
+	/**
+	 * @param root takes input of root node and calculates height node of the tree
+	 * @return the height of the tree maximum of left height and right height
+	 */
+	private int GetTreeHeight(TreeEntity root) {
+		// TODO Auto-generated method stub
+
+		if (root == null) {
+			return 0;
+		}
+
+		int leftheight = GetTreeHeight(root.getLeft());
+		int rightheight = GetTreeHeight(root.getRight());
+
+		return (leftheight > rightheight) ? leftheight + 1 : rightheight + 1;
+	}
+
+	/**
+	 * recursively checks with
+	 */
+	@Override
+	public boolean isSumPathExist(TreeEntity root, int pathSum) {
+		// TODO Auto-generated method stub
+		if (root == null)
+			return false;
+		if (pathSum == root.getData())
+			return true;
+		else
+			return isSumPathExist(root.getLeft(), pathSum - root.getData())
+					|| isSumPathExist(root.getRight(), pathSum - root.getData());
+
+	}
+
+	/**
+	 * @param data
+	 * @param node prints the path from root to leaf from the datastring
+	 */
+	private void printArray(String data, int node) {
+		if (data != null && !data.isEmpty()) {
+			System.out.println("The path to the node " + node + " is " + data + " " + node);
+
+		}
+
+	}
+
+	@Override
+	public int getBTSum(TreeEntity root) {
+		// TODO Auto-generated method stub
+		if(root==null)
+		return 0;
+		else
+		return root.getData()+getBTSum(root.getLeft())+getBTSum(root.getRight());
+	}
+
 }

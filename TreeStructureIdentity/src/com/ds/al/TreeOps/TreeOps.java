@@ -18,5 +18,8 @@ public interface TreeOps {
 	
 	public int getBTSum(TreeEntity root);
 	
+	public int getBTSumIterative(TreeEntity root);
+	
+	
 
 }

@@ -33,11 +33,13 @@ public class StartTree {
 		root1 = root1.GetRootNode();
 		root2 = root2.GetRootNode();
 		op.getRoottoLeafPath(root1, dataStr);
-		System.out.println("The sum of all the nodes in binary tree "+op.getBTSum(root1));
+		System.out.println("The sum of all the nodes in binary tree " + op.getBTSum(root1));
+		System.out.println("The sum of all the nodes in binary Tree " + op.getBTSumIterative(root1));
 		System.out.println("Output on Comparing TreeStructure " + op.CompareTreeStructure(root1, root2));
 		System.out.println("Diameter of the Tree " + op.GetTreeDiameter(root1));
 		System.out.println("Diameter of the Tree is " + op.GetTeeDiamterUtility(root1));
 		System.out.println("maximum level order sum is " + op.getMaxLevelSum(root1));
+		System.out.println("status of the path sum checker is " + op.isSumPathExist(root1, pathSum));
 
 	}
 

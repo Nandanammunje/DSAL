@@ -170,7 +170,7 @@ public class TreeOpsImpl implements TreeOps {
 	}
 
 	/**
-	 * recursively checks with
+	 * recursively subtracts the node from the path sum 
 	 */
 	@Override
 	public boolean isSumPathExist(TreeEntity root, int pathSum) {
@@ -197,13 +197,47 @@ public class TreeOpsImpl implements TreeOps {
 
 	}
 
+	/**
+	 * @param data recursive function that calculates sum of all nodes in BST
+	 */
 	@Override
 	public int getBTSum(TreeEntity root) {
 		// TODO Auto-generated method stub
-		if(root==null)
-		return 0;
+		if (root == null)
+			return 0;
 		else
-		return root.getData()+getBTSum(root.getLeft())+getBTSum(root.getRight());
+			return root.getData() + getBTSum(root.getLeft()) + getBTSum(root.getRight());
+	}
+
+	
+	
+	/**
+	 *@param root takes input the root of the tree to calculate the sum of all nodes in BT using level order traversal
+	 */
+	@Override
+	public int getBTSumIterative(TreeEntity root) {
+		// TODO Auto-generated method stub
+		TreeEntity node = null;
+		int sum = 0;
+		if (root == null)
+			return 0;
+		QueueEntity queue = new QueueEntity();
+		queue.Enqueue(root);
+		while (!queue.isEmpty()) {
+			try {
+				node = queue.getFirst();
+				sum = sum + node.getData();
+				if (node.getLeft() != null)
+					queue.Enqueue(node.getLeft());
+				if (node.getRight() != null)
+					queue.Enqueue(node.getRight());
+				queue.Dequeue();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return sum;
 	}
 
 }

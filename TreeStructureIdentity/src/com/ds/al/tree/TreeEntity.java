@@ -35,7 +35,7 @@ public class TreeEntity {
 		return Left;
 	}
 
-	private void setLeft(TreeEntity left) {
+	public void setLeft(TreeEntity left) {
 		Left = left;
 	}
 
@@ -43,7 +43,7 @@ public class TreeEntity {
 		return Right;
 	}
 
-	private void setRight(TreeEntity right) {
+	public void setRight(TreeEntity right) {
 		Right = right;
 	}
 

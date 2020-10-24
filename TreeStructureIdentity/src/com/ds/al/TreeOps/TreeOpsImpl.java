@@ -170,7 +170,7 @@ public class TreeOpsImpl implements TreeOps {
 	}
 
 	/**
-	 * recursively subtracts the node from the path sum 
+	 * recursively subtracts the node from the path sum
 	 */
 	@Override
 	public boolean isSumPathExist(TreeEntity root, int pathSum) {
@@ -209,10 +209,9 @@ public class TreeOpsImpl implements TreeOps {
 			return root.getData() + getBTSum(root.getLeft()) + getBTSum(root.getRight());
 	}
 
-	
-	
 	/**
-	 *@param root takes input the root of the tree to calculate the sum of all nodes in BT using level order traversal
+	 * @param root takes input the root of the tree to calculate 5 sum of all nodes
+	 *             in BT using level order traversal
 	 */
 	@Override
 	public int getBTSumIterative(TreeEntity root) {
@@ -238,6 +237,33 @@ public class TreeOpsImpl implements TreeOps {
 			}
 		}
 		return sum;
+	}
+
+	@Override
+	public TreeEntity MirrorTree(TreeEntity root) {
+		// TODO Auto-generated method stub
+		TreeEntity temp;
+		if (root == null || (root.getLeft() == null && root.getRight() == null))
+			return root;
+		if (root != null) {
+			MirrorTree(root.getLeft());
+			MirrorTree(root.getRight());
+			temp = root.getLeft();
+			root.setLeft(root.getRight());
+			root.setRight(temp);
+		}
+		return root;
+	}
+
+	@Override
+	public void InorderTravsersal(TreeEntity root) {
+		// TODO Auto-generated method stub
+		if (root != null) {
+			InorderTravsersal(root.getLeft());
+			System.out.println(root.getData());
+			InorderTravsersal(root.getRight());
+		} else
+			return;
 	}
 
 }

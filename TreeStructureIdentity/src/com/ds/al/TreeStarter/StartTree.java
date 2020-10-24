@@ -40,6 +40,8 @@ public class StartTree {
 		System.out.println("Diameter of the Tree is " + op.GetTeeDiamterUtility(root1));
 		System.out.println("maximum level order sum is " + op.getMaxLevelSum(root1));
 		System.out.println("status of the path sum checker is " + op.isSumPathExist(root1, pathSum));
+		System.out.println("Mirrored Tree is");
+		op.InorderTravsersal(op.MirrorTree(root1));
 
 	}
 

@@ -6,13 +6,13 @@ public class TreeOpsImpl implements TreeOps {
 
 	private int headIndex;
 	private TreeEntity root;
-
+    private int currNodeIndex;
 	
 	private void getCreateTree(String inorderSubStr, String preOrderSequence, TreeEntity root, int index,TreeEntity head,String inOrderSequence) {
 		// TODO Auto-generated method stub
 		
 		if (index > preOrderSequence.length() || inorderSubStr == null || inorderSubStr.isEmpty())
-			return;
+			return; 
 		boolean isLeft;
 		String preOrderNode = Character.toString(preOrderSequence.charAt(index));
 		int nodeIndex = inOrderSequence.indexOf(preOrderNode);
@@ -22,12 +22,16 @@ public class TreeOpsImpl implements TreeOps {
 			isLeft=true;
 		head=createTreeNode(root,head, preOrderNode, isLeft);
 		headIndex=nodeIndex;
-		String leftSequence=inorderSubStr.substring(0,nodeIndex);
+		currNodeIndex++;
+		String leftSequence="";
+		int splitIndex=inorderSubStr.indexOf(preOrderNode);
+		if(splitIndex+1 <=inorderSubStr.length())
+	    leftSequence=inorderSubStr.substring(0,splitIndex);
 		String rightSequence="";
-		if(nodeIndex+1<inorderSubStr.length())
-		rightSequence=inorderSubStr.substring(nodeIndex+1,inorderSubStr.length());
-		getCreateTree(leftSequence, preOrderSequence, this.root, ++index,head,inOrderSequence);
-		getCreateTree(rightSequence, preOrderSequence, this.root, ++index,head,inOrderSequence);
+		if(splitIndex+1<inorderSubStr.length())
+		rightSequence=inorderSubStr.substring(splitIndex+1,inorderSubStr.length());
+		getCreateTree(leftSequence, preOrderSequence, this.root, currNodeIndex,head,inOrderSequence);
+		getCreateTree(rightSequence, preOrderSequence, this.root, currNodeIndex,head,inOrderSequence);
 
 	}
 
@@ -42,7 +46,7 @@ public class TreeOpsImpl implements TreeOps {
         	this.root=root;
         	
         }
-        else
+        else 
         {
         	TreeEntity node=new TreeEntity();
         	node.setData(Integer.parseInt(data));

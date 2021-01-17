@@ -26,7 +26,7 @@ public class StartTree {
 		System.out.println("Enter the Inorder Sequence");
 		for (int i = 0; i < size; i++) {
 
-			inOrderDataString = inOrderDataString + sc.next() + "";
+			inOrderDataString = inOrderDataString + sc.next() + ""; 
 
 		}
 

@@ -18,7 +18,7 @@ public class StartTree {
 		String preOrderDataString = "";
 		String inOrderDataString = "";
 		System.out.println("Enter the PreOrder Sequence");
-		for (int i = 0; i < size; i++) { 
+		for (int i = 0; i < size; i++) {  
 
 			preOrderDataString = preOrderDataString + sc.next() + "";
 
@@ -29,12 +29,12 @@ public class StartTree {
 			inOrderDataString = inOrderDataString + sc.next() + ""; 
 
 		}
-
+             
         TreeOps op=new TreeOpsImpl();
         root=op.getCreateTreeInorderPreorder(inOrderDataString, preOrderDataString);
 		System.out.println("root node "+ "is"+root.getData());
 
 		sc.close();
-	}
+                                     	}
 
 }

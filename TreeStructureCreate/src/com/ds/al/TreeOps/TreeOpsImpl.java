@@ -39,7 +39,7 @@ public class TreeOpsImpl implements TreeOps {
         if(root==null)
         {
         	root=new TreeEntity();
-        	root.setData(Integer.parseInt(data));
+        	root.setData(data.charAt(0));
         	root.setLeft(null);
         	root.setRight(null);
         	head=root;
@@ -49,7 +49,7 @@ public class TreeOpsImpl implements TreeOps {
         else 
         {
         	TreeEntity node=new TreeEntity();
-        	node.setData(Integer.parseInt(data));
+        	node.setData(data.charAt(0));
         	node.setLeft(null);
         	node.setRight(null);
         	if(isLeft)

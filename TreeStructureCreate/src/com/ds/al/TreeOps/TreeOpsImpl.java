@@ -17,9 +17,9 @@ public class TreeOpsImpl implements TreeOps {
 		String preOrderNode = Character.toString(preOrderSequence.charAt(index));
 		int nodeIndex = inOrderSequence.indexOf(preOrderNode);
 		if (nodeIndex > headIndex)
-			isLeft = false;  
+			isLeft = Boolean.FALSE;  
 		else
-			isLeft=true;
+			isLeft=Boolean.TRUE;
 		head=createTreeNode(root,head, preOrderNode, isLeft);
 		headIndex=nodeIndex;
 		currNodeIndex++;
@@ -55,7 +55,7 @@ public class TreeOpsImpl implements TreeOps {
         	if(isLeft)
         	head.setLeft(node);
         	else
-        	head.setRight(node);
+        	head.setRight(node); 
         	head=node;
         }
 		return head;
@@ -68,6 +68,35 @@ public class TreeOpsImpl implements TreeOps {
 		getCreateTree(inorderSequence, preOrderSequence,null,0,null,inorderSequence);
 		
 		return this.root;
+	}
+	
+	public void mkTreeInorderPostorder(String inorderSub,String postOrderSeq,TreeEntity root,int index,TreeEntity head,String inorderSequence)
+	{
+		if(index > postOrderSeq.length()||inorderSub==null||inorderSub.isEmpty())
+		return;
+		String postOrderNode=Character.toString(postOrderSeq.charAt(index));
+		boolean isLeft;
+		int nodeIndex=inorderSequence.indexOf(postOrderNode);
+		if(nodeIndex > headIndex)
+		isLeft=Boolean.FALSE;	
+		else
+		isLeft=Boolean.TRUE;
+		head=createTreeNode(root, head,postOrderNode, isLeft);
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+
+	@Override
+	public TreeEntity getCreateTreeInorderPostorder(String inorderSequence, String postOrderSequence) {
+		// TODO Auto-generated method stub
+		mkTreeInorderPostorder(inorderSequence,postOrderSequence,null,0,null, inorderSequence);
+		return null;
 	}
 	
 }

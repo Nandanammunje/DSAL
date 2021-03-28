@@ -51,7 +51,7 @@ public class StartTree {
 
 		}
 		postOrderDataString = String.valueOf(postOrder);
-		 op.getCreateTreeInorderPostorder(inOrderDataString, postOrderDataString);
+		root=op.getCreateTreeInorderPostorder(inOrderDataString, postOrderDataString);
 		System.out.println(postOrder);
 		// System.out.println("root node "+ "is"+root.getData());
 

@@ -1,14 +1,20 @@
 package com.ds.al.TreeOps;
 
-import com.ds.al.tree.TreeEntity;
-import static java.lang.Boolean.TRUE;
 import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+
+import java.util.HashMap;
+
+import com.ds.al.TreeUtility.DoubleLinkedLstEntity;
+import com.ds.al.tree.TreeEntity;
 
 public class TreeOpsImpl implements TreeOps {
 
 	private int headIndex;
 	private TreeEntity root;
 	private int currNodeIndex;
+	private HashMap<String, Integer> indexMap;
+	private DoubleLinkedLstEntity queue;
 
 	private void getCreateTree(String inorderSubStr, String preOrderSequence, TreeEntity root, int index,
 			TreeEntity head, String inOrderSequence) {
@@ -69,7 +75,8 @@ public class TreeOpsImpl implements TreeOps {
 		return this.root;
 	}
 
-	public void mkTreeInorderPostorder(String inorderSub, String postOrderSeq, TreeEntity root, int index,TreeEntity head, String inorderSequence) {
+	public void mkTreeInorderPostorder(String inorderSub, String postOrderSeq, TreeEntity root, int index,
+			TreeEntity head, String inorderSequence) {
 		if (index > postOrderSeq.length() || inorderSub == null || inorderSub.isEmpty())
 			return;
 		String postOrderNode = Character.toString(postOrderSeq.charAt(index));
@@ -94,11 +101,70 @@ public class TreeOpsImpl implements TreeOps {
 
 	}
 
+	private String getHeadNode(String inorderSeq) {
+		char temp[] = inorderSeq.toCharArray();
+		indexMap.clear();
+		for (int i = 0; i < temp.length; i++) {
+			indexMap.put(Character.toString(temp[i]), i);
+		}
+
+		for (DoubleLinkedLstEntity tmp = queue.getHead(); tmp != null; tmp = tmp.getNxt()) {
+			if (indexMap.containsKey(Character.toString(tmp.getData()))) {
+				queue.removeNode(tmp);
+				return Character.toString(tmp.getData());
+			}
+		}
+
+		return null;
+	}
+
 	@Override
 	public TreeEntity getCreateTreeInorderPostorder(String inorderSequence, String postOrderSequence) {
 		// TODO Auto-generated method stub
 		mkTreeInorderPostorder(inorderSequence, postOrderSequence, null, 0, null, inorderSequence);
 		return this.root;
+	}
+
+	// public void pushIndexMap(String LevelOrder)
+
+	public void mkTreeInorderLevelOrder(String inorderSubstr, String levelOrderSequence, TreeEntity root, int index,
+			TreeEntity head, String inorderSequence) {
+		String leftSequence = "", rightSequence = "";
+		int splitIndex;
+		if (index > levelOrderSequence.length() || inorderSubstr == null || inorderSubstr.isEmpty())
+			return;
+		if (index == 0) {
+			head = createTreeNode(null, null, Character.toString(queue.getHead().getData()), true);
+			currNodeIndex++;
+            splitIndex = inorderSubstr.indexOf(queue.getHead().getData());
+            headIndex=splitIndex;
+			if (splitIndex < inorderSubstr.length()) {
+				leftSequence = inorderSubstr.substring(0, splitIndex);
+				rightSequence = inorderSubstr.substring(splitIndex + 1, inorderSubstr.length());
+			}
+			mkTreeInorderLevelOrder(leftSequence, levelOrderSequence, this.root, currNodeIndex, head, inorderSequence);
+			mkTreeInorderLevelOrder(rightSequence, levelOrderSequence, this.root, currNodeIndex, head, inorderSequence);
+
+		} else {
+			String levelorderNode = getHeadNode(inorderSubstr);
+			if (levelorderNode == null || levelorderNode.isEmpty())
+				return;
+			
+
+		}
+	}
+
+	@Override
+	public TreeEntity getCreateTreeInorderLevelorder(String inorderSequence, String levelOrderSequence) {
+		// TODO Auto-generated method stub
+		indexMap = new HashMap<String, Integer>();
+		char levelOrderCharArr[] = levelOrderSequence.toCharArray();
+		queue = new DoubleLinkedLstEntity();
+		for (int i = 0; i < levelOrderCharArr.length; i++) {
+			queue.addNode(levelOrderCharArr[i]);
+		}
+
+		return null;
 	}
 
 }

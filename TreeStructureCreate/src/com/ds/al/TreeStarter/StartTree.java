@@ -5,11 +5,13 @@ import java.util.Scanner;
 import com.ds.al.TreeOps.TreeOps;
 import com.ds.al.TreeOps.TreeOpsImpl;
 import com.ds.al.tree.TreeEntity;
+import com.ds.al.TreeUtility.DoubleLinkedLstEntity;
 
 public class StartTree {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		DoubleLinkedLstEntity nodeHead=new DoubleLinkedLstEntity();
 		TreeEntity root = new TreeEntity();
 		int size = 0;
 		Scanner sc = new Scanner(System.in);
@@ -32,14 +34,14 @@ public class StartTree {
 			postOrderDataString = postOrderDataString + sc.next() + "";
 
 		}
-		System.out.println("Enter the Inorder Sequence");
+		/*System.out.println("Enter the Inorder Sequence");
 		for (int i = 0; i < size; i++) {
 
 			inOrderDataString = inOrderDataString + sc.next() + "";
 
 		}
-
-		TreeOps op = new TreeOpsImpl();
+        */
+		//TreeOps op = new TreeOpsImpl();
 		// root=op.getCreateTreeInorderPreorder(inOrderDataString, preOrderDataString);
 		char temp;
 		char postOrder[] = postOrderDataString.toCharArray();
@@ -48,11 +50,27 @@ public class StartTree {
 			temp = postOrder[i];
 			postOrder[i] = postOrder[charArrLen - i - 1];
 			postOrder[charArrLen - i - 1] = temp;
-
 		}
-		postOrderDataString = String.valueOf(postOrder);
-		root=op.getCreateTreeInorderPostorder(inOrderDataString, postOrderDataString);
-		System.out.println(postOrder);
+		for(int i=0;i<charArrLen;i++)
+		{
+			nodeHead.addNode(postOrder[i]);
+		}
+	    nodeHead.printLst();
+	   System.out.println(nodeHead.getHead().getData());
+	   for(DoubleLinkedLstEntity tmp=nodeHead.getHead();tmp!=null;tmp=tmp.getNxt())
+	   {
+		   if(tmp.getData()=='g')
+		   {
+			   nodeHead.removeNode(tmp);
+		   }
+		   
+	   }
+	   nodeHead.printLst();
+	   System.out.println(nodeHead.getHead().getData());
+		//postOrderDataString = String.valueOf(postOrder);
+		//root = op.getCreateTreeInorderPostorder(inOrderDataString, postOrderDataString);
+		
+		//System.out.println(postOrder);
 		// System.out.println("root node "+ "is"+root.getData());
 
 		sc.close();

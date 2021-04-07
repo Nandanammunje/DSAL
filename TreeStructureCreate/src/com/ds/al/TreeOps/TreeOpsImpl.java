@@ -110,8 +110,9 @@ public class TreeOpsImpl implements TreeOps {
 
 		for (DoubleLinkedLstEntity tmp = queue.getHead(); tmp != null; tmp = tmp.getNxt()) {
 			if (indexMap.containsKey(Character.toString(tmp.getData()))) {
+				String headNode = Character.toString(tmp.getData());
 				queue.removeNode(tmp);
-				return Character.toString(tmp.getData());
+				return headNode;
 			}
 		}
 
@@ -136,8 +137,8 @@ public class TreeOpsImpl implements TreeOps {
 		if (index == 0) {
 			head = createTreeNode(null, null, Character.toString(queue.getHead().getData()), true);
 			currNodeIndex++;
-            splitIndex = inorderSubstr.indexOf(queue.getHead().getData());
-            headIndex=splitIndex;
+			splitIndex = inorderSubstr.indexOf(queue.getHead().getData());
+			headIndex = splitIndex;
 			if (splitIndex < inorderSubstr.length()) {
 				leftSequence = inorderSubstr.substring(0, splitIndex);
 				rightSequence = inorderSubstr.substring(splitIndex + 1, inorderSubstr.length());
@@ -147,10 +148,22 @@ public class TreeOpsImpl implements TreeOps {
 
 		} else {
 			String levelorderNode = getHeadNode(inorderSubstr);
+			currNodeIndex++;
 			if (levelorderNode == null || levelorderNode.isEmpty())
 				return;
-			
-
+			boolean isLeft;
+			int nodeIndex = inorderSequence.indexOf(levelorderNode);
+			if (nodeIndex > headIndex)
+				isLeft = FALSE;
+			else
+				isLeft = TRUE;
+			head = createTreeNode(root, head, levelorderNode, isLeft);
+			if (nodeIndex < inorderSubstr.length()) {
+				leftSequence = inorderSubstr.substring(0, nodeIndex);
+				rightSequence = inorderSubstr.substring(nodeIndex + 1, inorderSubstr.length());
+			}
+			mkTreeInorderLevelOrder(leftSequence, levelOrderSequence, this.root, currNodeIndex, head, inorderSequence);
+			mkTreeInorderLevelOrder(rightSequence, levelOrderSequence, this.root, currNodeIndex, head, inorderSequence);
 		}
 	}
 

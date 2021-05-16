@@ -103,7 +103,7 @@ public class TreeOpsImpl implements TreeOps {
 
 	private String getHeadNode(String inorderSeq) {
 		char temp[] = inorderSeq.toCharArray();
-		indexMap.clear();
+		indexMap.clear();                                                                                                                                                                                    
 		for (int i = 0; i < temp.length; i++) {
 			indexMap.put(Character.toString(temp[i]), i);
 		}
@@ -130,7 +130,7 @@ public class TreeOpsImpl implements TreeOps {
 
 	public void mkTreeInorderLevelOrder(String inorderSubstr, String levelOrderSequence, TreeEntity root, int index,
 			TreeEntity head, String inorderSequence) {
-		String leftSequence = "", rightSequence = "";
+ 		String leftSequence = "", rightSequence = "";
 		int splitIndex;
 		if (index > levelOrderSequence.length() || inorderSubstr == null || inorderSubstr.isEmpty())
 			return;
@@ -153,14 +153,17 @@ public class TreeOpsImpl implements TreeOps {
 				return;
 			boolean isLeft;
 			int nodeIndex = inorderSequence.indexOf(levelorderNode);
+			
 			if (nodeIndex > headIndex)
 				isLeft = FALSE;
 			else
 				isLeft = TRUE;
 			head = createTreeNode(root, head, levelorderNode, isLeft);
-			if (nodeIndex < inorderSubstr.length()) {
-				leftSequence = inorderSubstr.substring(0, nodeIndex);
-				rightSequence = inorderSubstr.substring(nodeIndex + 1, inorderSubstr.length());
+			headIndex=nodeIndex;
+			splitIndex=inorderSubstr.indexOf(levelorderNode);
+			if (splitIndex < inorderSubstr.length()) {
+				leftSequence = inorderSubstr.substring(0, splitIndex);
+				rightSequence = inorderSubstr.substring(splitIndex + 1, inorderSubstr.length());
 			}
 			mkTreeInorderLevelOrder(leftSequence, levelOrderSequence, this.root, currNodeIndex, head, inorderSequence);
 			mkTreeInorderLevelOrder(rightSequence, levelOrderSequence, this.root, currNodeIndex, head, inorderSequence);
@@ -170,14 +173,15 @@ public class TreeOpsImpl implements TreeOps {
 	@Override
 	public TreeEntity getCreateTreeInorderLevelorder(String inorderSequence, String levelOrderSequence) {
 		// TODO Auto-generated method stub
-		indexMap = new HashMap<String, Integer>();
+		indexMap = new HashMap<String, Integer>();  
 		char levelOrderCharArr[] = levelOrderSequence.toCharArray();
 		queue = new DoubleLinkedLstEntity();
 		for (int i = 0; i < levelOrderCharArr.length; i++) {
 			queue.addNode(levelOrderCharArr[i]);
 		}
+		mkTreeInorderLevelOrder(inorderSequence, levelOrderSequence, null, 0, null, inorderSequence);
 
-		return null;
+		return this.root;
 	}
 
 }

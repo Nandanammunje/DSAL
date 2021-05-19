@@ -10,6 +10,8 @@ public class TreeOpsImpl implements TreeOps {
 	private int headIndex;
 	private TreeEntity root;
 	private int currNodeIndex;
+	private boolean found=false;
+	private String AncestorNodes;
 	
 	private void getCreateTree(String inorderSubStr, String preOrderSequence, TreeEntity root, int index,
 			TreeEntity head, String inOrderSequence) {
@@ -70,10 +72,22 @@ public class TreeOpsImpl implements TreeOps {
 		return this.root;
 	}
 
-	@Override
-	public String getAncestor(String treeNode) {
+	//@Override
+	public void getAncestor(String treeNode,TreeEntity Node,String path) {
 		// TODO Auto-generated method stub
-		return null;
+		if(root==null||Node==null||found)
+		{
+			return ;
+		}
+		if(treeNode.equals(Node.getData()))
+		{
+			AncestorNodes=path;
+			found=true;
+			return ;
+		}
+		path=path+Node.getData();
+		getAncestor(treeNode, Node.getLeft(), path);
+		getAncestor(treeNode, Node.getRight(), path);
 	}
 
 	

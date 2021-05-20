@@ -4,14 +4,12 @@ import java.util.Scanner;
 
 import com.ds.al.TreeOps.TreeOps;
 import com.ds.al.TreeOps.TreeOpsImpl;
-import com.ds.al.tree.TreeEntity;
 
 public class StartTree {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		TreeEntity root = new TreeEntity();
 		int size = 0;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the size of the Tree ");
@@ -30,12 +28,17 @@ public class StartTree {
 			inOrderDataString = inOrderDataString + sc.next() + "";
 
 		}
-
 		TreeOps op = new TreeOpsImpl();
-		root = op.getCreateTreeInorderPreorder(inOrderDataString, preOrderDataString);
-		System.out.println("root node " + "is" + root.getData());
-
-		
+		op.getCreateTreeInorderPreorder(inOrderDataString, preOrderDataString);
+		System.out.println("Enter the Node for Ancestral Path");
+		String node = sc.next();
+		String nodes[] = op.getAncestors(node);
+		if (nodes != null && nodes.length > 0) {
+			for (String itr : nodes)
+				System.out.println("Nodes are " + itr);
+		} else {
+			System.out.println("No ancestral Nodes exist");
+		}
 
 		sc.close();
 	}

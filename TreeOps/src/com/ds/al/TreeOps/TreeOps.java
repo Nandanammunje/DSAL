@@ -6,7 +6,7 @@ public interface TreeOps {
 	
 	public TreeEntity getCreateTreeInorderPreorder(String inorderSequence,String preOrderSequence);
 
-	//public String getAncestor(String treeNode);
+	public String[] getAncestors(String treeNode);
 	
 	
 }

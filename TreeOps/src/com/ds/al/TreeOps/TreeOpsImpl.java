@@ -2,7 +2,7 @@ package com.ds.al.TreeOps;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
-
+import static com.ds.al.constants.TreeConstants.NODESEPERATOR;
 import com.ds.al.tree.TreeEntity;
 
 public class TreeOpsImpl implements TreeOps {
@@ -72,23 +72,39 @@ public class TreeOpsImpl implements TreeOps {
 		return this.root;
 	}
 
-	//@Override
-	public void getAncestor(String treeNode,TreeEntity Node,String path) {
+	
+	public void getAncestorString(String treeNode,TreeEntity Node,String path) {
 		// TODO Auto-generated method stub
 		if(root==null||Node==null||found)
 		{
 			return ;
 		}
-		if(treeNode.equals(Node.getData()))
+		if(treeNode.equals(Character.toString(Node.getData())))
 		{
 			AncestorNodes=path;
 			found=true;
 			return ;
 		}
-		path=path+Node.getData();
-		getAncestor(treeNode, Node.getLeft(), path);
-		getAncestor(treeNode, Node.getRight(), path);
+		path=path+Node.getData()+NODESEPERATOR;
+		getAncestorString(treeNode, Node.getLeft(), path);
+		getAncestorString(treeNode, Node.getRight(), path);
 	}
+
+	@Override
+	public String[] getAncestors(String treeNode) {
+		// TODO Auto-generated method stub
+		String path="";
+		String nodes[]=null;
+		getAncestorString(treeNode,root, path);
+		if(AncestorNodes!=null&&!AncestorNodes.isEmpty())
+		{
+			nodes=AncestorNodes.split(",");
+		}
+		
+		return nodes;
+	}
+	
+	
 
 	
 

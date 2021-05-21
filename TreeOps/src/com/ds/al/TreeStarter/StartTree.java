@@ -30,15 +30,18 @@ public class StartTree {
 		}
 		TreeOps op = new TreeOpsImpl();
 		op.getCreateTreeInorderPreorder(inOrderDataString, preOrderDataString);
-		System.out.println("Enter the Node for Ancestral Path");
-		String node = sc.next();
-		String nodes[] = op.getAncestors(node);
-		if (nodes != null && nodes.length > 0) {
-			for (String itr : nodes)
-				System.out.println("Nodes are " + itr);
-		} else {
-			System.out.println("No ancestral Nodes exist");
+		/*
+		 * System.out.println("Enter the Node for Ancestral Path"); String node =
+		 * sc.next(); String nodes[] = op.getAncestors(node); if (nodes != null &&
+		 * nodes.length > 0) { for (String itr : nodes) System.out.println("Nodes are "
+		 * + itr); } else { System.out.println("No ancestral Nodes exist"); }
+		 */
+		System.out.println("Enter the 2 Nodes for LCA check ");
+		String nodes[] = new String[2];
+		for (int i = 0; i < 2; i++) {
+			nodes[i] = sc.next();
 		}
+		System.out.println(op.getLCA(nodes[0], nodes[1]));
 
 		sc.close();
 	}

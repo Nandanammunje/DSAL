@@ -1,4 +1,4 @@
-			package com.ds.al.TreeUtility;
+package com.ds.al.TreeUtility;
 
 import com.ds.al.tree.TreeEntity;
 import static java.lang.Boolean.FALSE;
@@ -9,7 +9,7 @@ import static java.lang.Boolean.TRUE;
  */
 public class QueueEntity {
 
-	private LinkedLstEntity front, rear,head;
+	private LinkedLstEntity front, rear, head;
 
 	private int length;
 

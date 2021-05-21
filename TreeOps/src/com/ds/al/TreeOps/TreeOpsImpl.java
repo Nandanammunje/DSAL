@@ -94,6 +94,8 @@ public class TreeOpsImpl implements TreeOps {
 	public String[] getAncestors(String treeNode) {
 		// TODO Auto-generated method stub
 		String path="";
+		found=false;
+		AncestorNodes="";
 		String nodes[]=null;
 		getAncestorString(treeNode,root, path);
 		if(AncestorNodes!=null&&!AncestorNodes.isEmpty())
@@ -102,6 +104,29 @@ public class TreeOpsImpl implements TreeOps {
 		}
 		
 		return nodes;
+	}
+
+	@Override
+	public String getLCA(String treeNode1, String treeNode2) {
+		// TODO Auto-generated method stub
+		String lcaNode=null;
+		String ancestralNodes1[]=getAncestors(treeNode1);	
+		String ancestralNodes2[]=getAncestors(treeNode2);
+		if(ancestralNodes1!=null&&ancestralNodes2!=null&&ancestralNodes1.length>0&&ancestralNodes2.length>0)
+		{
+			int commonPathLen=(ancestralNodes1.length > ancestralNodes2.length)?ancestralNodes2.length:ancestralNodes1.length;
+			for(int i=0;i<commonPathLen;i++)
+			{
+				if(ancestralNodes1[i].equals(ancestralNodes2[i]))
+				{
+					lcaNode=ancestralNodes1[i];
+				}
+			}
+		}
+	   
+		
+		
+		return lcaNode;
 	}
 	
 	

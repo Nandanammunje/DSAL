@@ -133,7 +133,7 @@ public class TreeOpsImpl implements TreeOps {
 		while (!queue.isEmpty()) {
 			treeNode = queue.Dequeue();
 			if (treeNode == null) {
-				i++;
+				
 				queue.Enqueue(null);
 			}
 			if (treeNode.getLeft() != null)

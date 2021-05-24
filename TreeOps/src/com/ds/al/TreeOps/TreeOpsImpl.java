@@ -129,18 +129,22 @@ public class TreeOpsImpl implements TreeOps {
 		queue.Enqueue(root);
 		queue.Enqueue(null);
 		TreeEntity treeNode;
-		int i = 1;
+		String zigZagStr="";
 		while (!queue.isEmpty()) {
 			treeNode = queue.Dequeue();
+			
 			if (treeNode == null) {
-				
 				queue.Enqueue(null);
+			zigZagStr=zigZagStr+",";
 			}
+			else
+			{
+				zigZagStr=zigZagStr+treeNode.getData();
 			if (treeNode.getLeft() != null)
 				queue.Enqueue(treeNode.getLeft());
 			if (treeNode.getRight() != null)
 				queue.Enqueue(treeNode.getRight());
-
+			}
 		}
 	}
 

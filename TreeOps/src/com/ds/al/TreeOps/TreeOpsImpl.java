@@ -3,7 +3,7 @@ package com.ds.al.TreeOps;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static com.ds.al.constants.TreeConstants.NODESEPERATOR;
-
+import static com.ds.al.TreeUtility.StringUtility.StrReverse;
 import com.ds.al.TreeUtility.QueueEntity;
 import com.ds.al.tree.TreeEntity;
 
@@ -124,28 +124,57 @@ public class TreeOpsImpl implements TreeOps {
 		return lcaNode;
 	}
 
-	public void zigZagTraversal() throws Exception {
+	public String zigZagTraversal() throws Exception {
 		QueueEntity queue = new QueueEntity();
 		queue.Enqueue(root);
 		queue.Enqueue(null);
 		TreeEntity treeNode;
-		String zigZagStr="";
+		String zigZagStr = "";
 		while (!queue.isEmpty()) {
 			treeNode = queue.Dequeue();
-			
+
 			if (treeNode == null) {
+				if (queue.getSize() < 1)
+					break;
 				queue.Enqueue(null);
-			zigZagStr=zigZagStr+",";
-			}
-			else
-			{
-				zigZagStr=zigZagStr+treeNode.getData();
-			if (treeNode.getLeft() != null)
-				queue.Enqueue(treeNode.getLeft());
-			if (treeNode.getRight() != null)
-				queue.Enqueue(treeNode.getRight());
+				zigZagStr = zigZagStr + NODESEPERATOR;
+			} else {
+				zigZagStr = zigZagStr + treeNode.getData();
+				if (treeNode.getLeft() != null)
+					queue.Enqueue(treeNode.getLeft());
+				if (treeNode.getRight() != null)
+					queue.Enqueue(treeNode.getRight());
 			}
 		}
+		return zigZagStr;
+	}
+
+	@Override
+	public String getZigZagStr() throws Exception {
+
+		String preZigZagStr = zigZagTraversal();
+		String zigZagStr="";
+		if(preZigZagStr!=null&&!preZigZagStr.isEmpty()&&!preZigZagStr.trim().isEmpty())
+		{
+			String zigZagTraversal[]=preZigZagStr.split(NODESEPERATOR);
+			zigZagStr=zigZagTraversal[0];
+			for(int i=1;i<zigZagTraversal.length;i++)
+			{
+				if(i%2==1)
+				{
+					zigZagStr=zigZagStr+StrReverse(zigZagTraversal[i]);
+				}
+				else
+				{
+					zigZagStr=zigZagStr+zigZagTraversal[i];
+				}
+			}
+			
+		}
+	
+
+		return zigZagStr;
+
 	}
 
 }

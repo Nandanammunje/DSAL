@@ -176,5 +176,16 @@ public class TreeOpsImpl implements TreeOps {
 		return zigZagStr;
 
 	}
+	
+	public String getZigZagStrOptimized()
+	{
+		
+		
+		
+		
+		
+		
+		return null;
+	}
 
 }

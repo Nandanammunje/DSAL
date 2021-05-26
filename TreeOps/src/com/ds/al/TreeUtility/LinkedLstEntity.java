@@ -3,9 +3,8 @@ package com.ds.al.TreeUtility;
 import com.ds.al.tree.TreeEntity;
 
 /**
- * @author nandannayak 
- * This is utitily class for queue entity where queue is
- *  created using LinkedList
+ * @author nandannayak This is utitily class for queue entity where queue is
+ *         created using LinkedList
  */
 public class LinkedLstEntity {
 
@@ -52,6 +51,23 @@ public class LinkedLstEntity {
 			root.setNext(node);
 			return root;
 		}
+		return head;
+	}
+
+	public LinkedLstEntity pushNode(LinkedLstEntity head, TreeEntity treeNode) {
+		if (head == null) {
+
+			head = new LinkedLstEntity();
+			head.setNode(treeNode);
+			head.setNext(null);
+		} else {
+			LinkedLstEntity root = new LinkedLstEntity();
+			root.setNode(treeNode);
+			root.setNext(head);
+			head = root;
+
+		}
+
 		return head;
 	}
 

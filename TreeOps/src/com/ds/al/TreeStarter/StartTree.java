@@ -46,7 +46,7 @@ public class StartTree {
 		
 		try {
 			System.out.println("ZigZag Traversal of the Tree Node "+op.getZigZagStr());
-		} catch (Exception e) {
+		} catch (Exception e) {6
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

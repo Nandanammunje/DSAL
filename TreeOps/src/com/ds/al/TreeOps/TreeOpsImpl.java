@@ -1,9 +1,13 @@
 package com.ds.al.TreeOps;
 
+import static com.ds.al.TreeUtility.StringUtility.StrReverse;
+import static com.ds.al.constants.TreeConstants.NODESEPERATOR;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
-import static com.ds.al.constants.TreeConstants.NODESEPERATOR;
-import static com.ds.al.TreeUtility.StringUtility.StrReverse;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import com.ds.al.TreeUtility.QueueEntity;
 import com.ds.al.tree.TreeEntity;
 
@@ -14,6 +18,7 @@ public class TreeOpsImpl implements TreeOps {
 	private int currNodeIndex;
 	private boolean found = false;
 	private String AncestorNodes;
+	private HashMap<Integer,Integer> verticalSumMap;
 
 	private void getCreateTree(String inorderSubStr, String preOrderSequence, TreeEntity root, int index,
 			TreeEntity head, String inOrderSequence) {
@@ -158,7 +163,7 @@ public class TreeOpsImpl implements TreeOps {
 		{
 			String zigZagTraversal[]=preZigZagStr.split(NODESEPERATOR);
 			zigZagStr=zigZagTraversal[0];
-			for(int i=1;i<zigZagTraversal.length;i++)
+			for(int i=1;i<zigZagTraversal.length;i++)     
 			{
 				if(i%2==1)
 				{
@@ -176,5 +181,21 @@ public class TreeOpsImpl implements TreeOps {
 		return zigZagStr;
 
 	}
+	
+	public void setVerticalSumMap()
+	{
+		
+		
+	}
+
+	@Override
+	public Map<Integer, Integer> getVerticalSum() {
+		// TODO Auto-generated method stub
+		verticalSumMap=new HashMap<Integer, Integer>();
+		 
+		return verticalSumMap;
+	}
+
+	   
 
 }

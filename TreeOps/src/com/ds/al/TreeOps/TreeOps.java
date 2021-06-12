@@ -1,5 +1,7 @@
 package com.ds.al.TreeOps;
 
+import java.util.Map;
+
 import com.ds.al.tree.TreeEntity;
 
 public interface TreeOps {
@@ -9,7 +11,8 @@ public interface TreeOps {
 	public String[] getAncestors(String treeNode);
 
 	public String getLCA(String treeNode1, String treeNode2);
-	
-	public String getZigZagStr() throws Exception ;
 
+	public String getZigZagStr() throws Exception;
+
+	public Map<Integer,Integer> getVerticalSum();
 }

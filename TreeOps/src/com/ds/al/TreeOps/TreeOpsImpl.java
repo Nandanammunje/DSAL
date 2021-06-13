@@ -6,7 +6,7 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 import java.util.HashMap;
-import java.util.Map;
+import java.util.TreeMap;
 
 import com.ds.al.TreeUtility.QueueEntity;
 import com.ds.al.tree.TreeEntity;
@@ -18,7 +18,7 @@ public class TreeOpsImpl implements TreeOps {
 	private int currNodeIndex;
 	private boolean found = false;
 	private String AncestorNodes;
-	private HashMap<Integer,Integer> verticalSumMap;
+	private TreeMap<Integer, String> verticalSumMap;
 
 	private void getCreateTree(String inorderSubStr, String preOrderSequence, TreeEntity root, int index,
 			TreeEntity head, String inOrderSequence) {
@@ -158,44 +158,53 @@ public class TreeOpsImpl implements TreeOps {
 	public String getZigZagStr() throws Exception {
 
 		String preZigZagStr = zigZagTraversal();
-		String zigZagStr="";
-		if(preZigZagStr!=null&&!preZigZagStr.isEmpty()&&!preZigZagStr.trim().isEmpty())
-		{
-			String zigZagTraversal[]=preZigZagStr.split(NODESEPERATOR);
-			zigZagStr=zigZagTraversal[0];
-			for(int i=1;i<zigZagTraversal.length;i++)     
-			{
-				if(i%2==1)
-				{
-					zigZagStr=zigZagStr+StrReverse(zigZagTraversal[i]);
-				}
-				else
-				{
-					zigZagStr=zigZagStr+zigZagTraversal[i];
+		String zigZagStr = "";
+		if (preZigZagStr != null && !preZigZagStr.isEmpty() && !preZigZagStr.trim().isEmpty()) {
+			String zigZagTraversal[] = preZigZagStr.split(NODESEPERATOR);
+			zigZagStr = zigZagTraversal[0];
+			for (int i = 1; i < zigZagTraversal.length; i++) {
+				if (i % 2 == 1) {
+					zigZagStr = zigZagStr + StrReverse(zigZagTraversal[i]);
+				} else {
+					zigZagStr = zigZagStr + zigZagTraversal[i];
 				}
 			}
-			
+
 		}
-	
 
 		return zigZagStr;
 
 	}
-	
-	public void setVerticalSumMap()
-	{
+
+	public void setVerticalSumMap(TreeEntity root, int colIndex) {
+		String verticalSumString;
+		if (root == null) {
+			return;
+		}
+		if(verticalSumMap.containsKey(colIndex))
+		{
+			verticalSumString=verticalSumMap.get(colIndex)+Character.toString(root.getData());
+			verticalSumMap.put(colIndex,verticalSumString);
+		} else
+		{
+		 verticalSumMap.put(colIndex,Character.toString(root.getData()));
+		}
 		
-		
+		setVerticalSumMap(root.getLeft(), colIndex+1);
+		setVerticalSumMap(root.getRight(), colIndex-1);  
+
 	}
 
 	@Override
-	public Map<Integer, Integer> getVerticalSum() {
+	public TreeMap<Integer, String> getVerticalSum() {
 		// TODO Auto-generated method stub
-		verticalSumMap=new HashMap<Integer, Integer>();
-		 
+		verticalSumMap = new TreeMap<Integer, String>();
+		if (root != null) {
+			 
+			setVerticalSumMap(root, 0);
+		}
+
 		return verticalSumMap;
 	}
-
-	   
 
 }

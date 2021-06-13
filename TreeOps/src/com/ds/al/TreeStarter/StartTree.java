@@ -1,6 +1,8 @@
 package com.ds.al.TreeStarter;
 
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeMap;
 
 import com.ds.al.TreeOps.TreeOps;
 import com.ds.al.TreeOps.TreeOpsImpl;
@@ -44,12 +46,20 @@ public class StartTree {
 		System.out.println(op.getLCA(nodes[0], nodes[1]));
            */
 		
-		try {
+	/*	try {
 			System.out.println("ZigZag Traversal of the Tree Node "+op.getZigZagStr());
-		} catch (Exception e) {6
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
+		
+		TreeMap<Integer,String> verticalSumMap=op.getVerticalSum();
+		System.out.println(verticalSumMap);
+		
+		 
+		
+		//System.out.println(verticalSumMap);
 		sc.close();
 	}
 

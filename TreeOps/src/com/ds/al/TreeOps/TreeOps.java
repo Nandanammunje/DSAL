@@ -1,6 +1,6 @@
 package com.ds.al.TreeOps;
 
-import java.util.Map;
+import java.util.TreeMap;
 
 import com.ds.al.tree.TreeEntity;
 
@@ -14,5 +14,5 @@ public interface TreeOps {
 
 	public String getZigZagStr() throws Exception;
 
-	public Map<Integer,Integer> getVerticalSum();
+	public TreeMap<Integer,String> getVerticalSum();
 }

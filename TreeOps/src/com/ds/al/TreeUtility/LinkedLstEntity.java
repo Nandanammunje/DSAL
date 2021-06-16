@@ -74,4 +74,4 @@ public class LinkedLstEntity {
 	}
 
 }
->>>>>>> bca1f0593787cec261bf7cf3470d9e893fbb1671
+

@@ -54,21 +54,24 @@ public class LinkedLstEntity {
 		return head;
 	}
 
-	public LinkedLstEntity pushNode(LinkedLstEntity head, TreeEntity treeNode) {
-		if (head == null) {
+	public LinkedLstEntity BackNode(LinkedLstEntity head, TreeEntity Treenode) {
+		LinkedLstEntity node;
 
+		if (head == null) {
 			head = new LinkedLstEntity();
-			head.setNode(treeNode);
+			head.setNode(Treenode);
 			head.setNext(null);
+
 		} else {
-			LinkedLstEntity root = new LinkedLstEntity();
-			root.setNode(treeNode);
-			root.setNext(head);
-			head = root;
+
+			node = new LinkedLstEntity();
+			node.setNode(Treenode);
+			node.setNext(head);
+			head = node;
 
 		}
-
 		return head;
 	}
 
 }
+>>>>>>> bca1f0593787cec261bf7cf3470d9e893fbb1671

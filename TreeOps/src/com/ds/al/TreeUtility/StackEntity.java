@@ -4,49 +4,56 @@ import com.ds.al.tree.TreeEntity;
 
 public class StackEntity {
 
-	private LinkedLstEntity head;
-
-	private LinkedLstEntity tail;
-
+	private LinkedLstEntity first, last;
 	private int length;
 
 	public StackEntity() {
-
 		length = 0;
-		head = null;
-		tail = null;
+		first = last = null;
 	}
 
-	public void pushNode(TreeEntity node) {
-		LinkedLstEntity stackNode = new LinkedLstEntity();
-
-		head = stackNode.AddNode(head, node);
-		if (tail == null) {
-
-			tail = head;
+	public void pushStack(TreeEntity treeNode) {
+		LinkedLstEntity node = new LinkedLstEntity();
+		if (first == null) {
+			first = node.AddNode(first, treeNode);
+			last = first;
+		} else {
+			first = node.AddNode(first, treeNode);
 		}
 		length++;
 	}
 
-	public TreeEntity popNode() throws Exception {
+	public TreeEntity popStack() throws Exception {
+
+		TreeEntity node = null;
 
 		if (length > 0) {
-			LinkedLstEntity node = head.getNext();
-			TreeEntity popNode = head.getNode();
-			head = node;
-			length--;
-			return popNode;
+			LinkedLstEntity nextNode;
+			nextNode = first.getNext();
+			node = first.getNode();
+			first = nextNode;
 		} else {
-			throw new Exception("Cannot perform pop action on Empty ");
+			throw new Exception("cannot perform pop operation on empty queue");
 		}
-
+		length--;
+		return node;
 	}
 
-	public int size() {
+	public int getStackSize() {
 		return length;
-
 	}
-	
 
+	public TreeEntity getFirst() {
+		if (first == null)
+			return null;
+		return first.getNode();
+	}
+
+	public TreeEntity getLast() {
+		if (last == null)
+			return null;
+		return last.getNode();
+	}
 
 }
+>>>>>>> bca1f0593787cec261bf7cf3470d9e893fbb1671

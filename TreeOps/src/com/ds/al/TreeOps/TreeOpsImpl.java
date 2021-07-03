@@ -181,17 +181,15 @@ public class TreeOpsImpl implements TreeOps {
 		if (root == null) {
 			return;
 		}
-		if(verticalSumMap.containsKey(colIndex))
-		{
-			verticalSumString=verticalSumMap.get(colIndex)+Character.toString(root.getData());
-			verticalSumMap.put(colIndex,verticalSumString);
-		} else
-		{
-		 verticalSumMap.put(colIndex,Character.toString(root.getData()));
+		if (verticalSumMap.containsKey(colIndex)) {
+			verticalSumString = verticalSumMap.get(colIndex) + Character.toString(root.getData());
+			verticalSumMap.put(colIndex, verticalSumString);
+		} else {
+			verticalSumMap.put(colIndex, Character.toString(root.getData()));
 		}
-		
-		setVerticalSumMap(root.getLeft(), colIndex+1);
-		setVerticalSumMap(root.getRight(), colIndex-1);  
+
+		setVerticalSumMap(root.getLeft(), colIndex + 1);
+		setVerticalSumMap(root.getRight(), colIndex - 1);
 
 	}
 
@@ -200,7 +198,7 @@ public class TreeOpsImpl implements TreeOps {
 		// TODO Auto-generated method stub
 		verticalSumMap = new TreeMap<Integer, String>();
 		if (root != null) {
-			 
+
 			setVerticalSumMap(root, 0);
 		}
 

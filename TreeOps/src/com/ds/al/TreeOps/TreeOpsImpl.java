@@ -4,8 +4,8 @@ import static com.ds.al.TreeUtility.StringUtility.StrReverse;
 import static com.ds.al.constants.TreeConstants.NODESEPERATOR;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+import static java.lang.Integer.MAX_VALUE;
 
-import java.util.HashMap;
 import java.util.TreeMap;
 
 import com.ds.al.TreeUtility.QueueEntity;
@@ -19,6 +19,7 @@ public class TreeOpsImpl implements TreeOps {
 	private boolean found = false;
 	private String AncestorNodes;
 	private TreeMap<Integer, String> verticalSumMap;
+	private int minDepth;
 
 	private void getCreateTree(String inorderSubStr, String preOrderSequence, TreeEntity root, int index,
 			TreeEntity head, String inOrderSequence) {
@@ -203,6 +204,33 @@ public class TreeOpsImpl implements TreeOps {
 		}
 
 		return verticalSumMap;
+	}
+
+	public void setMinDepth(TreeEntity root, int depth) {
+
+		if (root == null) {
+			return;
+		} else {
+
+			if (root.getLeft() == null && root.getRight() == null) {
+				if (minDepth > depth) {
+					minDepth = depth;
+				}
+			}
+
+			depth++;
+			setMinDepth(root.getLeft(), depth);
+			setMinDepth(root.getRight(), depth);
+		}
+
+	}
+
+	@Override
+	public int getMinDepth() {
+		// TODO Auto-generated method stub
+		minDepth = MAX_VALUE;
+		setMinDepth(root,0);
+		return minDepth+1;
 	}
 
 }

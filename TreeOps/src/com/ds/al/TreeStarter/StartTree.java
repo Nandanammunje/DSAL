@@ -54,9 +54,9 @@ public class StartTree {
 		}
 		*/
 		
-		TreeMap<Integer,String> verticalSumMap=op.getVerticalSum();
-		System.out.println(verticalSumMap);
-		
+		//TreeMap<Integer,String> verticalSumMap=op.getVerticalSum();
+		//System.out.println(verticalSumMap);
+		System.out.println("Minimim depth is "+ op.getMinDepth());
 		 
 		
 		//System.out.println(verticalSumMap);

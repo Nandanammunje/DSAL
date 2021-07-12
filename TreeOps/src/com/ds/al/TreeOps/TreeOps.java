@@ -14,5 +14,7 @@ public interface TreeOps {
 
 	public String getZigZagStr() throws Exception;
 
-	public TreeMap<Integer,String> getVerticalSum();
+	public TreeMap<Integer, String> getVerticalSum();
+
+	public int getMinDepth();
 }

@@ -226,11 +226,44 @@ public class TreeOpsImpl implements TreeOps {
 	}
 
 	@Override
-	public int getMinDepth() {
+	public int getMinDepthRecursive() {
 		// TODO Auto-generated method stub
 		minDepth = MAX_VALUE;
-		setMinDepth(root,0);
-		return minDepth+1;
+		setMinDepth(root, 0);
+		return minDepth + 1;
+	}
+
+	@Override
+	public int getMinDepthLevelOrder() {
+		// TODO Auto-generated method stub
+		int distance = 0;
+		QueueEntity queue = new QueueEntity();
+		queue.Enqueue(root);
+		queue.Enqueue(null);
+		try {
+			while (!queue.isEmpty() && !(queue.getFirst() == null && queue.getLast() == null)) {
+
+				TreeEntity node = queue.Dequeue();
+				if(node!=null)
+				{
+					
+					if(node.getLeft()!=null)
+					{
+						queue.Enqueue(node.getLeft());
+					}
+					if(node.getRight()!=null)
+					{
+						queue.Enqueue(node.getRight());
+					}
+					
+				}
+
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 }

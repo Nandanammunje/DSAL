@@ -16,5 +16,7 @@ public interface TreeOps {
 
 	public TreeMap<Integer, String> getVerticalSum();
 
-	public int getMinDepth();
+	public int getMinDepthRecursive();
+
+	public int getMinDepthLevelOrder();
 }

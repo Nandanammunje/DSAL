@@ -241,21 +241,27 @@ public class TreeOpsImpl implements TreeOps {
 		queue.Enqueue(root);
 		queue.Enqueue(null);
 		try {
-			while (!queue.isEmpty() && !(queue.getFirst() == null && queue.getLast() == null)) {
+			while (!queue.isEmpty() && (queue.getSize() >1)) {
 
 				TreeEntity node = queue.Dequeue();
-				if(node!=null)
-				{
-					
-					if(node.getLeft()!=null)
-					{
+				if (node != null) {
+
+					if (node.getLeft() != null) {
 						queue.Enqueue(node.getLeft());
 					}
-					if(node.getRight()!=null)
-					{
+					if (node.getRight() != null) {
 						queue.Enqueue(node.getRight());
 					}
-					
+
+					if (node.getRight() == null && node.getLeft() == null) {
+						break;
+					}
+
+				} else {
+					if (node == null) {
+                         distance++;
+                         queue.Enqueue(null);
+					}
 				}
 
 			}
@@ -263,7 +269,7 @@ public class TreeOpsImpl implements TreeOps {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 0;
+		return distance+1;
 	}
 
 }

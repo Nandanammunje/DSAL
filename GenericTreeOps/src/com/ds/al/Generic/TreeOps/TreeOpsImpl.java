@@ -1,16 +1,22 @@
 package com.ds.al.Generic.TreeOps;
 
+import java.util.HashMap;
+
 import com.ds.al.Generic.TreeEntity.GenericTreeEntity;
 
 public class TreeOpsImpl implements TreeOps {
 
-	public int index;
+	private int index;
 
-	public GenericTreeEntity root;
+	private GenericTreeEntity root;
 
-	public int headIndex;
+	private int headIndex;
 
-	public String nodeSum;
+	private String nodeSum;
+
+	private HashMap<Integer, Integer> depthMap;
+
+	private int minDepth;
 
 	public void createTreeGeneric(GenericTreeEntity root, GenericTreeEntity head, int Index, String preOrderString,
 			String inorderString, String inorderSubStr) {
@@ -98,9 +104,36 @@ public class TreeOpsImpl implements TreeOps {
 	@Override
 	public String getNodeSum(GenericTreeEntity root) {
 		// TODO Auto-generated method stub
-		nodeSum="";
+		nodeSum = "";
 		TreeSum(root);
 		return nodeSum;
+	}
+
+	public void getMinDepth(int parent[], int node, int index, int depth) {
+
+		if (parent[index] == -1 || depthMap.containsKey(parent[index])) {
+			depth = depth + depthMap.getOrDefault(parent[index],0);
+			if (depth > minDepth)
+				minDepth = depth;
+			depthMap.put(node, depth+1);
+			return;
+
+		} else {
+			depth++;
+			getMinDepth(parent, node, parent[index], depth);
+		}
+
+	}
+
+	@Override
+	public int getDepth(int[] parentArr) {
+		// TODO Auto-generated method stub
+		depthMap = new HashMap<Integer, Integer>();
+		minDepth = -1;
+		for (int i = 0; i < parentArr.length; i++) {
+			getMinDepth(parentArr, i, i, 0);
+		}
+		return minDepth;
 	}
 
 }

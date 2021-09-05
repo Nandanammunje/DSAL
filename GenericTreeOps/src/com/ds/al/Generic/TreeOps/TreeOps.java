@@ -9,5 +9,7 @@ public interface TreeOps {
 	public void TreeTraversal(GenericTreeEntity root);
 
 	public String getNodeSum(GenericTreeEntity root);
+	
+	public int getDepth(int parentArr[]);
 
 }

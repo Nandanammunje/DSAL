@@ -6,6 +6,8 @@ import java.util.List;
 import com.ds.al.tree.TreeEntity;
 
 public class TreeOpsImpl implements TreeOps {
+	
+	private TreeEntity root;
 
 	@Override
 	public List<TreeEntity> makeTrees(int nodeLimit) {
@@ -77,7 +79,7 @@ public class TreeOpsImpl implements TreeOps {
 	public void PreorderTraversal(TreeEntity root) {
 		// TODO Auto-generated method stub
 
-		if (root != null) {
+		if (root != null) {                                                                                                                                                                                
 			System.out.print(root.getData()+" ");
 			PreorderTraversal(root.getLeft());
 			PreorderTraversal(root.getRight());
@@ -85,5 +87,39 @@ public class TreeOpsImpl implements TreeOps {
 			return;
 
 	}
+
+	
+	
+	
+	@Override
+	public TreeEntity createTreePreOrder(String preOrderSeq) {
+		// TODO Auto-generated method stub
+		
+		return null;
+	}
+	
+	private TreeEntity createTreeNode(TreeEntity root, TreeEntity head, String data, boolean isLeft) {
+		if (root == null) {
+			root = new TreeEntity();
+			root.setData(data.charAt(0));
+			root.setLeft(null);
+			root.setRight(null);
+			head = root;
+			this.root = root;
+
+		} else {
+			TreeEntity node = new TreeEntity();
+			node.setData(data.charAt(0));
+			node.setLeft(null);
+			node.setRight(null);
+			if (isLeft)
+				head.setLeft(node);
+			else
+				head.setRight(node);
+			head = node;
+		}
+		return head;
+	}
+
 
 }

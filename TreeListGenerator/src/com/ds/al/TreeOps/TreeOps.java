@@ -8,4 +8,5 @@ public interface TreeOps {
 
 	public List<TreeEntity> makeTrees(int nodeLimit);
 	public void PreorderTraversal(TreeEntity root);
+	public TreeEntity createTreePreOrder(String preOrderSeq); 
 }

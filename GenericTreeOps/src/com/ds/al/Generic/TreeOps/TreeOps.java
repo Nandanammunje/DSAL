@@ -11,5 +11,7 @@ public interface TreeOps {
 	public String getNodeSum(GenericTreeEntity root);
 	
 	public int getDepth(int parentArr[]);
+	
+	public boolean isIsomorphic(GenericTreeEntity root1,GenericTreeEntity root2);
 
 }

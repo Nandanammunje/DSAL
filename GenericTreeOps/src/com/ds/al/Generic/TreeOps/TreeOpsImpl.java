@@ -17,6 +17,8 @@ public class TreeOpsImpl implements TreeOps {
 	private HashMap<Integer, Integer> depthMap;
 
 	private int minDepth;
+	
+	private boolean isIsomorphic;
 
 	public void createTreeGeneric(GenericTreeEntity root, GenericTreeEntity head, int Index, String preOrderString,
 			String inorderString, String inorderSubStr) {
@@ -134,6 +136,30 @@ public class TreeOpsImpl implements TreeOps {
 			getMinDepth(parentArr, i, i, 0);
 		}
 		return minDepth;
+	}
+	
+	
+	public void checkIsomorphic(GenericTreeEntity root1,GenericTreeEntity root2)
+	{
+		
+		if((root1==null&&root2!=null)||(root1!=null && root2==null))
+		{
+		   isIsomorphic=false;
+		   return;	
+		}
+		if(root1!=null && root2!=null)
+		{
+		checkIsomorphic(root1.getFirstChild(), root2.getFirstChild());
+		checkIsomorphic(root1.getNextSibbling(), root2.getNextSibbling());
+		}
+	}
+
+	@Override
+	public boolean isIsomorphic(GenericTreeEntity root1, GenericTreeEntity root2) {
+		// TODO Auto-generated method stub
+		isIsomorphic=true;
+		checkIsomorphic(root1, root2);
+		return isIsomorphic;
 	}
 
 }

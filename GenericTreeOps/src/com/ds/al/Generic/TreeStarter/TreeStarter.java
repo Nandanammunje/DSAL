@@ -56,8 +56,8 @@ public class TreeStarter {
 		}                                                    
 
 		GenericTreeEntity root2 = opsTree2.mkGenericTree(preOrderSequence, inorderSequence);
-		System.out.println("Isomorphic status is "+ops.isIsomorphic(root1, root2)); 
-
+		//System.out.println("Isomorphic status is "+ops.isIsomorphic(root1, root2)); 
+         System.out.println("Quasi morphic status is "+ ops.isQuasiIsomorphic(root1, root2));
 		/*
 		 * int parentArr[] = new int[treeSize];
 		 * System.out.println("Enter the tree elements of the parent array"); for (int i

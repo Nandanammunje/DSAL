@@ -13,5 +13,7 @@ public interface TreeOps {
 	public int getDepth(int parentArr[]);
 	
 	public boolean isIsomorphic(GenericTreeEntity root1,GenericTreeEntity root2);
+	
+	public boolean isQuasiIsomorphic(GenericTreeEntity root1,GenericTreeEntity root2);
 
 }

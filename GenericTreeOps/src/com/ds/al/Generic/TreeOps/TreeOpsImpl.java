@@ -17,8 +17,10 @@ public class TreeOpsImpl implements TreeOps {
 	private HashMap<Integer, Integer> depthMap;
 
 	private int minDepth;
-	
+
 	private boolean isIsomorphic;
+
+	private boolean isQuasimorphic;
 
 	public void createTreeGeneric(GenericTreeEntity root, GenericTreeEntity head, int Index, String preOrderString,
 			String inorderString, String inorderSubStr) {
@@ -114,10 +116,10 @@ public class TreeOpsImpl implements TreeOps {
 	public void getMinDepth(int parent[], int node, int index, int depth) {
 
 		if (parent[index] == -1 || depthMap.containsKey(parent[index])) {
-			depth = depth + depthMap.getOrDefault(parent[index],0);
+			depth = depth + depthMap.getOrDefault(parent[index], 0);
 			if (depth > minDepth)
 				minDepth = depth;
-			depthMap.put(node, depth+1);
+			depthMap.put(node, depth + 1);
 			return;
 
 		} else {
@@ -137,29 +139,41 @@ public class TreeOpsImpl implements TreeOps {
 		}
 		return minDepth;
 	}
-	
-	
-	public void checkIsomorphic(GenericTreeEntity root1,GenericTreeEntity root2)
-	{
-		
-		if((root1==null&&root2!=null)||(root1!=null && root2==null))
-		{
-		   isIsomorphic=false;
-		   return;	
+
+	public void checkIsomorphic(GenericTreeEntity root1, GenericTreeEntity root2) {
+
+		if ((root1 == null && root2 != null) || (root1 != null && root2 == null)) {
+			isIsomorphic = false;
+			return;
 		}
-		if(root1!=null && root2!=null)
-		{
-		checkIsomorphic(root1.getFirstChild(), root2.getFirstChild());
-		checkIsomorphic(root1.getNextSibbling(), root2.getNextSibbling());
+		if (root1 != null && root2 != null) {
+			checkIsomorphic(root1.getFirstChild(), root2.getFirstChild());
+			checkIsomorphic(root1.getNextSibbling(), root2.getNextSibbling());
 		}
 	}
 
 	@Override
 	public boolean isIsomorphic(GenericTreeEntity root1, GenericTreeEntity root2) {
 		// TODO Auto-generated method stub
-		isIsomorphic=true;
+		isIsomorphic = true;
 		checkIsomorphic(root1, root2);
 		return isIsomorphic;
+	}
+
+	@Override
+	public boolean isQuasiIsomorphic(GenericTreeEntity root1, GenericTreeEntity root2) {
+		// TODO Auto-generated method stub
+		if (root1 == null && root2 == null) {
+			return true;
+		}
+		if ((root1 == null && root2 != null) || (root2 == null && root1 != null))
+
+		{
+               return false;
+		}
+		return (isQuasiIsomorphic(root1.getFirstChild(), root2.getFirstChild())&& isQuasiIsomorphic(root1.getNextSibbling(),root2.getNextSibbling())
+				||(isQuasiIsomorphic(root1.getFirstChild(),root2.getNextSibbling())&& isQuasiIsomorphic(root1.getNextSibbling(),root2.getFirstChild())));
+
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.ds.al.Generic.TreeOps;
 
 import java.util.HashMap;
+import static java.lang.Math.log;
 
 import com.ds.al.Generic.TreeEntity.GenericTreeEntity;
 
@@ -20,7 +21,7 @@ public class TreeOpsImpl implements TreeOps {
 
 	private boolean isIsomorphic;
 
-	private boolean isQuasimorphic;
+	private double treeHeight;
 
 	public void createTreeGeneric(GenericTreeEntity root, GenericTreeEntity head, int Index, String preOrderString,
 			String inorderString, String inorderSubStr) {
@@ -160,6 +161,44 @@ public class TreeOpsImpl implements TreeOps {
 		return isIsomorphic;
 	}
 
+	public void getCompleteTreeHeight(int treeNodes, int knumber) {
+
+		int number = (treeNodes*(knumber-1)) + 1;
+		treeHeight = customLogBase(number, knumber)-1;
+	}
+
+	public double customLogBase(int number, int base) {
+
+		return log(number) / log(base);
+
+	}
+
+	public void genericTreeListIterator(String[] nodeString, int kNumber, GenericTreeEntity head, int childHeight,
+			int siblingCount, boolean isChild) {
+
+		if (this.index >= nodeString.length || head == null) {
+			return;
+		}
+
+		if (childHeight < treeHeight && isChild) {
+
+			childHeight++;
+			head = createTreeNode(head, nodeString[this.index], isChild);
+			this.index++;
+			siblingCount = 0;
+
+		} else if (siblingCount < kNumber - 1 && !isChild) {
+			siblingCount++;
+			head = createTreeNode(head, nodeString[this.index], isChild);
+			this.index++;
+
+		} else {
+			return;
+		}
+         genericTreeListIterator(nodeString, kNumber, head, childHeight, siblingCount,true);
+         genericTreeListIterator(nodeString, kNumber, head, childHeight, siblingCount,false);
+	}
+
 	@Override
 	public boolean isQuasiIsomorphic(GenericTreeEntity root1, GenericTreeEntity root2) {
 		// TODO Auto-generated method stub
@@ -169,11 +208,26 @@ public class TreeOpsImpl implements TreeOps {
 		if ((root1 == null && root2 != null) || (root2 == null && root1 != null))
 
 		{
-               return false;
+			return false;
 		}
-		return (isQuasiIsomorphic(root1.getFirstChild(), root2.getFirstChild())&& isQuasiIsomorphic(root1.getNextSibbling(),root2.getNextSibbling())
-				||(isQuasiIsomorphic(root1.getFirstChild(),root2.getNextSibbling())&& isQuasiIsomorphic(root1.getNextSibbling(),root2.getFirstChild())));
+		return (isQuasiIsomorphic(root1.getFirstChild(), root2.getFirstChild())
+				&& isQuasiIsomorphic(root1.getNextSibbling(), root2.getNextSibbling())
+				|| (isQuasiIsomorphic(root1.getFirstChild(), root2.getNextSibbling())
+						&& isQuasiIsomorphic(root1.getNextSibbling(), root2.getFirstChild())));
 
+	}
+
+	@Override
+	public GenericTreeEntity GenerateGenericTreePreorder(String[] nodeList, int kNumber) {
+		// TODO Auto-generated method stub
+		getCompleteTreeHeight(nodeList.length, kNumber);
+		GenericTreeEntity root = new GenericTreeEntity();
+		root.setData(nodeList[0]);
+		index = 1;
+		root.setFirstChild(null);
+		root.setNextSibbling(null);
+		genericTreeListIterator(nodeList,kNumber,root,0,0,true);
+		return root;
 	}
 
 }

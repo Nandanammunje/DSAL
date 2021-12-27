@@ -83,19 +83,24 @@ public class TreeOpsImpl implements TreeOps {
 				successorNode.push(root);
 				mkThreadedBinaryTree(root.getLeft());
 			}
-			if (root.getrTag() == 1) {
-				successorNode.push(root);
-				mkThreadedBinaryTree(root.getRight());
-			}
+
 			System.out.println(root.getData());
 			if (root.getlTag() == 0) {
-				root.setLeft(successorNode.peek());
+				root.setLeft(predessorNode.peek());
 			}
 			if (root.getrTag() == 0) {
+
 				root.setRight(successorNode.peek());
 			}
-			successorNode.push(root);
+			predessorNode.push(root);
+			if (successorNode.peek() == root)
+				successorNode.pop();
 
+			if (root.getrTag() == 1) {
+
+				mkThreadedBinaryTree(root.getRight());
+
+			}
 		}
 		return;
 	}
@@ -105,6 +110,12 @@ public class TreeOpsImpl implements TreeOps {
 		// TODO Auto-generated method stub
 
 		mkBinaryTree(inorderSeq, preOrderSeq, root, currNodeIndex, root, inorderSeq);
+		predessorNode = new Stack<ThreadedBinaryTreeEntity>();
+		successorNode = new Stack<ThreadedBinaryTreeEntity>();
+		predessorNode.push(null);
+		successorNode.push(null);
+		mkThreadedBinaryTree(root);
+
 		return root;
 
 	}

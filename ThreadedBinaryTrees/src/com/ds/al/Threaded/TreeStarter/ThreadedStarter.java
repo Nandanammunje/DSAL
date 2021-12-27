@@ -29,6 +29,8 @@ public class ThreadedStarter {
 			
 		}
 		TreeOps ops=new TreeOpsImpl();
+		ops.CreateThreadedBinary(inOrderDataString, preOrderDataString);
+		
 
 	}
 

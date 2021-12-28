@@ -84,17 +84,20 @@ public class TreeOpsImpl implements TreeOps {
 				mkThreadedBinaryTree(root.getLeft());
 			}
 
-			System.out.println(root.getData());
+		System.out.println(root.getData());
 			if (root.getlTag() == 0) {
 				root.setLeft(predessorNode.peek());
 			}
+			
+			if (successorNode.peek() == root)
+				successorNode.pop();
+			
 			if (root.getrTag() == 0) {
 
 				root.setRight(successorNode.peek());
 			}
 			predessorNode.push(root);
-			if (successorNode.peek() == root)
-				successorNode.pop();
+			
 
 			if (root.getrTag() == 1) {
 

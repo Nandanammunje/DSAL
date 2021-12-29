@@ -18,6 +18,8 @@ public class TreeOpsImpl implements TreeOps {
 	private Stack<ThreadedBinaryTreeEntity> predessorNode;
 
 	private int currNodeIndex;
+	
+	private ThreadedBinaryTreeEntity foundNodeAddress=null;
 
 	private void mkBinaryTree(String inOrderSubstr, String preOrderSeq, ThreadedBinaryTreeEntity root, int index,
 			ThreadedBinaryTreeEntity head, String inOrderSequence) {
@@ -84,20 +86,18 @@ public class TreeOpsImpl implements TreeOps {
 				mkThreadedBinaryTree(root.getLeft());
 			}
 
-		System.out.println(root.getData());
 			if (root.getlTag() == 0) {
 				root.setLeft(predessorNode.peek());
 			}
-			
+
 			if (successorNode.peek() == root)
 				successorNode.pop();
-			
+
 			if (root.getrTag() == 0) {
 
 				root.setRight(successorNode.peek());
 			}
 			predessorNode.push(root);
-			
 
 			if (root.getrTag() == 1) {
 
@@ -121,6 +121,39 @@ public class TreeOpsImpl implements TreeOps {
 
 		return root;
 
+	}
+
+	private void findNodeAddress(String node, ThreadedBinaryTreeEntity root) {
+		if (root.getData().equalsIgnoreCase(node))
+			foundNodeAddress=root;
+		else if (root.getlTag() == 1)
+			findNodeAddress(node, root.getLeft());
+		if(root.getrTag() == 1)
+			findNodeAddress(node, root.getRight());
+
+		
+	}
+
+	@Override
+	public ThreadedBinaryTreeEntity findInorderSuccessor(String node) {
+		// TODO Auto-generated method stub
+		findNodeAddress(node, this.root);
+		ThreadedBinaryTreeEntity nodeAddress=this.foundNodeAddress;
+		ThreadedBinaryTreeEntity nodePointer = null;
+		if (nodeAddress != null) {
+			if (nodeAddress.getrTag() == 0) {
+				nodePointer = nodeAddress.getRight();
+				return nodePointer;
+			}
+
+			nodePointer = nodeAddress.getRight();
+			while (nodePointer.getlTag() != 0) {
+
+				nodePointer = nodePointer.getLeft();
+			}
+
+		}
+		return nodePointer;
 	}
 
 }

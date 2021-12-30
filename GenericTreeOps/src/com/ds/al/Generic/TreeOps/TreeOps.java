@@ -11,5 +11,11 @@ public interface TreeOps {
 	public String getNodeSum(GenericTreeEntity root);
 	
 	public int getDepth(int parentArr[]);
+	
+	public boolean isIsomorphic(GenericTreeEntity root1,GenericTreeEntity root2);
+	
+	public boolean isQuasiIsomorphic(GenericTreeEntity root1,GenericTreeEntity root2);
+	
+	public GenericTreeEntity GenerateGenericTreePreorder(String nodeList[],int kNumber);
 
 }

@@ -8,5 +8,7 @@ public interface TreeOps {
 	
 	public ThreadedBinaryTreeEntity findInorderSuccessor(String node);
 	
+	public ThreadedBinaryTreeEntity findPreorderSuccessor(String node);
+	
 
 }

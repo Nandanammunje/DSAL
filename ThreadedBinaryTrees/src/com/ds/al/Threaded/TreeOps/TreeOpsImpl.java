@@ -178,26 +178,29 @@ public class TreeOpsImpl implements TreeOps {
 	@Override
 	public ThreadedBinaryTreeEntity InsertNode(String parentNode, String childNode) {
 		// TODO Auto-generated method stub
+
+		boolean isChildEExist = false;
 		findNodeAddress(parentNode, root);
 		ThreadedBinaryTreeEntity node = this.foundNodeAddress;
+		if (node.getrTag() == 1)
+			isChildEExist = true;
 		ThreadedBinaryTreeEntity newChildNode = new ThreadedBinaryTreeEntity();
 		newChildNode.setData(childNode);
 		newChildNode.setlTag(0);
-		newChildNode.setrTag(0);
+		newChildNode.setrTag(node.getrTag());
 		newChildNode.setLeft(node);
 		newChildNode.setRight(node.getRight());
 		node.setRight(newChildNode);
 		node.setrTag(1);
-		if (node.getRight()!= null) {
+		if (isChildEExist) {
 
-			ThreadedBinaryTreeEntity previousNode=newChildNode.getRight();
-			while(previousNode.getlTag()==1)
-			{
-				previousNode=previousNode.getLeft();
+			ThreadedBinaryTreeEntity previousNode = newChildNode.getRight();
+			while (previousNode.getlTag() == 1) {
+				previousNode = previousNode.getLeft();
 			}
 			previousNode.setLeft(newChildNode);
-			
-		} 
+
+		}
 		return root;
 	}
 

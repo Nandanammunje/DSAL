@@ -19,4 +19,6 @@ public interface TreeOps {
 	public int getMinDepthRecursive();
 
 	public int getMinDepthLevelOrder();
+	
+	public TreeEntity getPreOrderSuccessor(String treeNode);
 }

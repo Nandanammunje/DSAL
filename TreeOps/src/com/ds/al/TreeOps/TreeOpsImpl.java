@@ -20,6 +20,8 @@ public class TreeOpsImpl implements TreeOps {
 	private String AncestorNodes;
 	private TreeMap<Integer, String> verticalSumMap;
 	private int minDepth;
+	private TreeEntity foundNode;
+	private boolean flag = false;
 
 	private void getCreateTree(String inorderSubStr, String preOrderSequence, TreeEntity root, int index,
 			TreeEntity head, String inOrderSequence) {
@@ -241,7 +243,7 @@ public class TreeOpsImpl implements TreeOps {
 		queue.Enqueue(root);
 		queue.Enqueue(null);
 		try {
-			while (!queue.isEmpty() && (queue.getSize() >1)) {
+			while (!queue.isEmpty() && (queue.getSize() > 1)) {
 
 				TreeEntity node = queue.Dequeue();
 				if (node != null) {
@@ -259,8 +261,8 @@ public class TreeOpsImpl implements TreeOps {
 
 				} else {
 					if (node == null) {
-                         distance++;
-                         queue.Enqueue(null);
+						distance++;
+						queue.Enqueue(null);
 					}
 				}
 
@@ -269,7 +271,28 @@ public class TreeOpsImpl implements TreeOps {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return distance+1;
+		return distance + 1;
+	}
+
+	private void nodeFinder(TreeEntity root, String node) {
+
+		if (root == null || found) {
+			return;
+		}
+		if (node.equals(Character.toString(root.getData()))) {
+			found = true;
+			foundNode = root;
+			return;
+		}
+		nodeFinder(root.getLeft(), node);
+		nodeFinder(root.getRight(), node);
+	}
+
+	@Override
+	public TreeEntity getPreOrderSuccessor(String treeNode) {
+		// TODO Auto-generated method stub
+		nodeFinder(root, treeNode);
+		return null;
 	}
 
 }

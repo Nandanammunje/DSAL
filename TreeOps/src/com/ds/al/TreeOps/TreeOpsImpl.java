@@ -6,6 +6,7 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.Integer.MAX_VALUE;
 
+import java.util.Stack;
 import java.util.TreeMap;
 
 import com.ds.al.TreeUtility.QueueEntity;
@@ -22,6 +23,7 @@ public class TreeOpsImpl implements TreeOps {
 	private int minDepth;
 	private TreeEntity foundNode;
 	private boolean flag = false;
+	private Stack<TreeEntity> inorderStack;
 
 	private void getCreateTree(String inorderSubStr, String preOrderSequence, TreeEntity root, int index,
 			TreeEntity head, String inOrderSequence) {
@@ -291,8 +293,45 @@ public class TreeOpsImpl implements TreeOps {
 	@Override
 	public TreeEntity getPreOrderSuccessor(String treeNode) {
 		// TODO Auto-generated method stub
+		boolean foundParentNode = false;
+		Stack<TreeEntity> treeStack = new Stack<TreeEntity>();
 		nodeFinder(root, treeNode);
-		return null;
+		TreeEntity treeStartNode = null;
+		if (foundNode.getLeft() != null)
+			return foundNode.getLeft();
+		else
+			treeStartNode = root;
+
+		treeStack.push(null);
+
+		{
+			while (!treeStack.isEmpty()) {
+
+				if (foundParentNode && treeStartNode != null)
+					return treeStartNode;
+
+				if (treeStartNode == foundNode)
+					foundParentNode = true;
+				if (treeStartNode.getLeft() != null) {
+					treeStack.push(treeStartNode);
+					treeStartNode = treeStartNode.getLeft();
+				} else if (treeStartNode.getRight() != null) {
+					treeStartNode = treeStartNode.getRight();
+					treeStack.pop();
+
+				} else {
+					treeStartNode = treeStack.pop();
+					if (treeStartNode.getRight() != null)
+						treeStartNode = treeStartNode.getRight();
+					
+
+				}
+
+			}
+
+		}
+
+		return treeStartNode;
 	}
 
 }

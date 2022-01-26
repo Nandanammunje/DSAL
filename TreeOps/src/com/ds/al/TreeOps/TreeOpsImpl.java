@@ -301,36 +301,39 @@ public class TreeOpsImpl implements TreeOps {
 			return foundNode.getLeft();
 		else
 			treeStartNode = root;
-
+		
 		treeStack.push(null);
 
-		{
-			while (!treeStack.isEmpty()) {
+		do {
 
-				if (foundParentNode && treeStartNode != null)
-					return treeStartNode;
+			if (foundParentNode && treeStartNode != null)
+				break;
+			if (treeStartNode == foundNode)
+				foundParentNode = true;
 
-				if (treeStartNode == foundNode)
-					foundParentNode = true;
-				if (treeStartNode.getLeft() != null) {
-					treeStack.push(treeStartNode);
-					treeStartNode = treeStartNode.getLeft();
-				} else if (treeStartNode.getRight() != null) {
+			if (treeStartNode.getLeft() != null) {
+				treeStack.push(treeStartNode);
+				treeStartNode = treeStartNode.getLeft();
+
+			} else {
+				if (treeStartNode.getRight() != null)
 					treeStartNode = treeStartNode.getRight();
-					treeStack.pop();
-
-				} else {
-					treeStartNode = treeStack.pop();
-					if (treeStartNode.getRight() != null)
-						treeStartNode = treeStartNode.getRight();
-					
-
+				else if(treeStack.peek()!=null)
+				{
+					treeStartNode=treeStack.pop().getRight();
 				}
+				else 
+				{
+					if(treeStartNode==null)
+						break;
+				}
+			
 
 			}
 
-		}
+		} while (!treeStack.isEmpty());
 
+		
 		return treeStartNode;
 	}
 

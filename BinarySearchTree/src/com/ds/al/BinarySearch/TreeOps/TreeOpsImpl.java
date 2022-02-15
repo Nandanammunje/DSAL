@@ -50,15 +50,15 @@ public class TreeOpsImpl implements TreeOps {
 
 		int charSecond = (int) b;
 
-		return a > b;
+		return charFirst > charSecond;
 	}
 
-	public BinarySearchTreeEntity getRoot() {
-		return root;
+	@Override
+	public BinarySearchTreeEntity createBST(String dataStr) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public void setRoot(BinarySearchTreeEntity root) {
-		this.root = root;
-	}
+	
 
 }

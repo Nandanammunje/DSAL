@@ -5,6 +5,7 @@ import com.ds.al.BinarySearch.TreeEntity.BinarySearchTreeEntity;
 public class TreeOpsImpl implements TreeOps {
 
 	private BinarySearchTreeEntity root;
+	private BinarySearchTreeEntity foundNode;
 
 	public void createBinarySearchTree(String data) {
 
@@ -60,6 +61,27 @@ public class TreeOpsImpl implements TreeOps {
 			createBinarySearchTree(Character.toString(dataStr.charAt(i)));
 		}
 		return root;
+	}
+
+	public void searchBSTNode(BinarySearchTreeEntity node, String data) {
+		if (node.getData().equalsIgnoreCase(data)) {
+			foundNode = node;
+			return;
+		} else {
+			if (compareCharacter(node.getData().charAt(0), data.charAt(0)))
+				searchBSTNode(node.getLeft(), data);
+			else
+				searchBSTNode(node.getRight(), data);
+
+		}
+
+	}
+
+	@Override
+	public BinarySearchTreeEntity findNode(String dataStr) {
+		// TODO Auto-generated method stub
+		searchBSTNode(root, dataStr);
+		return foundNode;
 	}
 
 }

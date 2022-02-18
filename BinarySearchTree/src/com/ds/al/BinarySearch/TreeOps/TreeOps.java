@@ -5,4 +5,6 @@ import com.ds.al.BinarySearch.TreeEntity.BinarySearchTreeEntity;
 public interface TreeOps {
 
 	public BinarySearchTreeEntity createBST(String dataStr);
+	
+	public BinarySearchTreeEntity findNode(String dataStr);
 }

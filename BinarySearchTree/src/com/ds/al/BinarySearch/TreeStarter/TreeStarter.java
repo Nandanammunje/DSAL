@@ -15,11 +15,15 @@ public class TreeStarter {
 		System.out.println("Enter the size of BST");
 		size = sc.nextInt();
 		String bstString = "";
+		String bstNode = "";
 		System.out.println("Enter data for BST");
-		for(int i=0;i<size;i++)
-		bstString = bstString + sc.next() + "";
+		for (int i = 0; i < size; i++)
+			bstString = bstString + sc.next() + "";
 		TreeOps operation = new TreeOpsImpl();
 		operation.createBST(bstString);
+		System.out.println("Enter the node to search");
+		bstNode = sc.next();
+		operation.findNode(bstNode);
 		sc.close();
 
 	}

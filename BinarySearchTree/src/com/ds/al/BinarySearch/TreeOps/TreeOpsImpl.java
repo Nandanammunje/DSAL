@@ -56,9 +56,10 @@ public class TreeOpsImpl implements TreeOps {
 	@Override
 	public BinarySearchTreeEntity createBST(String dataStr) {
 		// TODO Auto-generated method stub
-		return null;
+		for (int i = 0; i < dataStr.length(); i++) {
+			createBinarySearchTree(Character.toString(dataStr.charAt(i)));
+		}
+		return root;
 	}
-
-	
 
 }

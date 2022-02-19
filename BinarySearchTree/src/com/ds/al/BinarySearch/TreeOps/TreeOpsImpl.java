@@ -64,6 +64,9 @@ public class TreeOpsImpl implements TreeOps {
 	}
 
 	public void searchBSTNode(BinarySearchTreeEntity node, String data) {
+
+		if (node == null)
+			return;
 		if (node.getData().equalsIgnoreCase(data)) {
 			foundNode = node;
 			return;

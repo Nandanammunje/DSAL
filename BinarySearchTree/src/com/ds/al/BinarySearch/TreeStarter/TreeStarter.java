@@ -21,9 +21,12 @@ public class TreeStarter {
 			bstString = bstString + sc.next() + "";
 		TreeOps operation = new TreeOpsImpl();
 		operation.createBST(bstString);
-		System.out.println("Enter the node to search");
-		bstNode = sc.next();
-		operation.findNode(bstNode);
+		/*
+		 * System.out.println("Enter the node to search"); bstNode = sc.next();
+		 * operation.findNode(bstNode);
+		 */
+		//operation.findMinimumNode();
+		operation.findMaximumNode();
 		sc.close();
 
 	}

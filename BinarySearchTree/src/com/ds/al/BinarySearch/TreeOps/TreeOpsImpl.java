@@ -6,6 +6,8 @@ public class TreeOpsImpl implements TreeOps {
 
 	private BinarySearchTreeEntity root;
 	private BinarySearchTreeEntity foundNode;
+	private BinarySearchTreeEntity minNode;
+	private BinarySearchTreeEntity maxNode;
 
 	public void createBinarySearchTree(String data) {
 
@@ -85,6 +87,40 @@ public class TreeOpsImpl implements TreeOps {
 		// TODO Auto-generated method stub
 		searchBSTNode(root, dataStr);
 		return foundNode;
+	}
+
+	public void setMinimumNode(BinarySearchTreeEntity node) {
+		if (node != null) {
+			minNode = node;
+			setMinimumNode(node.getLeft());
+		}
+
+		else
+			return;
+	}
+
+	public void setMaximumNode(BinarySearchTreeEntity node) {
+		if (node != null) {
+			maxNode = node;
+			setMaximumNode(node.getRight());
+		} else
+			return;
+
+	}
+
+	@Override
+	public BinarySearchTreeEntity findMinimumNode() {
+		// TODO Auto-generated method stub
+		setMinimumNode(root);
+
+		return minNode;
+	}
+
+	@Override
+	public BinarySearchTreeEntity findMaximumNode() {
+		// TODO Auto-generated method stub
+		setMaximumNode(root);
+		return maxNode;
 	}
 
 }

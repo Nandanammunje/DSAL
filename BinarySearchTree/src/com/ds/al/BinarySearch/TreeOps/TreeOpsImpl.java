@@ -56,6 +56,14 @@ public class TreeOpsImpl implements TreeOps {
 		return charFirst > charSecond;
 	}
 
+	private int compareCharacterInt(char a, char b) {
+		int charFirst = (int) a;
+		int charSecond = (int) b;
+		int compareInt = (charFirst == charSecond) ? 0 : (charFirst > charSecond) ? 1 : -1;
+		return compareInt;
+
+	}
+
 	@Override
 	public BinarySearchTreeEntity createBST(String dataStr) {
 		// TODO Auto-generated method stub
@@ -121,6 +129,32 @@ public class TreeOpsImpl implements TreeOps {
 		// TODO Auto-generated method stub
 		setMaximumNode(root);
 		return maxNode;
+	}
+
+	public String createPathString(String bstNode, String dataStr, BinarySearchTreeEntity node) {
+		if (node == null)
+			return dataStr;
+		else if (compareCharacterInt(bstNode.charAt(0), node.getData().charAt(0)) > 0) {
+			dataStr = dataStr + node.getData() + createPathString(bstNode, dataStr, node.getRight());
+
+		} else if (compareCharacterInt(bstNode.charAt(0), node.getData().charAt(0)) < 0) {
+			dataStr = dataStr + node.getData() + createPathString(bstNode, dataStr, node.getLeft());
+		} else {
+			dataStr = dataStr + node.getData();
+		}
+
+		return dataStr;
+	}
+
+	@Override
+	public int findShortestPath(String bstNodeFirst, String bstNodeSecond) {
+		// TODO Auto-generated method stub
+		String nodePath1="";
+		String nodePath2="";
+		nodePath1=nodePath1+createPathString(bstNodeSecond, nodePath1,root);
+        nodePath2=nodePath2+createPathString(bstNodeSecond, nodePath2,root);
+        
+		return 0;
 	}
 
 }

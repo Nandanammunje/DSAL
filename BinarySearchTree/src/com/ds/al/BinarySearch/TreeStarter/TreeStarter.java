@@ -26,7 +26,7 @@ public class TreeStarter {
 		 * operation.findNode(bstNode);
 		 */
 		//operation.findMinimumNode();
-		operation.findMaximumNode();
+		//operation.findMaximumNode();
 		sc.close();
 
 	}

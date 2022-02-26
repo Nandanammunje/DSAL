@@ -134,10 +134,11 @@ public class TreeOpsImpl implements TreeOps {
 	public String createPathString(String bstNode, String dataStr, BinarySearchTreeEntity node) {
 		if (node == null)
 			return dataStr;
-		else if (compareCharacterInt(bstNode.charAt(0), node.getData().charAt(0)) > 0) {
+		int charComparVal = compareCharacterInt(bstNode.charAt(0), node.getData().charAt(0));
+		if (charComparVal > 0) {
 			dataStr = dataStr + node.getData() + createPathString(bstNode, dataStr, node.getRight());
 
-		} else if (compareCharacterInt(bstNode.charAt(0), node.getData().charAt(0)) < 0) {
+		} else if (charComparVal < 0) {
 			dataStr = dataStr + node.getData() + createPathString(bstNode, dataStr, node.getLeft());
 		} else {
 			dataStr = dataStr + node.getData();
@@ -149,12 +150,27 @@ public class TreeOpsImpl implements TreeOps {
 	@Override
 	public int findShortestPath(String bstNodeFirst, String bstNodeSecond) {
 		// TODO Auto-generated method stub
-		String nodePath1="";
-		String nodePath2="";
-		nodePath1=nodePath1+createPathString(bstNodeSecond, nodePath1,root);
-        nodePath2=nodePath2+createPathString(bstNodeSecond, nodePath2,root);
-        
-		return 0;
+		String nodePath1 = "";
+		String nodePath2 = "";
+		nodePath1 = nodePath1 + createPathString(bstNodeFirst, nodePath1, root);
+		nodePath2 = nodePath2 + createPathString(bstNodeSecond, nodePath2, root);
+        int shortestPath=getDistFromLCA(nodePath1, nodePath2);
+		
+		return shortestPath;
 	}
 
+	public int getDistFromLCA(String nodePath1, String nodePath2) {
+		int loopLength = (nodePath1.length() > nodePath2.length()) ? nodePath2.length() : nodePath1.length();
+		int comparIndex = 0;
+		for (int i = 0; i < loopLength; i++) {
+			if (compareCharacterInt(nodePath1.charAt(i), nodePath2.charAt(i)) == 0) {
+				comparIndex = i;
+
+			}
+		}
+
+		int nodeDistance = nodePath1.length() + nodePath2.length() - 2 + 2 * comparIndex;
+		return nodeDistance;
+
+	}
 }

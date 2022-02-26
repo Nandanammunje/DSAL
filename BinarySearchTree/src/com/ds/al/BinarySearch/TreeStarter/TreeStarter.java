@@ -16,11 +16,18 @@ public class TreeStarter {
 		size = sc.nextInt();
 		String bstString = "";
 		String bstNode = "";
+		String bstNodeFirst="";
+		String bstNodeSecond="";
 		System.out.println("Enter data for BST");
 		for (int i = 0; i < size; i++)
 			bstString = bstString + sc.next() + "";
 		TreeOps operation = new TreeOpsImpl();
 		operation.createBST(bstString);
+		System.out.println("Enter the first BST Node");
+		bstNodeFirst=sc.next();
+		System.out.println("Enter the second BST Node");
+		bstNodeSecond=sc.next();
+		operation.findShortestPath(bstNodeFirst, bstNodeSecond);
 		/*
 		 * System.out.println("Enter the node to search"); bstNode = sc.next();
 		 * operation.findNode(bstNode);

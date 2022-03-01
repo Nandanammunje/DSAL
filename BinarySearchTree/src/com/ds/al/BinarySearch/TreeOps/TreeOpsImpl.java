@@ -1,6 +1,7 @@
 package com.ds.al.BinarySearch.TreeOps;
 
 import com.ds.al.BinarySearch.TreeEntity.BinarySearchTreeEntity;
+import com.ds.al.Circular.DoubleLinkedLstEntity.CircularDoubleLinkedLstEntity;
 
 public class TreeOpsImpl implements TreeOps {
 
@@ -8,6 +9,8 @@ public class TreeOpsImpl implements TreeOps {
 	private BinarySearchTreeEntity foundNode;
 	private BinarySearchTreeEntity minNode;
 	private BinarySearchTreeEntity maxNode;
+	private CircularDoubleLinkedLstEntity head;
+	private CircularDoubleLinkedLstEntity prevLstNode;
 
 	public void createBinarySearchTree(String data) {
 
@@ -168,9 +171,58 @@ public class TreeOpsImpl implements TreeOps {
 
 			}
 		}
-
-		int nodeDistance = nodePath1.length() + nodePath2.length() - 2 + 2 * comparIndex;
+        comparIndex=2*comparIndex;
+		int nodeDistance = nodePath1.length()+nodePath2.length()-comparIndex-2;
 		return nodeDistance;
 
+	}
+
+	public void inorderTraverseConvert(CircularDoubleLinkedLstEntity prevNode,BinarySearchTreeEntity root)
+	{
+		
+		if(root!=null)
+		{
+		inorderTraverseConvert(prevNode ,root.getLeft());
+		initializeLst(root.getData());
+		inorderTraverseConvert(prevNode, root.getRight());
+		}
+		
+		
+		
+	}
+	
+	public void initializeLst(String data)
+	
+	{
+		CircularDoubleLinkedLstEntity currNode;
+		if(head==null)
+		{
+			head=new CircularDoubleLinkedLstEntity();
+			head.setData(data);
+			head.setNext(head);
+			head.setPrev(null);
+			currNode=head;
+		}
+		else
+		{
+			CircularDoubleLinkedLstEntity node=new CircularDoubleLinkedLstEntity();
+			node.setData(data);
+			node.setPrev(prevLstNode);
+			prevLstNode.setNext(node);
+			node.setNext(head);
+			currNode=node;
+			
+			
+		}
+		prevLstNode=currNode;
+		
+	}
+	
+	@Override
+	public CircularDoubleLinkedLstEntity convertBST2CDLL() {
+		// TODO Auto-generated method stub
+		inorderTraverseConvert(head, root);
+		
+		return head;
 	}
 }

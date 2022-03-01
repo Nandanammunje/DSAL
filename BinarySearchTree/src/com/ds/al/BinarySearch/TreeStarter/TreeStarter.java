@@ -23,11 +23,14 @@ public class TreeStarter {
 			bstString = bstString + sc.next() + "";
 		TreeOps operation = new TreeOpsImpl();
 		operation.createBST(bstString);
-		System.out.println("Enter the first BST Node");
+		operation.convertBST2CDLL();
+		/*System.out.println("Enter the first BST Node");
 		bstNodeFirst=sc.next();
 		System.out.println("Enter the second BST Node");
 		bstNodeSecond=sc.next();
-		operation.findShortestPath(bstNodeFirst, bstNodeSecond);
+		
+		
+		//operation.findShortestPath(bstNodeFirst, bstNodeSecond);
 		/*
 		 * System.out.println("Enter the node to search"); bstNode = sc.next();
 		 * operation.findNode(bstNode);

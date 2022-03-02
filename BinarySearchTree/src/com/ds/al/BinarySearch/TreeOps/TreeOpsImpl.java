@@ -2,6 +2,10 @@ package com.ds.al.BinarySearch.TreeOps;
 
 import com.ds.al.BinarySearch.TreeEntity.BinarySearchTreeEntity;
 import com.ds.al.Circular.DoubleLinkedLstEntity.CircularDoubleLinkedLstEntity;
+import com.ds.al.DoubleLinkedLstEntity.DoubleLinkedLst;
+import com.ds.al.util.Utility;
+import static com.ds.al.util.Utility.compareCharacter;
+import static com.ds.al.util.Utility.compareCharacterInt;
 
 public class TreeOpsImpl implements TreeOps {
 
@@ -11,6 +15,12 @@ public class TreeOpsImpl implements TreeOps {
 	private BinarySearchTreeEntity maxNode;
 	private CircularDoubleLinkedLstEntity head;
 	private CircularDoubleLinkedLstEntity prevLstNode;
+	private Utility util;
+
+	public TreeOpsImpl() {
+
+		util = new Utility();
+	}
 
 	public void createBinarySearchTree(String data) {
 
@@ -51,22 +61,7 @@ public class TreeOpsImpl implements TreeOps {
 
 	}
 
-	private boolean compareCharacter(char a, char b) {
-		int charFirst = (int) a;
-
-		int charSecond = (int) b;
-
-		return charFirst > charSecond;
-	}
-
-	private int compareCharacterInt(char a, char b) {
-		int charFirst = (int) a;
-		int charSecond = (int) b;
-		int compareInt = (charFirst == charSecond) ? 0 : (charFirst > charSecond) ? 1 : -1;
-		return compareInt;
-
-	}
-
+	
 	@Override
 	public BinarySearchTreeEntity createBST(String dataStr) {
 		// TODO Auto-generated method stub
@@ -157,8 +152,8 @@ public class TreeOpsImpl implements TreeOps {
 		String nodePath2 = "";
 		nodePath1 = nodePath1 + createPathString(bstNodeFirst, nodePath1, root);
 		nodePath2 = nodePath2 + createPathString(bstNodeSecond, nodePath2, root);
-        int shortestPath=getDistFromLCA(nodePath1, nodePath2);
-		
+		int shortestPath = getDistFromLCA(nodePath1, nodePath2);
+
 		return shortestPath;
 	}
 
@@ -171,58 +166,57 @@ public class TreeOpsImpl implements TreeOps {
 
 			}
 		}
-        comparIndex=2*comparIndex;
-		int nodeDistance = nodePath1.length()+nodePath2.length()-comparIndex-2;
+		comparIndex = 2 * comparIndex;
+		int nodeDistance = nodePath1.length() + nodePath2.length() - comparIndex - 2;
 		return nodeDistance;
 
 	}
 
-	public void inorderTraverseConvert(CircularDoubleLinkedLstEntity prevNode,BinarySearchTreeEntity root)
-	{
-		
-		if(root!=null)
-		{
-		inorderTraverseConvert(prevNode ,root.getLeft());
-		initializeLst(root.getData());
-		inorderTraverseConvert(prevNode, root.getRight());
+	public void inorderTraverseConvert(CircularDoubleLinkedLstEntity prevNode, BinarySearchTreeEntity root) {
+
+		if (root != null) {
+			inorderTraverseConvert(prevNode, root.getLeft());
+			initializeLst(root.getData());
+			inorderTraverseConvert(prevNode, root.getRight());
 		}
-		
-		
-		
+
 	}
-	
+
 	public void initializeLst(String data)
-	
+
 	{
 		CircularDoubleLinkedLstEntity currNode;
-		if(head==null)
-		{
-			head=new CircularDoubleLinkedLstEntity();
+		if (head == null) {
+			head = new CircularDoubleLinkedLstEntity();
 			head.setData(data);
 			head.setNext(head);
 			head.setPrev(null);
-			currNode=head;
-		}
-		else
-		{
-			CircularDoubleLinkedLstEntity node=new CircularDoubleLinkedLstEntity();
+			currNode = head;
+		} else {
+			CircularDoubleLinkedLstEntity node = new CircularDoubleLinkedLstEntity();
 			node.setData(data);
 			node.setPrev(prevLstNode);
 			prevLstNode.setNext(node);
 			node.setNext(head);
-			currNode=node;
-			
-			
+			currNode = node;
+
 		}
-		prevLstNode=currNode;
-		
+		prevLstNode = currNode;
+
 	}
+
 	
-	@Override
-	public CircularDoubleLinkedLstEntity convertBST2CDLL() {
+
+	@Override public CircularDoubleLinkedLstEntity convertBST2CDLL() {
 		// TODO Auto-generated method stub
 		inorderTraverseConvert(head, root);
-		
+
 		return head;
+	}
+
+	@Override
+	public BinarySearchTreeEntity convertDLL2BST(DoubleLinkedLst head) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

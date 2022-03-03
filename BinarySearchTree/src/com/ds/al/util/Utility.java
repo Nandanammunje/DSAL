@@ -1,5 +1,7 @@
 package com.ds.al.util;
 
+import com.ds.al.DoubleLinkedLstEntity.DoubleLinkedLst;
+
 public class Utility {
 
 	public static boolean compareCharacter(char a, char b) {
@@ -16,6 +18,18 @@ public class Utility {
 		int compareInt = (charFirst == charSecond) ? 0 : (charFirst > charSecond) ? 1 : -1;
 		return compareInt;
 
+	}
+
+	public static DoubleLinkedLst getMedian(DoubleLinkedLst head) {
+
+		DoubleLinkedLst slow, fast;
+		slow = fast = head;
+		while (fast != null && fast.getNxt() != null) {
+			slow = slow.getNxt();
+			fast = fast.getNxt().getNxt();
+
+		}
+		return slow;
 	}
 
 }

@@ -6,6 +6,7 @@ import com.ds.al.DoubleLinkedLstEntity.DoubleLinkedLst;
 import com.ds.al.util.Utility;
 import static com.ds.al.util.Utility.compareCharacter;
 import static com.ds.al.util.Utility.compareCharacterInt;
+import static com.ds.al.util.Utility.getMedian;
 
 public class TreeOpsImpl implements TreeOps {
 
@@ -217,6 +218,7 @@ public class TreeOpsImpl implements TreeOps {
 	@Override
 	public BinarySearchTreeEntity convertDLL2BST(DoubleLinkedLst head) {
 		// TODO Auto-generated method stub
+		DoubleLinkedLst median = getMedian(head);
 		return null;
 	}
 }

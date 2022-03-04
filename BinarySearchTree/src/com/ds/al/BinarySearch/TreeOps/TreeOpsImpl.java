@@ -62,16 +62,6 @@ public class TreeOpsImpl implements TreeOps {
 
 	}
 
-	
-	@Override
-	public BinarySearchTreeEntity createBST(String dataStr) {
-		// TODO Auto-generated method stub
-		for (int i = 0; i < dataStr.length(); i++) {
-			createBinarySearchTree(Character.toString(dataStr.charAt(i)));
-		}
-		return root;
-	}
-
 	public void searchBSTNode(BinarySearchTreeEntity node, String data) {
 
 		if (node == null)
@@ -87,13 +77,6 @@ public class TreeOpsImpl implements TreeOps {
 
 		}
 
-	}
-
-	@Override
-	public BinarySearchTreeEntity findNode(String dataStr) {
-		// TODO Auto-generated method stub
-		searchBSTNode(root, dataStr);
-		return foundNode;
 	}
 
 	public void setMinimumNode(BinarySearchTreeEntity node) {
@@ -115,21 +98,6 @@ public class TreeOpsImpl implements TreeOps {
 
 	}
 
-	@Override
-	public BinarySearchTreeEntity findMinimumNode() {
-		// TODO Auto-generated method stub
-		setMinimumNode(root);
-
-		return minNode;
-	}
-
-	@Override
-	public BinarySearchTreeEntity findMaximumNode() {
-		// TODO Auto-generated method stub
-		setMaximumNode(root);
-		return maxNode;
-	}
-
 	public String createPathString(String bstNode, String dataStr, BinarySearchTreeEntity node) {
 		if (node == null)
 			return dataStr;
@@ -144,18 +112,6 @@ public class TreeOpsImpl implements TreeOps {
 		}
 
 		return dataStr;
-	}
-
-	@Override
-	public int findShortestPath(String bstNodeFirst, String bstNodeSecond) {
-		// TODO Auto-generated method stub
-		String nodePath1 = "";
-		String nodePath2 = "";
-		nodePath1 = nodePath1 + createPathString(bstNodeFirst, nodePath1, root);
-		nodePath2 = nodePath2 + createPathString(bstNodeSecond, nodePath2, root);
-		int shortestPath = getDistFromLCA(nodePath1, nodePath2);
-
-		return shortestPath;
 	}
 
 	public int getDistFromLCA(String nodePath1, String nodePath2) {
@@ -206,9 +162,87 @@ public class TreeOpsImpl implements TreeOps {
 
 	}
 
-	
+	public void generateBalancedBST(BinarySearchTreeEntity node, DoubleLinkedLst head, boolean isLeft) {
+		if (head == null)
+			return;
 
-	@Override public CircularDoubleLinkedLstEntity convertBST2CDLL() {
+		DoubleLinkedLst midNode = getMedian(head);
+		BinarySearchTreeEntity parentNode;
+		if (root == null) {
+			root = new BinarySearchTreeEntity();
+			root.setData(midNode.getData());
+			root.setLeft(null);
+			root.setRight(null);
+			parentNode = root;
+		} else {
+			BinarySearchTreeEntity treeNode = new BinarySearchTreeEntity();
+			treeNode.setData(midNode.getData());
+			if (isLeft)
+				node.setLeft(treeNode);
+			else
+				node.setRight(treeNode);
+			parentNode = node;
+		}
+		DoubleLinkedLst leftHead = head;
+		DoubleLinkedLst rightHead = midNode.getNxt();
+
+		if (rightHead != null) {
+			midNode.getNxt().setPrev(null);
+			midNode.getPrev().setNxt(null);
+		}
+		if (midNode == leftHead)
+			leftHead = null;
+
+		generateBalancedBST(parentNode, leftHead, true);
+		generateBalancedBST(parentNode, rightHead, false);
+
+	}
+
+	@Override
+	public BinarySearchTreeEntity createBST(String dataStr) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < dataStr.length(); i++) {
+			createBinarySearchTree(Character.toString(dataStr.charAt(i)));
+		}
+		return root;
+	}
+
+	@Override
+	public int findShortestPath(String bstNodeFirst, String bstNodeSecond) {
+		// TODO Auto-generated method stub
+		String nodePath1 = "";
+		String nodePath2 = "";
+		nodePath1 = nodePath1 + createPathString(bstNodeFirst, nodePath1, root);
+		nodePath2 = nodePath2 + createPathString(bstNodeSecond, nodePath2, root);
+		int shortestPath = getDistFromLCA(nodePath1, nodePath2);
+
+		return shortestPath;
+	}
+
+	@Override
+	public BinarySearchTreeEntity findNode(String dataStr) {
+		// TODO Auto-generated method stub
+		searchBSTNode(root, dataStr);
+		return foundNode;
+	}
+
+	@Override
+	public BinarySearchTreeEntity findMinimumNode() {
+		// TODO Auto-generated method stub
+		setMinimumNode(root);
+
+		return minNode;
+	}
+
+	@Override
+	public BinarySearchTreeEntity findMaximumNode() {
+		// TODO Auto-generated method stub
+		setMaximumNode(root);
+		return maxNode;
+	}
+
+	@Override
+	public CircularDoubleLinkedLstEntity convertBST2CDLL() {
 		// TODO Auto-generated method stub
 		inorderTraverseConvert(head, root);
 
@@ -218,7 +252,7 @@ public class TreeOpsImpl implements TreeOps {
 	@Override
 	public BinarySearchTreeEntity convertDLL2BST(DoubleLinkedLst head) {
 		// TODO Auto-generated method stub
-		DoubleLinkedLst median = getMedian(head);
-		return null;
+		generateBalancedBST(root, head, false);
+		return root;
 	}
 }

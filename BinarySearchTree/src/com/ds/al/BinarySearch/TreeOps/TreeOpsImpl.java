@@ -181,17 +181,18 @@ public class TreeOpsImpl implements TreeOps {
 				node.setLeft(treeNode);
 			else
 				node.setRight(treeNode);
-			parentNode = node;
+			parentNode = treeNode;
 		}
 		DoubleLinkedLst leftHead = head;
 		DoubleLinkedLst rightHead = midNode.getNxt();
 
-		if (rightHead != null) {
+		if (rightHead != null) 
 			midNode.getNxt().setPrev(null);
-			midNode.getPrev().setNxt(null);
-		}
+		
 		if (midNode == leftHead)
 			leftHead = null;
+		else
+			midNode.getPrev().setNxt(null);
 
 		generateBalancedBST(parentNode, leftHead, true);
 		generateBalancedBST(parentNode, rightHead, false);

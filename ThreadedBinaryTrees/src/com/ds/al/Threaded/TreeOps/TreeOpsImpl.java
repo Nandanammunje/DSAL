@@ -18,8 +18,8 @@ public class TreeOpsImpl implements TreeOps {
 	private Stack<ThreadedBinaryTreeEntity> predessorNode;
 
 	private int currNodeIndex;
-	
-	private ThreadedBinaryTreeEntity foundNodeAddress=null;
+
+	private ThreadedBinaryTreeEntity foundNodeAddress = null;
 
 	private void mkBinaryTree(String inOrderSubstr, String preOrderSeq, ThreadedBinaryTreeEntity root, int index,
 			ThreadedBinaryTreeEntity head, String inOrderSequence) {
@@ -125,20 +125,19 @@ public class TreeOpsImpl implements TreeOps {
 
 	private void findNodeAddress(String node, ThreadedBinaryTreeEntity root) {
 		if (root.getData().equalsIgnoreCase(node))
-			foundNodeAddress=root;
+			foundNodeAddress = root;
 		else if (root.getlTag() == 1)
 			findNodeAddress(node, root.getLeft());
-		if(root.getrTag() == 1)
+		if (root.getrTag() == 1)
 			findNodeAddress(node, root.getRight());
 
-		
 	}
 
 	@Override
 	public ThreadedBinaryTreeEntity findInorderSuccessor(String node) {
 		// TODO Auto-generated method stub
 		findNodeAddress(node, this.root);
-		ThreadedBinaryTreeEntity nodeAddress=this.foundNodeAddress;
+		ThreadedBinaryTreeEntity nodeAddress = this.foundNodeAddress;
 		ThreadedBinaryTreeEntity nodePointer = null;
 		if (nodeAddress != null) {
 			if (nodeAddress.getrTag() == 0) {
@@ -154,6 +153,55 @@ public class TreeOpsImpl implements TreeOps {
 
 		}
 		return nodePointer;
+	}
+
+	@Override
+	public ThreadedBinaryTreeEntity findPreorderSuccessor(String node) {
+		// TODO Auto-generated method stub
+		findInorderSuccessor(node);
+		ThreadedBinaryTreeEntity nodeAddress = this.foundNodeAddress;
+		if (nodeAddress.getlTag() == 1 || nodeAddress.getrTag() == 1) {
+			return (nodeAddress.getlTag() == 1) ? nodeAddress.getLeft() : nodeAddress.getRight();
+
+		} else {
+			while (nodeAddress.getrTag() != 1) {
+				nodeAddress = nodeAddress.getRight();
+				if (nodeAddress == null)
+					return null;
+
+			}
+		}
+
+		return nodeAddress.getRight();
+	}
+
+	@Override
+	public ThreadedBinaryTreeEntity InsertNode(String parentNode, String childNode) {
+		// TODO Auto-generated method stub
+
+		boolean isChildEExist = false;
+		findNodeAddress(parentNode, root);
+		ThreadedBinaryTreeEntity node = this.foundNodeAddress;
+		if (node.getrTag() == 1)
+			isChildEExist = true;
+		ThreadedBinaryTreeEntity newChildNode = new ThreadedBinaryTreeEntity();
+		newChildNode.setData(childNode);
+		newChildNode.setlTag(0);
+		newChildNode.setrTag(node.getrTag());
+		newChildNode.setLeft(node);
+		newChildNode.setRight(node.getRight());
+		node.setRight(newChildNode);
+		node.setrTag(1);
+		if (isChildEExist) {
+
+			ThreadedBinaryTreeEntity previousNode = newChildNode.getRight();
+			while (previousNode.getlTag() == 1) {
+				previousNode = previousNode.getLeft();
+			}
+			previousNode.setLeft(newChildNode);
+
+		}
+		return root;
 	}
 
 }

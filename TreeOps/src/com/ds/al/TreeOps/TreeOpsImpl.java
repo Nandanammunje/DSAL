@@ -6,6 +6,7 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.Integer.MAX_VALUE;
 
+import java.util.Stack;
 import java.util.TreeMap;
 
 import com.ds.al.TreeUtility.QueueEntity;
@@ -20,6 +21,9 @@ public class TreeOpsImpl implements TreeOps {
 	private String AncestorNodes;
 	private TreeMap<Integer, String> verticalSumMap;
 	private int minDepth;
+	private TreeEntity foundNode;
+	private boolean flag = false;
+	private Stack<TreeEntity> inorderStack;
 
 	private void getCreateTree(String inorderSubStr, String preOrderSequence, TreeEntity root, int index,
 			TreeEntity head, String inOrderSequence) {
@@ -241,7 +245,7 @@ public class TreeOpsImpl implements TreeOps {
 		queue.Enqueue(root);
 		queue.Enqueue(null);
 		try {
-			while (!queue.isEmpty() && (queue.getSize() >1)) {
+			while (!queue.isEmpty() && (queue.getSize() > 1)) {
 
 				TreeEntity node = queue.Dequeue();
 				if (node != null) {
@@ -259,8 +263,8 @@ public class TreeOpsImpl implements TreeOps {
 
 				} else {
 					if (node == null) {
-                         distance++;
-                         queue.Enqueue(null);
+						distance++;
+						queue.Enqueue(null);
 					}
 				}
 
@@ -269,7 +273,68 @@ public class TreeOpsImpl implements TreeOps {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return distance+1;
+		return distance + 1;
+	}
+
+	private void nodeFinder(TreeEntity root, String node) {
+
+		if (root == null || found) {
+			return;
+		}
+		if (node.equals(Character.toString(root.getData()))) {
+			found = true;
+			foundNode = root;
+			return;
+		}
+		nodeFinder(root.getLeft(), node);
+		nodeFinder(root.getRight(), node);
+	}
+
+	@Override
+	public TreeEntity getPreOrderSuccessor(String treeNode) {
+		// TODO Auto-generated method stub
+		boolean foundParentNode = false;
+		Stack<TreeEntity> treeStack = new Stack<TreeEntity>();
+		nodeFinder(root, treeNode);
+		TreeEntity treeStartNode = null;
+		if (foundNode.getLeft() != null)
+			return foundNode.getLeft();
+		else
+			treeStartNode = root;
+		
+		treeStack.push(null);
+
+		do {
+
+			if (foundParentNode && treeStartNode != null)
+				break;
+			if (treeStartNode == foundNode)
+				foundParentNode = true;
+
+			if (treeStartNode.getLeft() != null) {
+				treeStack.push(treeStartNode);
+				treeStartNode = treeStartNode.getLeft();
+
+			} else {
+				if (treeStartNode.getRight() != null)
+					treeStartNode = treeStartNode.getRight();
+				else if(treeStack.peek()!=null)
+				{
+					treeStartNode=treeStack.pop().getRight();
+				}
+				else 
+				{
+					if(treeStartNode==null)
+						break;
+				}
+			
+
+			}
+
+		} while (!treeStack.isEmpty());
+
+		
+		return treeStartNode;
 	}
 
 	

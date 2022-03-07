@@ -18,6 +18,8 @@ public class ThreadedStarter {
 		String preOrderDataString = "";
 		String inOrderDataString = "";
 		String findNode = "";
+		String parentNode = "";
+		String childNode = "";
 		for (int i = 0; i < size; i++) {
 			preOrderDataString = preOrderDataString + sc.next() + "";
 
@@ -30,11 +32,21 @@ public class ThreadedStarter {
 		}
 		TreeOps ops = new TreeOpsImpl();
 		ops.CreateThreadedBinary(inOrderDataString, preOrderDataString);
-		System.out.println("Enter the node for the successor search");
-		findNode = sc.next();
-		ThreadedBinaryTreeEntity successorNode=ops.findInorderSuccessor(findNode);
-		System.out.println(successorNode.getData());
+		/*
+		 * System.out.println("Enter the node for the preorder successor search");
+		 * findNode = sc.next(); // ThreadedBinaryTreeEntity
+		 * successorNode=ops.findInorderSuccessor(findNode); //
+		 * System.out.println(successorNode.getData()); ThreadedBinaryTreeEntity
+		 * successorNode = ops.findPreorderSuccessor(findNode); if (successorNode !=
+		 * null) System.out.println(successorNode.getData()); else
+		 * System.out.println("No Pre Order Successor Found");
+		 */
 
+		System.out.println("Enter the inorder parent node");
+		parentNode = sc.next();
+		System.out.println("Enter the child node to insert to the parent node");
+		childNode = sc.next();
+		ops.InsertNode(parentNode, childNode);
 		sc.close();
 
 	}

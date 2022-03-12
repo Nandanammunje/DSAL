@@ -186,9 +186,9 @@ public class TreeOpsImpl implements TreeOps {
 		DoubleLinkedLst leftHead = head;
 		DoubleLinkedLst rightHead = midNode.getNxt();
 
-		if (rightHead != null) 
+		if (rightHead != null)
 			midNode.getNxt().setPrev(null);
-		
+
 		if (midNode == leftHead)
 			leftHead = null;
 		else
@@ -197,6 +197,20 @@ public class TreeOpsImpl implements TreeOps {
 		generateBalancedBST(parentNode, leftHead, true);
 		generateBalancedBST(parentNode, rightHead, false);
 
+	}
+
+	public int getDoubleLinkedLstLength(DoubleLinkedLst head) {
+		int count = 0;
+		while (head != null) {
+			count++;
+			head = head.getNxt();
+		}
+		return count;
+	}
+
+	public BinarySearchTreeEntity createBinaryTreeOptimized(int start, int end, DoubleLinkedLst node) {
+
+		return null;
 	}
 
 	@Override
@@ -255,5 +269,12 @@ public class TreeOpsImpl implements TreeOps {
 		// TODO Auto-generated method stub
 		generateBalancedBST(root, head, false);
 		return root;
+	}
+
+	@Override
+	public BinarySearchTreeEntity convertDLL2BSTOptimized(DoubleLinkedLst head) {
+
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

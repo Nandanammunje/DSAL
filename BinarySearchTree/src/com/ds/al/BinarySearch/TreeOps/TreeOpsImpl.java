@@ -210,7 +210,26 @@ public class TreeOpsImpl implements TreeOps {
 
 	public BinarySearchTreeEntity createBinaryTreeOptimized(int start, int end, DoubleLinkedLst node) {
 
-		return null;
+		if (start < end)
+			return null;
+		int midCorrector = (end - start) % 2;
+		int mid = start + (end - start + midCorrector) / 2;
+		BinarySearchTreeEntity treeLeft=createBinaryTreeOptimized(start,mid-1, node);
+		BinarySearchTreeEntity treeRoot=new BinarySearchTreeEntity();
+		treeRoot.setData(node.getData());
+		while(node.getNxt()!=null)
+		{
+			DoubleLinkedLst nxt = node.getNxt();
+			node.setData(nxt.getData());
+			node.setNxt(nxt.getNxt());
+		
+		}
+		treeRoot.setLeft(treeLeft);
+		BinarySearchTreeEntity treeRight=createBinaryTreeOptimized(mid+1, end, node);
+		treeRoot.setRight(treeRight);
+		
+		
+		return treeRoot;
 	}
 
 	@Override

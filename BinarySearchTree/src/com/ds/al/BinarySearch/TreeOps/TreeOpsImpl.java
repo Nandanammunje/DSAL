@@ -210,25 +210,23 @@ public class TreeOpsImpl implements TreeOps {
 
 	public BinarySearchTreeEntity createBinaryTreeOptimized(int start, int end, DoubleLinkedLst node) {
 
-		if (start < end)
+		if (start >end)
 			return null;
 		int midCorrector = (end - start) % 2;
 		int mid = start + (end - start + midCorrector) / 2;
-		BinarySearchTreeEntity treeLeft=createBinaryTreeOptimized(start,mid-1, node);
-		BinarySearchTreeEntity treeRoot=new BinarySearchTreeEntity();
+		BinarySearchTreeEntity treeLeft = createBinaryTreeOptimized(start, mid - 1, node);
+		BinarySearchTreeEntity treeRoot = new BinarySearchTreeEntity();
 		treeRoot.setData(node.getData());
-		while(node.getNxt()!=null)
+		if(node.getNxt()!=null)
 		{
 			DoubleLinkedLst nxt = node.getNxt();
 			node.setData(nxt.getData());
 			node.setNxt(nxt.getNxt());
-		
 		}
 		treeRoot.setLeft(treeLeft);
-		BinarySearchTreeEntity treeRight=createBinaryTreeOptimized(mid+1, end, node);
+		BinarySearchTreeEntity treeRight = createBinaryTreeOptimized(mid + 1, end, node);
 		treeRoot.setRight(treeRight);
-		
-		
+
 		return treeRoot;
 	}
 
@@ -293,7 +291,10 @@ public class TreeOpsImpl implements TreeOps {
 	@Override
 	public BinarySearchTreeEntity convertDLL2BSTOptimized(DoubleLinkedLst head) {
 
+		int doubleLinkedLstLength = getDoubleLinkedLstLength(head);
+		BinarySearchTreeEntity createBinaryTreeOptimized = createBinaryTreeOptimized(0, doubleLinkedLstLength - 1,
+				head);
 		// TODO Auto-generated method stub
-		return null;
+		return createBinaryTreeOptimized;
 	}
 }

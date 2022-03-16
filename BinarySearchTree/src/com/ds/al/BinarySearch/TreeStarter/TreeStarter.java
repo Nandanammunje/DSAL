@@ -45,7 +45,8 @@ public class TreeStarter {
 				prev = node;
 			}
 		}
-		operation.convertDLL2BST(head);
+		operation.convertDLL2BSTOptimized(head);
+		//operation.convertDLL2BST(head);
 		/*
 		 * System.out.println("Enter the first BST Node"); bstNodeFirst=sc.next();
 		 * System.out.println("Enter the second BST Node"); bstNodeSecond=sc.next();

@@ -16,6 +16,7 @@ public class TreeOpsImpl implements TreeOps {
 	private BinarySearchTreeEntity maxNode;
 	private CircularDoubleLinkedLstEntity head;
 	private CircularDoubleLinkedLstEntity prevLstNode;
+	private int count = 0;
 	private Utility util;
 
 	public TreeOpsImpl() {
@@ -210,15 +211,14 @@ public class TreeOpsImpl implements TreeOps {
 
 	public BinarySearchTreeEntity createBinaryTreeOptimized(int start, int end, DoubleLinkedLst node) {
 
-		if (start >end)
+		if (start > end)
 			return null;
 		int midCorrector = (end - start) % 2;
 		int mid = start + (end - start + midCorrector) / 2;
 		BinarySearchTreeEntity treeLeft = createBinaryTreeOptimized(start, mid - 1, node);
 		BinarySearchTreeEntity treeRoot = new BinarySearchTreeEntity();
 		treeRoot.setData(node.getData());
-		if(node.getNxt()!=null)
-		{
+		if (node.getNxt() != null) {
 			DoubleLinkedLst nxt = node.getNxt();
 			node.setData(nxt.getData());
 			node.setNxt(nxt.getNxt());
@@ -228,6 +228,19 @@ public class TreeOpsImpl implements TreeOps {
 		treeRoot.setRight(treeRight);
 
 		return treeRoot;
+	}
+
+	public void smallestKthNode(BinarySearchTreeEntity node, int count, int rank) {
+		if (node == null||count > rank)
+			return;
+		smallestKthNode(node.getLeft(), this.count, rank);
+		this.count++;
+		if (this.count == rank) {
+			foundNode = node;
+			return;
+		}
+		smallestKthNode(node.getRight(), this.count, rank);
+
 	}
 
 	@Override
@@ -296,5 +309,12 @@ public class TreeOpsImpl implements TreeOps {
 				head);
 		// TODO Auto-generated method stub
 		return createBinaryTreeOptimized;
+	}
+
+	@Override
+	public BinarySearchTreeEntity findKthSmallestNode(int rank) {
+		// TODO Auto-generated method stub
+		smallestKthNode(root, 0, rank);
+		return foundNode;
 	}
 }

@@ -21,4 +21,6 @@ public interface TreeOps {
 	public BinarySearchTreeEntity convertDLL2BST(DoubleLinkedLst head);
 
 	public BinarySearchTreeEntity convertDLL2BSTOptimized(DoubleLinkedLst head);
+	
+	public BinarySearchTreeEntity findKthSmallestNode(int rank);
 }

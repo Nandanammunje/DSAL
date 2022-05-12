@@ -44,7 +44,7 @@ public class TreeOpsImpl implements TreeOps {
 
 		if (node != null) {
 
-			if (compareCharacter(node.getData().charAt(0), data.charAt(0))) {
+			if (compareCharacter(node.getData(), data)) {
 				mkBinaryTree(node, node.getLeft(), data, true);
 			} else {
 				mkBinaryTree(node, node.getRight(), data, false);
@@ -231,7 +231,7 @@ public class TreeOpsImpl implements TreeOps {
 	}
 
 	public void smallestKthNode(BinarySearchTreeEntity node, int count, int rank) {
-		if (node == null||count > rank)
+		if (node == null || count > rank)
 			return;
 		smallestKthNode(node.getLeft(), this.count, rank);
 		this.count++;
@@ -243,12 +243,35 @@ public class TreeOpsImpl implements TreeOps {
 
 	}
 
-	@Override
-	public BinarySearchTreeEntity createBST(String dataStr) {
-		// TODO Auto-generated method stub
-		for (int i = 0; i < dataStr.length(); i++) {
-			createBinarySearchTree(Character.toString(dataStr.charAt(i)));
+	public BinarySearchTreeEntity getCeil(int key, BinarySearchTreeEntity node) {
+		BinarySearchTreeEntity ceilNode = null;
+		if (node == null || key == Integer.parseInt(node.getData()))
+			return node;
+		if (key < Integer.parseInt(node.getData()))
+			ceilNode = getCeil(key, node.getLeft());
+		else
+			ceilNode = getCeil(key, node.getRight());
+
+		if (ceilNode == null && key < Integer.parseInt(node.getData())) {
+
+			ceilNode = node;
+
 		}
+
+		return ceilNode;
+
+	}
+
+	@Override
+	public BinarySearchTreeEntity createBST(String dataStr[]) {
+		// TODO Auto-generated method stub
+		/*
+		 * for (int i = 0; i < dataStr.length(); i++) {
+		 * createBinarySearchTree(Character.toString(dataStr.charAt(i))); }
+		 */
+		for (String itr : dataStr)
+			createBinarySearchTree(itr);
+
 		return root;
 	}
 
@@ -316,5 +339,11 @@ public class TreeOpsImpl implements TreeOps {
 		// TODO Auto-generated method stub
 		smallestKthNode(root, 0, rank);
 		return foundNode;
+	}
+
+	@Override
+	public BinarySearchTreeEntity findCeilNode(int key) {
+		// TODO Auto-generated method stub
+		return getCeil(key, root);
 	}
 }

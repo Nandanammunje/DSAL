@@ -12,6 +12,14 @@ public class Utility {
 		return charFirst > charSecond;
 	}
 
+	public static boolean compareCharacter(String a, String b) {
+		int charFirst = Integer.parseInt(a);
+
+		int charSecond = Integer.parseInt(b);
+
+		return charFirst > charSecond;
+	}
+
 	public static int compareCharacterInt(char a, char b) {
 		int charFirst = (int) a;
 		int charSecond = (int) b;

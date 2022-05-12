@@ -11,7 +11,7 @@ public class TreeStarter {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		int size = 0,rank=0;
+		int size = 0, rank = 0, nodeData;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the size of BST");
 //		DoubleLinkedLst head = null;
@@ -22,13 +22,24 @@ public class TreeStarter {
 //		String bstNodeFirst = "";
 //		String bstNodeSecond = "";
 		System.out.println("Enter data for BST");
-		for (int i = 0; i < size; i++)	
-		bstString = bstString + sc.next() + "";
+		for (int i = 0; i < size; i++)
+			bstString = bstString + sc.next() + ",";
+		String[] bstnodes = bstString.split(",");
 		TreeOps operation = new TreeOpsImpl();
-        operation.createBST(bstString);
-        System.out.println("Enter the rank");
-        rank=sc.nextInt();
-        operation.findKthSmallestNode(rank);
+		operation.createBST(bstnodes);
+		System.out.println("Enter the node data ");
+		nodeData = sc.nextInt();
+		operation.findCeilNode(nodeData);
+
+//		TreeOps operation = new TreeOpsImpl();
+//		operation.createBST(bstString);
+//		System.out.println("Enter the node data ");
+//		nodeData = sc.nextInt();
+//		operation.findCeilNode(nodeData);
+		/*
+		 * System.out.println("Enter the rank"); rank=sc.nextInt();
+		 * operation.findKthSmallestNode(rank);
+		 */
 //		operation.convertBST2CDLL();
 //		System.out.println("Enter Sorted data for the Lst");
 //		DoubleLinkedLst prev = null;

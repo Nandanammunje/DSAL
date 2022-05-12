@@ -6,7 +6,7 @@ import com.ds.al.DoubleLinkedLstEntity.DoubleLinkedLst;
 
 public interface TreeOps {
 
-	public BinarySearchTreeEntity createBST(String dataStr);
+	public BinarySearchTreeEntity createBST(String[] bstnodes);
 
 	public BinarySearchTreeEntity findNode(String dataStr);
 
@@ -23,4 +23,6 @@ public interface TreeOps {
 	public BinarySearchTreeEntity convertDLL2BSTOptimized(DoubleLinkedLst head);
 	
 	public BinarySearchTreeEntity findKthSmallestNode(int rank);
+	
+	 public BinarySearchTreeEntity findCeilNode(int key);
 }

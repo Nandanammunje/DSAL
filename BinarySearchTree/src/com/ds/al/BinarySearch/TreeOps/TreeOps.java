@@ -21,8 +21,10 @@ public interface TreeOps {
 	public BinarySearchTreeEntity convertDLL2BST(DoubleLinkedLst head);
 
 	public BinarySearchTreeEntity convertDLL2BSTOptimized(DoubleLinkedLst head);
-	
+
 	public BinarySearchTreeEntity findKthSmallestNode(int rank);
-	
-	 public BinarySearchTreeEntity findCeilNode(int key);
+
+	public BinarySearchTreeEntity findCeilNode(int key);
+
+	public BinarySearchTreeEntity findFloorNode(int key);
 }

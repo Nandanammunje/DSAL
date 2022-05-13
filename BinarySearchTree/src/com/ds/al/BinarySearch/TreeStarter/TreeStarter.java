@@ -29,7 +29,8 @@ public class TreeStarter {
 		operation.createBST(bstnodes);
 		System.out.println("Enter the node data ");
 		nodeData = sc.nextInt();
-		operation.findCeilNode(nodeData);
+		operation.findFloorNode(nodeData);
+		// operation.findCeilNode(nodeData);
 
 //		TreeOps operation = new TreeOpsImpl();
 //		operation.createBST(bstString);

@@ -262,6 +262,23 @@ public class TreeOpsImpl implements TreeOps {
 
 	}
 
+	public BinarySearchTreeEntity getFloorNode(BinarySearchTreeEntity node, int key) {
+
+		BinarySearchTreeEntity floorNode = null;
+		if (node == null || Integer.parseInt(node.getData()) == key)
+			return node;
+		if (key < Integer.parseInt(node.getData()))
+			floorNode = getFloorNode(node.getLeft(), key);
+		else
+			floorNode = getFloorNode(node.getRight(), key);
+
+		if (floorNode == null && key > Integer.parseInt(node.getData())) {
+			floorNode = node;
+		}
+
+		return floorNode;
+	}
+
 	@Override
 	public BinarySearchTreeEntity createBST(String dataStr[]) {
 		// TODO Auto-generated method stub
@@ -345,5 +362,11 @@ public class TreeOpsImpl implements TreeOps {
 	public BinarySearchTreeEntity findCeilNode(int key) {
 		// TODO Auto-generated method stub
 		return getCeil(key, root);
+	}
+
+	@Override
+	public BinarySearchTreeEntity findFloorNode(int key) {
+		// TODO Auto-generated method stub
+		return getFloorNode(root, key);
 	}
 }

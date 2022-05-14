@@ -1,5 +1,7 @@
 package com.ds.al.BinarySearch.TreeOps;
 
+import java.util.ArrayList;
+
 import com.ds.al.BinarySearch.TreeEntity.BinarySearchTreeEntity;
 import com.ds.al.Circular.DoubleLinkedLstEntity.CircularDoubleLinkedLstEntity;
 import com.ds.al.DoubleLinkedLstEntity.DoubleLinkedLst;
@@ -27,4 +29,6 @@ public interface TreeOps {
 	public BinarySearchTreeEntity findCeilNode(int key);
 
 	public BinarySearchTreeEntity findFloorNode(int key);
+	
+	public ArrayList<String> findIntersection(BinarySearchTreeEntity nodeA,BinarySearchTreeEntity nodeB);
 }

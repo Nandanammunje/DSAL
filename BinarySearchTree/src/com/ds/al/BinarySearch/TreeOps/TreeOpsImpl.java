@@ -1,12 +1,16 @@
 package com.ds.al.BinarySearch.TreeOps;
 
+import static com.ds.al.util.Utility.compareCharacter;
+import static com.ds.al.util.Utility.compareCharacterInt;
+import static com.ds.al.util.Utility.getMedian;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ds.al.BinarySearch.TreeEntity.BinarySearchTreeEntity;
 import com.ds.al.Circular.DoubleLinkedLstEntity.CircularDoubleLinkedLstEntity;
 import com.ds.al.DoubleLinkedLstEntity.DoubleLinkedLst;
 import com.ds.al.util.Utility;
-import static com.ds.al.util.Utility.compareCharacter;
-import static com.ds.al.util.Utility.compareCharacterInt;
-import static com.ds.al.util.Utility.getMedian;
 
 public class TreeOpsImpl implements TreeOps {
 
@@ -279,6 +283,34 @@ public class TreeOpsImpl implements TreeOps {
 		return floorNode;
 	}
 
+	public boolean findSearchNode(BinarySearchTreeEntity node, int searchNode) {
+		boolean nodeExist = false;
+		if (node == null)
+			return false;
+		int bstNode = Integer.parseInt(node.getData());
+		if (searchNode == bstNode)
+			return true;
+
+		if (searchNode > bstNode)
+			nodeExist = findSearchNode(node.getRight(), searchNode);
+		else
+			nodeExist = findSearchNode(node.getLeft(), searchNode);
+
+		return nodeExist;
+	}
+
+	public void inorderTraverse(BinarySearchTreeEntity nodeA, BinarySearchTreeEntity nodeB,
+			ArrayList<String> commonNodes) {
+
+		if (nodeA == null)
+			return;
+		inorderTraverse(nodeA.getLeft(), nodeB, commonNodes);
+		if (findSearchNode(nodeB, Integer.parseInt(nodeA.getData())))
+			commonNodes.add(nodeA.getData());
+		inorderTraverse(nodeA.getRight(), nodeB, commonNodes);
+
+	}
+
 	@Override
 	public BinarySearchTreeEntity createBST(String dataStr[]) {
 		// TODO Auto-generated method stub
@@ -368,5 +400,13 @@ public class TreeOpsImpl implements TreeOps {
 	public BinarySearchTreeEntity findFloorNode(int key) {
 		// TODO Auto-generated method stub
 		return getFloorNode(root, key);
+	}
+
+	@Override
+	public ArrayList<String> findIntersection(BinarySearchTreeEntity nodeA, BinarySearchTreeEntity nodeB) {
+		// TODO Auto-generated method stub
+		ArrayList<String> bstCommonNodeLst = new ArrayList<String>();
+		inorderTraverse(nodeA, nodeB, bstCommonNodeLst);
+		return bstCommonNodeLst;
 	}
 }

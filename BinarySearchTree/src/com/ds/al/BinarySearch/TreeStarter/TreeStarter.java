@@ -2,34 +2,47 @@ package com.ds.al.BinarySearch.TreeStarter;
 
 import java.util.Scanner;
 
+import com.ds.al.BinarySearch.TreeEntity.BinarySearchTreeEntity;
 import com.ds.al.BinarySearch.TreeOps.TreeOps;
 import com.ds.al.BinarySearch.TreeOps.TreeOpsImpl;
-import com.ds.al.DoubleLinkedLstEntity.DoubleLinkedLst;
 
 public class TreeStarter {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		int size = 0, rank = 0, nodeData;
+		int size = 0, rank = 0, nodeData, sizeTwo = 0;
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter the size of BST");
+		System.out.println("Enter the size of BST one");
 //		DoubleLinkedLst head = null;
 //		System.out.println("Enter the size of the Double Linked List");
 		size = sc.nextInt();
 		String bstString = "";
+		String bstStringTwo = "";
 //		String bstNode = "";
 //		String bstNodeFirst = "";
 //		String bstNodeSecond = "";
-		System.out.println("Enter data for BST");
+		System.out.println("Enter data for BST one");
 		for (int i = 0; i < size; i++)
 			bstString = bstString + sc.next() + ",";
 		String[] bstnodes = bstString.split(",");
 		TreeOps operation = new TreeOpsImpl();
-		operation.createBST(bstnodes);
-		System.out.println("Enter the node data ");
-		nodeData = sc.nextInt();
-		operation.findFloorNode(nodeData);
+		BinarySearchTreeEntity createBSTone = operation.createBST(bstnodes);
+		System.out.println("Enter the size of the BST Two");
+		sizeTwo = sc.nextInt();
+		System.out.println("Enter data for BST two");
+		for (int i = 0; i < sizeTwo; i++)
+			bstStringTwo = bstStringTwo + sc.next() + ",";
+		String[] bstNodesTwo = bstStringTwo.split(",");
+		TreeOps operationTwo = new TreeOpsImpl();
+		BinarySearchTreeEntity createBSTTwo = operationTwo.createBST(bstNodesTwo);
+		TreeOps ops = new TreeOpsImpl();
+		ops.findIntersection(createBSTone, createBSTTwo);
+
+		/*
+		 * System.out.println("Enter the node data "); nodeData = sc.nextInt();
+		 * operation.findFloorNode(nodeData);
+		 */
 		// operation.findCeilNode(nodeData);
 
 //		TreeOps operation = new TreeOpsImpl();

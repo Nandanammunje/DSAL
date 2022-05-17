@@ -40,4 +40,16 @@ public class Utility {
 		return slow;
 	}
 
+	public static int compareDoubleLinkedLst(DoubleLinkedLst nodeA,DoubleLinkedLst nodeB)
+	{
+		if(nodeA==null&&nodeB==null)
+			return 0;
+		if(nodeA!=null&&nodeB==null)
+			return 1;
+		else if(nodeA==null&&nodeB!=null)
+			return -1;
+		
+		return compareDoubleLinkedLst(nodeA.getNxt(),nodeB.getNxt());
+		
+	}
 }

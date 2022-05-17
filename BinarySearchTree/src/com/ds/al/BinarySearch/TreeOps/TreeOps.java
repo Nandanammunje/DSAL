@@ -29,6 +29,12 @@ public interface TreeOps {
 	public BinarySearchTreeEntity findCeilNode(int key);
 
 	public BinarySearchTreeEntity findFloorNode(int key);
-	
-	public ArrayList<String> findIntersection(BinarySearchTreeEntity nodeA,BinarySearchTreeEntity nodeB);
+
+	public ArrayList<String> findIntersection(BinarySearchTreeEntity nodeA, BinarySearchTreeEntity nodeB);
+
+	public void findIntersectionOptimized(DoubleLinkedLst nodeA, DoubleLinkedLst nodeB,
+			ArrayList<String> commonNodeLst);
+
+	public DoubleLinkedLst convertBST2DLL(BinarySearchTreeEntity node);
+
 }

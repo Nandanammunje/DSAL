@@ -5,7 +5,6 @@ import static com.ds.al.util.Utility.compareCharacterInt;
 import static com.ds.al.util.Utility.getMedian;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.ds.al.BinarySearch.TreeEntity.BinarySearchTreeEntity;
 import com.ds.al.Circular.DoubleLinkedLstEntity.CircularDoubleLinkedLstEntity;
@@ -20,6 +19,17 @@ public class TreeOpsImpl implements TreeOps {
 	private BinarySearchTreeEntity maxNode;
 	private CircularDoubleLinkedLstEntity head;
 	private CircularDoubleLinkedLstEntity prevLstNode;
+	private DoubleLinkedLst prevNodeLst;
+	private DoubleLinkedLst headLinked;
+
+	public DoubleLinkedLst getHeadLinked() {
+		return headLinked;
+	}
+
+	public void setHeadLinked(DoubleLinkedLst headLinked) {
+		this.headLinked = headLinked;
+	}
+
 	private int count = 0;
 	private Utility util;
 
@@ -311,6 +321,34 @@ public class TreeOpsImpl implements TreeOps {
 
 	}
 
+	public void convert2DLL(BinarySearchTreeEntity node) {
+		if (node == null)
+			return;
+
+		convert2DLL(node.getLeft());
+		if (headLinked == null) {
+			headLinked = new DoubleLinkedLst();
+			headLinked.setData(node.getData());
+			headLinked.setPrev(prevNodeLst);
+			headLinked.setNxt(null);
+			prevNodeLst = headLinked;
+		} else {
+			DoubleLinkedLst linkedNode = new DoubleLinkedLst();
+			linkedNode.setData(node.getData());
+			linkedNode.setPrev(prevNodeLst);
+			prevNodeLst.setNxt(linkedNode);
+			prevNodeLst = linkedNode;
+		}
+		convert2DLL(node.getRight());
+
+	}
+
+	@Override
+	public DoubleLinkedLst convertBST2DLL(BinarySearchTreeEntity node) {
+		convert2DLL(node);
+		return this.getHeadLinked();
+	}
+
 	@Override
 	public BinarySearchTreeEntity createBST(String dataStr[]) {
 		// TODO Auto-generated method stub
@@ -409,4 +447,23 @@ public class TreeOpsImpl implements TreeOps {
 		inorderTraverse(nodeA, nodeB, bstCommonNodeLst);
 		return bstCommonNodeLst;
 	}
+
+	@Override
+	public void findIntersectionOptimized(DoubleLinkedLst nodeA, DoubleLinkedLst nodeB, ArrayList<String> nodeLst) {
+		// TODO Auto-generated method stub
+		if (nodeA == null || nodeB == null)
+			return;
+		if (Integer.parseInt(nodeA.getData()) == Integer.parseInt(nodeB.getData())) {
+			nodeLst.add(nodeA.getData());
+			findIntersectionOptimized(nodeA.getNxt(), nodeB.getNxt(), nodeLst);
+		} else {
+			if (Integer.parseInt(nodeA.getData()) > Integer.parseInt(nodeB.getData()))
+				findIntersectionOptimized(nodeA, nodeB.getNxt(), nodeLst);
+			else
+				findIntersectionOptimized(nodeA.getNxt(), nodeB, nodeLst);
+
+		}
+
+	}
+
 }

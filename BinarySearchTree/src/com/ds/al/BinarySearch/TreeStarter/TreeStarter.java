@@ -1,10 +1,12 @@
 package com.ds.al.BinarySearch.TreeStarter;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.ds.al.BinarySearch.TreeEntity.BinarySearchTreeEntity;
 import com.ds.al.BinarySearch.TreeOps.TreeOps;
 import com.ds.al.BinarySearch.TreeOps.TreeOpsImpl;
+import com.ds.al.DoubleLinkedLstEntity.DoubleLinkedLst;
 
 public class TreeStarter {
 
@@ -28,6 +30,7 @@ public class TreeStarter {
 		String[] bstnodes = bstString.split(",");
 		TreeOps operation = new TreeOpsImpl();
 		BinarySearchTreeEntity createBSTone = operation.createBST(bstnodes);
+		DoubleLinkedLst dllNode = operation.convertBST2DLL(createBSTone);
 		System.out.println("Enter the size of the BST Two");
 		sizeTwo = sc.nextInt();
 		System.out.println("Enter data for BST two");
@@ -36,8 +39,10 @@ public class TreeStarter {
 		String[] bstNodesTwo = bstStringTwo.split(",");
 		TreeOps operationTwo = new TreeOpsImpl();
 		BinarySearchTreeEntity createBSTTwo = operationTwo.createBST(bstNodesTwo);
+		DoubleLinkedLst dllNodeSecond = operationTwo.convertBST2DLL(createBSTTwo);
 		TreeOps ops = new TreeOpsImpl();
-		ops.findIntersection(createBSTone, createBSTTwo);
+		ArrayList<String> nodeLst = new ArrayList<>();
+		ops.findIntersectionOptimized(dllNode, dllNodeSecond, nodeLst);
 
 		/*
 		 * System.out.println("Enter the node data "); nodeData = sc.nextInt();

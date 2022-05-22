@@ -36,5 +36,8 @@ public interface TreeOps {
 			ArrayList<String> commonNodeLst);
 
 	public DoubleLinkedLst convertBST2DLL(BinarySearchTreeEntity node);
+	
+	public void printBSTRange(BinarySearchTreeEntity root,int K1,int K2);
+	
 
 }

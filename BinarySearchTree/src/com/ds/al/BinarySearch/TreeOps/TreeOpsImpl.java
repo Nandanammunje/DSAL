@@ -466,4 +466,24 @@ public class TreeOpsImpl implements TreeOps {
 
 	}
 
+	@Override
+	public void printBSTRange(BinarySearchTreeEntity root, int K1, int K2) {
+		// TODO Auto-generated method stub
+
+		if (root == null)
+			return;
+		int rootData = Integer.parseInt(root.getData());
+		if (rootData<K1)
+			printBSTRange(root.getRight(), K1, K2);
+           if(rootData >=K1 && rootData <K2)
+           {
+        	   
+        	   printBSTRange(root.getLeft(), K1, K2);
+        	   System.out.println(rootData);
+        	   printBSTRange(root.getRight(), K1, K2);
+           }
+		if(rootData >=K2)
+		printBSTRange(root.getLeft(), K1, K2);
+	
+	}
 }

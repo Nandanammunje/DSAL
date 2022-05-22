@@ -1,26 +1,24 @@
 package com.ds.al.BinarySearch.TreeStarter;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.ds.al.BinarySearch.TreeEntity.BinarySearchTreeEntity;
 import com.ds.al.BinarySearch.TreeOps.TreeOps;
 import com.ds.al.BinarySearch.TreeOps.TreeOpsImpl;
-import com.ds.al.DoubleLinkedLstEntity.DoubleLinkedLst;
 
 public class TreeStarter {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		int size = 0, rank = 0, nodeData, sizeTwo = 0;
+		int size = 0, rank = 0, nodeData, sizeTwo = 0, lowRange = 0, highRange = 0;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the size of BST one");
 //		DoubleLinkedLst head = null;
 //		System.out.println("Enter the size of the Double Linked List");
 		size = sc.nextInt();
 		String bstString = "";
-		String bstStringTwo = "";
+//		String bstStringTwo = "";
 //		String bstNode = "";
 //		String bstNodeFirst = "";
 //		String bstNodeSecond = "";
@@ -30,19 +28,27 @@ public class TreeStarter {
 		String[] bstnodes = bstString.split(",");
 		TreeOps operation = new TreeOpsImpl();
 		BinarySearchTreeEntity createBSTone = operation.createBST(bstnodes);
-		DoubleLinkedLst dllNode = operation.convertBST2DLL(createBSTone);
-		System.out.println("Enter the size of the BST Two");
-		sizeTwo = sc.nextInt();
-		System.out.println("Enter data for BST two");
-		for (int i = 0; i < sizeTwo; i++)
-			bstStringTwo = bstStringTwo + sc.next() + ",";
-		String[] bstNodesTwo = bstStringTwo.split(",");
-		TreeOps operationTwo = new TreeOpsImpl();
-		BinarySearchTreeEntity createBSTTwo = operationTwo.createBST(bstNodesTwo);
-		DoubleLinkedLst dllNodeSecond = operationTwo.convertBST2DLL(createBSTTwo);
-		TreeOps ops = new TreeOpsImpl();
-		ArrayList<String> nodeLst = new ArrayList<>();
-		ops.findIntersectionOptimized(dllNode, dllNodeSecond, nodeLst);
+		System.out.println("Enter the low range");
+		lowRange = sc.nextInt();
+		System.out.println("Enter the high range");
+		highRange = sc.nextInt();
+		operation.printBSTRange(createBSTone, lowRange, highRange);
+		/*
+		 * DoubleLinkedLst dllNode = operation.convertBST2DLL(createBSTone);
+		 * System.out.println("Enter the size of the BST Two"); sizeTwo = sc.nextInt();
+		 * System.out.println("Enter data for BST two"); for (int i = 0; i < sizeTwo;
+		 * i++) bstStringTwo = bstStringTwo + sc.next() + ","; String[] bstNodesTwo =
+		 * bstStringTwo.split(","); TreeOps operationTwo = new TreeOpsImpl();
+		 * BinarySearchTreeEntity createBSTTwo = operationTwo.createBST(bstNodesTwo);
+		 * DoubleLinkedLst dllNodeSecond = operationTwo.convertBST2DLL(createBSTTwo);
+		 * System.out.println(Utility.compareDoubleLinkedLst(dllNode, dllNodeSecond));
+		 * if(Utility.compareDoubleLinkedLst(dllNode, dllNodeSecond) >= 0) {
+		 * Utility.mergeSortedDll(dllNode, dllNodeSecond); } else {
+		 * Utility.mergeSortedDll(dllNodeSecond, dllNode); }
+		 */
+//		TreeOps ops = new TreeOpsImpl();
+//		ArrayList<String> nodeLst = new ArrayList<>();
+//		ops.findIntersectionOptimized(dllNode, dllNodeSecond, nodeLst);
 
 		/*
 		 * System.out.println("Enter the node data "); nodeData = sc.nextInt();

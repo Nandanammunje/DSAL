@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.ds.al.BinarySearch.TreeEntity.BinarySearchTreeEntity;
 import com.ds.al.Circular.DoubleLinkedLstEntity.CircularDoubleLinkedLstEntity;
 import com.ds.al.DoubleLinkedLstEntity.DoubleLinkedLst;
+import com.ds.al.Threaded.TreeEntity.ThreadedBinaryTreeEntity;
 
 public interface TreeOps {
 
@@ -36,8 +37,11 @@ public interface TreeOps {
 			ArrayList<String> commonNodeLst);
 
 	public DoubleLinkedLst convertBST2DLL(BinarySearchTreeEntity node);
+
+	void printBSTRange(BinarySearchTreeEntity root, int K1, int K2);
 	
-	public void printBSTRange(BinarySearchTreeEntity root,int K1,int K2);
-	
+	void printThreadedBinaryTree(ThreadedBinaryTreeEntity root,int k1,int k2);
+
+	public ThreadedBinaryTreeEntity getThreadedBSTRoot(String[] bstnodes);
 
 }

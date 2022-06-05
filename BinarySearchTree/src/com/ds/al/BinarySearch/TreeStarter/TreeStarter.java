@@ -5,6 +5,7 @@ import java.util.Scanner;
 import com.ds.al.BinarySearch.TreeEntity.BinarySearchTreeEntity;
 import com.ds.al.BinarySearch.TreeOps.TreeOps;
 import com.ds.al.BinarySearch.TreeOps.TreeOpsImpl;
+import com.ds.al.Threaded.TreeEntity.ThreadedBinaryTreeEntity;
 
 public class TreeStarter {
 
@@ -27,12 +28,15 @@ public class TreeStarter {
 			bstString = bstString + sc.next() + ",";
 		String[] bstnodes = bstString.split(",");
 		TreeOps operation = new TreeOpsImpl();
-		BinarySearchTreeEntity createBSTone = operation.createBST(bstnodes);
-		System.out.println("Enter the low range");
+		//operation.createBST(bstnodes);
+		ThreadedBinaryTreeEntity threadedBSTRoot = operation.getThreadedBSTRoot(bstnodes);
+	//	ThreadedBinaryTreeEntity threadedBSTRoot = operation.getThreadedBSTRoot();
+  		System.out.println("Enter the low range");
 		lowRange = sc.nextInt();
 		System.out.println("Enter the high range");
 		highRange = sc.nextInt();
-		operation.printBSTRange(createBSTone, lowRange, highRange);
+		operation.printThreadedBinaryTree(threadedBSTRoot, lowRange, highRange);
+		//operation.printBSTRange(createBSTone, lowRange, highRange);
 		/*
 		 * DoubleLinkedLst dllNode = operation.convertBST2DLL(createBSTone);
 		 * System.out.println("Enter the size of the BST Two"); sizeTwo = sc.nextInt();

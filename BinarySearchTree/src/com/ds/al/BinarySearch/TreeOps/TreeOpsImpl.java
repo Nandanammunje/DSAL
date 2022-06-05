@@ -5,10 +5,12 @@ import static com.ds.al.util.Utility.compareCharacterInt;
 import static com.ds.al.util.Utility.getMedian;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 import com.ds.al.BinarySearch.TreeEntity.BinarySearchTreeEntity;
 import com.ds.al.Circular.DoubleLinkedLstEntity.CircularDoubleLinkedLstEntity;
 import com.ds.al.DoubleLinkedLstEntity.DoubleLinkedLst;
+import com.ds.al.Threaded.TreeEntity.ThreadedBinaryTreeEntity;
 import com.ds.al.util.Utility;
 
 public class TreeOpsImpl implements TreeOps {
@@ -21,6 +23,9 @@ public class TreeOpsImpl implements TreeOps {
 	private CircularDoubleLinkedLstEntity prevLstNode;
 	private DoubleLinkedLst prevNodeLst;
 	private DoubleLinkedLst headLinked;
+	private ThreadedBinaryTreeEntity threadedRoot;
+	private Stack<ThreadedBinaryTreeEntity> predessorNode;
+	private Stack<ThreadedBinaryTreeEntity> successorNode;
 
 	public DoubleLinkedLst getHeadLinked() {
 		return headLinked;
@@ -42,6 +47,9 @@ public class TreeOpsImpl implements TreeOps {
 
 		if (root == null) {
 			root = new BinarySearchTreeEntity();
+			threadedRoot = new ThreadedBinaryTreeEntity();
+			threadedRoot.setData(data);
+			threadedRoot.setlTag(0);
 			root.setData(data);
 			root.setLeft(null);
 			root.setRight(null);
@@ -49,7 +57,38 @@ public class TreeOpsImpl implements TreeOps {
 		}
 
 		else {
+			predessorNode = new Stack<ThreadedBinaryTreeEntity>();
+			successorNode = new Stack<ThreadedBinaryTreeEntity>();
+			predessorNode.push(null);
+			successorNode.push(null);
 			mkBinaryTree(root, root, data, true);
+			/*
+			 * mkBinaryThreadedTree(threadedRoot, threadedRoot, data, true);
+			 * createThreadedlinks(threadedRoot);
+			 */
+		}
+
+	}
+
+	public void createThreadedBinarySearchTree(String data) {
+
+		if (threadedRoot == null) {
+
+			threadedRoot = new ThreadedBinaryTreeEntity();
+			threadedRoot.setData(data);
+			threadedRoot.setlTag(0);
+			threadedRoot.setrTag(0);
+			return;
+		}
+
+		else {
+
+			predessorNode = new Stack<ThreadedBinaryTreeEntity>();
+			successorNode = new Stack<ThreadedBinaryTreeEntity>();
+			predessorNode.push(null);
+			successorNode.push(null);
+			mkBinaryThreadedTree(threadedRoot, threadedRoot, data, true);
+
 		}
 
 	}
@@ -74,6 +113,65 @@ public class TreeOpsImpl implements TreeOps {
 				parent.setRight(node);
 
 		}
+
+	}
+
+	private void mkBinaryThreadedTree(ThreadedBinaryTreeEntity parent, ThreadedBinaryTreeEntity node, String data,
+			boolean isLeft) {
+
+		if (node != null) {
+
+			if (compareCharacter(node.getData(), data)) {
+				mkBinaryThreadedTree(node, node.getLeft(), data, true);
+			} else {
+				mkBinaryThreadedTree(node, node.getRight(), data, false);
+			}
+		} else {
+			node = new ThreadedBinaryTreeEntity();
+			node.setData(data);
+			node.setLeft(null);
+			node.setRight(null);
+			node.setlTag(0);
+			node.setrTag(0);
+			if (isLeft) {
+				parent.setlTag(1);
+				parent.setLeft(node);
+			} else {
+				parent.setRight(node);
+				parent.setrTag(1);
+			}
+		}
+
+	}
+
+	private void createThreadedlinks(ThreadedBinaryTreeEntity node) {
+
+		if (node != null) {
+			if (node.getlTag() == 1) {
+				successorNode.push(node);
+				createThreadedlinks(node.getLeft());
+			}
+
+			if (node.getlTag() == 0) {
+				node.setLeft(predessorNode.peek());
+			}
+
+			if (successorNode.peek() == node)
+				successorNode.pop();
+
+			if (node.getrTag() == 0) {
+
+				node.setRight(successorNode.peek());
+			}
+			predessorNode.push(node);
+
+			if (node.getrTag() == 1) {
+
+				createThreadedlinks(node.getRight());
+
+			}
+		}
+		return;
 
 	}
 
@@ -343,6 +441,68 @@ public class TreeOpsImpl implements TreeOps {
 
 	}
 
+	private ThreadedBinaryTreeEntity findInorderSuccessor(ThreadedBinaryTreeEntity node,
+			ThreadedBinaryTreeEntity root) {
+		if (node == null)
+			return null;
+		if (node.getrTag() == 0) {
+			return node.getRight();
+		}
+		node = node.getRight();
+		while (node.getlTag() != 0) {
+			node = node.getLeft();
+		}
+
+		return node;
+
+	}
+
+	private ThreadedBinaryTreeEntity findInorderPredessor(ThreadedBinaryTreeEntity node,
+			ThreadedBinaryTreeEntity root) {
+		if (node == null)
+			return null;
+		if (node.getlTag() == 0)
+			return node.getLeft();
+		ThreadedBinaryTreeEntity successorInorderNode = node.getLeft();
+		ThreadedBinaryTreeEntity currentInorderNode = null;
+		while (node != successorInorderNode) {
+			currentInorderNode = successorInorderNode;
+			successorInorderNode = findInorderSuccessor(successorInorderNode, root);
+		}
+
+		return currentInorderNode;
+
+	}
+
+	private void findNodesinRange(ThreadedBinaryTreeEntity node, int k1, int k2) {
+
+		if (node == null)
+			return;
+
+		ThreadedBinaryTreeEntity rangeNode = node;
+		int nodeData = Integer.parseInt(node.getData());
+		while (nodeData >= k1) {
+
+			if (nodeData < k2)
+				System.out.println(nodeData);
+			rangeNode = findInorderPredessor(rangeNode, node);
+			nodeData = (rangeNode == null) ? k1 - 1 : Integer.parseInt(rangeNode.getData());
+
+		}
+
+		rangeNode = findInorderSuccessor(node, rangeNode);
+		nodeData = (rangeNode == null) ? k2 + 1 : Integer.parseInt(rangeNode.getData());
+		while (nodeData < k2) {
+			if (nodeData > k1)
+				System.out.println(nodeData);
+
+			rangeNode = findInorderSuccessor(rangeNode, node);
+			nodeData = (rangeNode == null) ? k2 + 1 : Integer.parseInt(rangeNode.getData());
+
+		}
+
+	}
+
 	@Override
 	public DoubleLinkedLst convertBST2DLL(BinarySearchTreeEntity node) {
 		convert2DLL(node);
@@ -473,17 +633,33 @@ public class TreeOpsImpl implements TreeOps {
 		if (root == null)
 			return;
 		int rootData = Integer.parseInt(root.getData());
-		if (rootData<K1)
+		if (rootData < K1)
 			printBSTRange(root.getRight(), K1, K2);
-           if(rootData >=K1 && rootData <K2)
-           {
-        	   
-        	   printBSTRange(root.getLeft(), K1, K2);
-        	   System.out.println(rootData);
-        	   printBSTRange(root.getRight(), K1, K2);
-           }
-		if(rootData >=K2)
-		printBSTRange(root.getLeft(), K1, K2);
-	
+		if (rootData >= K1 && rootData < K2) {
+
+			printBSTRange(root.getLeft(), K1, K2);
+			System.out.println(rootData);
+			printBSTRange(root.getRight(), K1, K2);
+		}
+		if (rootData >= K2)
+			printBSTRange(root.getLeft(), K1, K2);
+
+	}
+
+	@Override
+	public ThreadedBinaryTreeEntity getThreadedBSTRoot(String[] bstnodes) {
+		// TODO Auto-generated method stub
+		for (String itr : bstnodes)
+			createThreadedBinarySearchTree(itr);
+
+		createThreadedlinks(threadedRoot);
+
+		return threadedRoot;
+	}
+
+	@Override
+	public void printThreadedBinaryTree(ThreadedBinaryTreeEntity root, int k1, int k2) {
+		// TODO Auto-generated method stub
+		findNodesinRange(root, k1, k2);
 	}
 }

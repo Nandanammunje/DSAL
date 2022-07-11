@@ -11,7 +11,7 @@ public class AvlTreeEntity {
 	private int height;
 
 	public AvlTreeEntity() {
-		height = 0;
+		height = 1;
 	}
 
 	public int getData() {

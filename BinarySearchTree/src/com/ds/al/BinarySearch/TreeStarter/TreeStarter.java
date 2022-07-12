@@ -28,14 +28,19 @@ public class TreeStarter {
 			bstString = bstString + sc.next() + ",";
 		String[] bstnodes = bstString.split(",");
 		TreeOps operation = new TreeOpsImpl();
+		BinarySearchTreeEntity root = operation.createBST(bstnodes);
+		operation.isAVLTree(root);
+		
+		
 		//operation.createBST(bstnodes);
-		ThreadedBinaryTreeEntity threadedBSTRoot = operation.getThreadedBSTRoot(bstnodes);
-	//	ThreadedBinaryTreeEntity threadedBSTRoot = operation.getThreadedBSTRoot();
-  		System.out.println("Enter the low range");
-		lowRange = sc.nextInt();
-		System.out.println("Enter the high range");
-		highRange = sc.nextInt();
-		operation.printThreadedBinaryTree(threadedBSTRoot, lowRange, highRange);
+		/*
+		 * ThreadedBinaryTreeEntity threadedBSTRoot =
+		 * operation.getThreadedBSTRoot(bstnodes); // ThreadedBinaryTreeEntity
+		 * threadedBSTRoot = operation.getThreadedBSTRoot();
+		 * System.out.println("Enter the low range"); lowRange = sc.nextInt();
+		 * System.out.println("Enter the high range"); highRange = sc.nextInt();
+		 * operation.printThreadedBinaryTree(threadedBSTRoot, lowRange, highRange);
+		 */
 		//operation.printBSTRange(createBSTone, lowRange, highRange);
 		/*
 		 * DoubleLinkedLst dllNode = operation.convertBST2DLL(createBSTone);

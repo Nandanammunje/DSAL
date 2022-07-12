@@ -12,6 +12,13 @@ public class Utility {
 		return charFirst > charSecond;
 	}
 
+	public static int getMaxInt(int a, int b) {
+
+		int maxInt = (a > b) ? a : b;
+
+		return maxInt;
+	}
+
 	public static boolean compareCharacter(String a, String b) {
 		int charFirst = Integer.parseInt(a);
 

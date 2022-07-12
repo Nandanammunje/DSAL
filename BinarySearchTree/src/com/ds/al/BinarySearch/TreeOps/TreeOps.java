@@ -43,5 +43,8 @@ public interface TreeOps {
 	void printThreadedBinaryTree(ThreadedBinaryTreeEntity root,int k1,int k2);
 
 	public ThreadedBinaryTreeEntity getThreadedBSTRoot(String[] bstnodes);
+	
+	public boolean isAVLTree(BinarySearchTreeEntity node);
+	
 
 }

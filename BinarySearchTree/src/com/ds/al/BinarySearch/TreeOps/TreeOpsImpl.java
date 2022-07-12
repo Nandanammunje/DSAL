@@ -3,7 +3,8 @@ package com.ds.al.BinarySearch.TreeOps;
 import static com.ds.al.util.Utility.compareCharacter;
 import static com.ds.al.util.Utility.compareCharacterInt;
 import static com.ds.al.util.Utility.getMedian;
-
+import static com.ds.al.util.Utility.getMaxInt;
+import static java.lang.Math.abs;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -661,5 +662,35 @@ public class TreeOpsImpl implements TreeOps {
 	public void printThreadedBinaryTree(ThreadedBinaryTreeEntity root, int k1, int k2) {
 		// TODO Auto-generated method stub
 		findNodesinRange(root, k1, k2);
+	}
+
+	public int getBSTHeight(BinarySearchTreeEntity root) {
+
+		if (root == null)
+			return 0;
+		else
+			return 1 + getMaxInt(getBSTHeight(root.getLeft()), getBSTHeight(root.getRight()));
+
+	}
+
+	@Override
+	public boolean isAVLTree(BinarySearchTreeEntity node) {
+		// TODO Auto-generated method stub
+		if (node == null)
+			return true;
+
+		int leftHeight = getBSTHeight(node.getLeft());
+		int rightHeight = getBSTHeight(node.getRight());
+
+		if (abs(leftHeight - rightHeight) > 1) {
+			return false;
+		} else {
+			if(isAVLTree(node.getLeft())&&isAVLTree(node.getRight()))
+			return true;
+			else
+				return false;
+		}
+		
+		
 	}
 }

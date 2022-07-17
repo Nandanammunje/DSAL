@@ -22,7 +22,9 @@ public class TreeOpsImpl implements TreeOps {
 
 	}
 
-	public AvlTreeEntity rightRotate(AvlTreeEntity node) {
+	private AvlTreeEntity rightRotate(AvlTreeEntity node) {
+		
+		
 		AvlTreeEntity leftNode = node.getLeft();
 		AvlTreeEntity rightNode = leftNode.getRight();
 		node.setLeft(rightNode);
@@ -33,7 +35,7 @@ public class TreeOpsImpl implements TreeOps {
 
 	}
 
-	public AvlTreeEntity leftRotate(AvlTreeEntity node) {
+	private AvlTreeEntity leftRotate(AvlTreeEntity node) {
 
 		AvlTreeEntity rightNode = node.getRight();
 		AvlTreeEntity leftNode = rightNode.getLeft();
@@ -45,7 +47,7 @@ public class TreeOpsImpl implements TreeOps {
 
 	}
 
-	public AvlTreeEntity insertIntoBST(AvlTreeEntity node, int data) {
+	private AvlTreeEntity insertIntoBST(AvlTreeEntity node, int data) {
 
 		if (node == null) {
 			node = new AvlTreeEntity();
@@ -85,6 +87,20 @@ public class TreeOpsImpl implements TreeOps {
 			root = insertIntoBST(root, i);
 
 		return root;
+	}
+
+	@Override
+	public int countNodesinRange(int startRange, int endRange,AvlTreeEntity node) {
+		// TODO Auto-generated method stub
+		if(node==null)
+			return 0;
+		if(node.getData() < startRange)
+		return countNodesinRange(startRange, endRange, node.getRight());
+		else if(node.getData() >=endRange)
+			return countNodesinRange(startRange, endRange, node.getLeft());
+		else
+			return 1+countNodesinRange(startRange, endRange, node.getLeft())+countNodesinRange(startRange, endRange, node.getRight());
+		
 	}
 
 }

@@ -337,6 +337,22 @@ public class TreeOpsImpl implements TreeOps {
 		return treeStartNode;
 	}
 
+	@Override
+	public TreeEntity deleteHalfNodes(TreeEntity root) {
+		// TODO Auto-generated method stub
+		if(root==null)
+			return null;
+		root.setLeft(deleteHalfNodes(root.getLeft()));
+		root.setRight(deleteHalfNodes(root.getRight()));
+		if(root.getLeft()==null && root.getRight()==null)
+			return root;
+         if(root.getLeft()==null)
+        	 return root.getRight();
+         if(root.getRight()==null)
+        	 return root.getLeft();
+		return root;
+	}
+
 	
 
 }

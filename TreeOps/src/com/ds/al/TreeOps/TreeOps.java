@@ -21,5 +21,7 @@ public interface TreeOps {
 	public int getMinDepthLevelOrder();
 
 	public TreeEntity getPreOrderSuccessor(String treeNode);
+	
+	public TreeEntity deleteHalfNodes(TreeEntity root);
 
 }

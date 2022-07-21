@@ -5,6 +5,7 @@ import static com.ds.al.util.Utility.compareCharacterInt;
 import static com.ds.al.util.Utility.getMedian;
 import static com.ds.al.util.Utility.getMaxInt;
 import static java.lang.Math.abs;
+import static com.ds.al.util.Utility.compareStrInt;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -685,12 +686,25 @@ public class TreeOpsImpl implements TreeOps {
 		if (abs(leftHeight - rightHeight) > 1) {
 			return false;
 		} else {
-			if(isAVLTree(node.getLeft())&&isAVLTree(node.getRight()))
-			return true;
+			if (isAVLTree(node.getLeft()) && isAVLTree(node.getRight()))
+				return true;
 			else
 				return false;
 		}
-		
-		
+
+	}
+
+	@Override
+	public BinarySearchTreeEntity pruneBST(BinarySearchTreeEntity node, int startNumber, int endNumber) {
+		// TODO Auto-generated method stub
+		if (node == null)
+			return null;
+		node.setLeft(pruneBST(node.getLeft(), startNumber, endNumber));
+		node.setRight(pruneBST(node.getRight(), startNumber, endNumber));
+		if (compareStrInt(node.getData(), startNumber) == -1)
+			return node.getRight();
+		if (compareStrInt(node.getData(), endNumber) ==1)
+			return node.getLeft();
+		return node;
 	}
 }

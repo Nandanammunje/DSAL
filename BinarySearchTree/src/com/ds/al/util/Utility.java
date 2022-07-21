@@ -35,6 +35,15 @@ public class Utility {
 
 	}
 
+	public static int compareStrInt(String a, int b) {
+
+		int parsedInt = Integer.parseInt(a);
+
+		int compareInt = (parsedInt == b) ? 0 : (parsedInt > b) ? 1 : -1;
+
+		return compareInt;
+	}
+
 	public static DoubleLinkedLst getMedian(DoubleLinkedLst head) {
 
 		DoubleLinkedLst slow, fast;

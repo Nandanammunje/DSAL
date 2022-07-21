@@ -39,12 +39,13 @@ public interface TreeOps {
 	public DoubleLinkedLst convertBST2DLL(BinarySearchTreeEntity node);
 
 	void printBSTRange(BinarySearchTreeEntity root, int K1, int K2);
-	
-	void printThreadedBinaryTree(ThreadedBinaryTreeEntity root,int k1,int k2);
+
+	void printThreadedBinaryTree(ThreadedBinaryTreeEntity root, int k1, int k2);
 
 	public ThreadedBinaryTreeEntity getThreadedBSTRoot(String[] bstnodes);
-	
+
 	public boolean isAVLTree(BinarySearchTreeEntity node);
-	
+
+	public BinarySearchTreeEntity pruneBST(BinarySearchTreeEntity node, int startNumber, int endNumber);
 
 }

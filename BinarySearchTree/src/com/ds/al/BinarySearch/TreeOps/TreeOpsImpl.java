@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import com.ds.al.BinarySearch.TreeEntity.BinarySearchTreeEntity;
+import com.ds.al.BinarySearch.TreeEntity.LinkedBinarySearchTree;
 import com.ds.al.Circular.DoubleLinkedLstEntity.CircularDoubleLinkedLstEntity;
 import com.ds.al.DoubleLinkedLstEntity.DoubleLinkedLst;
 import com.ds.al.Threaded.TreeEntity.ThreadedBinaryTreeEntity;
@@ -703,8 +704,32 @@ public class TreeOpsImpl implements TreeOps {
 		node.setRight(pruneBST(node.getRight(), startNumber, endNumber));
 		if (compareStrInt(node.getData(), startNumber) == -1)
 			return node.getRight();
-		if (compareStrInt(node.getData(), endNumber) ==1)
+		if (compareStrInt(node.getData(), endNumber) == 1)
 			return node.getLeft();
 		return node;
+	}
+
+	private LinkedBinarySearchTree createBaseBst(String data, LinkedBinarySearchTree node) {
+		if (node == null) {
+			node = new LinkedBinarySearchTree();
+			node.setData(data);
+			return node;
+		} else {
+			if (compareCharacter(data, node.getData()))
+				node.setRight(createBaseBst(data, node.getRight()));
+			else
+				node.setLeft(createBaseBst(data, node.getLeft()));
+			return node;
+		}
+
+	}
+
+	@Override
+	public LinkedBinarySearchTree createLinkedBinarySearchTree(String[] bstNodes) {
+		// TODO Auto-generated method stub
+		LinkedBinarySearchTree root = null;
+		for (String node : bstNodes)
+			root = createBaseBst(node, root);
+		return null;
 	}
 }

@@ -3,6 +3,7 @@ package com.ds.al.BinarySearch.TreeOps;
 import java.util.ArrayList;
 
 import com.ds.al.BinarySearch.TreeEntity.BinarySearchTreeEntity;
+import com.ds.al.BinarySearch.TreeEntity.LinkedBinarySearchTree;
 import com.ds.al.Circular.DoubleLinkedLstEntity.CircularDoubleLinkedLstEntity;
 import com.ds.al.DoubleLinkedLstEntity.DoubleLinkedLst;
 import com.ds.al.Threaded.TreeEntity.ThreadedBinaryTreeEntity;
@@ -47,5 +48,7 @@ public interface TreeOps {
 	public boolean isAVLTree(BinarySearchTreeEntity node);
 
 	public BinarySearchTreeEntity pruneBST(BinarySearchTreeEntity node, int startNumber, int endNumber);
+	
+	public LinkedBinarySearchTree createLinkedBinarySearchTree(String[] bstNodes);
 
 }

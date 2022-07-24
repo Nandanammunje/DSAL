@@ -2,15 +2,17 @@ package com.ds.al.BinarySearch.TreeOps;
 
 import static com.ds.al.util.Utility.compareCharacter;
 import static com.ds.al.util.Utility.compareCharacterInt;
-import static com.ds.al.util.Utility.getMedian;
-import static com.ds.al.util.Utility.getMaxInt;
-import static java.lang.Math.abs;
 import static com.ds.al.util.Utility.compareStrInt;
+import static com.ds.al.util.Utility.getMaxInt;
+import static com.ds.al.util.Utility.getMedian;
+import static java.lang.Math.abs;
+
 import java.util.ArrayList;
 import java.util.Stack;
 
 import com.ds.al.BinarySearch.TreeEntity.BinarySearchTreeEntity;
 import com.ds.al.BinarySearch.TreeEntity.LinkedBinarySearchTree;
+import com.ds.al.BinarySearch.TreeEntity.QueueEntity;
 import com.ds.al.Circular.DoubleLinkedLstEntity.CircularDoubleLinkedLstEntity;
 import com.ds.al.DoubleLinkedLstEntity.DoubleLinkedLst;
 import com.ds.al.Threaded.TreeEntity.ThreadedBinaryTreeEntity;
@@ -724,12 +726,33 @@ public class TreeOpsImpl implements TreeOps {
 
 	}
 
+	private LinkedBinarySearchTree createBSTLink(LinkedBinarySearchTree node) throws Exception {
+		QueueEntity bstNodeQueue = new QueueEntity();
+		bstNodeQueue.Enqueue(node);
+		bstNodeQueue.Enqueue(null);
+		while (!bstNodeQueue.IsEmpty() && bstNodeQueue.getLength() > 1) {
+			LinkedBinarySearchTree dequeuedNode = bstNodeQueue.Dequeue();
+			if (dequeuedNode != null) {
+				if (dequeuedNode.getLeft() != null)
+					bstNodeQueue.Enqueue(dequeuedNode.getLeft());
+				if (dequeuedNode.getRight() != null)
+					bstNodeQueue.Enqueue(dequeuedNode.getRight());
+				dequeuedNode.setNext(bstNodeQueue.getFirst());
+
+			} else
+				bstNodeQueue.Enqueue(null);
+		}
+
+		return node;
+	}
+
 	@Override
-	public LinkedBinarySearchTree createLinkedBinarySearchTree(String[] bstNodes) {
+	public LinkedBinarySearchTree createLinkedBinarySearchTree(String[] bstNodes) throws Exception {
 		// TODO Auto-generated method stub
 		LinkedBinarySearchTree root = null;
 		for (String node : bstNodes)
 			root = createBaseBst(node, root);
-		return null;
+		root = createBSTLink(root);
+		return root;
 	}
 }

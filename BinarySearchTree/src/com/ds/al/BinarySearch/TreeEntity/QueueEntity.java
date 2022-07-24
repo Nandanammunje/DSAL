@@ -16,7 +16,7 @@ public class QueueEntity {
 
 	
 
-	public void Enqueue(BinarySearchTreeEntity TreeNode) {
+	public void Enqueue(LinkedBinarySearchTree TreeNode) {
 		LinkedListEntity node = new LinkedListEntity();
 		if (front == null) {
 			front = node.AddNode(front,TreeNode);
@@ -29,9 +29,9 @@ public class QueueEntity {
 		
 		length++;
 	}
-	public BinarySearchTreeEntity Dequeue() throws Exception
+	public LinkedBinarySearchTree Dequeue() throws Exception
 	{
-		BinarySearchTreeEntity result;
+		LinkedBinarySearchTree result;
 		
 		LinkedListEntity nxt;
 		if(length!=0)
@@ -47,7 +47,7 @@ public class QueueEntity {
 		throw new Exception("queue empty");
 	
 	}
-	public BinarySearchTreeEntity getFirst() throws Exception
+	public LinkedBinarySearchTree getFirst() throws Exception
 	{
 		if(length!=0)
 		{

@@ -11,7 +11,7 @@ public class TreeStarter {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		int size = 0, lowRange = 0, highRange = 0;
+		int size = 0;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the size of BST one");
 		size = sc.nextInt();
@@ -21,12 +21,12 @@ public class TreeStarter {
 			bstString = bstString + sc.next() + ",";
 		String[] bstnodes = bstString.split(",");
 		TreeOps operation = new TreeOpsImpl();
-		BinarySearchTreeEntity root = operation.createBST(bstnodes);
-		System.out.println("Enter the low range number");
-		lowRange = sc.nextInt();
-		System.out.println("Enter the high range number");
-		highRange = sc.nextInt();
-		BinarySearchTreeEntity prunedRoot = operation.pruneBST(root, lowRange, highRange);
+		try {
+			operation.createLinkedBinarySearchTree(bstnodes);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		sc.close();
 

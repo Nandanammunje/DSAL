@@ -4,13 +4,13 @@ package com.ds.al.BinarySearch.TreeEntity;
 
 public class LinkedListEntity {
 
-	private BinarySearchTreeEntity node;
+	private LinkedBinarySearchTree node;
 	private LinkedListEntity next;
 	
-	public BinarySearchTreeEntity getNode() {
+	public LinkedBinarySearchTree getNode() {
 		return node;
 	}
-	public void setNode(BinarySearchTreeEntity node) {
+	public void setNode(LinkedBinarySearchTree node) {
 		this.node = node;
 	}
 	
@@ -22,7 +22,7 @@ public class LinkedListEntity {
 		this.next = next;
 	}
 	
-	public LinkedListEntity AddNode(LinkedListEntity head, BinarySearchTreeEntity Treenode) {
+	public LinkedListEntity AddNode(LinkedListEntity head, LinkedBinarySearchTree Treenode) {
 		// TODO Auto-generated method stub
 		LinkedListEntity root,node;
 		

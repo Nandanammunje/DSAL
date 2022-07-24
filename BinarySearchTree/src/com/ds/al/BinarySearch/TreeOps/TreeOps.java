@@ -49,6 +49,6 @@ public interface TreeOps {
 
 	public BinarySearchTreeEntity pruneBST(BinarySearchTreeEntity node, int startNumber, int endNumber);
 	
-	public LinkedBinarySearchTree createLinkedBinarySearchTree(String[] bstNodes);
+	public LinkedBinarySearchTree createLinkedBinarySearchTree(String[] bstNodes) throws Exception;
 
 }

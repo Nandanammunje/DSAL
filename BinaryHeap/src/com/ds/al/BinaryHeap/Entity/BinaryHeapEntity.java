@@ -40,17 +40,17 @@ public class BinaryHeapEntity {
 
 	public int deleteMax() {
 		int max = heapArr[0];
-        shrinkHeap();
-        prelocateDown(0);
+		shrinkHeap();
+		prelocateDown(0);
 		return max;
 	}
 
 	private void shrinkHeap() {
 		heapArr[0] = heapArr[capacity - 1];
-        capacity--;
-        int temp[]=new int[capacity];
-        System.arraycopy(heapArr, 0, temp,0, capacity);
-        heapArr=temp;
+		capacity--;
+		int temp[] = new int[capacity];
+		System.arraycopy(heapArr, 0, temp, 0, capacity);
+		heapArr = temp;
 	}
 
 	private void expandHeap() {
@@ -114,6 +114,16 @@ public class BinaryHeapEntity {
 		else
 			return -1;
 
+	}
+
+	public int[] doHeapSort() {
+		int temp[] = new int[capacity];
+		int i = 0;
+		while (capacity > 0) {
+			temp[i] = deleteMax();
+			i++;
+		}
+		return temp;
 	}
 
 	public void heapify(int a[]) {

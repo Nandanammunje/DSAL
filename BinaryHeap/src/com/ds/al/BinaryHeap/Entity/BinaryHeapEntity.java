@@ -20,25 +20,40 @@ public class BinaryHeapEntity {
 	}
 
 	public void insertIntoHeap(int data) {
-		resizeHeap();
+		expandHeap();
 		heapArr[capacity - 1] = data;
-		balanceHeap(capacity - 1);
+		preLocateUp(capacity - 1);
 	}
 
-	private void balanceHeap(int pos) {
+	private void preLocateUp(int pos) {
 		int parent = getParent(pos);
 		int maxTreeIndex = getMaxIndex(parent);
 		if (maxTreeIndex != parent) {
 			int temp = heapArr[parent];
 			heapArr[parent] = heapArr[maxTreeIndex];
 			heapArr[maxTreeIndex] = temp;
-			balanceHeap(parent);
+			preLocateUp(parent);
 		} else
 			return;
 
 	}
 
-	private void resizeHeap() {
+	public int deleteMax() {
+		int max = heapArr[0];
+        shrinkHeap();
+        prelocateDown(0);
+		return max;
+	}
+
+	private void shrinkHeap() {
+		heapArr[0] = heapArr[capacity - 1];
+        capacity--;
+        int temp[]=new int[capacity];
+        System.arraycopy(heapArr, 0, temp,0, capacity);
+        heapArr=temp;
+	}
+
+	private void expandHeap() {
 		capacity++;
 		int temp[] = new int[capacity];
 		System.arraycopy(heapArr, 0, temp, 0, capacity - 1);

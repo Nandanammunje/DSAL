@@ -22,8 +22,7 @@ public class BinaryHeapStarter {
 		data = sc.nextInt();
 		biHeap.insertIntoHeap(data);
 		int[] heapArr2 = biHeap.getHeapArr();
-		biHeap.deleteMax();
-		biHeap.deleteMax();
+		int[] doHeapSort = biHeap.doHeapSort();
 		sc.close();
 	}
 

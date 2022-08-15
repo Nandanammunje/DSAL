@@ -8,7 +8,7 @@ public class BinaryHeapStarter {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int size;
+		int size, data;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the size of the heap");
 		size = sc.nextInt();
@@ -18,8 +18,11 @@ public class BinaryHeapStarter {
 			a[i] = sc.nextInt();
 		BinaryHeapEntity biHeap = new BinaryHeapEntity(size);
 		biHeap.heapify(a);
-		int[] heapArr = biHeap.getHeapArr();
-	
+		System.out.println("Enter the data to be inserted into the Heap");
+		data = sc.nextInt();
+		biHeap.insertIntoHeap(data);
+		int[] heapArr2 = biHeap.getHeapArr();
+
 		sc.close();
 	}
 

@@ -3,12 +3,14 @@ package com.ds.al.BinaryHeap.Starter;
 import java.util.Scanner;
 
 import com.ds.al.BinaryHeap.Entity.BinaryHeapEntity;
+import com.ds.al.BinaryHeap.Operations.BinaryHeapOps;
+import com.ds.al.BinaryHeap.Operations.BinaryHeapOpsImpl;
 
 public class BinaryHeapStarter {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int size, data;
+		int size, data, range;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the size of the heap");
 		size = sc.nextInt();
@@ -21,8 +23,10 @@ public class BinaryHeapStarter {
 		System.out.println("Enter the data to be inserted into the Heap");
 		data = sc.nextInt();
 		biHeap.insertIntoHeap(data);
-		int[] heapArr2 = biHeap.getHeapArr();
-		int[] doHeapSort = biHeap.doHeapSort();
+		BinaryHeapOps ops = new BinaryHeapOpsImpl();
+		System.out.println("Enter the range for Binary Heap ");
+		range = sc.nextInt();
+		ops.printNumbersLessRange(biHeap, range);
 		sc.close();
 	}
 

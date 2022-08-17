@@ -87,7 +87,7 @@ public class BinaryHeapEntity {
 		return maxIndex;
 	}
 
-	private int getLeftChild(int i) {
+	public int getLeftChild(int i) {
 
 		int leftIndex = (2 * i) + 1;
 		if (leftIndex < capacity)
@@ -96,7 +96,7 @@ public class BinaryHeapEntity {
 			return -1;
 	}
 
-	private int getRightChild(int i) {
+	public int getRightChild(int i) {
 		int rightIndex = (2 * i) + 2;
 		if (rightIndex < capacity)
 			return rightIndex;
@@ -106,7 +106,7 @@ public class BinaryHeapEntity {
 
 	}
 
-	private int getParent(int i) {
+	public int getParent(int i) {
 		int parentIndex = (i - 1) / 2;
 
 		if (parentIndex >= 0)

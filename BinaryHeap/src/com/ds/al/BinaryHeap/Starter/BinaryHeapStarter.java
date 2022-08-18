@@ -26,7 +26,8 @@ public class BinaryHeapStarter {
 		BinaryHeapOps ops = new BinaryHeapOpsImpl();
 		System.out.println("Enter the range for Binary Heap ");
 		range = sc.nextInt();
-		ops.printNumbersLessRange(biHeap, range);
+		//ops.printNumbersLessRange(biHeap, range);
+		ops.printNumbersMoreRange(biHeap, range);
 		sc.close();
 	}
 

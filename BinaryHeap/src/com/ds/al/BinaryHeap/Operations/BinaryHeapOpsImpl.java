@@ -28,9 +28,9 @@ public class BinaryHeapOpsImpl implements BinaryHeapOps {
 			System.out.println(arr[index]);
 		else
 			return;
-		int rightIndex=heapEntity.getRightChild(index);
+		int rightIndex = heapEntity.getRightChild(index);
 		printNumberMax(arr, rightIndex, key);
-		int leftIndex=heapEntity.getLeftChild(index);
+		int leftIndex = heapEntity.getLeftChild(index);
 		printNumberMax(arr, leftIndex, key);
 
 	}
@@ -46,4 +46,27 @@ public class BinaryHeapOpsImpl implements BinaryHeapOps {
 		printNumberMin(arr, leftIndex, range);
 	}
 
+	@Override
+	public int findKthLargeNumber(BinaryHeapEntity heapEntity, int key) {
+		// TODO Auto-generated method stub
+		int Kmax = 0;
+		for (int i = 1; i <= key; i++)
+			Kmax = heapEntity.deleteMax();
+		return Kmax;
+	}
+
+	@Override
+	public int findKthLargeNumberOptimized(BinaryHeapEntity heapEntity, int key) {
+		// TODO Auto-generated method stub
+		BinaryHeapEntity aux=new BinaryHeapEntity(1);
+		int kMax[]=new int[1];
+		kMax[0]=heapEntity.deleteMax();
+		aux.heapify(kMax);
+		
+		
+		
+		return 0;
+	}
+
+	
 }

@@ -1,6 +1,9 @@
 package com.ds.al.BinaryHeap.Operations;
 
+import java.util.PriorityQueue;
+
 import com.ds.al.BinaryHeap.Entity.BinaryHeapEntity;
+import com.ds.al.BinaryHeap.Entity.HeapTree;
 
 public class BinaryHeapOpsImpl implements BinaryHeapOps {
 
@@ -57,14 +60,13 @@ public class BinaryHeapOpsImpl implements BinaryHeapOps {
 
 	@Override
 	public int findKthLargeNumberOptimized(BinaryHeapEntity heapEntity, int key) {
-		// TODO Auto-generated method stub
-		BinaryHeapEntity aux=new BinaryHeapEntity(1);
-		int kMax[]=new int[1];
-		kMax[0]=heapEntity.deleteMax();
-		aux.heapify(kMax);
 		
 		
 		
+		
+	PriorityQueue<HeapTree> priorityIndex=new PriorityQueue<HeapTree>();
+	
+	
 		return 0;
 	}
 

@@ -10,7 +10,7 @@ public class BinaryHeapStarter {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int size, data, range;
+		int size, data, rank;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the size of the heap");
 		size = sc.nextInt();
@@ -24,11 +24,21 @@ public class BinaryHeapStarter {
 		data = sc.nextInt();
 		biHeap.insertIntoHeap(data);
 		BinaryHeapOps ops = new BinaryHeapOpsImpl();
-		System.out.println("Enter the range for Binary Heap ");
-		range = sc.nextInt();
-		//ops.printNumbersLessRange(biHeap, range);
-		ops.printNumbersMoreRange(biHeap, range);
+		System.out.println("Enter the rank of element");
+		rank=sc.nextInt();
+		ops.findKthLargeNumberOptimized(biHeap, rank);
+		/*
+		 * System.out.println("Enter the range for Binary Heap "); range = sc.nextInt();
+		 * ops.printNumbersLessRange(biHeap, range); ops.printNumbersMoreRange(biHeap,
+		 * range);
+		 */
 		sc.close();
+		
+		
+		
+		
+
+		
 	}
 
 }

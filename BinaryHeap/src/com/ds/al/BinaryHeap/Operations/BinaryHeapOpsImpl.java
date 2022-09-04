@@ -60,15 +60,33 @@ public class BinaryHeapOpsImpl implements BinaryHeapOps {
 
 	@Override
 	public int findKthLargeNumberOptimized(BinaryHeapEntity heapEntity, int key) {
-		
-		
-		
-		
-	PriorityQueue<HeapTree> priorityIndex=new PriorityQueue<HeapTree>();
-	
-	
-		return 0;
+		PriorityQueue<HeapTree> priorityIndex = new PriorityQueue<HeapTree>();
+		int leftIndex, rightIndex;
+		int Kmax[] = new int[1];
+		Kmax[0] = heapEntity.getHeapArr()[0];
+		HeapTree heap = new HeapTree(Kmax[0], 0);
+		priorityIndex.add(heap);
+		for (int i = 0; i <= key; i++) {
+			HeapTree heapElement = priorityIndex.poll();
+			if (heapElement != null) {
+				Kmax[0] = heapElement.getParent();
+				leftIndex = (heapElement.getLeftChild() < heapEntity.getHeapSize()) ? heapElement.getLeftChild() : -1;
+				rightIndex = (heapElement.getRightChild() < heapEntity.getHeapSize()) ? heapElement.getRightChild()
+						: -1;
+				if (leftIndex != -1) {
+					HeapTree leftHeap = new HeapTree(heapEntity.getHeapArr()[leftIndex], leftIndex);
+					priorityIndex.add(leftHeap);
+				}
+				if (rightIndex != -1) {
+					HeapTree rightHeap = new HeapTree(heapEntity.getHeapArr()[rightIndex], rightIndex);
+
+					priorityIndex.add(rightHeap);
+				}
+			}
+
+		}
+
+		return Kmax[0];
 	}
 
-	
 }

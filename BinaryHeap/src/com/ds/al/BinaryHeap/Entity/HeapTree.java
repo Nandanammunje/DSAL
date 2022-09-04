@@ -5,9 +5,17 @@ public class HeapTree implements Comparable<HeapTree> {
 	private int parent;
 	private int leftChild;
 	private int rightChild;
-
+   
 	public int getParent() {
 		return parent;
+	}
+
+	public HeapTree(int parentElement,int parentIndex) {
+
+		this.parent = parentElement;
+		leftChild = (2 * parentIndex) + 1;
+		rightChild = (2 * parentIndex) + 2;
+
 	}
 
 	public void setParent(int parent) {
@@ -34,7 +42,12 @@ public class HeapTree implements Comparable<HeapTree> {
 	public int compareTo(HeapTree o) {
 		// TODO Auto-generated method stub
 
-		return this.parent - o.parent;
+		return  o.parent-this.parent;
+	}
+
+	@Override
+	public String toString() {
+		return "HeapTree [parent=" + parent + "]";
 	}
 
 }

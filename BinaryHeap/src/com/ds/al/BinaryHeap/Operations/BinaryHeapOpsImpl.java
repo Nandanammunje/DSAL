@@ -66,12 +66,12 @@ public class BinaryHeapOpsImpl implements BinaryHeapOps {
 		Kmax[0] = heapEntity.getHeapArr()[0];
 		HeapTree heap = new HeapTree(Kmax[0], 0);
 		priorityIndex.add(heap);
-		for (int i = 0; i <= key; i++) {
+		for (int i = 0; i <key; i++) {
 			HeapTree heapElement = priorityIndex.poll();
 			if (heapElement != null) {
 				Kmax[0] = heapElement.getParent();
-				leftIndex = (heapElement.getLeftChild() < heapEntity.getHeapSize()) ? heapElement.getLeftChild() : -1;
-				rightIndex = (heapElement.getRightChild() < heapEntity.getHeapSize()) ? heapElement.getRightChild()
+				leftIndex = (heapElement.getLeftChild() < heapEntity.getCapacity()) ? heapElement.getLeftChild() : -1;
+				rightIndex = (heapElement.getRightChild() < heapEntity.getCapacity()) ? heapElement.getRightChild()
 						: -1;
 				if (leftIndex != -1) {
 					HeapTree leftHeap = new HeapTree(heapEntity.getHeapArr()[leftIndex], leftIndex);
@@ -79,7 +79,6 @@ public class BinaryHeapOpsImpl implements BinaryHeapOps {
 				}
 				if (rightIndex != -1) {
 					HeapTree rightHeap = new HeapTree(heapEntity.getHeapArr()[rightIndex], rightIndex);
-
 					priorityIndex.add(rightHeap);
 				}
 			}

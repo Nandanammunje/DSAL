@@ -11,4 +11,6 @@ public interface BinaryHeapOps {
 	public int findKthLargeNumber(BinaryHeapEntity heapEntity, int key);
 
 	public int findKthLargeNumberOptimized(BinaryHeapEntity heapEntity, int key);
+
+	public int[] findSlidingWindow(int arr[], int window);
 }

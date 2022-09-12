@@ -1,5 +1,8 @@
 package com.ds.al.BinaryHeap.Operations;
 
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 import com.ds.al.BinaryHeap.Entity.BinaryHeapEntity;
@@ -66,7 +69,7 @@ public class BinaryHeapOpsImpl implements BinaryHeapOps {
 		Kmax[0] = heapEntity.getHeapArr()[0];
 		HeapTree heap = new HeapTree(Kmax[0], 0);
 		priorityIndex.add(heap);
-		for (int i = 0; i <key; i++) {
+		for (int i = 0; i < key; i++) {
 			HeapTree heapElement = priorityIndex.poll();
 			if (heapElement != null) {
 				Kmax[0] = heapElement.getParent();
@@ -86,6 +89,28 @@ public class BinaryHeapOpsImpl implements BinaryHeapOps {
 		}
 
 		return Kmax[0];
+	}
+
+	@Override
+	public int[] findSlidingWindow(int[] arr, int window) {
+		// TODO Auto-generated method stub
+		int slidingWindowMax[] = new int[arr.length - window + 1];
+		Deque<Integer> maxIndex = new LinkedList<Integer>();
+		for (int i = 0; i < window; i++) {
+			while (!maxIndex.isEmpty() && arr[maxIndex.getLast()] < arr[i])
+				maxIndex.pollLast();
+			maxIndex.push(i);
+		}
+		for (int i = window; i < arr.length; i++) {
+			slidingWindowMax[i - window] = arr[maxIndex.getFirst()];
+			while (!maxIndex.isEmpty() && maxIndex.getFirst() <= i - window)
+				maxIndex.pollFirst();
+			while (!maxIndex.isEmpty() && arr[maxIndex.getLast()] < arr[i])
+				maxIndex.pollLast();
+			maxIndex.addLast(i);
+		}
+		slidingWindowMax[arr.length - window] = arr[maxIndex.getFirst()];
+		return slidingWindowMax;
 	}
 
 }

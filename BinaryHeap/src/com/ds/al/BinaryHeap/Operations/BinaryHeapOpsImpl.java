@@ -99,14 +99,14 @@ public class BinaryHeapOpsImpl implements BinaryHeapOps {
 		for (int i = 0; i < window; i++) {
 			while (!maxIndex.isEmpty() && arr[maxIndex.getLast()] < arr[i])
 				maxIndex.pollLast();
-			maxIndex.push(i);
+			maxIndex.addLast(i);;
 		}
 		for (int i = window; i < arr.length; i++) {
 			slidingWindowMax[i - window] = arr[maxIndex.getFirst()];
 			while (!maxIndex.isEmpty() && maxIndex.getFirst() <= i - window)
 				maxIndex.pollFirst();
 			while (!maxIndex.isEmpty() && arr[maxIndex.getLast()] < arr[i])
-				maxIndex.pollLast();
+				maxIndex.pollLast(); 
 			maxIndex.addLast(i);
 		}
 		slidingWindowMax[arr.length - window] = arr[maxIndex.getFirst()];

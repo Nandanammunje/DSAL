@@ -14,15 +14,15 @@ public class GraphStarter {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter no of vertices");
 		vertices = sc.nextInt();
-		Graph g=new Graph(vertices);
-		g.addEdge(0,1);
-		g.addEdge(0,2);
-		g.addEdge(1,2);
-		g.addEdge(2,0);
-		g.addEdge(2,3);
-		g.addEdge(3,3);
-		GraphOps ops=new GraphOpsImpl();
-		ops.BFS(g);
+		Graph g = new Graph(vertices);
+		g.addEdge(5, 2);
+		g.addEdge(5, 0);
+		g.addEdge(4, 0);
+		g.addEdge(4, 1);
+		g.addEdge(2, 3);
+		g.addEdge(3, 1);
+		GraphOps ops = new GraphOpsImpl();
+		ops.TopologicalSort(g);
 
 	}
 

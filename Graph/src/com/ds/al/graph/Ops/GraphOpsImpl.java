@@ -80,14 +80,13 @@ public class GraphOpsImpl implements GraphOps {
 
 	private void doTopologicalSort(int v, LinkedList<Integer> adj[], boolean visited[], Stack<Integer> nodeTopoStack) {
 		visited[v] = true;
-		nodeTopoStack.push(v);
 		ListIterator<Integer> nodeListIterator = adj[v].listIterator();
 		while (nodeListIterator.hasNext()) {
 			int nearNode = nodeListIterator.next();
 			if (!visited[nearNode])
 				doTopologicalSort(nearNode, adj, visited, nodeTopoStack);
 		}
-
+		nodeTopoStack.push(v);
 	}
 
 }

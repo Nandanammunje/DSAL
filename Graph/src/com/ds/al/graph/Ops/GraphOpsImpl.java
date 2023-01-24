@@ -4,6 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Stack;
 
 import com.ds.al.graph.Entity.Graph;
 
@@ -25,6 +26,21 @@ public class GraphOpsImpl implements GraphOps {
 
 	}
 
+	@Override
+	public void TopologicalSort(Graph g) {
+		// TODO Auto-generated method stub
+
+		boolean visited[] = new boolean[g.getVertices()];
+		Stack<Integer> nodeStack = new Stack<Integer>();
+		for (int i = 0; i < g.getVertices(); i++) {
+			if (!visited[i])
+				doTopologicalSort(i, g.getAdjLst(), visited, nodeStack);
+		}
+		while (!nodeStack.isEmpty()) {
+			System.out.println(nodeStack.pop());
+		}
+	}
+
 	private void doBfs(int v, LinkedList<Integer> adj[], boolean visited[]) {
 
 		Deque<Integer> nodeQueue = new ArrayDeque<Integer>();
@@ -33,7 +49,7 @@ public class GraphOpsImpl implements GraphOps {
 
 		while (!nodeQueue.isEmpty()) {
 			int nodeVert = nodeQueue.pop();
-			System.out.println("Visited node "+nodeVert);
+			System.out.println("Visited node " + nodeVert);
 			ListIterator<Integer> listIterator = adj[nodeVert].listIterator();
 			while (listIterator.hasNext()) {
 				Integer node = listIterator.next();
@@ -60,6 +76,17 @@ public class GraphOpsImpl implements GraphOps {
 			}
 		}
 
+	}
+
+	private void doTopologicalSort(int v, LinkedList<Integer> adj[], boolean visited[], Stack<Integer> nodeTopoStack) {
+		visited[v] = true;
+		ListIterator<Integer> nodeListIterator = adj[v].listIterator();
+		while (nodeListIterator.hasNext()) {
+			int nearNode = nodeListIterator.next();
+			if (!visited[nearNode])
+				doTopologicalSort(nearNode, adj, visited, nodeTopoStack);
+		}
+		nodeTopoStack.push(v);
 	}
 
 }

@@ -8,4 +8,6 @@ public interface GraphOps {
 
 	public void BFS(Graph g);
 
+	public void TopologicalSort(Graph g);
+
 }

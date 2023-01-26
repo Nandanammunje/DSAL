@@ -41,6 +41,13 @@ public class GraphOpsImpl implements GraphOps {
 		}
 	}
 
+	@Override
+	public void findShortestPath(Graph g, int source, int destination) {
+		// TODO Auto-generated method stub
+		boolean visited[] = new boolean[g.getVertices()];
+		dofindShortestPath(source, g.getAdjLst(), visited, destination);
+	}
+
 	private void doBfs(int v, LinkedList<Integer> adj[], boolean visited[]) {
 
 		Deque<Integer> nodeQueue = new ArrayDeque<Integer>();
@@ -87,6 +94,23 @@ public class GraphOpsImpl implements GraphOps {
 				doTopologicalSort(nearNode, adj, visited, nodeTopoStack);
 		}
 		nodeTopoStack.push(v);
+	}
+
+	private void dofindShortestPath(int v, LinkedList<Integer> adj[], boolean visited[], int dest) {
+		Deque<Integer> nodeDequeue = new ArrayDeque<Integer>();
+		visited[v]=true;
+		nodeDequeue.add(v);
+ 		int distance[]=new int[adj.length];
+		 while(!nodeDequeue.isEmpty())
+		{
+			Integer node = nodeDequeue.pop();
+			ListIterator<Integer> listIterator = adj[v].listIterator();
+			while(listIterator.hasNext())
+			{
+				
+			}
+		}
+
 	}
 
 }

@@ -9,5 +9,7 @@ public interface GraphOps {
 	public void BFS(Graph g);
 
 	public void TopologicalSort(Graph g);
+	
+	public void findShortestPath(Graph g,int source,int destination);
 
 }

@@ -42,10 +42,10 @@ public class GraphOpsImpl implements GraphOps {
 	}
 
 	@Override
-	public void findShortestPath(Graph g, int source, int destination) {
+	public void findUnweightedShortestPath(Graph g, int source) {
 		// TODO Auto-generated method stub
 		boolean visited[] = new boolean[g.getVertices()];
-		dofindShortestPath(source, g.getAdjLst(), visited, destination);
+		dofindUnweightedShortestPath(source, g.getAdjLst(), visited);
 	}
 
 	private void doBfs(int v, LinkedList<Integer> adj[], boolean visited[]) {
@@ -55,7 +55,7 @@ public class GraphOpsImpl implements GraphOps {
 		nodeQueue.add(v);
 
 		while (!nodeQueue.isEmpty()) {
-			int nodeVert = nodeQueue.pop();
+			int nodeVert = nodeQueue.poll();
 			System.out.println("Visited node " + nodeVert);
 			ListIterator<Integer> listIterator = adj[nodeVert].listIterator();
 			while (listIterator.hasNext()) {
@@ -96,21 +96,26 @@ public class GraphOpsImpl implements GraphOps {
 		nodeTopoStack.push(v);
 	}
 
-	private void dofindShortestPath(int v, LinkedList<Integer> adj[], boolean visited[], int dest) {
-		Deque<Integer> nodeDequeue = new ArrayDeque<Integer>();
-		visited[v]=true;
-		nodeDequeue.add(v);
- 		int distance[]=new int[adj.length];
-		 while(!nodeDequeue.isEmpty())
-		{
-			Integer node = nodeDequeue.pop();
-			ListIterator<Integer> listIterator = adj[v].listIterator();
-			while(listIterator.hasNext())
-			{
-				
+	private void dofindUnweightedShortestPath(int source, LinkedList<Integer> adj[], boolean visited[]) {
+
+		int distanceArr[] = new int[adj.length];
+		for (int i = 0; i < distanceArr.length; i++)
+			distanceArr[i] = -1;
+		distanceArr[source] = 0;
+		Deque<Integer> nodeQueue = new ArrayDeque<Integer>();
+		nodeQueue.push(source);
+		while (!nodeQueue.isEmpty()) {
+			int popNode = nodeQueue.poll();
+			ListIterator<Integer> listIterator = adj[popNode].listIterator();
+			while (listIterator.hasNext()) {
+				int childNode = listIterator.next();
+				if (distanceArr[childNode] == -1) {
+					distanceArr[childNode] = distanceArr[popNode] + 1;
+					nodeQueue.add(childNode);
+				}
+
 			}
 		}
-
 	}
 
 }

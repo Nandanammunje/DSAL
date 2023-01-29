@@ -10,6 +10,6 @@ public interface GraphOps {
 
 	public void TopologicalSort(Graph g);
 	
-	public void findShortestPath(Graph g,int source,int destination);
+	public void findUnweightedShortestPath(Graph g,int source);
 
 }

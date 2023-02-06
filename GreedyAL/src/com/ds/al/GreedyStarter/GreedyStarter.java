@@ -3,6 +3,8 @@ package com.ds.al.GreedyStarter;
 import java.util.PriorityQueue;
 
 import com.ds.al.GreedyEntity.HuffmanNode;
+import com.ds.al.GreedyOps.GreedyOps;
+import com.ds.al.GreedyOps.GreedyOpsImpl;
 import com.ds.al.GreedyUtil.HuffmanNodeComparator;
 
 public class GreedyStarter {
@@ -19,6 +21,9 @@ public class GreedyStarter {
 			hn.sethuffmanChar(charArray[i]);
 			nodeQueue.add(hn);
 		}
+
+		GreedyOps ops = new GreedyOpsImpl();
+		ops.createHuffmanTree(nodeQueue);
 
 	}
 

@@ -1,5 +1,6 @@
 package com.ds.al.GreedyStarter;
 
+import java.util.HashMap;
 import java.util.PriorityQueue;
 
 import com.ds.al.GreedyEntity.HuffmanNode;
@@ -12,7 +13,7 @@ public class GreedyStarter {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		char[] charArray = { 'a', 'b', 'c', 'd', 'e', 'f' };
-		int[] charfreq = { 12, 2, 7, 13, 14, 85 };
+		int[] charfreq = { 5, 9, 12, 13, 16, 45 };
 		HuffmanNodeComparator nodeCompar = new HuffmanNodeComparator();
 		PriorityQueue<HuffmanNode> nodeQueue = new PriorityQueue<HuffmanNode>(nodeCompar);
 		for (int i = 0; i < charArray.length; i++) {
@@ -22,9 +23,19 @@ public class GreedyStarter {
 			nodeQueue.add(hn);
 		}
 
+		HashMap<Integer,String> codeMap=new HashMap<>();
 		GreedyOps ops = new GreedyOpsImpl();
-		ops.createHuffmanTree(nodeQueue);
-
+		HuffmanNode createHuffmanTree = ops.createHuffmanTree(nodeQueue);
+		for (int i = 0; i < charArray.length; i++) {
+             int charInt=(int)charArray[i];
+             System.out.println(charInt);
+             if(!codeMap.containsKey(charInt))
+             {
+            	 codeMap.put(charInt,"null");
+             }
+		}
+        String code="";
+		ops.printHuffmanCode(createHuffmanTree, codeMap, code, null);
 	}
 
 }

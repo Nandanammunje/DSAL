@@ -1,5 +1,6 @@
 package com.ds.al.GreedyOps;
 
+import java.util.HashMap;
 import java.util.PriorityQueue;
 
 import com.ds.al.GreedyEntity.HuffmanNode;
@@ -24,6 +25,36 @@ public class GreedyOpsImpl implements GreedyOps {
 
 		}
 		return newNode;
+	}
+
+	private boolean isLeafNode(HuffmanNode node) {
+		if (node.getLeft() == null && node.getRight() == null) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void printHuffmanCode(HuffmanNode root, HashMap<Integer, String> codeMap, String code, Boolean isLeft) {
+		// TODO Auto-generated method stub
+		if (root == null)
+			return;
+		if(isLeft!=null)
+		{
+		if (isLeft)
+			code = code + "0";
+		else
+			code = code + "1";
+		}
+
+		if (isLeafNode(root)) {
+
+			int huffmanChar = (int) root.gethuffmanChar();
+			codeMap.put(huffmanChar, code);
+		}
+		printHuffmanCode(root.getLeft(), codeMap, code,true);
+		printHuffmanCode(root.getRight(), codeMap, code,false);
+
 	}
 
 }

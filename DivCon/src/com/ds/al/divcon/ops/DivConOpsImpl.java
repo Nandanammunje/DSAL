@@ -55,7 +55,33 @@ public class DivConOpsImpl implements DivConOps {
 	@Override
 	public int getMedianOfSortedArr(int[] sortedArr1, int[] sortedArr2) {
 		// TODO Auto-generated method stub
-		return 0;
+		int mrgArrlen = sortedArr1.length + sortedArr2.length;
+		int mergedArr[] = new int[mrgArrlen];
+		int i = 0, j = 0, k = 0;
+		while (i < sortedArr1.length && j < sortedArr2.length) {
+			if (sortedArr1[i] > sortedArr2[j]) {
+				mergedArr[k] = sortedArr2[j];
+				j++;
+			} else {
+				mergedArr[k] = sortedArr1[i];
+				i++;
+			}
+			k++;
+		}
+		while (i < sortedArr1.length) {
+			mergedArr[k] = sortedArr1[i];
+			i++;
+			k++;
+
+		}
+		while (j < sortedArr2.length) {
+			mergedArr[k] = sortedArr2[j];
+			j++;
+			k++;
+		}
+		int median = ((mrgArrlen % 2) == 0) ? ((mergedArr[(mrgArrlen / 2)] + (mergedArr[((mrgArrlen) / 2) - 1])) / 2)
+				: mergedArr[(mrgArrlen - 1) / 2];
+		return median;
 	}
 
 }

@@ -109,7 +109,7 @@ public class DivConOpsImpl implements DivConOps {
 			getMedianDiffLen(arr2, arr1);
 		int low = 0, high = arr1.length;
 		int medianMerged = (arr1.length + arr2.length + 1) >> 1;
-		while (low <= high) {
+		while (low <= high) { 
 			int lowMid = (low + high) >> 1;
 			int highMid = medianMerged - lowMid;
 			int l1 = (lowMid == 0) ? Integer.MIN_VALUE : arr1[lowMid - 1];
@@ -147,7 +147,7 @@ public class DivConOpsImpl implements DivConOps {
 	public int getMedianOfSortedArrUnequalLen(int[] sortedArr1, int[] sortedArr2) {
 		// TODO Auto-generated method stub
 		getMedianDiffLen(sortedArr1, sortedArr2);
-		return 0;
+ 		return 0;
 	}
 
 }

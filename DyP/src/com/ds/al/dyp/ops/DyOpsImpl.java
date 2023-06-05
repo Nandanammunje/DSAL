@@ -1,5 +1,7 @@
 package com.ds.al.dyp.ops;
 
+import static com.ds.al.dysp.util.DypUtil.getMaxInt;
+
 public class DyOpsImpl implements DypOps {
 
 	int memArr[][];
@@ -26,6 +28,17 @@ public class DyOpsImpl implements DypOps {
 
 	}
 
+	@Override
+	public void setDPArr(int x, int y, int defaultValue) {
+		memArr = new int[x+1][y+1];
+		for (int i = 0; i < memArr.length; i++) {
+			for (int j = 0; j < memArr[i].length; j++) {
+				memArr[i][j] = defaultValue;
+			}
+
+		}
+	}
+
 	private void getLcsArrTab(char[] a, char[] b) {
 		for (int i = 0; i < memArr.length; i++)
 			memArr[i][0] = 0;
@@ -43,7 +56,6 @@ public class DyOpsImpl implements DypOps {
 			}
 
 		}
-		     
 
 	}
 
@@ -58,11 +70,31 @@ public class DyOpsImpl implements DypOps {
 				memArr[i][j] = -1;
 			}
 		}
-		
+
 		getLcsArrTab(a, b);
 
 		int lcsArr = getLcsArr(0, 0, a, b);
 		return lcsArr;
+	}
+
+	@Override
+	public int knapSackBinary(int capacity, int[] weights, int[] profits, int index) {
+		// TODO Auto-generated method stub
+
+		if (index >= weights.length || capacity <= 0)
+			return 0;
+		else if (capacity < weights[index])
+			return knapSackBinary(capacity, weights, profits, index + 1);
+		if(memArr[capacity][index]!=-1)
+			return memArr[capacity][index];
+
+		else
+		{
+			int maxFirst=profits[index]+knapSackBinary(capacity- weights[index], weights, profits, index+1);
+			int maxSecond=knapSackBinary(capacity, weights, profits, index+1);
+			memArr[capacity][index]=(maxFirst > maxSecond)?maxFirst:maxSecond;
+			return  memArr[capacity][index];
+		}
 	}
 
 }

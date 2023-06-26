@@ -21,25 +21,21 @@ public class Starter {
 		 * <l2;i++) seqTwo[i]=sc.next().trim().charAt(0);
 		 */
 
-		System.out.println("Enter the length of weight array");
+		System.out.println("Enter the coins array length");
 		l1 = sc.nextInt();
-		int[] wght = new int[l1];
-		System.out.println("Enter the weights");
+		int[] coinsArr = new int[l1];
+		System.out.println("Enter the coins");
 		for (int i = 0; i < l1; i++) {
-			wght[i] = sc.nextInt();
+			coinsArr[i] = sc.nextInt();
 		}
-		System.out.println("Enter the profits array length");
-		l2 = sc.nextInt();
-		int profit[] = new int[l2];
-		System.out.println("Enter the profits");
-		for (int i = 0; i < l2; i++) {
-			profit[i] = sc.nextInt();
-		}
-		System.out.println("Enter the knap sack capacity");
+		System.out.println("Enter the amount");
 		cap = sc.nextInt();
 		DypOps dyOps = new DyOpsImpl();
-		dyOps.setDPArr(cap, cap,-1);
-		dyOps.knapSackBinary(cap, wght, profit, 0);
+		dyOps.setDPArr(l1,cap, -1);
+		
+		System.out.println("no of coins change " + dyOps.makeChangeDpMinMemoize(cap,0, coinsArr));
+		/* dyOps.knapSackUnbounded(cap, wght, profit, wght.length-1); */
+		/* dyOps.knapSackBinary(cap, wght, profit, 0); */
 
 		/* dyOps.getLcs(seqOne, seqTwo); */
 

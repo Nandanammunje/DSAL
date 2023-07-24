@@ -44,7 +44,7 @@ public class Starter {
 			arr[i] = sc.nextInt();
 		}
 		DypOps ops = new DyOpsImpl();
-		System.out.println(ops.getLengthIncreasingSequence(arr, 1, 0));
+		System.out.println(ops.getLengthIncreasingSequence(arr, 0, -1));
 		sc.close();
 	}
 

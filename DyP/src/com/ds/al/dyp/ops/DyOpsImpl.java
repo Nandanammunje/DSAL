@@ -229,7 +229,7 @@ public class DyOpsImpl implements DypOps {
 	@Override
 	public int getLengthIncreasingSequence(int[] arr, int currIndex, int prevIndex) {
 		// TODO Auto-generated method stub
-		int incLength = 0, notIncLength = 0, notCurr;
+		int incLength = 0, notIncLength = 0;
 		if (currIndex >= arr.length || prevIndex >= arr.length)
 			return 0;
 		notIncLength = getLengthIncreasingSequence(arr, currIndex + 1, prevIndex);

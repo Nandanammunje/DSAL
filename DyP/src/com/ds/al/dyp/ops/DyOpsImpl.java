@@ -226,4 +226,27 @@ public class DyOpsImpl implements DypOps {
 
 	}
 
+	@Override
+	public int getLengthIncreasingSequence(int[] arr, int currIndex, int prevIndex) {
+		// TODO Auto-generated method stub
+		int incLength = 0,notIncLength = 0,notCurr;
+		if (currIndex >= arr.length || prevIndex >= arr.length)
+			return 0;
+		
+	        if(arr[currIndex] > arr[prevIndex] && currIndex > prevIndex)
+			incLength = 1 + getLengthIncreasingSequence(arr, currIndex + 1, currIndex);
+			if(arr[currIndex]< arr[prevIndex]|| currIndex <prevIndex)
+	        notIncLength = getLengthIncreasingSequence(arr, currIndex+1, prevIndex);
+			notCurr=getLengthIncreasingSequence(arr, currIndex, prevIndex+1);
+            int maxOne = Math.max(incLength,notIncLength);
+		    int maxTwo = Math.max(maxOne,notCurr);
+           
+			return maxTwo;
+
+		}
+		
+		
+		
+	
+
 }

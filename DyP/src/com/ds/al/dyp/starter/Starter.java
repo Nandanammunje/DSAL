@@ -21,24 +21,30 @@ public class Starter {
 		 * <l2;i++) seqTwo[i]=sc.next().trim().charAt(0);
 		 */
 
-		System.out.println("Enter the coins array length");
-		l1 = sc.nextInt();
-		int[] coinsArr = new int[l1];
-		System.out.println("Enter the coins");
-		for (int i = 0; i < l1; i++) {
-			coinsArr[i] = sc.nextInt();
-		}
-		System.out.println("Enter the amount");
-		cap = sc.nextInt();
-		DypOps dyOps = new DyOpsImpl();
-		dyOps.setDPArr(l1,cap, -1);
-		
-		System.out.println("no of coins change " + dyOps.makeChangeDpMinMemoize(cap,0, coinsArr));
+		/*
+		 * System.out.println("Enter the coins array length"); l1 = sc.nextInt(); int[]
+		 * coinsArr = new int[l1]; System.out.println("Enter the coins"); for (int i =
+		 * 0; i < l1; i++) { coinsArr[i] = sc.nextInt(); }
+		 * System.out.println("Enter the amount"); cap = sc.nextInt(); DypOps dyOps =
+		 * new DyOpsImpl(); dyOps.setDPArr(l1,cap, -1);
+		 * 
+		 * System.out.println("no of coins change " +
+		 * dyOps.makeChangeDpMinMemoize(cap,0, coinsArr));
+		 */
 		/* dyOps.knapSackUnbounded(cap, wght, profit, wght.length-1); */
 		/* dyOps.knapSackBinary(cap, wght, profit, 0); */
 
 		/* dyOps.getLcs(seqOne, seqTwo); */
 
+		System.out.println("Enter the length of the array ");
+		l1 = sc.nextInt();
+		int arr[] = new int[l1];
+		System.out.println("Enter the input to array");
+		for (int i = 0; i < l1; i++) {
+			arr[i] = sc.nextInt();
+		}
+		DypOps ops = new DyOpsImpl();
+		System.out.println(ops.getLengthIncreasingSequence(arr, 1, 0));
 		sc.close();
 	}
 

@@ -240,4 +240,19 @@ public class DyOpsImpl implements DypOps {
 
 	}
 
+	@Override
+	public boolean isSubsetSumExist(int[] arr, int index, int sum) {
+		// TODO Auto-generated method stub
+		boolean inclElem = false, notIncElem = false;
+		if (index >= arr.length)
+			return false;
+		if (sum == arr[index])
+			return true;
+		notIncElem = isSubsetSumExist(arr, index + 1, sum);
+        if(arr[index] < sum)
+         inclElem=isSubsetSumExist(arr, index+1, sum-arr[index]);
+        	
+		return (notIncElem||inclElem);
+	}
+
 }

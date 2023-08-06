@@ -43,8 +43,10 @@ public class Starter {
 		for (int i = 0; i < l1; i++) {
 			arr[i] = sc.nextInt();
 		}
+		System.out.println("Enter the subset sum");
+		cap=sc.nextInt();
 		DypOps ops = new DyOpsImpl();
-		System.out.println("Length of longest increasing sequence "+ops.getLengthIncreasingSequence(arr, 0, -1));
+		System.out.println("subset exist "+ops.isSubsetSumExist(arr,0, cap));
 		sc.close();
 	}
 

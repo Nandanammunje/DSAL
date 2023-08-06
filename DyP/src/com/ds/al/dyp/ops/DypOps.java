@@ -19,5 +19,7 @@ public interface DypOps {
 	int makeChangeDpMinMemoize(int capacity, int index, int[] coins);
 
 	int getLengthIncreasingSequence(int arr[], int currIndex, int prevIndex);
+	
+	boolean isSubsetSumExist(int arr[],int index,int sum);
 
 }

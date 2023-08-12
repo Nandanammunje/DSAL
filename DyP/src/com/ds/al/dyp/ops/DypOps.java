@@ -21,5 +21,11 @@ public interface DypOps {
 	int getLengthIncreasingSequence(int arr[], int currIndex, int prevIndex);
 	
 	boolean isSubsetSumExist(int arr[],int index,int sum);
+	
+	boolean isPartitionSumExist(int arr[]);
+	
+	int getCountOfSubset(int arr[],int index ,int sum);
+	
+	
 
 }

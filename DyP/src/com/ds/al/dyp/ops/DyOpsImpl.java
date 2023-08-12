@@ -92,6 +92,20 @@ public class DyOpsImpl implements DypOps {
 
 	}
 
+	public boolean isPartitionSum(int arr[], int index, int sum) {
+		boolean isPartitionExist = true;
+		if (index >= arr.length)
+			return false;
+
+		if (arr[index] == sum)
+			return true;
+
+		isPartitionExist = isPartitionSum(arr, index + 1, sum) || isPartitionSum(arr, index + 1, sum - arr[index]);
+
+		return isPartitionExist;
+
+	}
+
 	@Override
 	public int makeChangeDPMemoize(int capacity, int index, int coins[]) {
 		if (index < 0 || capacity <= 0 || index >= coins.length)
@@ -249,10 +263,42 @@ public class DyOpsImpl implements DypOps {
 		if (sum == arr[index])
 			return true;
 		notIncElem = isSubsetSumExist(arr, index + 1, sum);
-        if(arr[index] < sum)
-         inclElem=isSubsetSumExist(arr, index+1, sum-arr[index]);
-        	
-		return (notIncElem||inclElem);
+		if (arr[index] < sum)
+			inclElem = isSubsetSumExist(arr, index + 1, sum - arr[index]);
+
+		return (notIncElem || inclElem);
+	}
+
+	@Override
+	public boolean isPartitionSumExist(int[] arr) {
+		// TODO Auto-generated method stub
+		boolean existStatus = true;
+		int sum = 0;
+		for (int itr : arr)
+			sum = sum + itr;
+		if (sum % 2 == 1)
+			return false;
+		sum = sum / 2;
+		existStatus = isPartitionSum(arr, 0, sum);
+
+		return existStatus;
+	}
+
+	@Override
+	public int getCountOfSubset(int[] arr, int index, int sum) {
+		// TODO Auto-generated method stub
+		int inclCount=0;
+		if (index >= arr.length)
+			return 0;
+		
+		else if (sum == arr[index])
+			return 1 + getCountOfSubset(arr, index + 1, sum);
+
+		int notInclCount = getCountOfSubset(arr, index + 1, sum);
+		if(sum > arr[index])
+		inclCount = getCountOfSubset(arr, index + 1, sum - arr[index]);
+
+		return notInclCount + inclCount;
 	}
 
 }

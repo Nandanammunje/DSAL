@@ -43,10 +43,12 @@ public class Starter {
 		for (int i = 0; i < l1; i++) {
 			arr[i] = sc.nextInt();
 		}
-		System.out.println("Enter the subset sum");
-		cap=sc.nextInt();
+
+		System.out.println("Enter the  subset sum");
+		cap = sc.nextInt();
+
 		DypOps ops = new DyOpsImpl();
-		System.out.println("subset exist "+ops.isSubsetSumExist(arr,0, cap));
+		System.out.println("Count of subset sum is  " + ops.getCountOfSubset(arr, 0, cap));
 		sc.close();
 	}
 

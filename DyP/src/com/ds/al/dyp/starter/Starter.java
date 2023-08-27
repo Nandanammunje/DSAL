@@ -48,6 +48,7 @@ public class Starter {
 		cap = sc.nextInt();
 
 		DypOps ops = new DyOpsImpl();
+		ops.setDPArr(l1,cap, 0);
 		System.out.println("Count of subset sum is  " + ops.getCountOfSubset(arr, 0, cap));
 		sc.close();
 	}

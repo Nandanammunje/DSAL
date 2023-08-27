@@ -5,6 +5,7 @@ import static com.ds.al.dysp.util.DypUtil.getMaxInt;
 public class DyOpsImpl implements DypOps {
 
 	int memArr[][];
+	 int mod = 1000000007;
 
 	private int getLcsArr(int i, int j, char[] a, char[] b) {
 		if (i >= a.length || j >= b.length)
@@ -287,18 +288,21 @@ public class DyOpsImpl implements DypOps {
 	@Override
 	public int getCountOfSubset(int[] arr, int index, int sum) {
 		// TODO Auto-generated method stub
-		int inclCount=0;
+		int inclCount = 0;
 		if (index >= arr.length)
 			return 0;
-		
-		else if (sum == arr[index])
-			return 1 + getCountOfSubset(arr, index + 1, sum);
+		if (memArr[index][sum] != -1)
+			return memArr[index][sum];
 
+		else if (sum == arr[index]) {
+			return memArr[index][sum] = (1 + getCountOfSubset(arr, index + 1, sum)+getCountOfSubset(arr, index+1,0))%mod;
+		}
 		int notInclCount = getCountOfSubset(arr, index + 1, sum);
-		if(sum > arr[index])
-		inclCount = getCountOfSubset(arr, index + 1, sum - arr[index]);
-
-		return notInclCount + inclCount;
+		if (sum > arr[index])
+			inclCount = getCountOfSubset(arr, index + 1, sum - arr[index]);
+		memArr[index][sum] = (notInclCount + inclCount)%mod;
+		return memArr[index][sum];
 	}
 
+	
 }

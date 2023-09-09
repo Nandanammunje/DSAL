@@ -5,7 +5,8 @@ import static com.ds.al.dysp.util.DypUtil.getMaxInt;
 public class DyOpsImpl implements DypOps {
 
 	int memArr[][];
-	 int mod = 1000000007;
+	int mod = 1000000007;
+	int minDiff;
 
 	private int getLcsArr(int i, int j, char[] a, char[] b) {
 		if (i >= a.length || j >= b.length)
@@ -295,14 +296,46 @@ public class DyOpsImpl implements DypOps {
 			return memArr[index][sum];
 
 		else if (sum == arr[index]) {
-			return memArr[index][sum] = (1 + getCountOfSubset(arr, index + 1, sum)+getCountOfSubset(arr, index+1,0))%mod;
+			return memArr[index][sum] = (1 + getCountOfSubset(arr, index + 1, sum)
+					+ getCountOfSubset(arr, index + 1, 0)) % mod;
 		}
 		int notInclCount = getCountOfSubset(arr, index + 1, sum);
 		if (sum > arr[index])
 			inclCount = getCountOfSubset(arr, index + 1, sum - arr[index]);
-		memArr[index][sum] = (notInclCount + inclCount)%mod;
+		memArr[index][sum] = (notInclCount + inclCount) % mod;
 		return memArr[index][sum];
 	}
 
-	
+	@Override
+	public void MinDifferenceSubset(int[] arr, int index, int totalSum, int sum) {
+		// TODO Auto-generated method stub
+        
+        	 
+		if (Math.abs((totalSum - sum) - sum) < minDiff) {
+			minDiff = Math.abs((totalSum - sum) - sum);
+		}
+		if (index >= arr.length)
+			return;
+		if(memArr[index][sum]!=-1)
+		{
+			return;
+		}
+		MinDifferenceSubset(arr, index + 1, totalSum, sum + arr[index]);
+		MinDifferenceSubset(arr, index + 1, totalSum, sum);
+
+	}
+
+	@Override
+	public int getMinDiff() {
+		// TODO Auto-generated method stub
+		return minDiff;
+	}
+
+	@Override
+	public void setMinDifference(int minDiff) {
+		// TODO Auto-generated method stub
+		this.minDiff=minDiff;
+		
+	}
+
 }

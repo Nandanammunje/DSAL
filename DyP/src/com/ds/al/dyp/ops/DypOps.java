@@ -31,5 +31,7 @@ public interface DypOps {
 	void setMinDifference(int minDiff);
 
 	int getMinDiff();
+	
+	
 
 }

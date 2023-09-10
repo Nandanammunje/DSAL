@@ -8,4 +8,10 @@ public class DypUtil {
 		return max;
 	}
 
+	public static int getDiff(int a, int b) {
+		int diff = a - b;
+		diff = (diff > 0) ? diff : -diff;
+		return diff;
+
+	}
 }

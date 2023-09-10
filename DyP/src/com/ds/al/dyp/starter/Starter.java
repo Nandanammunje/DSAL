@@ -9,7 +9,7 @@ public class Starter {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int l1, l2, cap;
+		int l1, l2, cap=0;
 		Scanner sc = new Scanner(System.in);
 		/*
 		 * System.out.println("Enter the length of char array 1"); l1 = sc.nextInt();
@@ -42,14 +42,13 @@ public class Starter {
 		System.out.println("Enter the input to array");
 		for (int i = 0; i < l1; i++) {
 			arr[i] = sc.nextInt();
+			cap=cap+arr[i];
 		}
-
-		System.out.println("Enter the  subset sum");
-		cap = sc.nextInt();
-
 		DypOps ops = new DyOpsImpl();
-		ops.setDPArr(l1,cap, 0);
-		System.out.println("Count of subset sum is  " + ops.getCountOfSubset(arr, 0, cap));
+		ops.setDPArr(l1,cap,-1);
+		ops.setMinDifference(cap);
+		ops.MinDifferenceSubset(arr,0,cap,0);
+		System.out.println("minimum difference between subsets "+ops.getMinDiff());
 		sc.close();
 	}
 

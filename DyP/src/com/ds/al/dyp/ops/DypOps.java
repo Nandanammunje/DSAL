@@ -19,14 +19,17 @@ public interface DypOps {
 	int makeChangeDpMinMemoize(int capacity, int index, int[] coins);
 
 	int getLengthIncreasingSequence(int arr[], int currIndex, int prevIndex);
-	
-	boolean isSubsetSumExist(int arr[],int index,int sum);
-	
-	boolean isPartitionSumExist(int arr[]);
-	
-	int getCountOfSubset(int arr[],int index ,int sum);
-	
 
-	
+	boolean isSubsetSumExist(int arr[], int index, int sum);
+
+	boolean isPartitionSumExist(int arr[]);
+
+	int getCountOfSubset(int arr[], int index, int sum);
+
+	void MinDifferenceSubset(int arr[], int index, int totalSum, int sum);
+
+	void setMinDifference(int minDiff);
+
+	int getMinDiff();
 
 }

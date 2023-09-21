@@ -9,7 +9,9 @@ public class Starter {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+
 		int lenArrSize, l2, cap = 0, rodLen;
+
 		Scanner sc = new Scanner(System.in);
 		/*
 		 * System.out.println("Enter the length of char array 1"); l1 = sc.nextInt();
@@ -36,6 +38,7 @@ public class Starter {
 
 		/* dyOps.getLcs(seqOne, seqTwo); */
 
+
 		System.out.println("Enter the length of the coin array ");
 		lenArrSize = sc.nextInt();
 		int coins[] = new int[lenArrSize];
@@ -56,6 +59,7 @@ public class Starter {
 		/*
 		 * ops.setMinDifference(cap); ops.MinDifferenceSubset(arr,0,cap,0);
 		 */
+
 
 		sc.close();
 	}

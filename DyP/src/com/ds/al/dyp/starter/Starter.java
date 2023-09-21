@@ -9,7 +9,7 @@ public class Starter {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int l1, l2, cap=0;
+		int lenArrSize, l2, cap = 0, rodLen;
 		Scanner sc = new Scanner(System.in);
 		/*
 		 * System.out.println("Enter the length of char array 1"); l1 = sc.nextInt();
@@ -36,19 +36,27 @@ public class Starter {
 
 		/* dyOps.getLcs(seqOne, seqTwo); */
 
-		System.out.println("Enter the length of the array ");
-		l1 = sc.nextInt();
-		int arr[] = new int[l1];
-		System.out.println("Enter the input to array");
-		for (int i = 0; i < l1; i++) {
-			arr[i] = sc.nextInt();
-			cap=cap+arr[i];
+		System.out.println("Enter the length of the coin array ");
+		lenArrSize = sc.nextInt();
+		int coins[] = new int[lenArrSize];
+		System.out.println("Enter the coin denomination ");
+		for (int i = 0; i < lenArrSize; i++) {
+			coins[i] = sc.nextInt();
+
 		}
+
+		System.out.println("Enter the value");
+			cap = sc.nextInt();
+
+
 		DypOps ops = new DyOpsImpl();
-		ops.setDPArr(l1,cap,-1);
-		ops.setMinDifference(cap);
-		ops.MinDifferenceSubset(arr,0,cap,0);
-		System.out.println("minimum difference between subsets "+ops.getMinDiff());
+		ops.setDPArr(lenArrSize, cap,-1);
+		System.out.println(ops.makeChangeDpMinMemoize(cap,0, coins,0));
+		
+		/*
+		 * ops.setMinDifference(cap); ops.MinDifferenceSubset(arr,0,cap,0);
+		 */
+
 		sc.close();
 	}
 

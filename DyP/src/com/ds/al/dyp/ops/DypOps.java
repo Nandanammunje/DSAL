@@ -14,9 +14,9 @@ public interface DypOps {
 
 	int makeChangeDPMemoize(int capacity, int index, int[] coins);
 
-	int makeChangeDpMin(int capacity, int index, int[] coins);
+	int makeChangeDpMin(int capacity, int index, int[] coins,int coinCount);
 
-	int makeChangeDpMinMemoize(int capacity, int index, int[] coins);
+	int makeChangeDpMinMemoize(int capacity, int index, int[] coins,int coinCount);
 
 	int getLengthIncreasingSequence(int arr[], int currIndex, int prevIndex);
 

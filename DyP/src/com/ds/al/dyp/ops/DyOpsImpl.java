@@ -201,44 +201,53 @@ public class DyOpsImpl implements DypOps {
 	}
 
 	@Override
-	public int makeChangeDpMin(int capacity, int index, int[] coins) {
+	public int makeChangeDpMin(int capacity, int index, int[] coins, int coinCount) {
 		// TODO Auto-generated method stub
-		if (capacity <= 0 || index < 0 || index >= coins.length)
-			return 0;
-		if (coins[index] > capacity)
-			return (makeChangeDpMin(capacity, index + 1, coins));
-		else {
+		int inclCount, notInclCount;
+		if (capacity < 0 || index >= coins.length || (index == 0 && capacity == 0 && coinCount <= 0))
+			return -1;
+		if (capacity == 0)
+			return coinCount;
+		if (coins[index] <= capacity) {
+			inclCount = makeChangeDpMin(capacity - coins[index], index, coins, coinCount + 1);
+			notInclCount = makeChangeDpMin(capacity, index + 1, coins, coinCount);
+		} else {
 
-			int coinFirst = 1 + makeChangeDpMin(capacity - coins[index], index, coins);
-			int coinSecond = makeChangeDpMin(capacity, index + 1, coins);
-			if (coinFirst > 0 && coinSecond > 0)
-				return Math.min(coinFirst, coinSecond);
-			else
-				return Math.max(coinFirst, coinSecond);
+			return makeChangeDpMin(capacity, index + 1, coins, coinCount);
 		}
+
+		if (inclCount > 0 && notInclCount > 0)
+			return Math.min(inclCount, notInclCount);
+		else
+			return Math.max(inclCount, notInclCount);
 
 	}
 
 	@Override
-	public int makeChangeDpMinMemoize(int capacity, int index, int[] coins) {
+	public int makeChangeDpMinMemoize(int capacity, int index, int[] coins, int coinCount) {
 		// TODO Auto-generated method stub
-		if (capacity <= 0 || index < 0 || index >= coins.length)
-			return 0;
-		if (coins[index] > capacity)
-			return (makeChangeDpMin(capacity, index + 1, coins));
+		int inclCount, notInclCount;
+		if (capacity < 0 || index >= coins.length || (index == 0 && capacity == 0 && coinCount <= 0))
+			return -1;
+		
+		if (capacity == 0)
+			return coinCount;
 		if (memArr[index][capacity] != -1)
 			return memArr[index][capacity];
-		else {
-			int coinFirst = 1 + makeChangeDpMin(capacity - coins[index], index, coins);
-			int coinSecond = makeChangeDpMin(capacity, index + 1, coins);
-			if (coinFirst > 0 && coinSecond > 0)
-				memArr[index][capacity] = Math.min(coinFirst, coinSecond);
-			else
-				memArr[index][capacity] = Math.max(coinFirst, coinSecond);
 
+		if (coins[index] <= capacity) {
+			inclCount = makeChangeDpMinMemoize(capacity - coins[index], index, coins, coinCount + 1);
+			notInclCount = makeChangeDpMinMemoize(capacity, index + 1, coins, coinCount);
+		} else {
+			memArr[index][capacity]= makeChangeDpMinMemoize(capacity, index + 1, coins, coinCount);
 			return memArr[index][capacity];
-
 		}
+		if (inclCount > 0 && notInclCount > 0)
+			memArr[index][capacity] = Math.min(inclCount, notInclCount);
+		else
+			memArr[index][capacity] = Math.max(inclCount, notInclCount);
+
+		return memArr[index][capacity];
 
 	}
 
@@ -309,15 +318,13 @@ public class DyOpsImpl implements DypOps {
 	@Override
 	public void MinDifferenceSubset(int[] arr, int index, int totalSum, int sum) {
 		// TODO Auto-generated method stub
-        
-        	 
+
 		if (Math.abs((totalSum - sum) - sum) < minDiff) {
 			minDiff = Math.abs((totalSum - sum) - sum);
 		}
 		if (index >= arr.length)
 			return;
-		if(memArr[index][sum]!=-1)
-		{
+		if (memArr[index][sum] != -1) {
 			return;
 		}
 		MinDifferenceSubset(arr, index + 1, totalSum, sum + arr[index]);
@@ -334,8 +341,8 @@ public class DyOpsImpl implements DypOps {
 	@Override
 	public void setMinDifference(int minDiff) {
 		// TODO Auto-generated method stub
-		this.minDiff=minDiff;
-		
+		this.minDiff = minDiff;
+
 	}
 
 }

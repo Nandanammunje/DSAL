@@ -4,9 +4,10 @@ import static com.ds.al.dysp.util.DypUtil.getMaxInt;
 
 public class DyOpsImpl implements DypOps {
 
-	int memArr[][];
+	int[][] memArr;
 	int mod = 1000000007;
 	int minDiff;
+	int memMultiArr[][][];
 
 	private int getLcsArr(int i, int j, char[] a, char[] b) {
 		if (i >= a.length || j >= b.length)
@@ -31,13 +32,26 @@ public class DyOpsImpl implements DypOps {
 	}
 
 	@Override
-	public void setDPArr(int x, int y, int defaultValue) {
-		memArr = new int[x + 1][y + 1];
-		for (int i = 0; i < memArr.length; i++) {
-			for (int j = 0; j < memArr[i].length; j++) {
-				memArr[i][j] = defaultValue;
-			}
+	public void setDPArr(int x, int y, int z, int defaultValue, int multi) {
+		if (multi == 0) {
+			memArr = new int[x + 1][y + 1];
+			for (int i = 0; i < memArr.length; i++) {
+				for (int j = 0; j < memArr[i].length; j++) {
+					memArr[i][j] = defaultValue;
+				}
 
+			}
+		} else {
+
+			memMultiArr = new int[x + 1][y + 1][z + 1];
+			for (int i = 0; i < x + 1; i++) {
+				for (int j = 0; j < y + 1; j++) {
+					for (int k = 0; k < z + 1; k++) {
+						memMultiArr[i][j][k] = defaultValue;
+					}
+				}
+
+			}
 		}
 	}
 
@@ -209,6 +223,14 @@ public class DyOpsImpl implements DypOps {
 		if (capacity == 0)
 			return coinCount;
 		if (coins[index] <= capacity) {
+			if (index == coins.length - 1) {
+				if (capacity % coins[index] == 0)
+					return capacity / coins[index]+coinCount;
+				else
+					return -1;
+
+			}
+
 			inclCount = makeChangeDpMin(capacity - coins[index], index, coins, coinCount + 1);
 			notInclCount = makeChangeDpMin(capacity, index + 1, coins, coinCount);
 		} else {
@@ -229,25 +251,27 @@ public class DyOpsImpl implements DypOps {
 		int inclCount, notInclCount;
 		if (capacity < 0 || index >= coins.length || (index == 0 && capacity == 0 && coinCount <= 0))
 			return -1;
-		
-		if (capacity == 0)
+
+		if (capacity == 0) {
+			memMultiArr[index][capacity][coinCount] = coinCount;
 			return coinCount;
-		if (memArr[index][capacity] != -1)
-			return memArr[index][capacity];
+		}
+		if (memMultiArr[index][capacity][coinCount] != -1)
+			return memMultiArr[index][capacity][coinCount];
 
 		if (coins[index] <= capacity) {
 			inclCount = makeChangeDpMinMemoize(capacity - coins[index], index, coins, coinCount + 1);
 			notInclCount = makeChangeDpMinMemoize(capacity, index + 1, coins, coinCount);
 		} else {
-			memArr[index][capacity]= makeChangeDpMinMemoize(capacity, index + 1, coins, coinCount);
-			return memArr[index][capacity];
+			memMultiArr[index][capacity][coinCount] = makeChangeDpMinMemoize(capacity, index + 1, coins, coinCount);
+			return memMultiArr[index][capacity][coinCount];
 		}
 		if (inclCount > 0 && notInclCount > 0)
-			memArr[index][capacity] = Math.min(inclCount, notInclCount);
+			memMultiArr[index][capacity][coinCount] = Math.min(inclCount, notInclCount);
 		else
-			memArr[index][capacity] = Math.max(inclCount, notInclCount);
+			memMultiArr[index][capacity][coinCount] = Math.max(inclCount, notInclCount);
 
-		return memArr[index][capacity];
+		return memMultiArr[index][capacity][coinCount];
 
 	}
 
@@ -345,5 +369,24 @@ public class DyOpsImpl implements DypOps {
 
 	}
 
+	@Override
+	public int getLeastCommonSubstring(char[] a, char[] b,int i,int j,int count) {
+		// TODO Auto-generated method stub
+		int incFirst=0,incSecond=0;
+		if(i <0||j<0)
+			return count;
+	       
+		if(a[i]==b[j])
+			return getLeastCommonSubstring(a, b, i--, j--, count+1);
+		else
+		{
+			incFirst=getLeastCommonSubstring(a,b,i--, j,0);
+			incSecond=getLeastCommonSubstring(a, b,i, j--,0);
+			
+			
+		}
+		
+		return Math.max(count,Math.max(incFirst, incSecond));
+	}
 
 }

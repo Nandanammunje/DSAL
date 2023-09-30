@@ -53,7 +53,7 @@ public class Starter {
 
 
 		DypOps ops = new DyOpsImpl();
-		ops.setDPArr(lenArrSize, cap,-1);
+		ops.setDPArr(lenArrSize, cap,lenArrSize*cap,-1,1);
 		System.out.println(ops.makeChangeDpMinMemoize(cap,0, coins,0));
 		
 		/*

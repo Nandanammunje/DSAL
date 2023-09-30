@@ -6,7 +6,7 @@ public interface DypOps {
 
 	public int knapSackBinary(int capacity, int weights[], int profits[], int index);
 
-	public void setDPArr(int x, int y, int defaultValue);
+	public void setDPArr(int x, int y, int z,int defaultValue,int multi);
 
 	public int knapSackUnbounded(int capacity, int weights[], int profits[], int index);
 
@@ -31,6 +31,9 @@ public interface DypOps {
 	void setMinDifference(int minDiff);
 
 	int getMinDiff();
+	
+	int getLeastCommonSubstring(char a[],char b[],int i, int j, int count);
+	
 	
 	
 

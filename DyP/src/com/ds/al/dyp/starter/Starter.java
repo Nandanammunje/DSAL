@@ -11,6 +11,7 @@ public class Starter {
 		// TODO Auto-generated method stub
 
 		int lenArrSize, l2, cap = 0, rodLen;
+		char arrOne[],arrTwo[];
 
 		Scanner sc = new Scanner(System.in);
 		/*
@@ -39,23 +40,13 @@ public class Starter {
 		/* dyOps.getLcs(seqOne, seqTwo); */
 
 
-		System.out.println("Enter the length of the coin array ");
-		lenArrSize = sc.nextInt();
-		int coins[] = new int[lenArrSize];
-		System.out.println("Enter the coin denomination ");
-		for (int i = 0; i < lenArrSize; i++) {
-			coins[i] = sc.nextInt();
-
-		}
-
-		System.out.println("Enter the value");
-			cap = sc.nextInt();
-
-
-		DypOps ops = new DyOpsImpl();
-		ops.setDPArr(lenArrSize, cap,lenArrSize*cap,-1,1);
-		System.out.println(ops.makeChangeDpMinMemoize(cap,0, coins,0));
-		
+		System.out.println("Enter the char array one as a string ");
+		arrOne= sc.next().toCharArray();
+		System.out.println("Enter the char array two as a string ");
+		arrTwo=sc.next().toCharArray();
+		DypOps ops=new DyOpsImpl();
+		ops.setDPArr(arrOne.length,arrTwo.length,0, cap,-1);
+		System.out.println("length of common substring "+ops.getLeastCommonSubstring(arrOne, arrTwo,0,0,0));
 		/*
 		 * ops.setMinDifference(cap); ops.MinDifferenceSubset(arr,0,cap,0);
 		 */

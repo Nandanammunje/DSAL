@@ -34,6 +34,8 @@ public interface DypOps {
 	
 	int getLeastCommonSubstring(char a[],char b[],int i, int j, int count);
 	
+	int getLeastCommonSubstringTabulation(char a[],char b[]);
+	
 	
 	
 

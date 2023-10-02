@@ -373,20 +373,31 @@ public class DyOpsImpl implements DypOps {
 	public int getLeastCommonSubstring(char[] a, char[] b,int i,int j,int count) {
 		// TODO Auto-generated method stub
 		int incFirst=0,incSecond=0;
-		if(i <0||j<0)
+		if(i>=a.length||j>=b.length)
 			return count;
 	       
 		if(a[i]==b[j])
-			return getLeastCommonSubstring(a, b, i--, j--, count+1);
+			return getLeastCommonSubstring(a, b, i+1, j+1, count+1);
 		else
 		{
-			incFirst=getLeastCommonSubstring(a,b,i--, j,0);
-			incSecond=getLeastCommonSubstring(a, b,i, j--,0);
+			incFirst=getLeastCommonSubstring(a,b,i+1, j,0);
+			incSecond=getLeastCommonSubstring(a, b,i, j+1,0);
 			
 			
 		}
 		
 		return Math.max(count,Math.max(incFirst, incSecond));
+	}
+
+	@Override
+	public int getLeastCommonSubstringTabulation(char[] a, char[] b) {
+		// TODO Auto-generated method stub
+		for(int i=0;i<memArr.length;i++)
+		  memArr[i][0]=0;
+		for(int j=0;j<memArr[0].length;j++)
+			memArr[0][j]=0;
+		
+		return 0;
 	}
 
 }

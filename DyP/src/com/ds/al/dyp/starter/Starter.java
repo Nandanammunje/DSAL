@@ -45,8 +45,8 @@ public class Starter {
 		System.out.println("Enter the char array two as a string ");
 		arrTwo=sc.next().toCharArray();
 		DypOps ops=new DyOpsImpl();
-		ops.setDPArr(arrOne.length,arrTwo.length,0, cap,-1);
-		System.out.println("length of common substring "+ops.getLeastCommonSubstring(arrOne, arrTwo,0,0,0));
+		ops.setDPArr(arrOne.length,arrTwo.length,0, cap,0);
+		System.out.println("length of common substring "+ops.getLeastCommonSubstringTabulation(arrOne, arrTwo));
 		/*
 		 * ops.setMinDifference(cap); ops.MinDifferenceSubset(arr,0,cap,0);
 		 */

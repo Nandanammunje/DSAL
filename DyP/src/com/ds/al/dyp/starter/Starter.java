@@ -53,7 +53,8 @@ public class Starter {
 		}
 
 		DypOps ops = new DyOpsImpl();
-		ops.setDPArr(cap, lenArrSize, 0, 0, 0);
+		ops.setDPArr(lenArrSize, cap, 0, 0, 0);
+		System.out.println(" no of solutions "+ops.makeChangeDPTabulation(coins, cap));
 
 		/*
 		 * ops.setMinDifference(cap); ops.MinDifferenceSubset(arr,0,cap,0);

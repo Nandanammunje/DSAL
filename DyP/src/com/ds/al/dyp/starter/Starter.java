@@ -39,23 +39,17 @@ public class Starter {
 
 		/* dyOps.getLcs(seqOne, seqTwo); */
 
-		System.out.println("Enter the value ");
-		cap = sc.nextInt();
+		System.out.println("Enter the character array one");
+		arrOne=sc.next().toCharArray();
 
-		System.out.println("Enter the coin array length");
-		lenArrSize = sc.nextInt();
-		int coins[] = new int[lenArrSize];
+		System.out.println("Enter the character array two ");
+		arrTwo=sc.next().toCharArray();
+	
+		DypOps ops=new DyOpsImpl();
+		ops.getLcs(arrOne, arrTwo);
+		System.out.println(" longest common subsequence is "+ops.getLcsString(arrOne, arrTwo));
 
-		System.out.println("Enter the coin values");
-
-		for (int i = 0; i < lenArrSize; i++) {
-			coins[i] = sc.nextInt();
-		}
-
-		DypOps ops = new DyOpsImpl();
-		ops.setDPArr(lenArrSize, cap, 0, 0, 0);
-		System.out.println(" no of solutions "+ops.makeChangeDPTabulation(coins, cap));
-
+		
 		/*
 		 * ops.setMinDifference(cap); ops.MinDifferenceSubset(arr,0,cap,0);
 		 */

@@ -14,7 +14,7 @@ public class DyOpsImpl implements DypOps {
 			return 0;
 
 		if (memArr[i][j] != -1) {
-			System.out.println("Memoized part");
+			
 			return memArr[i][j];
 		}
 		if (a[i] == b[j]) {
@@ -73,6 +73,29 @@ public class DyOpsImpl implements DypOps {
 
 		}
 
+	}
+
+	@Override
+	public StringBuffer getLcsString(char a[], char b[]) {
+		// TODO Auto-generated method stub
+		int i = a.length;
+		int j = b.length;
+		StringBuffer lcsStr = new StringBuffer();
+		while (i > 0 && j > 0) {
+			if (a[i - 1] == b[j - 1]) {
+				lcsStr.append(a[i - 1]);
+				i--;
+				j--;
+			} else {
+				if (memArr[i][j - 1] > memArr[i - 1][j])
+					j--;
+				else
+					i--;
+			}
+
+		}
+
+		return lcsStr.reverse();
 	}
 
 	private void getKnapsackBinary(int capacity, int[] weights, int[] profits) {
@@ -213,23 +236,20 @@ public class DyOpsImpl implements DypOps {
 		}
 
 	}
-	
+
 	@Override
 	public int makeChangeDPTabulation(int[] coins, int capacity) {
 		// TODO Auto-generated method stub
 		int totalCoinChange;
-		memArr[0][0]=1;
-		for(int i=1;i<memArr.length;i++)
-		{
-			
-			for(int j=0;j<memArr[i].length;j++)
-			{
-				totalCoinChange=memArr[i-1][j];
-				if(j-coins[i-1]>=0)
-				{
-					totalCoinChange=totalCoinChange+memArr[i][j-coins[i-1]];
+		memArr[0][0] = 1;
+		for (int i = 1; i < memArr.length; i++) {
+
+			for (int j = 0; j < memArr[i].length; j++) {
+				totalCoinChange = memArr[i - 1][j];
+				if (j - coins[i - 1] >= 0) {
+					totalCoinChange = totalCoinChange + memArr[i][j - coins[i - 1]];
 				}
-				memArr[i][j]=totalCoinChange;
+				memArr[i][j] = totalCoinChange;
 			}
 		}
 		return memArr[coins.length][capacity];
@@ -429,7 +449,5 @@ public class DyOpsImpl implements DypOps {
 		}
 		return maxLength;
 	}
-
-	
 
 }

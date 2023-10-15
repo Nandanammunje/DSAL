@@ -39,8 +39,7 @@ public class Starter {
 
 		/* dyOps.getLcs(seqOne, seqTwo); */
 
-		System.out.println("Enter the value ");
-		cap = sc.nextInt();
+	
 
 		System.out.println("Enter the coin array length");
 		lenArrSize = sc.nextInt();

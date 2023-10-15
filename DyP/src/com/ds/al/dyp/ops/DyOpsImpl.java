@@ -8,6 +8,7 @@ public class DyOpsImpl implements DypOps {
 	int mod = 1000000007;
 	int minDiff;
 	int memMultiArr[][][];
+	int minCoinCount;
 
 	private int getLcsArr(int i, int j, char[] a, char[] b) {
 		if (i >= a.length || j >= b.length)
@@ -213,23 +214,20 @@ public class DyOpsImpl implements DypOps {
 		}
 
 	}
-	
+
 	@Override
 	public int makeChangeDPTabulation(int[] coins, int capacity) {
 		// TODO Auto-generated method stub
 		int totalCoinChange;
-		memArr[0][0]=1;
-		for(int i=1;i<memArr.length;i++)
-		{
-			
-			for(int j=0;j<memArr[i].length;j++)
-			{
-				totalCoinChange=memArr[i-1][j];
-				if(j-coins[i-1]>=0)
-				{
-					totalCoinChange=totalCoinChange+memArr[i][j-coins[i-1]];
+		memArr[0][0] = 1;
+		for (int i = 1; i < memArr.length; i++) {
+
+			for (int j = 0; j < memArr[i].length; j++) {
+				totalCoinChange = memArr[i - 1][j];
+				if (j - coins[i - 1] >= 0) {
+					totalCoinChange = totalCoinChange + memArr[i][j - coins[i - 1]];
 				}
-				memArr[i][j]=totalCoinChange;
+				memArr[i][j] = totalCoinChange;
 			}
 		}
 		return memArr[coins.length][capacity];
@@ -241,8 +239,15 @@ public class DyOpsImpl implements DypOps {
 		int inclCount, notInclCount;
 		if (capacity < 0 || index >= coins.length || (index == 0 && capacity == 0 && coinCount <= 0))
 			return -1;
-		if (capacity == 0)
+		if (capacity == 0) {
+			if (coinCount < minCoinCount)
+				minCoinCount = coinCount;
 			return coinCount;
+
+		}
+		if (coinCount >= minCoinCount && coinCount!=0)
+			return minCoinCount;
+
 		if (coins[index] <= capacity) {
 			if (index == coins.length - 1) {
 				if (capacity % coins[index] == 0)
@@ -264,6 +269,16 @@ public class DyOpsImpl implements DypOps {
 		else
 			return Math.max(inclCount, notInclCount);
 
+	}
+	
+	
+	
+	
+
+	@Override
+	public void setMinCoin(int noCoins) {
+		// TODO Auto-generated method stub
+		minCoinCount = noCoins + 1;
 	}
 
 	@Override
@@ -295,6 +310,8 @@ public class DyOpsImpl implements DypOps {
 		return memMultiArr[index][capacity][coinCount];
 
 	}
+	
+	
 
 	@Override
 	public int getLengthIncreasingSequence(int[] arr, int currIndex, int prevIndex) {

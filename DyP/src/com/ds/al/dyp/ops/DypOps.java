@@ -6,19 +6,19 @@ public interface DypOps {
 
 	public int knapSackBinary(int capacity, int weights[], int profits[], int index);
 
-	public void setDPArr(int x, int y, int z,int defaultValue,int multi);
+	public void setDPArr(int x, int y, int z, int defaultValue, int multi);
 
 	public int knapSackUnbounded(int capacity, int weights[], int profits[], int index);
 
 	public int makeChangeDP(int capacity, int index, int coins[]);
 
 	int makeChangeDPMemoize(int capacity, int index, int[] coins);
-	
-	int makeChangeDPTabulation(int coins[],int capacity);
 
-	int makeChangeDpMin(int capacity, int index, int[] coins,int coinCount);
+	int makeChangeDPTabulation(int coins[], int capacity);
 
-	int makeChangeDpMinMemoize(int capacity, int index, int[] coins,int coinCount);
+	int makeChangeDpMin(int capacity, int index, int[] coins, int coinCount);
+
+	int makeChangeDpMinMemoize(int capacity, int index, int[] coins, int coinCount);
 
 	int getLengthIncreasingSequence(int arr[], int currIndex, int prevIndex);
 
@@ -33,12 +33,11 @@ public interface DypOps {
 	void setMinDifference(int minDiff);
 
 	int getMinDiff();
-	
-	int getLeastCommonSubstring(char a[],char b[],int i, int j, int count);
-	
-	int getLeastCommonSubstringTabulation(char a[],char b[]);
-	
-	
-	
+
+	int getLeastCommonSubstring(char a[], char b[], int i, int j, int count);
+
+	int getLeastCommonSubstringTabulation(char a[], char b[]);
+
+	void setMinCoin(int noCoins);
 
 }

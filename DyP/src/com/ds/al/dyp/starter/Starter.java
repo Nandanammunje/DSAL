@@ -41,24 +41,29 @@ public class Starter {
 
 	
 
-		System.out.println("Enter the coin array length");
-		lenArrSize = sc.nextInt();
-		int coins[] = new int[lenArrSize];
-
-		System.out.println("Enter the coin values");
-
-		for (int i = 0; i < lenArrSize; i++) {
-			coins[i] = sc.nextInt();
-		}
-
-		DypOps ops = new DyOpsImpl();
-		ops.setDPArr(lenArrSize, cap, 0, 0,0);
-		System.out.println(" minimum no of solutions  "+ops.makeChangeDpMin(cap,0, coins,0));
-
+		/*
+		 * System.out.println("Enter the coin array length"); lenArrSize = sc.nextInt();
+		 * int coins[] = new int[lenArrSize];
+		 * 
+		 * System.out.println("Enter the coin values");
+		 * 
+		 * for (int i = 0; i < lenArrSize; i++) { coins[i] = sc.nextInt(); }
+		 * 
+		 * DypOps ops = new DyOpsImpl(); ops.setDPArr(lenArrSize, cap, 0, 0,0);
+		 * System.out.println(" minimum no of solutions  "+ops.makeChangeDpMin(cap,0,
+		 * coins,0));
+		 */
 		/*
 		 * ops.setMinDifference(cap); ops.MinDifferenceSubset(arr,0,cap,0);
 		 */
-
+		
+		System.out.println("Enter the first char sequence");
+		arrOne=sc.next().toCharArray();
+		System.out.println("Enter the second char sequence");
+        arrTwo=sc.next().toCharArray();
+        DypOps ops=new DyOpsImpl();
+        ops.setDPArr(arrOne.length,arrTwo.length,0,-1,0);
+        
 		sc.close();
 	}
 

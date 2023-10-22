@@ -15,7 +15,7 @@ public class DyOpsImpl implements DypOps {
 			return 0;
 
 		if (memArr[i][j] != -1) {
-			
+
 			return memArr[i][j];
 		}
 		if (a[i] == b[j]) {
@@ -170,7 +170,7 @@ public class DyOpsImpl implements DypOps {
 		// TODO Auto-generated method stub
 
 		memArr = new int[a.length + 1][b.length + 1];
-		getLcsArrTab(a, b);
+
 		for (int i = 0; i < memArr.length; i++) {
 			for (int j = 0; j < memArr[i].length; j++) {
 				memArr[i][j] = -1;
@@ -179,8 +179,8 @@ public class DyOpsImpl implements DypOps {
 
 		getLcsArrTab(a, b);
 
-		int lcsArr = getLcsArr(0, 0, a, b);
-		return lcsArr;
+		// int lcsArr = getLcsArr(0, 0, a, b);
+		return memArr[a.length][b.length];
 
 	}
 
@@ -268,7 +268,7 @@ public class DyOpsImpl implements DypOps {
 			return coinCount;
 
 		}
-		if (coinCount >= minCoinCount && coinCount!=0)
+		if (coinCount >= minCoinCount && coinCount != 0)
 			return minCoinCount;
 
 		if (coins[index] <= capacity) {
@@ -293,10 +293,6 @@ public class DyOpsImpl implements DypOps {
 			return Math.max(inclCount, notInclCount);
 
 	}
-	
-	
-	
-	
 
 	@Override
 	public void setMinCoin(int noCoins) {
@@ -333,8 +329,6 @@ public class DyOpsImpl implements DypOps {
 		return memMultiArr[index][capacity][coinCount];
 
 	}
-	
-	
 
 	@Override
 	public int getLengthIncreasingSequence(int[] arr, int currIndex, int prevIndex) {
@@ -468,6 +462,35 @@ public class DyOpsImpl implements DypOps {
 			}
 		}
 		return maxLength;
+	}
+
+	@Override
+	public StringBuffer getShortestCommonSuperstring(char[] a, char[] b) {
+		int i = a.length;
+		int j = b.length;
+		StringBuffer lcsStr = new StringBuffer();
+		while (i > 0 && j > 0) {
+			if (a[i - 1] == b[j - 1]) {
+				lcsStr.append(a[i - 1]);
+				i--;
+				j--;
+			} else {
+				if (memArr[i][j - 1] > memArr[i - 1][j]) {
+					lcsStr.append(b[j - 1]);
+					j--;
+
+				} else {
+
+					lcsStr.append(i - 1);
+					i--;
+
+				}
+			}
+
+		}
+
+		// TODO Auto-generated method stub
+		return lcsStr.reverse();
 	}
 
 }

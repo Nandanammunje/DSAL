@@ -3,8 +3,8 @@ package com.ds.al.dyp.ops;
 public interface DypOps {
 
 	public int getLcs(char a[], char b[]);
-	
-	public StringBuffer getLcsString(char a[],char b[]);
+
+	public StringBuffer getLcsString(char a[], char b[]);
 
 	public int knapSackBinary(int capacity, int weights[], int profits[], int index);
 
@@ -39,6 +39,8 @@ public interface DypOps {
 	int getLeastCommonSubstring(char a[], char b[], int i, int j, int count);
 
 	int getLeastCommonSubstringTabulation(char a[], char b[]);
+
+	StringBuffer getShortestCommonSuperstring(char a[], char b[]);
 
 	void setMinCoin(int noCoins);
 

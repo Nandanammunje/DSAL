@@ -481,12 +481,22 @@ public class DyOpsImpl implements DypOps {
 
 				} else {
 
-					lcsStr.append(i - 1);
+					lcsStr.append(a[i - 1]);
 					i--;
 
 				}
 			}
 
+		}
+		while(i > 0)
+		{
+			lcsStr.append(a[i-1]);
+			i--;
+		}
+		while(j>0)
+		{
+			lcsStr.append(b[j-1]);
+			j--;
 		}
 
 		// TODO Auto-generated method stub

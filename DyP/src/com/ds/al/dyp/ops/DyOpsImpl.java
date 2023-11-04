@@ -503,4 +503,14 @@ public class DyOpsImpl implements DypOps {
 		return lcsStr.reverse();
 	}
 
+	@Override
+	public int getMinInsertionDeletion(char[] a, char[] b,int lcsLen) {
+		// TODO Auto-generated method stub
+		
+		
+		int insertionNum=b.length-lcsLen;
+		int deletionNum=a.length-lcsLen;
+		return insertionNum+deletionNum;
+	}
+
 }

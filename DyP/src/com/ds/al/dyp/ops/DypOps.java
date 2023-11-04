@@ -41,6 +41,8 @@ public interface DypOps {
 	int getLeastCommonSubstringTabulation(char a[], char b[]);
 
 	StringBuffer getShortestCommonSuperstring(char a[], char b[]);
+	
+	int getMinInsertionDeletion(char a[], char b[],int lcsLen);
 
 	void setMinCoin(int noCoins);
 

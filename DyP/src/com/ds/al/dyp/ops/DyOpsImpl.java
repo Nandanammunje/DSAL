@@ -488,14 +488,12 @@ public class DyOpsImpl implements DypOps {
 			}
 
 		}
-		while(i > 0)
-		{
-			lcsStr.append(a[i-1]);
+		while (i > 0) {
+			lcsStr.append(a[i - 1]);
 			i--;
 		}
-		while(j>0)
-		{
-			lcsStr.append(b[j-1]);
+		while (j > 0) {
+			lcsStr.append(b[j - 1]);
 			j--;
 		}
 
@@ -504,13 +502,55 @@ public class DyOpsImpl implements DypOps {
 	}
 
 	@Override
-	public int getMinInsertionDeletion(char[] a, char[] b,int lcsLen) {
+	public int getMinInsertionDeletion(char[] a, char[] b, int lcsLen) {
 		// TODO Auto-generated method stub
+
+		int insertionNum = b.length - lcsLen;
+		int deletionNum = a.length - lcsLen;
+		return insertionNum + deletionNum;
+	}
+
+	@Override
+	public int getLengthLongestPallindrome(char[] a, int i, int j) {
+		// TODO Auto-generated method stub6
+		if (j < 0 || i >= a.length || i > j) {
+			return 0;
+		}
+		if (memArr[i][j] != 0)
+			return memArr[i][j];
+		if (i == j) {
+			memArr[i][j] = 1;
+			return 1;
+		}
+
+		if (a[i] == a[j]) {
+			memArr[i][j] = 2 + getLengthLongestPallindrome(a, i + 1, j - 1);
+			return memArr[i][j];
+
+		} else {
+			memArr[i][j] = Math.max(getLengthLongestPallindrome(a, i + 1, j), getLengthLongestPallindrome(a, i, j - 1));
+			return memArr[i][j];
+		}
+	}
+
+	@Override
+	public int getLengthLongestPallindromeTab(char[] a) {
+		// TODO Auto-generated method stub
+		for(int i=1;i<=a.length;i++)
+		{
+			for(int j=1;j<=a.length;j++)
+			{
+				if(a[i-1]==a[a.length-j])
+				{
+					
+				}
+			}
+			
+		}
 		
 		
-		int insertionNum=b.length-lcsLen;
-		int deletionNum=a.length-lcsLen;
-		return insertionNum+deletionNum;
+		
+		return 0;
 	}
 
 }

@@ -11,7 +11,7 @@ public class Starter {
 		// TODO Auto-generated method stub
 
 		int lenArrSize, l2, cap = 0, rodLen;
-		char arrOne[], arrTwo[];
+		char arrSubs[];
 
 		Scanner sc = new Scanner(System.in);
 		/*
@@ -54,15 +54,13 @@ public class Starter {
 		/*
 		 * ops.setMinDifference(cap); ops.MinDifferenceSubset(arr,0,cap,0);
 		 */
-
+        DypOps ops=new DyOpsImpl();
 		System.out.println("Enter the first char sequence");
-		arrOne = sc.next().toCharArray();
-		System.out.println("Enter the second char sequence");
-		arrTwo = sc.next().toCharArray();
-		DypOps ops = new DyOpsImpl();
-		ops.setDPArr(arrOne.length, arrTwo.length, 0, -1, 0);
-		int lcs = ops.getLcs(arrOne, arrTwo);
-		System.out.println(" minimum no of insertion and deletion " + ops.getMinInsertionDeletion(arrOne, arrTwo, lcs));
+		arrSubs = sc.next().toCharArray();
+		ops.setDPArr(arrSubs.length,arrSubs.length,0,0,0);
+		System.out.println("length of longest pallindrome "+ops.getLengthLongestPallindrome(arrSubs, 0, arrSubs.length-1));
+		
+		
 
 		sc.close();
 	}

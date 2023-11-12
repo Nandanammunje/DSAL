@@ -534,23 +534,26 @@ public class DyOpsImpl implements DypOps {
 	}
 
 	@Override
-	public int getLengthLongestPallindromeTab(char[] a) {
+	public int getLengthLongestPallindromeTab(char[] a, char b[]) {
 		// TODO Auto-generated method stub
-		for(int i=1;i<=a.length;i++)
-		{
-			for(int j=1;j<=a.length;j++)
-			{
-				if(a[i-1]==a[a.length-j])
-				{
-					
+		for (int i = 1; i <= a.length; i++) {
+			for (int j = 1; j <= b.length; j++) {
+
+				if (a.length - i + 1 == j && a[i - 1] == b[j - 1]) {
+					memArr[i][j] = 1;
+				}
+
+				else {
+					if (a[i - 1] == b[j - 1])
+						memArr[i][j] = 2 + memArr[i - 1][j - 1];
+					else
+						memArr[i][j] = Math.max(memArr[i - 1][j], memArr[i][j - 1]);
 				}
 			}
-			
+
 		}
-		
-		
-		
-		return 0;
+
+		return memArr[a.length][a.length];
 	}
 
 }

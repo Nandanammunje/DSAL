@@ -48,6 +48,6 @@ public interface DypOps {
 
 	int getLengthLongestPallindrome(char a[],int i, int j );
 	
-	int getLengthLongestPallindromeTab(char a[]);
+	int getLengthLongestPallindromeTab(char a[],char b[]);
 
 }

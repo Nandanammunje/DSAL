@@ -556,4 +556,19 @@ public class DyOpsImpl implements DypOps {
 		return memArr[a.length][a.length];
 	}
 
+	@Override
+	public int getLongestRepeatingSubSequence(char[] a, int i, int j) {
+		// TODO Auto-generated method stub
+		if(i>=a.length||j>=a.length)
+		return 0;
+		if(a[i]==a[j]&&i!=j)
+		{
+			return 1+getLongestRepeatingSubSequence(a, i+1, j+1);
+		}
+		else
+		{
+			return Math.max(getLongestRepeatingSubSequence(a, i, j+1),getLongestRepeatingSubSequence(a, i+1, j));
+		}
+	}
+
 }

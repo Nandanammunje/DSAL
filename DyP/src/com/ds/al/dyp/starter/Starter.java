@@ -56,12 +56,12 @@ public class Starter {
 		 */
         DypOps ops=new DyOpsImpl();
 		System.out.println("Enter the first char sequence");
-		CharSequence inputCharSeq= sc.next();
-		StringBuffer reversedInputCharStream=new StringBuffer(inputCharSeq).reverse();
+		 char[] charArray = sc.next().toCharArray();
+	
 		
 		
-		ops.setDPArr(reversedInputCharStream.length(),reversedInputCharStream.length(),0,0,0);
-		System.out.println("length of longest pallindrome "+ops.getLengthLongestPallindromeTab(((String)inputCharSeq).toCharArray(),reversedInputCharStream.toString().toCharArray()));
+	
+		System.out.println("length of longest repeating character "+ops.getLongestRepeatingSubSequence(charArray, 0,1));
 		
 		
 

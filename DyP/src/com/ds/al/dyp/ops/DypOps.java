@@ -49,5 +49,7 @@ public interface DypOps {
 	int getLengthLongestPallindrome(char a[],int i, int j );
 	
 	int getLengthLongestPallindromeTab(char a[],char b[]);
+	
+	int getLongestRepeatingSubSequence(char a[],int i,int j);
 
 }

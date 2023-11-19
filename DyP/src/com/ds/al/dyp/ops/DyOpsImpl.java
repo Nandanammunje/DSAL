@@ -571,4 +571,24 @@ public class DyOpsImpl implements DypOps {
 		}
 	}
 
+	@Override
+	public boolean isSequenceMatching(char[] a, char[] b, int i, int j) {
+		// TODO Auto-generated method stub
+		if( i >= a.length)
+			return true;
+		
+		if(a.length-i > b.length-j)
+			return false;
+		
+		if(a[i]==b[j])
+			{
+			return true&&isSequenceMatching(a, b, i+1, j+1);
+		}
+		else
+		{
+			return isSequenceMatching(a, b, i, j+1);
+		}
+		
+	}
+
 }

@@ -54,16 +54,15 @@ public class Starter {
 		/*
 		 * ops.setMinDifference(cap); ops.MinDifferenceSubset(arr,0,cap,0);
 		 */
-        DypOps ops=new DyOpsImpl();
+		DypOps ops = new DyOpsImpl();
 		System.out.println("Enter the first char sequence");
-		 char[] charArray = sc.next().toCharArray();
-	
-		
-		
-	
-		System.out.println("length of longest repeating character "+ops.getLongestRepeatingSubSequence(charArray, 0,1));
-		
-		
+		char[] charFirstArr = sc.next().toCharArray();
+		System.out.println("Enter the second sequence ");
+		char[] charSecondArr = sc.next().toCharArray();
+
+		System.out.println(" is subsequence  " + ((charFirstArr.length > charSecondArr.length)
+				? ops.isSequenceMatching(charSecondArr, charFirstArr, 0, 0)
+				: ops.isSequenceMatching(charFirstArr, charSecondArr, 0, 0)));
 
 		sc.close();
 	}

@@ -559,36 +559,49 @@ public class DyOpsImpl implements DypOps {
 	@Override
 	public int getLongestRepeatingSubSequence(char[] a, int i, int j) {
 		// TODO Auto-generated method stub
-		if(i>=a.length||j>=a.length)
-		return 0;
-		if(a[i]==a[j]&&i!=j)
-		{
-			return 1+getLongestRepeatingSubSequence(a, i+1, j+1);
-		}
-		else
-		{
-			return Math.max(getLongestRepeatingSubSequence(a, i, j+1),getLongestRepeatingSubSequence(a, i+1, j));
+		if (i >= a.length || j >= a.length)
+			return 0;
+		if (a[i] == a[j] && i != j) {
+			return 1 + getLongestRepeatingSubSequence(a, i + 1, j + 1);
+		} else {
+			return Math.max(getLongestRepeatingSubSequence(a, i, j + 1), getLongestRepeatingSubSequence(a, i + 1, j));
 		}
 	}
 
 	@Override
 	public boolean isSequenceMatching(char[] a, char[] b, int i, int j) {
 		// TODO Auto-generated method stub
-		if( i >= a.length)
+		if (i >= a.length)
 			return true;
-		
-		if(a.length-i > b.length-j)
+
+		if (a.length - i > b.length - j)
 			return false;
-		
-		if(a[i]==b[j])
-			{
-			return true&&isSequenceMatching(a, b, i+1, j+1);
+
+		if (a[i] == b[j]) {
+			return true && isSequenceMatching(a, b, i + 1, j + 1);
+		} else {
+			return isSequenceMatching(a, b, i, j + 1);
 		}
+
+	}
+
+	@Override
+	public int countMinInsertPallindrome(char[] a, int start, int end) {
+		// TODO Auto-generated method stub
+		if (start > end)
+			return Integer.MAX_VALUE;
+		if (start == end)
+			return 0;
+		if (start == end - 1) {
+			return a[start] == a[end] ? 0 : 1;
+		}
+
+		if (a[start] == a[end])
+			return countMinInsertPallindrome(a, start + 1, end - 1);
 		else
-		{
-			return isSequenceMatching(a, b, i, j+1);
-		}
-		
+			return Math.min(countMinInsertPallindrome(a, start + 1, end), countMinInsertPallindrome(a, start, end - 1))
+					+ 1;
+
 	}
 
 }

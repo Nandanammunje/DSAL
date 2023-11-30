@@ -53,5 +53,7 @@ public interface DypOps {
 	int getLongestRepeatingSubSequence(char a[],int i,int j);
 	
 	boolean isSequenceMatching(char a[],char b[],int i,int j);
+	
+	int countMinInsertPallindrome(char a[],int start, int end);
 
 }

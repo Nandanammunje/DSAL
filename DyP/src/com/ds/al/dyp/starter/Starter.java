@@ -55,14 +55,11 @@ public class Starter {
 		 * ops.setMinDifference(cap); ops.MinDifferenceSubset(arr,0,cap,0);
 		 */
 		DypOps ops = new DyOpsImpl();
-		System.out.println("Enter the first char sequence");
-		char[] charFirstArr = sc.next().toCharArray();
-		System.out.println("Enter the second sequence ");
-		char[] charSecondArr = sc.next().toCharArray();
+		System.out.println("Enter the sequence ");
+		char[] charSeq = sc.next().toCharArray();
+	
 
-		System.out.println(" is subsequence  " + ((charFirstArr.length > charSecondArr.length)
-				? ops.isSequenceMatching(charSecondArr, charFirstArr, 0, 0)
-				: ops.isSequenceMatching(charFirstArr, charSecondArr, 0, 0)));
+		System.out.println("no of insert required "+ops.countMinInsertPallindrome(charSeq,0,charSeq.length-1));
 
 		sc.close();
 	}

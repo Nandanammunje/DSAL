@@ -1,6 +1,7 @@
 package com.ds.al.dyp.ops;
 
 import static com.ds.al.dysp.util.DypUtil.getMaxInt;
+import static com.ds.al.dysp.util.DypUtil.isCharArrayPallindrome;
 
 public class DyOpsImpl implements DypOps {
 
@@ -602,6 +603,39 @@ public class DyOpsImpl implements DypOps {
 			return Math.min(countMinInsertPallindrome(a, start + 1, end), countMinInsertPallindrome(a, start, end - 1))
 					+ 1;
 
+	}
+
+	@Override
+	public int getMinMatrixChainMultiplicationCount(int[] arr, int start, int end) {
+		// TODO Auto-generated method stub
+		if (start >= end)
+			return 0;
+		int min = Integer.MAX_VALUE;
+
+		for (int k = start; k < end; k++) {
+
+			int count = getMinMatrixChainMultiplicationCount(arr, start, k)
+					+ getMinMatrixChainMultiplicationCount(arr, k + 1, end) + arr[start - 1] * arr[k] * arr[end];
+			if (count < min)
+				count = min;
+		}
+
+		return min;
+	}
+
+	@Override
+	public int getMinPartitionPallindome(char[] arr, int start, int end) {
+		// TODO Auto-generated method stub
+		if (start >= end || isCharArrayPallindrome(arr, start, end))
+			return 0;
+		int minPart = Integer.MAX_VALUE;
+		for (int k = start; k < end; k++) {
+			int count = getMinPartitionPallindome(arr, start, k) + getMinPartitionPallindome(arr, k + 1, end) + 1;
+
+			if (minPart > count)
+				minPart = count;
+		}
+		return minPart;
 	}
 
 }

@@ -55,5 +55,9 @@ public interface DypOps {
 	boolean isSequenceMatching(char a[],char b[],int i,int j);
 	
 	int countMinInsertPallindrome(char a[],int start, int end);
+	
+	int getMinMatrixChainMultiplicationCount(int arr[],int start,int end);
+	
+	int getMinPartitionPallindome(char arr[],int start,int end);
 
 }

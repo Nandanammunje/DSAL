@@ -59,5 +59,7 @@ public interface DypOps {
 	int getMinMatrixChainMultiplicationCount(int arr[],int start,int end);
 	
 	int getMinPartitionPallindome(char arr[],int start,int end);
+	
+	int getExpressionWays(char expressionArr[]);
 
 }

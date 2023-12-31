@@ -147,6 +147,55 @@ public class DyOpsImpl implements DypOps {
 
 	}
 
+	private int evalExpressionWays(char[] expressionArr, int i, int j, int isTrue) {
+		if (i > j)
+			return 0;
+		if (i == j) {
+			if (isTrue == 1)
+				return (expressionArr[i] == 'T') ? 1 : 0;
+			else
+				return (expressionArr[i] == 'F') ? 1 : 0;
+		}
+		int ways = 0;
+
+		for (int indx = i + 1; indx <= j - 1; indx = indx + 2) {
+			int leftTrue = evalExpressionWays(expressionArr, i, indx - 1, 1);
+			int rightTrue = evalExpressionWays(expressionArr, indx + 1, j, 1);
+			int leftFalse = evalExpressionWays(expressionArr, i, indx - 1, 0);
+			int rightFalse = evalExpressionWays(expressionArr, indx + 1, j, 0);
+
+			switch (expressionArr[indx]) {
+			case '|':
+				if (isTrue == 1) {
+					ways = ways + leftTrue * (rightTrue + rightFalse) + rightTrue * leftFalse;
+				} else {
+					ways = ways + rightFalse * leftFalse;
+				}
+				;
+
+			case '&':
+				if (isTrue == 1) {
+					ways = ways + leftTrue * rightTrue;
+				} else {
+					ways = ways + rightFalse * leftFalse + leftFalse * rightTrue + rightFalse * leftTrue;
+				}
+				;
+
+			case '^':
+
+				if (isTrue == 1) {
+
+					ways = ways + rightFalse * leftTrue + rightTrue * leftFalse;
+				} else {
+					ways = ways + rightFalse * leftFalse + leftTrue * rightTrue;
+				}
+
+			}
+
+		}
+         return ways;
+	}
+
 	@Override
 	public int makeChangeDPMemoize(int capacity, int index, int coins[]) {
 		if (index < 0 || capacity <= 0 || index >= coins.length)
@@ -636,6 +685,12 @@ public class DyOpsImpl implements DypOps {
 				minPart = count;
 		}
 		return minPart;
+	}
+
+	@Override
+	public int getExpressionWays(char[] expressionArr) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

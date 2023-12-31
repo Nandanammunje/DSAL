@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.ds.al.dyp.ops.DyOpsImpl;
 import com.ds.al.dyp.ops.DypOps;
+import static com.ds.al.dysp.util.DypUtil.getExpressionArr;
 
 public class Starter {
 
@@ -55,11 +56,11 @@ public class Starter {
 		 * ops.setMinDifference(cap); ops.MinDifferenceSubset(arr,0,cap,0);
 		 */
 		DypOps ops = new DyOpsImpl();
-		System.out.println("Enter the sequence ");
-		char[] charSeq = sc.next().toCharArray();
-	
-
-		System.out.println("no of insert required "+ops.countMinInsertPallindrome(charSeq,0,charSeq.length-1));
+		System.out.println("Enter the Boolean Sequence ");
+		char[] charSeqBool = sc.next().toCharArray();
+		System.out.println("Enter the Operator Sequence ");
+		char[] operatorSeq = sc.next().toCharArray();
+		char[] expressionArr = getExpressionArr(charSeqBool, operatorSeq);
 
 		sc.close();
 	}

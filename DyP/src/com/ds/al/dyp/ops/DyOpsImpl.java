@@ -171,6 +171,7 @@ public class DyOpsImpl implements DypOps {
 				} else {
 					ways = ways + rightFalse * leftFalse;
 				}
+				break
 				;
 
 			case '&':
@@ -179,6 +180,7 @@ public class DyOpsImpl implements DypOps {
 				} else {
 					ways = ways + rightFalse * leftFalse + leftFalse * rightTrue + rightFalse * leftTrue;
 				}
+				break
 				;
 
 			case '^':
@@ -193,7 +195,7 @@ public class DyOpsImpl implements DypOps {
 			}
 
 		}
-         return ways;
+		return ways;
 	}
 
 	@Override
@@ -690,7 +692,8 @@ public class DyOpsImpl implements DypOps {
 	@Override
 	public int getExpressionWays(char[] expressionArr) {
 		// TODO Auto-generated method stub
-		return 0;
+		int noOfways = evalExpressionWays(expressionArr, 0, expressionArr.length - 1, 1);
+		return noOfways;
 	}
 
 }

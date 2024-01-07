@@ -1,5 +1,6 @@
 package com.ds.al.dyp.starter;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 import com.ds.al.dyp.ops.DyOpsImpl;
@@ -61,7 +62,9 @@ public class Starter {
 		System.out.println("Enter the Operator Sequence ");
 		char[] operatorSeq = sc.next().toCharArray();
 		char[] expressionArr = getExpressionArr(charSeqBool, operatorSeq);
-
+		int expressionWays = ops.getExpressionWays(expressionArr);
+		System.out.println(expressionWays);
+		
 		sc.close();
 	}
 

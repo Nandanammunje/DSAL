@@ -57,11 +57,11 @@ public class Starter {
 		 * ops.setMinDifference(cap); ops.MinDifferenceSubset(arr,0,cap,0);
 		 */
 		DypOps ops = new DyOpsImpl();
-		System.out.println("Enter the Boolean Sequence ");
-		char[] charSeqBool = sc.next().toCharArray();
-		System.out.println("Enter the Operator Sequence ");
-		char[] operatorSeq = sc.next().toCharArray();
-		char[] expressionArr = getExpressionArr(charSeqBool, operatorSeq);
+		System.out.println("Enter the scrambled Sequence one");
+		char[] charSeqScrambledOne = sc.next().toCharArray();
+		System.out.println("Enter the scrambled Sequence Two");
+		char[] charSeqScrambledTwo = sc.next().toCharArray();
+		char[] expressionArr = getExpressionArr(charSeqScrambledOne, charSeqScrambledTwo);
 		int expressionWays = ops.getExpressionWays(expressionArr);
 		System.out.println(expressionWays);
 		

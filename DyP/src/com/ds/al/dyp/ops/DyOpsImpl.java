@@ -216,6 +216,32 @@ public class DyOpsImpl implements DypOps {
 		}
 
 	}
+	
+	private boolean isScrambledSeq(String seqOne,String seqTwo)
+	{
+		if(seqOne.length()!=seqTwo.length())
+			return false;
+		
+		if(seqOne.equals(seqTwo))
+			return true;
+		else
+		{
+			
+			for(int k=1;k<seqOne.length()-1;k++)
+			{
+				String partOneS1=seqOne.substring(0, k);
+				String partoneS2=seqTwo.substring(0,k);
+				String partTwoS1=seqOne.substring(k, seqOne.length());
+				String partTwoS2=seqTwo.substring(k,seqTwo.length());
+				boolean isFirstPart=isScrambledSeq(partOneS1,partoneS2);
+					
+				
+			}
+		}
+		
+		
+		
+	}
 
 	@Override
 	public int getLcs(char[] a, char[] b) {
@@ -694,6 +720,12 @@ public class DyOpsImpl implements DypOps {
 		// TODO Auto-generated method stub
 		int noOfways = evalExpressionWays(expressionArr, 0, expressionArr.length - 1, 1);
 		return noOfways;
+	}
+
+	@Override
+	public boolean isScrambledSeq(char[] scrambledSeqOne, char[] scrambledSeqTwo) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

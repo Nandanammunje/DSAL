@@ -46,20 +46,22 @@ public interface DypOps {
 
 	void setMinCoin(int noCoins);
 
-	int getLengthLongestPallindrome(char a[],int i, int j );
-	
-	int getLengthLongestPallindromeTab(char a[],char b[]);
-	
-	int getLongestRepeatingSubSequence(char a[],int i,int j);
-	
-	boolean isSequenceMatching(char a[],char b[],int i,int j);
-	
-	int countMinInsertPallindrome(char a[],int start, int end);
-	
-	int getMinMatrixChainMultiplicationCount(int arr[],int start,int end);
-	
-	int getMinPartitionPallindome(char arr[],int start,int end);
-	
+	int getLengthLongestPallindrome(char a[], int i, int j);
+
+	int getLengthLongestPallindromeTab(char a[], char b[]);
+
+	int getLongestRepeatingSubSequence(char a[], int i, int j);
+
+	boolean isSequenceMatching(char a[], char b[], int i, int j);
+
+	int countMinInsertPallindrome(char a[], int start, int end);
+
+	int getMinMatrixChainMultiplicationCount(int arr[], int start, int end);
+
+	int getMinPartitionPallindome(char arr[], int start, int end);
+
 	int getExpressionWays(char expressionArr[]);
+
+	boolean isScrambledSeq(char scrambledSeqOne[], char scrambledSeqTwo[]);
 
 }

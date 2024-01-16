@@ -61,10 +61,7 @@ public class Starter {
 		char[] charSeqScrambledOne = sc.next().toCharArray();
 		System.out.println("Enter the scrambled Sequence Two");
 		char[] charSeqScrambledTwo = sc.next().toCharArray();
-		char[] expressionArr = getExpressionArr(charSeqScrambledOne, charSeqScrambledTwo);
-		int expressionWays = ops.getExpressionWays(expressionArr);
-		System.out.println(expressionWays);
-		
+		System.out.println(ops.isScrambledSeq(charSeqScrambledOne, charSeqScrambledTwo));
 		sc.close();
 	}
 

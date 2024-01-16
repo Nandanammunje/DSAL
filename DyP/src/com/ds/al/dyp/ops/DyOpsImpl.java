@@ -171,8 +171,7 @@ public class DyOpsImpl implements DypOps {
 				} else {
 					ways = ways + rightFalse * leftFalse;
 				}
-				break
-				;
+				break;
 
 			case '&':
 				if (isTrue == 1) {
@@ -180,8 +179,7 @@ public class DyOpsImpl implements DypOps {
 				} else {
 					ways = ways + rightFalse * leftFalse + leftFalse * rightTrue + rightFalse * leftTrue;
 				}
-				break
-				;
+				break;
 
 			case '^':
 
@@ -216,31 +214,36 @@ public class DyOpsImpl implements DypOps {
 		}
 
 	}
-	
-	private boolean isScrambledSeq(String seqOne,String seqTwo)
-	{
-		if(seqOne.length()!=seqTwo.length())
+
+	private boolean isScrambledSeq(String seqOne, String seqTwo) {
+		boolean isScrambledFirstPart = false, isScrambledSecondPart = false;
+		if (seqOne.length() != seqTwo.length())
 			return false;
-		
-		if(seqOne.equals(seqTwo))
+
+		if (seqOne.length() == 0)
 			return true;
-		else
-		{
-			
-			for(int k=1;k<seqOne.length()-1;k++)
-			{
-				String partOneS1=seqOne.substring(0, k);
-				String partoneS2=seqTwo.substring(0,k);
-				String partTwoS1=seqOne.substring(k, seqOne.length());
-				String partTwoS2=seqTwo.substring(k,seqTwo.length());
-				boolean isFirstPart=isScrambledSeq(partOneS1,partoneS2);
-					
-				
+		
+		if (seqOne.equals(seqTwo))
+			return true;
+		else {
+
+			for (int k = 1; k <= seqOne.length() - 1; k++) {
+				String partOneS1 = seqOne.substring(0, k);
+				String partoneS2 = seqTwo.substring(0, k);
+				String partTwoS1 = seqOne.substring(k, seqOne.length());
+				String partTwoS2 = seqTwo.substring(k, seqTwo.length());
+				String lastFirstS2 = seqTwo.substring(seqTwo.length() - k, seqTwo.length());
+				String lastSecondS2 = seqTwo.substring(0, seqTwo.length() - k);
+				isScrambledFirstPart = isScrambledSeq(partOneS1, partoneS2) && isScrambledSeq(partTwoS1, partTwoS2);
+				isScrambledSecondPart = isScrambledSeq(partOneS1, lastFirstS2)
+						&& isScrambledSeq(partTwoS1, lastSecondS2);
+				if (isScrambledFirstPart || isScrambledSecondPart)
+					break;
 			}
+
+			return isScrambledFirstPart || isScrambledSecondPart;
 		}
-		
-		
-		
+
 	}
 
 	@Override
@@ -725,7 +728,9 @@ public class DyOpsImpl implements DypOps {
 	@Override
 	public boolean isScrambledSeq(char[] scrambledSeqOne, char[] scrambledSeqTwo) {
 		// TODO Auto-generated method stub
-		return false;
+
+		boolean scrambledSeq = isScrambledSeq(new String(scrambledSeqOne), new String(scrambledSeqTwo));
+		return scrambledSeq;
 	}
 
 }

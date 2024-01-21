@@ -245,7 +245,23 @@ public class DyOpsImpl implements DypOps {
 		}
 
 	}
-
+    
+	
+	private int getMaxNoOfways(int floor,int eggNum)
+	{
+		int maxWays=0;
+		if(eggNum==1||floor==1||floor==0)
+			return floor;
+		
+		for(int k=1;k<=floor;k++)
+		{
+			maxWays=Math.max(floor-k, eggNum);
+			
+		}
+	 return maxWays;	
+		
+	}
+	
 	@Override
 	public int getLcs(char[] a, char[] b) {
 		// TODO Auto-generated method stub
@@ -731,6 +747,12 @@ public class DyOpsImpl implements DypOps {
 
 		boolean scrambledSeq = isScrambledSeq(new String(scrambledSeqOne), new String(scrambledSeqTwo));
 		return scrambledSeq;
+	}
+
+	@Override
+	public int getOptimizeEggDroppingSolution(int floors, int EggNumber) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

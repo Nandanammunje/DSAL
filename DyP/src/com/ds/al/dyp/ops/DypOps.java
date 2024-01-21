@@ -64,4 +64,6 @@ public interface DypOps {
 
 	boolean isScrambledSeq(char scrambledSeqOne[], char scrambledSeqTwo[]);
 
+	int getOptimizeEggDroppingSolution(int floors, int EggNumber);
+
 }

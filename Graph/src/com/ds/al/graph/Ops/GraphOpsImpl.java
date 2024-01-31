@@ -1,13 +1,17 @@
 package com.ds.al.graph.Ops;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.PriorityQueue;
 import java.util.Stack;
 
 import com.ds.al.graph.Entity.Graph;
+import com.ds.al.graph.Entity.Node;
+import com.ds.al.graph.Entity.NodeEdge;
 import com.ds.al.graph.Entity.NodeGraph;
 import com.ds.al.graph.Entity.WeightedGraph;
 
@@ -128,26 +132,44 @@ public class GraphOpsImpl implements GraphOps {
 
 		for (int i : dist)
 			dist[i] = Integer.MAX_VALUE;
-		    dist[source] = 0;
-		    
-		    PriorityQueue<NodeGraph> nodeLst=new PriorityQueue<NodeGraph>();
-		    nodeLst.add(new NodeGraph(source, 0));
-		    while(!nodeLst.isEmpty())
-		    {
-		       NodeGraph currSourceNode=nodeLst.poll();
-		       
-		       for(NodeGraph it:g.getAdjLst().get(currSourceNode.getVertice()))
-		       {
-		    	   if(dist[it.getVertice()] > dist[currSourceNode.getVertice()]+it.getWeight())
-		    	   {
-		    		   dist[it.getVertice()]=dist[currSourceNode.getVertice()]+it.getWeight();
-		    		   nodeLst.add( new NodeGraph(it.getVertice(),dist[it.getVertice()]));
-		    	   }
-		    	   
-		       }
-		    }
-		    
-		    
+		dist[source] = 0;
+
+		PriorityQueue<NodeGraph> nodeLst = new PriorityQueue<NodeGraph>();
+		nodeLst.add(new NodeGraph(source, 0));
+		while (!nodeLst.isEmpty()) {
+			NodeGraph currSourceNode = nodeLst.poll();
+
+			for (NodeGraph it : g.getAdjLst().get(currSourceNode.getVertice())) {
+				if (dist[it.getVertice()] > dist[currSourceNode.getVertice()] + it.getWeight()) {
+					dist[it.getVertice()] = dist[currSourceNode.getVertice()] + it.getWeight();
+					nodeLst.add(new NodeGraph(it.getVertice(), dist[it.getVertice()]));
+				}
+
+			}
+		}
+
+	}
+
+	@Override
+	public void BellmanFord(NodeEdge g, int source) {
+		// TODO Auto-generated method stub
+		int dist[] = new int[g.getVertices()];
+		for (int i : dist)
+			dist[i] = Integer.MAX_VALUE;
+		dist[source] = 0;
+
+		ArrayList<Node> edgeLst = g.getEdgeLst();
+		for (int i = 0; i < g.getVertices() - 1; i++) {
+
+			for (Node node : edgeLst) {
+				int start = node.getSource();
+				int dest = node.getDest();
+				int weight = node.getWeight();
+				if (dist[start] + weight < dist[dest]) {
+					dist[dest] = dist[start] + weight;
+				}
+			}
+		}
 
 	}
 

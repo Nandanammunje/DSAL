@@ -17,5 +17,9 @@ public interface GraphOps {
 	public void Dijkstra(WeightedGraph g,int source);
 	
 	public void BellmanFord(NodeEdge g,int source);
+	
+	public int KruskalMinimalSPT(NodeEdge g);
+	
+	public int PrimAlgorithmSPT(NodeEdge g);
 
 }

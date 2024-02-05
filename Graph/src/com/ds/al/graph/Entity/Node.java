@@ -1,6 +1,6 @@
 package com.ds.al.graph.Entity;
 
-public class Node {
+public class Node  {
 
 	private int source;
 
@@ -38,5 +38,7 @@ public class Node {
 		this.dest = dest;
 		this.weight = weight;
 	}
+
+	
 
 }

@@ -3,6 +3,7 @@ package com.ds.al.graph.Ops;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -14,6 +15,8 @@ import com.ds.al.graph.Entity.Node;
 import com.ds.al.graph.Entity.NodeEdge;
 import com.ds.al.graph.Entity.NodeGraph;
 import com.ds.al.graph.Entity.WeightedGraph;
+import com.ds.al.graph.utility.DisjointSets;
+import com.ds.al.graph.utility.WeightComparartor;
 
 public class GraphOpsImpl implements GraphOps {
 
@@ -170,6 +173,26 @@ public class GraphOpsImpl implements GraphOps {
 				}
 			}
 		}
+
+	}
+
+	@Override
+	public int KruskalMinimalSPT(NodeEdge g) {
+		// TODO Auto-generated method stub
+
+		ArrayList<Node> edgeLst = g.getEdgeLst();
+		edgeLst.sort(new WeightComparartor());
+		DisjointSets set = new DisjointSets(g.getVertices());
+		int weight = 0;
+		for (Node node : edgeLst) {
+			if (set.findUparent(node.getSource()) != set.findUparent(node.getDest())) {
+
+				set.unionbySize(node.getSource(), node.getDest());
+				weight = weight + node.getWeight();
+
+			}
+		}
+		return weight;
 
 	}
 

@@ -2,7 +2,7 @@ package com.ds.al.graph.Entity;
 
 import java.util.Comparator;
 
-public class NodeGraph implements Comparator<NodeGraph> {
+public class NodeGraph implements Comparable<NodeGraph> {
 
 	private int vertice;
 
@@ -31,13 +31,9 @@ public class NodeGraph implements Comparator<NodeGraph> {
 	}
 
 	@Override
-	public int compare(NodeGraph o1, NodeGraph o2) {
+	public int compareTo(NodeGraph o1) {
 		// TODO Auto-generated method stub
-		if (o1.weight == o2.weight)
-			return 0;
-		int order = (o1.weight > o2.weight) ? 1 : -1;
-
-		return order;
+		return weight-o1.weight;
 	}
 
 }

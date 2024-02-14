@@ -14,7 +14,9 @@ import com.ds.al.graph.Entity.Graph;
 import com.ds.al.graph.Entity.Node;
 import com.ds.al.graph.Entity.NodeEdge;
 import com.ds.al.graph.Entity.NodeGraph;
+import com.ds.al.graph.Entity.Pair;
 import com.ds.al.graph.Entity.WeightedGraph;
+import com.ds.al.graph.Entity.WeightedNodeGraph;
 import com.ds.al.graph.utility.DisjointSets;
 import com.ds.al.graph.utility.WeightComparartor;
 
@@ -194,6 +196,32 @@ public class GraphOpsImpl implements GraphOps {
 		}
 		return weight;
 
+	}
+
+	@Override
+	public int PrimAlgorithmSPT(WeightedNodeGraph g) {
+		// TODO Auto-generated method stub
+		ArrayList<ArrayList<Pair>> adjLst = g.getAdjLst();
+		PriorityQueue<Pair> pq = new PriorityQueue<Pair>();
+		int visitedNode[] = new int[g.getVertices()];
+		pq.add(new Pair(0, 0));
+		int sumWeight = 0;
+		while (!pq.isEmpty()) {
+			Pair polledNode = pq.poll();
+			int nextVertice = polledNode.getVertice();
+			int verticeWeight = polledNode.getWeight();
+			if (visitedNode[nextVertice] == 1)
+				continue;
+			sumWeight = sumWeight + verticeWeight;
+			visitedNode[nextVertice] = 1;
+			for (Pair node : adjLst.get(nextVertice)) {
+				if (visitedNode[node.getVertice()] != 1)
+					pq.add(new Pair(node.getVertice(), node.getWeight()));
+
+			}
+
+		}
+		return sumWeight;
 	}
 
 }

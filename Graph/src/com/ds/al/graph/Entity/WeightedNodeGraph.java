@@ -2,17 +2,17 @@ package com.ds.al.graph.Entity;
 
 import java.util.ArrayList;
 
-import javafx.util.Pair;
+
 
 public class WeightedNodeGraph {
 
 	private int vertices;
 
-	private ArrayList<ArrayList<Pair<Integer, Integer>>> adjPairMatrix;
+	private ArrayList<ArrayList<Pair>> adjPairMatrix;
 
 	public void addEdge(int source, int destination, int weight) {
-		adjPairMatrix.get(source).add(new Pair<Integer, Integer>(destination, weight));
-		adjPairMatrix.get(destination).add(new Pair<Integer, Integer>(source, weight));
+		adjPairMatrix.get(source).add(new Pair(destination, weight));
+		adjPairMatrix.get(destination).add(new Pair(source, weight));
 	}
 
 	public int getVertices() {
@@ -23,11 +23,11 @@ public class WeightedNodeGraph {
 		this.vertices = vertices;
 		adjPairMatrix = new ArrayList<>();
 		for (int i = 0; i < vertices; i++) {
-			adjPairMatrix.add(new ArrayList<Pair<Integer, Integer>>());
+			adjPairMatrix.add(new ArrayList<Pair>());
 		}
 	}
 
-	public ArrayList<ArrayList<Pair<Integer, Integer>>> getAdjLst() {
+	public ArrayList<ArrayList<Pair>> getAdjLst() {
 		return adjPairMatrix;
 	}
 

@@ -3,6 +3,7 @@ package com.ds.al.graph.Ops;
 import com.ds.al.graph.Entity.Graph;
 import com.ds.al.graph.Entity.NodeEdge;
 import com.ds.al.graph.Entity.WeightedGraph;
+import com.ds.al.graph.Entity.WeightedNodeGraph;
 
 public interface GraphOps {
 
@@ -20,6 +21,6 @@ public interface GraphOps {
 	
 	public int KruskalMinimalSPT(NodeEdge g);
 	
-	public int PrimAlgorithmSPT(NodeEdge g);
+	public int PrimAlgorithmSPT(WeightedNodeGraph g);
 
 }

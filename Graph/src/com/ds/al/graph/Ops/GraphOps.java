@@ -22,5 +22,7 @@ public interface GraphOps {
 	public int KruskalMinimalSPT(NodeEdge g);
 	
 	public int PrimAlgorithmSPT(WeightedNodeGraph g);
+	
+	public void FloydWarshallMinDist(WeightedNodeGraph g);
 
 }

@@ -227,15 +227,17 @@ public class GraphOpsImpl implements GraphOps {
 	@Override
 	public void FloydWarshallMinDist(WeightedNodeGraph g) {
 		// TODO Auto-generated method stub
-		for(int i=0;i<g.getVertices();i++)
-		{
-			for(int j=0;j<g.getVertices();j++)
-			{
-				
+		int[][] adjMatrix = g.getAdjMatrix();
+		for (int k = 0; k < g.getVertices(); k++) {
+			for (int i = 0; i < g.getVertices(); i++) {
+				for (int j = 0; j < g.getVertices(); j++) {
+					adjMatrix[i][j] = Math.max(adjMatrix[i][j], adjMatrix[i][k] + adjMatrix[k][j]);
+				}
+
 			}
-			
+
 		}
-		
+
 	}
 
 }

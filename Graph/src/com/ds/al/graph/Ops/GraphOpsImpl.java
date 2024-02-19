@@ -2,6 +2,7 @@ package com.ds.al.graph.Ops;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -21,6 +22,9 @@ import com.ds.al.graph.utility.DisjointSets;
 import com.ds.al.graph.utility.WeightComparartor;
 
 public class GraphOpsImpl implements GraphOps {
+
+	private ArrayList<ArrayList<Integer>> bridgeLst;
+	private int nodeOrderCounter;
 
 	@Override
 	public void DFS(Graph g, int v) {
@@ -237,6 +241,44 @@ public class GraphOpsImpl implements GraphOps {
 			}
 
 		}
+
+	}
+
+	private void doDfsMarker(int node, boolean visited[], LinkedList<Integer>[] adjLst, int parentNode,
+			int dfsIndexLst[], int lowdfsIndex[]) {
+		System.out.println("VisitedNode " + node);
+		visited[node] = true;
+		nodeOrderCounter++;
+		dfsIndexLst[node] = lowdfsIndex[node] = nodeOrderCounter;
+		for (Integer it : adjLst[node]) {
+            if(it==parentNode)
+            	continue;
+            else
+            {
+            	if(!visited[it])
+            	{
+            	doDfsMarker(it, visited, adjLst,node, dfsIndexLst, lowdfsIndex);
+            	lowdfsIndex[node]=Math.min(lowdfsIndex[node],lowdfsIndex[it]);
+            	if(lowdfsIndex[it] > dfsIndexLst[node]) {
+            	
+            	}
+            	
+            	
+            }
+			
+		}
+
+	}
+	}
+
+	@Override
+	public void GetBridgeTarjansAlgorithm(Graph g) {
+		// TODO Auto-generated method stub
+		bridgeLst = new ArrayList<ArrayList<Integer>>();
+		int dfIndeXLst[] = new int[g.getVertices()];
+		int lowdfsIndex[] = new int[g.getVertices()];
+		boolean visited[] = new boolean[g.getVertices()];
+		doDfsMarker(0, visited, g.getAdjLst(), -1, dfIndeXLst, lowdfsIndex);
 
 	}
 

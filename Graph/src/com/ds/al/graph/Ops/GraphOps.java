@@ -24,5 +24,7 @@ public interface GraphOps {
 	public int PrimAlgorithmSPT(WeightedNodeGraph g);
 	
 	public void FloydWarshallMinDist(WeightedNodeGraph g);
+	
+	public void GetBridgeTarjansAlgorithm(Graph g);
 
 }

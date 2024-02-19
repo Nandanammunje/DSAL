@@ -16,10 +16,11 @@ public class GraphStarter {
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter no of vertices");
 		int vertices=sc.nextInt();
-		nodeGraph.setVertices(vertices);
-		nodeGraph.addEdge(0,1,5);
-		nodeGraph.addEdge(1,2,3);
-		nodeGraph.addEdge(0,2,1);
+	    Graph g=new Graph(vertices);
+	    g.addEdge(0,1);
+	    g.addEdge(1,2);
+	    g.addEdge(2,0);
+	    g.addEdge(1,3);
 		
 	}
 

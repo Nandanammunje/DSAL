@@ -24,11 +24,11 @@ public class Graph {
 	public LinkedList<Integer>[] getAdjLst() {
 		return adjLst;
 	}
-	
-	public void addEdge(int v,int w)
-	{
+
+	public void addEdge(int v, int w) {
 		adjLst[v].add(w);
-		
+		adjLst[w].add(v);
+
 	}
 
 }

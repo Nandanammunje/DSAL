@@ -7,6 +7,7 @@ import java.util.Deque;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.PriorityQueue;
 import java.util.Stack;
@@ -23,7 +24,7 @@ import com.ds.al.graph.utility.WeightComparartor;
 
 public class GraphOpsImpl implements GraphOps {
 
-	private ArrayList<ArrayList<Integer>> bridgeLst;
+	private ArrayList<List<Integer>> bridgeLst;
 	private int nodeOrderCounter;
 
 	@Override
@@ -251,30 +252,31 @@ public class GraphOpsImpl implements GraphOps {
 		nodeOrderCounter++;
 		dfsIndexLst[node] = lowdfsIndex[node] = nodeOrderCounter;
 		for (Integer it : adjLst[node]) {
-            if(it==parentNode)
-            	continue;
-            else
-            {
-            	if(!visited[it])
-            	{
-            	doDfsMarker(it, visited, adjLst,node, dfsIndexLst, lowdfsIndex);
-            	lowdfsIndex[node]=Math.min(lowdfsIndex[node],lowdfsIndex[it]);
-            	if(lowdfsIndex[it] > dfsIndexLst[node]) {
-            	
-            	}
-            	
-            	
-            }
-			
-		}
+			if (it == parentNode)
+				continue;
+			else {
+				if (!visited[it]) {
+					doDfsMarker(it, visited, adjLst, node, dfsIndexLst, lowdfsIndex);
+					lowdfsIndex[node] = Math.min(lowdfsIndex[node], lowdfsIndex[it]);
+					if (lowdfsIndex[it] > dfsIndexLst[node]) {
+						bridgeLst.add(Arrays.asList(it, node));
+					}
 
-	}
+				}
+				else
+				{
+					lowdfsIndex[node]=Math.min(lowdfsIndex[node],lowdfsIndex[it]);
+				}
+				
+			}
+
+		}
 	}
 
 	@Override
 	public void GetBridgeTarjansAlgorithm(Graph g) {
 		// TODO Auto-generated method stub
-		bridgeLst = new ArrayList<ArrayList<Integer>>();
+		bridgeLst = new ArrayList<List<Integer>>();
 		int dfIndeXLst[] = new int[g.getVertices()];
 		int lowdfsIndex[] = new int[g.getVertices()];
 		boolean visited[] = new boolean[g.getVertices()];

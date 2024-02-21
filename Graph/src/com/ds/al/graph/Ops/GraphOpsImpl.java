@@ -135,6 +135,65 @@ public class GraphOpsImpl implements GraphOps {
 		}
 	}
 
+	private void doDfsMarker(int node, boolean visited[], LinkedList<Integer>[] adjLst, int parentNode,
+			int dfsIndexLst[], int lowdfsIndex[]) {
+		System.out.println("VisitedNode " + node);
+		visited[node] = true;
+		nodeOrderCounter++;
+		dfsIndexLst[node] = lowdfsIndex[node] = nodeOrderCounter;
+		for (Integer it : adjLst[node]) {
+			if (it == parentNode)
+				continue;
+			else {
+				if (!visited[it]) {
+					doDfsMarker(it, visited, adjLst, node, dfsIndexLst, lowdfsIndex);
+					lowdfsIndex[node] = Math.min(lowdfsIndex[node], lowdfsIndex[it]);
+					if (lowdfsIndex[it] > dfsIndexLst[node]) {
+						bridgeLst.add(Arrays.asList(it, node));
+					}
+
+				} else {
+					lowdfsIndex[node] = Math.min(lowdfsIndex[node], lowdfsIndex[it]);
+				}
+
+			}
+
+		}
+	}
+
+	private void DoDFSMarkerChildNodes(int node, int parentNode, boolean visited[], LinkedList<Integer>[] adjLst,
+			int dfsIndxLst[], int lowdfsIndex[]) {
+        int child=0;
+		System.out.println("Node is " + node);
+		visited[node] = true;
+		nodeOrderCounter++;
+		dfsIndxLst[node] = lowdfsIndex[node] = nodeOrderCounter;
+		for(Integer it:adjLst[node])
+		{
+			if(it==parentNode)
+				continue;
+			
+			else
+			{
+				if(!visited[it])
+				{
+					
+					DoDFSMarkerChildNodes(it,node, visited, adjLst, dfsIndxLst, lowdfsIndex);
+					child++;
+					lowdfsIndex[node]=Math.min(lowdfsIndex[node],lowdfsIndex[it]);
+					if(dfsIndxLst[node] < lowdfsIndex[it])
+					{
+						
+					}
+				}
+				
+				
+			}
+			
+		}
+
+	}
+
 	@Override
 	public void Dijkstra(WeightedGraph g, int source) {
 		// TODO Auto-generated method stub
@@ -245,34 +304,6 @@ public class GraphOpsImpl implements GraphOps {
 
 	}
 
-	private void doDfsMarker(int node, boolean visited[], LinkedList<Integer>[] adjLst, int parentNode,
-			int dfsIndexLst[], int lowdfsIndex[]) {
-		System.out.println("VisitedNode " + node);
-		visited[node] = true;
-		nodeOrderCounter++;
-		dfsIndexLst[node] = lowdfsIndex[node] = nodeOrderCounter;
-		for (Integer it : adjLst[node]) {
-			if (it == parentNode)
-				continue;
-			else {
-				if (!visited[it]) {
-					doDfsMarker(it, visited, adjLst, node, dfsIndexLst, lowdfsIndex);
-					lowdfsIndex[node] = Math.min(lowdfsIndex[node], lowdfsIndex[it]);
-					if (lowdfsIndex[it] > dfsIndexLst[node]) {
-						bridgeLst.add(Arrays.asList(it, node));
-					}
-
-				}
-				else
-				{
-					lowdfsIndex[node]=Math.min(lowdfsIndex[node],lowdfsIndex[it]);
-				}
-				
-			}
-
-		}
-	}
-
 	@Override
 	public void GetBridgeTarjansAlgorithm(Graph g) {
 		// TODO Auto-generated method stub
@@ -281,6 +312,12 @@ public class GraphOpsImpl implements GraphOps {
 		int lowdfsIndex[] = new int[g.getVertices()];
 		boolean visited[] = new boolean[g.getVertices()];
 		doDfsMarker(0, visited, g.getAdjLst(), -1, dfIndeXLst, lowdfsIndex);
+
+	}
+
+	@Override
+	public void GetArticulationPointTarjansAlgorithm(Graph g) {
+		// TODO Auto-generated method stub
 
 	}
 

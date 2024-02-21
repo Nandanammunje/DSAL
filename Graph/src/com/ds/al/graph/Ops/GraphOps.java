@@ -26,5 +26,7 @@ public interface GraphOps {
 	public void FloydWarshallMinDist(WeightedNodeGraph g);
 	
 	public void GetBridgeTarjansAlgorithm(Graph g);
+	
+	public void GetArticulationPointTarjansAlgorithm(Graph g);
 
 }

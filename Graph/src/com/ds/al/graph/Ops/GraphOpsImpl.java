@@ -25,6 +25,7 @@ import com.ds.al.graph.utility.WeightComparartor;
 public class GraphOpsImpl implements GraphOps {
 
 	private ArrayList<List<Integer>> bridgeLst;
+	private ArrayList<Integer> articulationVertices;
 	private int nodeOrderCounter;
 
 	@Override
@@ -163,33 +164,33 @@ public class GraphOpsImpl implements GraphOps {
 
 	private void DoDFSMarkerChildNodes(int node, int parentNode, boolean visited[], LinkedList<Integer>[] adjLst,
 			int dfsIndxLst[], int lowdfsIndex[]) {
-        int child=0;
+		int child = 0;
 		System.out.println("Node is " + node);
 		visited[node] = true;
 		nodeOrderCounter++;
 		dfsIndxLst[node] = lowdfsIndex[node] = nodeOrderCounter;
-		for(Integer it:adjLst[node])
-		{
-			if(it==parentNode)
+		for (Integer it : adjLst[node]) {
+			if (it == parentNode)
 				continue;
-			
-			else
-			{
-				if(!visited[it])
-				{
-					
-					DoDFSMarkerChildNodes(it,node, visited, adjLst, dfsIndxLst, lowdfsIndex);
+
+			else {
+				if (!visited[it]) {
+
+					DoDFSMarkerChildNodes(it, node, visited, adjLst, dfsIndxLst, lowdfsIndex);
 					child++;
-					lowdfsIndex[node]=Math.min(lowdfsIndex[node],lowdfsIndex[it]);
-					if(dfsIndxLst[node] < lowdfsIndex[it])
-					{
-						
+					lowdfsIndex[node] = Math.min(lowdfsIndex[node], lowdfsIndex[it]);
+					if (dfsIndxLst[node] <= lowdfsIndex[it] && parentNode == -1) {
+                            articulationVertices.add(node);
 					}
 				}
-				
-				
+				else
+				{
+					lowdfsIndex[node]=Math.min(lowdfsIndex[node],dfsIndxLst[it]);
+				}
+
 			}
 			
+
 		}
 
 	}
@@ -318,6 +319,7 @@ public class GraphOpsImpl implements GraphOps {
 	@Override
 	public void GetArticulationPointTarjansAlgorithm(Graph g) {
 		// TODO Auto-generated method stub
+		articulationVertices = new ArrayList<Integer>();
 
 	}
 

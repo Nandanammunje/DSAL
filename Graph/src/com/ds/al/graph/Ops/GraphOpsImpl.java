@@ -179,18 +179,18 @@ public class GraphOpsImpl implements GraphOps {
 					DoDFSMarkerChildNodes(it, node, visited, adjLst, dfsIndxLst, lowdfsIndex);
 					child++;
 					lowdfsIndex[node] = Math.min(lowdfsIndex[node], lowdfsIndex[it]);
-					if (dfsIndxLst[node] <= lowdfsIndex[it] && parentNode == -1) {
-                            articulationVertices.add(node);
+					if (dfsIndxLst[node] <= lowdfsIndex[it] && parentNode != -1) {
+						articulationVertices.add(node);
 					}
-				}
-				else
-				{
-					lowdfsIndex[node]=Math.min(lowdfsIndex[node],dfsIndxLst[it]);
+				} else {
+					lowdfsIndex[node] = Math.min(lowdfsIndex[node], dfsIndxLst[it]);
 				}
 
 			}
-			
 
+		}
+		if (parentNode == -1 && child > 1) {
+			articulationVertices.add(node);
 		}
 
 	}
@@ -320,6 +320,10 @@ public class GraphOpsImpl implements GraphOps {
 	public void GetArticulationPointTarjansAlgorithm(Graph g) {
 		// TODO Auto-generated method stub
 		articulationVertices = new ArrayList<Integer>();
+		boolean visited[] = new boolean[g.getVertices()];
+		int dfsIndexLst[] = new int[g.getVertices()];
+		int lowdfsIndexLst[] = new int[g.getVertices()];
+		DoDFSMarkerChildNodes(0, -1, visited, g.getAdjLst(), dfsIndexLst, lowdfsIndexLst);
 
 	}
 

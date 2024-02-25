@@ -12,6 +12,8 @@ import java.util.ListIterator;
 import java.util.PriorityQueue;
 import java.util.Stack;
 
+import javax.net.ssl.SSLContext;
+
 import com.ds.al.graph.Entity.Graph;
 import com.ds.al.graph.Entity.Node;
 import com.ds.al.graph.Entity.NodeEdge;
@@ -27,6 +29,9 @@ public class GraphOpsImpl implements GraphOps {
 	private ArrayList<List<Integer>> bridgeLst;
 	private ArrayList<Integer> articulationVertices;
 	private int nodeOrderCounter;
+	private Stack<Integer> dfsNodeStack;
+	private LinkedList<Integer> sccLst[];
+	private int sccLstCounter;
 
 	@Override
 	public void DFS(Graph g, int v) {
@@ -195,6 +200,37 @@ public class GraphOpsImpl implements GraphOps {
 
 	}
 
+	private void DoDFSMarkerScc(int node, int parentNode, boolean visited[], LinkedList<Integer>[] adjLst, int dfsLst[],
+			int lowdfsIndxLst[]) {
+
+		System.out.println("Current Node is " + node);
+		visited[node] = true;
+		nodeOrderCounter++;
+		lowdfsIndxLst[node] = dfsLst[node] = nodeOrderCounter;
+		for (Integer itNode : adjLst[node]) {
+			if (itNode == parentNode)
+				continue;
+			else {
+				if (!visited[itNode]) {
+					dfsNodeStack.push(itNode);
+					DoDFSMarkerScc(node, parentNode, visited, adjLst, dfsLst, lowdfsIndxLst);
+					lowdfsIndxLst[node] = Math.min(lowdfsIndxLst[node], lowdfsIndxLst[itNode]);
+					if (lowdfsIndxLst[node] == dfsLst[node]) {
+						sccLst[sccLstCounter] = new LinkedList<Integer>();
+						while (!(dfsNodeStack.peek() == node)) {
+							sccLst[sccLstCounter].add(node);
+						}
+						sccLstCounter++;
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
 	@Override
 	public void Dijkstra(WeightedGraph g, int source) {
 		// TODO Auto-generated method stub
@@ -324,6 +360,14 @@ public class GraphOpsImpl implements GraphOps {
 		int dfsIndexLst[] = new int[g.getVertices()];
 		int lowdfsIndexLst[] = new int[g.getVertices()];
 		DoDFSMarkerChildNodes(0, -1, visited, g.getAdjLst(), dfsIndexLst, lowdfsIndexLst);
+
+	}
+
+	@Override
+	public void GetStronglyComponentsTarjanAlgorithm(Graph g) {
+		// TODO Auto-generated method stub
+		dfsNodeStack = new Stack<Integer>();
+		sccLst = new LinkedList[g.getVertices()];
 
 	}
 

@@ -28,5 +28,7 @@ public interface GraphOps {
 	public void GetBridgeTarjansAlgorithm(Graph g);
 	
 	public void GetArticulationPointTarjansAlgorithm(Graph g);
+	
+	public void GetStronglyComponentsTarjanAlgorithm(Graph g);
 
 }

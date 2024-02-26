@@ -25,8 +25,9 @@ public class Graph {
 		return adjLst;
 	}
 
-	public void addEdge(int v, int w) {
+	public void addEdge(int v, int w, boolean isDirected) {
 		adjLst[v].add(w);
+		if(!isDirected)
 		adjLst[w].add(v);
 
 	}

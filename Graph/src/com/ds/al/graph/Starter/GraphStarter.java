@@ -17,16 +17,19 @@ public class GraphStarter {
 		System.out.println("Enter no of vertices");
 		int vertices = sc.nextInt();
 		Graph g = new Graph(vertices);
-		g.addEdge(0, 1);
-		g.addEdge(0, 2);
-		g.addEdge(0, 3);
-		g.addEdge(2, 3);
-		g.addEdge(2, 4);
-		g.addEdge(2, 5);
-		g.addEdge(4, 6);
-		g.addEdge(6, 5);
+		g.addEdge(0, 1, true);
+		g.addEdge(1, 2, true);
+		g.addEdge(1, 3, true);
+		g.addEdge(3, 4, true);
+		g.addEdge(4, 0, true);
+		g.addEdge(4, 5, true);
+		g.addEdge(4, 6, true);
+		g.addEdge(5, 6, true);
+		g.addEdge(5, 2, true);
+		g.addEdge(6, 5, true);
 		GraphOps ops = new GraphOpsImpl();
-		ops.GetArticulationPointTarjansAlgorithm(g);
+		ops.GetStronglyComponentsTarjanAlgorithm(g);
+		sc.close();
 	}
 
 }

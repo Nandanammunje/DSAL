@@ -23,13 +23,14 @@ import com.ds.al.graph.Entity.WeightedGraph;
 import com.ds.al.graph.Entity.WeightedNodeGraph;
 import com.ds.al.graph.utility.DisjointSets;
 import com.ds.al.graph.utility.WeightComparartor;
+import static com.ds.al.graph.utility.GraphUtility.isElementinDequeu;
 
 public class GraphOpsImpl implements GraphOps {
 
 	private ArrayList<List<Integer>> bridgeLst;
 	private ArrayList<Integer> articulationVertices;
 	private int nodeOrderCounter;
-	private Stack<Integer> dfsNodeStack;
+	private Deque<Integer> dfsNodeStack;
 	private LinkedList<Integer> sccLst[];
 	private int sccLstCounter;
 
@@ -213,20 +214,27 @@ public class GraphOpsImpl implements GraphOps {
 			else {
 				if (!visited[itNode]) {
 					dfsNodeStack.push(itNode);
-					DoDFSMarkerScc(node, parentNode, visited, adjLst, dfsLst, lowdfsIndxLst);
+					DoDFSMarkerScc(itNode, parentNode, visited, adjLst, dfsLst, lowdfsIndxLst);
 					lowdfsIndxLst[node] = Math.min(lowdfsIndxLst[node], lowdfsIndxLst[itNode]);
-					if (lowdfsIndxLst[node] == dfsLst[node]) {
-						sccLst[sccLstCounter] = new LinkedList<Integer>();
-						while (!(dfsNodeStack.peek() == node)) {
-							sccLst[sccLstCounter].add(node);
-						}
-						sccLstCounter++;
-					}
+					
+
+				} else {
+					if (isElementinDequeu(dfsNodeStack, itNode))
+						lowdfsIndxLst[node] = Math.min(lowdfsIndxLst[node], dfsLst[itNode]);
 
 				}
 
 			}
 
+		}
+		if (lowdfsIndxLst[node] == dfsLst[node]) {
+			sccLst[sccLstCounter] = new LinkedList<Integer>();
+			int dfsStackTopNode = 0;
+			do {
+				dfsStackTopNode = dfsNodeStack.pop();
+				sccLst[sccLstCounter].add(dfsStackTopNode);
+			} while (dfsStackTopNode != node);
+			sccLstCounter++;
 		}
 
 	}
@@ -366,8 +374,14 @@ public class GraphOpsImpl implements GraphOps {
 	@Override
 	public void GetStronglyComponentsTarjanAlgorithm(Graph g) {
 		// TODO Auto-generated method stub
-		dfsNodeStack = new Stack<Integer>();
+		nodeOrderCounter = -1;
+		dfsNodeStack = new ArrayDeque<Integer>();
+		dfsNodeStack.push(0);
 		sccLst = new LinkedList[g.getVertices()];
+		int lowdfsIndxLst[] = new int[g.getVertices()];
+		int dfsIndxLst[] = new int[g.getVertices()];
+		boolean visited[] = new boolean[g.getVertices()];
+		DoDFSMarkerScc(0, -1, visited, g.getAdjLst(), dfsIndxLst, lowdfsIndxLst);
 
 	}
 

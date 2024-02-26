@@ -23,7 +23,7 @@ import com.ds.al.graph.Entity.WeightedGraph;
 import com.ds.al.graph.Entity.WeightedNodeGraph;
 import com.ds.al.graph.utility.DisjointSets;
 import com.ds.al.graph.utility.WeightComparartor;
-import static com.ds.al.graph.utility.GraphUtility.isElementinDequeu;
+import static com.ds.al.graph.utility.GraphUtility.isElementinDequeue;
 
 public class GraphOpsImpl implements GraphOps {
 
@@ -219,7 +219,7 @@ public class GraphOpsImpl implements GraphOps {
 					
 
 				} else {
-					if (isElementinDequeu(dfsNodeStack, itNode))
+					if (isElementinDequeue(dfsNodeStack, itNode))
 						lowdfsIndxLst[node] = Math.min(lowdfsIndxLst[node], dfsLst[itNode]);
 
 				}

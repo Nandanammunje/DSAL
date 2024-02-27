@@ -23,7 +23,7 @@ public class SortingOpsImpl implements SortingOps {
 	@Override
 	public void insertionSort(int[] arr) {
 		// TODO Auto-generated method stub
-		int j, key, temp;
+		int j, key;
 		for (int i = 1; i < arr.length; i++) {
 			j = i - 1;
 			key = arr[i];
@@ -33,6 +33,26 @@ public class SortingOpsImpl implements SortingOps {
 
 			}
 			arr[j + 1] = key;
+
+		}
+
+	}
+
+	@Override
+	public void shellSort(int[] arr) {
+		// TODO Auto-generated method stub
+		int j, key;
+		for (int gap = arr.length / 2; gap >= 1; gap = gap / 2) {
+			for (int i = gap; i < arr.length; i++) {
+				j = i - gap;
+				key = arr[i];
+				while (j >= 0 && key < arr[j - gap]) {
+					arr[j + gap] = arr[j];
+					j = j - gap;
+				}
+				arr[j + gap] = key;
+
+			}
 
 		}
 

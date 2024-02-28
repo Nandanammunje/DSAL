@@ -2,6 +2,52 @@ package com.ds.al.sorting.Ops;
 
 public class SortingOpsImpl implements SortingOps {
 
+	public void doMerge(int arr[], int start, int mid, int end) {
+		int leftTmpLen = mid - start + 1;
+		int rightTmpLen = end - mid;
+		int leftTmpArr[] = new int[leftTmpLen];
+		int rightTmpArr[] = new int[rightTmpLen];
+		for (int i = start; i <= mid; i++)
+			leftTmpArr[i - start] = arr[i];
+		for (int j = mid + 1; j <= end; j++)
+			rightTmpArr[j - mid - 1] = arr[j];
+		int i = 0, j = 0, k = start;
+		while (i < leftTmpLen && j < rightTmpLen) {
+			if (leftTmpArr[i] > rightTmpArr[j]) {
+				arr[k] = rightTmpArr[j];
+
+				j++;
+			} else {
+				arr[k] = leftTmpArr[i];
+				i++;
+
+			}
+			k++;
+		}
+		while (i < leftTmpLen) {
+			arr[k] = leftTmpArr[i];
+			i++;
+			k++;
+		}
+		while (j < rightTmpLen) {
+			arr[k] = rightTmpArr[j];
+			j++;
+			k++;
+		}
+
+	}
+
+	public void doMergeSort(int arr[], int start, int end) {
+		if (start >= end)
+			return;
+
+		int mid = start + (end - start) / 2;
+		doMergeSort(arr, start, mid);
+		doMergeSort(arr, mid + 1, end);
+		doMerge(arr, start, mid, end);
+
+	}
+
 	@Override
 	public void selectionSort(int arr[]) {
 		// TODO Auto-generated method stub
@@ -55,6 +101,13 @@ public class SortingOpsImpl implements SortingOps {
 			}
 
 		}
+
+	}
+
+	@Override
+	public void mergeSort(int[] arr) {
+		// TODO Auto-generated method stub
+		doMergeSort(arr, 0, arr.length - 1);
 
 	}
 

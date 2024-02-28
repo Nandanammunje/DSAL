@@ -7,5 +7,8 @@ public interface SortingOps {
 	public void insertionSort(int arr[]);
 
 	public void shellSort(int arr[]);
+	
+	public void mergeSort(int arr[]);
+	
 
 }

@@ -1,5 +1,7 @@
 package com.ds.al.sorting.Ops;
 
+import com.ds.al.sorting.entity.BinaryHeapEntity;
+
 public class SortingOpsImpl implements SortingOps {
 
 	public void doMerge(int arr[], int start, int mid, int end) {
@@ -108,6 +110,15 @@ public class SortingOpsImpl implements SortingOps {
 	public void mergeSort(int[] arr) {
 		// TODO Auto-generated method stub
 		doMergeSort(arr, 0, arr.length - 1);
+
+	}
+
+	@Override
+	public void heapSort(int[] arr) {
+		// TODO Auto-generated method stub
+		BinaryHeapEntity heap = new BinaryHeapEntity(arr.length);
+		heap.heapify(arr);
+		arr = heap.doHeapSort();
 
 	}
 

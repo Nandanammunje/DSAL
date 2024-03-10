@@ -10,5 +10,7 @@ public interface SortingOps {
 	
 	public void mergeSort(int arr[]);
 	
+	public void heapSort(int arr[]);
+	
 
 }

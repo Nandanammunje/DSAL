@@ -1,6 +1,7 @@
 package com.ds.al.sorting.Ops;
 
 import com.ds.al.sorting.entity.BinaryHeapEntity;
+import static com.ds.al.sorting.utility.SortingUtility.swapArr;
 
 public class SortingOpsImpl implements SortingOps {
 
@@ -47,6 +48,36 @@ public class SortingOpsImpl implements SortingOps {
 		doMergeSort(arr, start, mid);
 		doMergeSort(arr, mid + 1, end);
 		doMerge(arr, start, mid, end);
+
+	}
+
+	public int doPartition(int arr[], int low, int high) {
+		int pivot = arr[low];
+		int i = low;
+		int j = high;
+
+		while (i < j) {
+			while (arr[i] < pivot && i <= high - 1)
+				i++;
+			while (arr[j] > pivot && j >= low + 1)
+				j--;
+			if (i < j)
+				swapArr(arr, i, j);
+
+		}
+		swapArr(arr, low, j);
+		return j;
+
+	}
+
+	public void doQuickSort(int arr[], int low, int high) {
+		if (low < high) {
+
+			int pivotIndex = doPartition(arr, low, high);
+			doQuickSort(arr, low, pivotIndex - 1);
+			doQuickSort(arr, pivotIndex + 1, high);
+
+		}
 
 	}
 
@@ -119,6 +150,13 @@ public class SortingOpsImpl implements SortingOps {
 		BinaryHeapEntity heap = new BinaryHeapEntity(arr.length);
 		heap.heapify(arr);
 		arr = heap.doHeapSort();
+
+	}
+
+	@Override
+	public void quickSort(int[] arr) {
+		// TODO Auto-generated method stub
+		doQuickSort(arr, 0, arr.length - 1);
 
 	}
 

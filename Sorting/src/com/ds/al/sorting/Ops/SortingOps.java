@@ -12,5 +12,7 @@ public interface SortingOps {
 	
 	public void heapSort(int arr[]);
 	
+	public void quickSort(int arr[]);
+	
 
 }

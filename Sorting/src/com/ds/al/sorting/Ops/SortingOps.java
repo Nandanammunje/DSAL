@@ -7,12 +7,13 @@ public interface SortingOps {
 	public void insertionSort(int arr[]);
 
 	public void shellSort(int arr[]);
-	
+
 	public void mergeSort(int arr[]);
-	
+
 	public void heapSort(int arr[]);
-	
+
 	public void quickSort(int arr[]);
-	
+
+	public void radixSort(int arr[]);
 
 }

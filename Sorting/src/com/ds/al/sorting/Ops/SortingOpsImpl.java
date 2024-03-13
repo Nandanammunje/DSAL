@@ -2,10 +2,11 @@ package com.ds.al.sorting.Ops;
 
 import com.ds.al.sorting.entity.BinaryHeapEntity;
 import static com.ds.al.sorting.utility.SortingUtility.swapArr;
+import static com.ds.al.sorting.utility.SortingUtility.getMax;
 
 public class SortingOpsImpl implements SortingOps {
 
-	public void doMerge(int arr[], int start, int mid, int end) {
+	private void doMerge(int arr[], int start, int mid, int end) {
 		int leftTmpLen = mid - start + 1;
 		int rightTmpLen = end - mid;
 		int leftTmpArr[] = new int[leftTmpLen];
@@ -40,7 +41,7 @@ public class SortingOpsImpl implements SortingOps {
 
 	}
 
-	public void doMergeSort(int arr[], int start, int end) {
+	private void doMergeSort(int arr[], int start, int end) {
 		if (start >= end)
 			return;
 
@@ -51,7 +52,7 @@ public class SortingOpsImpl implements SortingOps {
 
 	}
 
-	public int doPartition(int arr[], int low, int high) {
+	private int doPartition(int arr[], int low, int high) {
 		int pivot = arr[low];
 		int i = low;
 		int j = high;
@@ -70,7 +71,7 @@ public class SortingOpsImpl implements SortingOps {
 
 	}
 
-	public void doQuickSort(int arr[], int low, int high) {
+	private void doQuickSort(int arr[], int low, int high) {
 		if (low < high) {
 
 			int pivotIndex = doPartition(arr, low, high);
@@ -80,7 +81,7 @@ public class SortingOpsImpl implements SortingOps {
 		}
 
 	}
-
+	
 	@Override
 	public void selectionSort(int arr[]) {
 		// TODO Auto-generated method stub
@@ -158,6 +159,21 @@ public class SortingOpsImpl implements SortingOps {
 		// TODO Auto-generated method stub
 		doQuickSort(arr, 0, arr.length - 1);
 
+	}
+
+	@Override
+	public void radixSort(int[] arr) {
+		// TODO Auto-generated method stub
+		int maxNumber = getMax(arr);
+		int exp=10;
+		do
+		{
+			maxNumber=maxNumber/exp;
+			
+			
+			exp=exp*10;
+			
+		}while(maxNumber>1);
 	}
 
 }

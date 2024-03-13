@@ -2,6 +2,9 @@ package com.ds.al.sorting.Ops;
 
 import com.ds.al.sorting.entity.BinaryHeapEntity;
 import static com.ds.al.sorting.utility.SortingUtility.swapArr;
+
+import java.util.Arrays;
+
 import static com.ds.al.sorting.utility.SortingUtility.getMax;
 
 public class SortingOpsImpl implements SortingOps {
@@ -81,7 +84,19 @@ public class SortingOpsImpl implements SortingOps {
 		}
 
 	}
-	
+
+	private void doRadixSort(int arr[], int exp) {
+
+		int countingSortArr[] = new int[10];
+		Arrays.fill(countingSortArr, 0);
+		for (int i = 0; i < arr.length; i++)
+			countingSortArr[(arr[i] / exp) % 10]++;
+		for(int i=1;i<arr.length;i++)
+			arr[i]=arr[i-1]+arr[i];
+		
+
+	}
+
 	@Override
 	public void selectionSort(int arr[]) {
 		// TODO Auto-generated method stub
@@ -165,15 +180,13 @@ public class SortingOpsImpl implements SortingOps {
 	public void radixSort(int[] arr) {
 		// TODO Auto-generated method stub
 		int maxNumber = getMax(arr);
-		int exp=10;
-		do
-		{
-			maxNumber=maxNumber/exp;
-			
-			
-			exp=exp*10;
-			
-		}while(maxNumber>1);
+		int exp = 1;
+		do {
+
+			doRadixSort(arr, exp);
+			exp = exp * 10;
+
+		} while (maxNumber / exp > 1);
 	}
 
 }

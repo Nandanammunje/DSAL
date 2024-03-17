@@ -22,7 +22,7 @@ public class SortingStarter {
 		}
 
 		SortingOps ops = new SortingOpsImpl();
-		ops.mergeSort(inputArr);
+		ops.radixSort(inputArr);
 
 		sc.close();
 

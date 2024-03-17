@@ -88,12 +88,23 @@ public class SortingOpsImpl implements SortingOps {
 	private void doRadixSort(int arr[], int exp) {
 
 		int countingSortArr[] = new int[10];
+		int outputArr[]=new int[arr.length];
 		Arrays.fill(countingSortArr, 0);
 		for (int i = 0; i < arr.length; i++)
 			countingSortArr[(arr[i] / exp) % 10]++;
-		for(int i=1;i<arr.length;i++)
-			arr[i]=arr[i-1]+arr[i];
-		
+		for(int i=1;i<countingSortArr.length;i++)
+			countingSortArr[i]=countingSortArr[i-1]+countingSortArr[i];
+		int mod;
+		for(int i=arr.length-1;i>=0;i--)
+		{
+			mod=(arr[i]/exp)%10;
+		    int pos=countingSortArr[mod];
+		    outputArr[pos-1]=arr[i];
+		    countingSortArr[mod]--;
+			
+		}
+		for(int i=0;i<arr.length;i++)
+			arr[i]=outputArr[i];
 
 	}
 

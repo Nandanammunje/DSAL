@@ -4,15 +4,15 @@ public class SearchingOpsImpl implements SearchingOps {
 
 	private boolean doBinarySearch(int arr[], int searchElement, int low, int high) {
 
-		if (low > high)
+		if (low > high || arr[arr.length-1] < searchElement||arr[0]>low)
 			return false;
-		int mid = (low + high) / 2;
+		int mid =low+ (low + high) / 2;
 		if (arr[mid] == searchElement)
 			return true;
 		if (arr[mid] > searchElement)
-			return doBinarySearch(arr, searchElement, low, mid);
+			return doBinarySearch(arr, searchElement, low, mid-1);
 		else
-			return doBinarySearch(arr, searchElement, mid, high);
+			return doBinarySearch(arr, searchElement, mid+1, high);
 
 	}
 
@@ -20,7 +20,7 @@ public class SearchingOpsImpl implements SearchingOps {
 	public boolean findElementBinarySearch(int[] arr, int searchElement) {
 		// TODO Auto-generated method stub
 		boolean searchStatus = false;
-		searchStatus = doBinarySearch(arr, searchElement, 0, arr.length - 1);
+		searchStatus = doBinarySearch(arr, searchElement, 0, arr.length);
 		return searchStatus;
 	}
 

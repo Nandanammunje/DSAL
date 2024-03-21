@@ -4,5 +4,7 @@ public interface SearchingOps {
 	
 	
 	boolean findElementBinarySearch(int arr[],int searchElement);
+	
+	boolean findElementInterpolationSearch(int arr[],int searchElement);
 
 }

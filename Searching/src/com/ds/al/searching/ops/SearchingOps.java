@@ -8,4 +8,6 @@ public interface SearchingOps {
 
 	int findFirstRepeatingElement(int arr[], int searchElement);
 
+	int[] findTwoElementSumK(int arr[], int sum);
+
 }

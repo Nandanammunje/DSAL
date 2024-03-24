@@ -1,6 +1,7 @@
 package com.ds.al.searching.ops;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class SearchingOpsImpl implements SearchingOps {
 
@@ -67,6 +68,27 @@ public class SearchingOpsImpl implements SearchingOps {
 		if (minIndex == arr.length)
 			minIndex = -2;
 		return minIndex + 1;
+	}
+
+	@Override
+	public int[] findTwoElementSumK(int[] arr, int sum) {
+		// TODO Auto-generated method stub
+		HashSet<Integer> findMap = new HashSet<Integer>();
+		int sumNumbers[] = new int[2];
+		
+
+		for (int i = 0; i < arr.length; i++) {
+			if (findMap.contains(sum - arr[i])) {
+				sumNumbers[0] = arr[i];
+				sumNumbers[1] = arr[sum - arr[i]];
+			}
+			else
+			{
+				findMap.add(arr[i]);
+			}
+		}
+
+		return sumNumbers;
 	}
 
 }

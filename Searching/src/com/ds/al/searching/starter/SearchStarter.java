@@ -20,7 +20,7 @@ public class SearchStarter {
            System.out.println("Enter the search element");
            searchElement=sc.nextInt();
            SearchingOps ops=new SearchingOpsImpl();
-           System.out.println(ops.findElementBinarySearch(arr, searchElement));
+           System.out.println("search element is "+ops.findElementInterpolationSearch(arr, searchElement));
            sc.close();
            
 		

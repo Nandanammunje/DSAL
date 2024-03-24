@@ -1,5 +1,7 @@
 package com.ds.al.searching.ops;
 
+import java.util.HashMap;
+
 public class SearchingOpsImpl implements SearchingOps {
 
 	private boolean doBinarySearch(int arr[], int searchElement, int low, int high) {
@@ -45,6 +47,26 @@ public class SearchingOpsImpl implements SearchingOps {
 		boolean searchStatus = false;
 		searchStatus = doInterpolationSearch(arr, searchElement, 0, arr.length - 1);
 		return searchStatus;
+	}
+
+	@Override
+	public int findFirstRepeatingElement(int[] arr, int searchElement) {
+		// TODO Auto-generated method stub
+		int minIndex = arr.length;
+		HashMap<Integer, Integer> repeatMap = new HashMap<Integer, Integer>();
+		for (int i = 0; i < arr.length; i++) {
+			if (repeatMap.containsKey(arr[i])) {
+				int key = repeatMap.get(arr[i]);
+				minIndex = (minIndex > key) ? key : minIndex;
+			} else {
+
+				repeatMap.put(arr[i], i);
+			}
+
+		}
+		if (minIndex == arr.length)
+			minIndex = -2;
+		return minIndex + 1;
 	}
 
 }

@@ -10,4 +10,6 @@ public interface SearchingOps {
 
 	int[] findTwoElementSumK(int arr[], int sum);
 
+	int[] findTwoElementSumSquareElement(int arr[]);
+
 }

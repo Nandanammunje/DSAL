@@ -3,11 +3,14 @@ package com.ds.al.searching.ops;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import com.ds.al.sorting.Ops.SortingOps;
+import com.ds.al.sorting.Ops.SortingOpsImpl;
+
 public class SearchingOpsImpl implements SearchingOps {
 
 	private boolean doBinarySearch(int arr[], int searchElement, int low, int high) {
 
-		if (low > high || arr[arr.length - 1] < searchElement || arr[0] > low)
+		if (low > high || arr[arr.length - 1] < searchElement || arr[0] > searchElement)
 			return false;
 		int mid = low + (low + high) / 2;
 		if (arr[mid] == searchElement)
@@ -75,20 +78,53 @@ public class SearchingOpsImpl implements SearchingOps {
 		// TODO Auto-generated method stub
 		HashSet<Integer> findMap = new HashSet<Integer>();
 		int sumNumbers[] = new int[2];
-		
 
 		for (int i = 0; i < arr.length; i++) {
 			if (findMap.contains(sum - arr[i])) {
 				sumNumbers[0] = arr[i];
 				sumNumbers[1] = arr[sum - arr[i]];
-			}
-			else
-			{
+			} else {
 				findMap.add(arr[i]);
 			}
 		}
 
 		return sumNumbers;
+	}
+
+	@Override
+	public int[] findTwoElementSumSquareElement(int[] arr) {
+		// TODO Auto-generated method stub
+		int squareTriplet[] = new int[3];
+		for (int i = 0; i < arr.length; i++)
+			arr[i] = arr[i] * arr[i];
+		SortingOps ops = new SortingOpsImpl();
+		ops.quickSort(arr);
+		int j, k;
+		for (int i = arr.length - 1; i >= 0; i--) {
+			j = 0;
+			k = i - 1;
+			while (j < k) {
+
+				if (arr[j] + arr[k] == arr[i]) {
+					squareTriplet[0] = arr[j];
+					squareTriplet[1] = arr[k];
+					squareTriplet[2] = arr[i];
+				}
+				
+				else if(arr[j]+arr[k] > arr[i])
+				{
+					k--;
+				}
+				else
+				{
+					j++;
+				}
+
+			}
+
+		}
+
+		return null;
 	}
 
 }

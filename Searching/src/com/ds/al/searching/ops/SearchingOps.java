@@ -12,4 +12,6 @@ public interface SearchingOps {
 
 	int[] findTwoElementSumSquareElement(int arr[]);
 
+	int findTripletSum(int arr[]);
+
 }

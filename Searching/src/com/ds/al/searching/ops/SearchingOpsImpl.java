@@ -1,5 +1,7 @@
 package com.ds.al.searching.ops;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -12,7 +14,7 @@ public class SearchingOpsImpl implements SearchingOps {
 
 		if (low > high || arr[arr.length - 1] < searchElement || arr[0] > searchElement)
 			return false;
-		int mid = low + (low + high) / 2;
+		int mid = low + (high-low) / 2;
 		if (arr[mid] == searchElement)
 			return true;
 		if (arr[mid] > searchElement)
@@ -124,7 +126,31 @@ public class SearchingOpsImpl implements SearchingOps {
 
 		}
 
-		return null;
+		return squareTriplet;
+	}
+
+	@Override
+	public int findTripletSum(int[] arr) {
+		// TODO Auto-generated method stub
+		Arrays.sort(arr);
+		int counter=0;
+		for(int i=arr.length-1;i>=2;i--)
+		{
+			
+			for(int j=0;j<=i-1;j++)
+			{
+				if(doBinarySearch(arr,arr[i]-arr[j], j+1, i-1))
+				{
+					counter++;
+				}
+				
+				
+			}
+			
+		}
+		
+		
+		return counter;
 	}
 
 }

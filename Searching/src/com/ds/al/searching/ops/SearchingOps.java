@@ -14,4 +14,6 @@ public interface SearchingOps {
 
 	int findTripletSum(int arr[]);
 
+	int findPairSumCloseToZero(int arr[]);
+
 }

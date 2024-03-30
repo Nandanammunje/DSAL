@@ -1,11 +1,11 @@
 package com.ds.al.sorting.Ops;
 
-import com.ds.al.sorting.entity.BinaryHeapEntity;
-import static com.ds.al.sorting.utility.SortingUtility.swapArr;
 
+import static com.ds.al.searching.utility.SortingUtility.swapArr;
+import static com.ds.al.searching.utility.SortingUtility.getMax;
 import java.util.Arrays;
 
-import static com.ds.al.sorting.utility.SortingUtility.getMax;
+
 
 public class SortingOpsImpl implements SortingOps {
 
@@ -61,7 +61,7 @@ public class SortingOpsImpl implements SortingOps {
 		int j = high;
 
 		while (i < j) {
-			while (arr[i] <= pivot && i <= high - 1)
+			while (arr[i] < pivot && i <= high - 1)
 				i++;
 			while (arr[j] > pivot && j >= low + 1)
 				j--;

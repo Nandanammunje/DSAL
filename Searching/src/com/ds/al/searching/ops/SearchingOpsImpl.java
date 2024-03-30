@@ -14,7 +14,7 @@ public class SearchingOpsImpl implements SearchingOps {
 
 		if (low > high || arr[arr.length - 1] < searchElement || arr[0] > searchElement)
 			return false;
-		int mid = low + (high-low) / 2;
+		int mid = low + (high - low) / 2;
 		if (arr[mid] == searchElement)
 			return true;
 		if (arr[mid] > searchElement)
@@ -112,13 +112,10 @@ public class SearchingOpsImpl implements SearchingOps {
 					squareTriplet[1] = arr[k];
 					squareTriplet[2] = arr[i];
 				}
-				
-				else if(arr[j]+arr[k] > arr[i])
-				{
+
+				else if (arr[j] + arr[k] > arr[i]) {
 					k--;
-				}
-				else
-				{
+				} else {
 					j++;
 				}
 
@@ -133,24 +130,46 @@ public class SearchingOpsImpl implements SearchingOps {
 	public int findTripletSum(int[] arr) {
 		// TODO Auto-generated method stub
 		Arrays.sort(arr);
-		int counter=0;
-		for(int i=arr.length-1;i>=2;i--)
-		{
-			
-			for(int j=0;j<=i-1;j++)
-			{
-				if(doBinarySearch(arr,arr[i]-arr[j], j+1, i-1))
-				{
+		int counter = 0;
+		for (int i = arr.length - 1; i >= 2; i--) {
+
+			for (int j = 0; j <= i - 1; j++) {
+				if (doBinarySearch(arr, arr[i] - arr[j], j + 1, i - 1)) {
 					counter++;
 				}
-				
-				
+
 			}
-			
+
 		}
-		
-		
+
 		return counter;
+	}
+
+	@Override
+	public int findPairSumCloseToZero(int[] arr) {
+		// TODO Auto-generated method stub
+		Arrays.sort(arr);
+		int low = 0, high = arr.length - 1, sum, modSum = Integer.MAX_VALUE, closeSum = Integer.MAX_VALUE;
+		int pairNum[] = new int[2];
+		while (low < high) {
+
+			sum = arr[low] + arr[high];
+			if (Math.abs(sum) < modSum || (Math.abs(sum) == modSum) && sum < (pairNum[0] + pairNum[1])) {
+				modSum = Math.abs(sum);
+				pairNum[0] = arr[low];
+				pairNum[1] = arr[high];
+			}
+			if (sum > 0)
+				high--;
+			else if (sum < 0)
+				low++;
+			else {
+				break;
+			}
+
+		}
+
+		return pairNum[0] + pairNum[1];
 	}
 
 }

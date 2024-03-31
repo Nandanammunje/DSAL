@@ -1,6 +1,7 @@
 package com.ds.al.searching.ops;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -170,6 +171,29 @@ public class SearchingOpsImpl implements SearchingOps {
 		}
 
 		return pairNum[0] + pairNum[1];
+	}
+
+	@Override
+	public void findTripletSumK(int[] arr, int sumK) {
+
+		Arrays.sort(arr);
+		int searchNum;
+		for (int i = arr.length - 1; i >= 2; i--) {
+
+			for (int j = 0; j <= i - 1; j++) {
+				searchNum = sumK - arr[i] - arr[j];
+				if (searchNum > 0) {
+					if (doBinarySearch(arr, sumK, j, i)) {
+						System.out.println("triplet is " + arr[i] + " " + arr[j] + " " + searchNum);
+					}
+
+				} else if (searchNum < 0) {
+					continue;
+				}
+				
+			}
+
+		}
 	}
 
 }

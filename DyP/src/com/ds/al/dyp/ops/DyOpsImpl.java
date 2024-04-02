@@ -249,16 +249,19 @@ public class DyOpsImpl implements DypOps {
 	
 	private int getMaxNoOfways(int floor,int eggNum)
 	{
-		int maxWays=0;
+		int maxWays,minCom=Integer.MAX_VALUE;
 		if(eggNum==1||floor==1||floor==0)
 			return floor;
 		
 		for(int k=1;k<=floor;k++)
 		{
-			maxWays=Math.max(floor-k, eggNum);
+			maxWays=Math.max(getMaxNoOfways(floor-1, eggNum-1),getMaxNoOfways(floor-k, eggNum));
+			if(maxWays <minCom)
+				minCom=maxWays;
+			
 			
 		}
-	 return maxWays;	
+	 return minCom+1;	
 		
 	}
 	
@@ -752,7 +755,8 @@ public class DyOpsImpl implements DypOps {
 	@Override
 	public int getOptimizeEggDroppingSolution(int floors, int EggNumber) {
 		// TODO Auto-generated method stub
-		return 0;
+		
+		return getMaxNoOfways(floors, EggNumber);
 	}
 
 }

@@ -190,10 +190,29 @@ public class SearchingOpsImpl implements SearchingOps {
 				} else if (searchNum < 0) {
 					continue;
 				}
-				
+
 			}
 
 		}
+	}
+
+	private void findTripletSumKNoBin(int arr[], int sumK) {
+		Arrays.sort(arr);
+		int l, r;
+		for (int i = 0; i < arr.length - 2; i++) {
+			l = i + 1;
+			r = arr.length - 1;
+			while (l < r) {
+                if(arr[i]+arr[l]+arr[r]==sumK)
+                	System.out.println(" triplet is "+arr[i]+" "+arr[l]+" "+arr[r]);
+                else if(arr[i]+arr[l]+arr[r] < sumK)
+                	l++;
+                else
+                	 r--;
+			}
+
+		}
+
 	}
 
 }

@@ -203,14 +203,40 @@ public class SearchingOpsImpl implements SearchingOps {
 			l = i + 1;
 			r = arr.length - 1;
 			while (l < r) {
-                if(arr[i]+arr[l]+arr[r]==sumK)
-                	System.out.println(" triplet is "+arr[i]+" "+arr[l]+" "+arr[r]);
-                else if(arr[i]+arr[l]+arr[r] < sumK)
-                	l++;
-                else
-                	 r--;
+				if (arr[i] + arr[l] + arr[r] == sumK)
+					System.out.println(" triplet is " + arr[i] + " " + arr[l] + " " + arr[r]);
+				else if (arr[i] + arr[l] + arr[r] < sumK)
+					l++;
+				else
+					r--;
 			}
 
+		}
+
+	}
+
+	@Override
+	public void findTripletCloseToZero(int[] arr) {
+		// TODO Auto-generated method stub
+		Arrays.sort(arr);
+		int l, r, modSum = Integer.MAX_VALUE, sum;
+		int triplet[] = new int[3];
+		for (int i = 0; i < arr.length - 2; i++) {
+			l = i + 1;
+			r = arr.length - 1;
+			while (l < r) {
+				sum = arr[l] + arr[r] + arr[i];
+
+				if (Math.abs(sum) < modSum || (Math.abs(sum) == modSum) && sum < triplet[0] + triplet[1] + triplet[2]) {
+					triplet[0] = arr[i];
+					triplet[1] = arr[l];
+					triplet[2] = arr[r];
+				}
+
+			}
+			if (arr[i] > 0) {
+				break;
+			}
 		}
 
 	}

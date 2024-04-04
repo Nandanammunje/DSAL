@@ -40,6 +40,45 @@ public class SearchingOpsImpl implements SearchingOps {
 
 	}
 
+	private int doModifiedBinarySearch(int arr[], int searchElement, int low, int high) {
+		int mid = low + (high - low) / 2;
+
+		if (low <= high) {
+			if (arr[mid] == searchElement)
+				return mid;
+			if (arr[low] < arr[mid]) {
+				if (arr[low] < searchElement && searchElement < arr[mid]) {
+					return doModifiedBinarySearch(arr, searchElement, low, mid - 1);
+				} else
+					return doModifiedBinarySearch(arr, searchElement, mid + 1, high);
+			} else {
+				if (searchElement > arr[mid] && searchElement < arr[high])
+					return doModifiedBinarySearch(arr, searchElement, mid + 1, high);
+				else
+					return doModifiedBinarySearch(arr, searchElement, low, mid - 1);
+
+			}
+
+		}
+		return -1;
+	}
+
+	private int findIndexBitonicBinSearch(int arr[], int low, int high) {
+		int midIndx = low + (high - low) / 2;
+		if (low <= high) {
+			if ((midIndx==0||midIndx==arr.length-1)||arr[midIndx - 1] < arr[midIndx] && arr[midIndx + 1] < arr[midIndx]) {
+				return midIndx;
+			} else if (midIndx==0||arr[midIndx - 1] < arr[midIndx]) {
+				return findIndexBitonicBinSearch(arr, midIndx + 1, high);
+			} 
+				
+				return findIndexBitonicBinSearch(arr, low, midIndx - 1);
+			}
+		return midIndx;
+		}
+          
+	
+
 	@Override
 	public boolean findElementBinarySearch(int[] arr, int searchElement) {
 		// TODO Auto-generated method stub
@@ -239,6 +278,20 @@ public class SearchingOpsImpl implements SearchingOps {
 			}
 		}
 
+	}
+
+	@Override
+	public int findElementinRotatedSortedArr(int[] arr, int searchElement) {
+		// TODO Auto-generated method stub
+		doModifiedBinarySearch(arr, searchElement, 0, arr.length - 1);
+		return 0;
+	}
+
+	@Override
+	public int findBitonicIndex(int[] arr) {
+		// TODO Auto-generated method stub
+
+		return findIndexBitonicBinSearch(arr, 0, arr.length-1);
 	}
 
 }

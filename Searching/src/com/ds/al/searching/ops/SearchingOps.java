@@ -16,8 +16,12 @@ public interface SearchingOps {
 
 	int findPairSumCloseToZero(int arr[]);
 
-	void findTripletSumK(int arr[],int sumK);
-	
+	void findTripletSumK(int arr[], int sumK);
+
 	void findTripletCloseToZero(int arr[]);
+
+	int findElementinRotatedSortedArr(int arr[], int searchElement);
+
+	int findBitonicIndex(int arr[]);
 
 }

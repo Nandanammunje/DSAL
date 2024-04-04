@@ -1,9 +1,5 @@
 package com.ds.al.searching.starter;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Scanner;
 
 import com.ds.al.searching.ops.SearchingOps;
@@ -24,7 +20,7 @@ public class SearchStarter {
 			arr[i] = sc.nextInt();
 
 		SearchingOps ops = new SearchingOpsImpl();
-		ops.findPairSumCloseToZero(arr);
+		ops.findBitonicIndex(arr);
 		sc.close();
 
 		

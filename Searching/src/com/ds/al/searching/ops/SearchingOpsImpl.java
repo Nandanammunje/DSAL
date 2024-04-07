@@ -63,21 +63,53 @@ public class SearchingOpsImpl implements SearchingOps {
 		return -1;
 	}
 
+	private int findFirstOccurence(int arr[], int searchElement, int start, int end) {
+
+		if (start <= end && arr[0] <= searchElement && arr[arr.length - 1] >= searchElement) {
+			int midElementIndx = start + (end - start) / 2;
+
+			if (midElementIndx == 0 || arr[midElementIndx] == searchElement && arr[midElementIndx - 1] != searchElement)
+				return midElementIndx;
+
+			if (arr[midElementIndx] < searchElement)
+				return findFirstOccurence(arr, searchElement, (midElementIndx + 1), end);
+			else
+				return findFirstOccurence(arr, searchElement, start, (midElementIndx - 1));
+
+		}
+		return -1;
+
+	}
+
+	private int findLastOccurence(int arr[], int searchNum, int start, int end) {
+		if (start <= end) {
+			int midIndx = start + (end - start) / 2;
+
+			if (midIndx == arr.length - 1 || arr[midIndx] == searchNum && arr[midIndx + 1] != searchNum) {
+				return midIndx;
+			}
+			if (arr[midIndx] <= searchNum)
+				return findLastOccurence(arr, searchNum, midIndx + 1, end);
+			else
+				return findLastOccurence(arr, searchNum, start, midIndx - 1);
+		}
+		return -1;
+	}
+
 	private int findIndexBitonicBinSearch(int arr[], int low, int high) {
 		int midIndx = low + (high - low) / 2;
 		if (low <= high) {
-			if ((midIndx==0||midIndx==arr.length-1)||arr[midIndx - 1] < arr[midIndx] && arr[midIndx + 1] < arr[midIndx]) {
+			if ((midIndx == 0 || midIndx == arr.length - 1)
+					|| arr[midIndx - 1] < arr[midIndx] && arr[midIndx + 1] < arr[midIndx]) {
 				return midIndx;
-			} else if (midIndx==0||arr[midIndx - 1] < arr[midIndx]) {
+			} else if (midIndx == 0 || arr[midIndx - 1] < arr[midIndx]) {
 				return findIndexBitonicBinSearch(arr, midIndx + 1, high);
-			} 
-				
-				return findIndexBitonicBinSearch(arr, low, midIndx - 1);
 			}
-		return midIndx;
+
+			return findIndexBitonicBinSearch(arr, low, midIndx - 1);
 		}
-          
-	
+		return midIndx;
+	}
 
 	@Override
 	public boolean findElementBinarySearch(int[] arr, int searchElement) {
@@ -291,7 +323,20 @@ public class SearchingOpsImpl implements SearchingOps {
 	public int findBitonicIndex(int[] arr) {
 		// TODO Auto-generated method stub
 
-		return findIndexBitonicBinSearch(arr, 0, arr.length-1);
+		return findIndexBitonicBinSearch(arr, 0, arr.length - 1);
+	}
+
+	@Override
+	public int findFirstOccurence(int[] arr, int findElement) {
+		// TODO Auto-generated method stub
+		return findFirstOccurence(arr, findElement, 0, arr.length - 1);
+	}
+
+	@Override
+	public int findLastOccurence(int[] arr, int findElement) {
+		// TODO Auto-generated method stub
+
+		return findLastOccurence(arr, findElement, 0, arr.length - 1);
 	}
 
 }

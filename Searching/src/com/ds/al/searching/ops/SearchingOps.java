@@ -24,4 +24,8 @@ public interface SearchingOps {
 
 	int findBitonicIndex(int arr[]);
 
+	int findFirstOccurence(int arr[], int findElement);
+
+	int findLastOccurence(int arr[], int findElement);
+
 }

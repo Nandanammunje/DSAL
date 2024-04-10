@@ -339,4 +339,36 @@ public class SearchingOpsImpl implements SearchingOps {
 		return findLastOccurence(arr, findElement, 0, arr.length - 1);
 	}
 
+	@Override
+	public int findMajorityElement(int[] arr) {
+		// TODO Auto-generated method stub
+
+		int limit = arr.length / 2;
+		int maxVoteElement = -1;
+		int maxVote = 0;
+
+		HashMap<Integer, Integer> numMap = new HashMap<Integer, Integer>();
+		for (int i = 0; i < arr.length; i++) {
+
+			if (!numMap.containsKey(arr[i])) {
+				if (i <= arr.length / 2)
+					numMap.put(arr[i], 1);
+				else
+					continue;
+			}
+			else {
+				if (i <= limit || maxVote + arr.length - i - 1 >= limit) {
+					int vote = numMap.computeIfPresent(arr[i], (k, v) -> v = v + 1);
+					if (vote > maxVote) {
+						maxVote = vote;
+						maxVoteElement = arr[i];
+					}
+				} else {
+					break;
+				}
+			}
+
+		}
+		 	return (maxVote >limit)?maxVoteElement:-1;
+	}
 }

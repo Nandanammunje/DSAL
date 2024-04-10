@@ -27,5 +27,7 @@ public interface SearchingOps {
 	int findFirstOccurence(int arr[], int findElement);
 
 	int findLastOccurence(int arr[], int findElement);
+	
+	int findMajorityElement(int arr[]);
 
 }

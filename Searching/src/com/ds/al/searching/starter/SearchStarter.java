@@ -1,5 +1,6 @@
 package com.ds.al.searching.starter;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 import com.ds.al.searching.ops.SearchingOps;
@@ -9,6 +10,7 @@ public class SearchStarter {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+
 		int size, arr[], searchElement;
 
 		Scanner sc = new Scanner(System.in);
@@ -18,10 +20,9 @@ public class SearchStarter {
 		System.out.println("Enter the array elements");
 		for (int i = 0; i < arr.length; i++)
 			arr[i] = sc.nextInt();
-		System.out.println("Enter the search Element");
-		searchElement = sc.nextInt();
+	
 		SearchingOps ops = new SearchingOpsImpl();
-		ops.findLastOccurence(arr, searchElement);
+		ops.findMajorityElement(arr);
 		sc.close();
 
 	}

@@ -6,57 +6,59 @@ public class TernarySearchTree<T> {
 
 	private T obj;
 
-	private TernarySearchTree leftLink;
+	private TernarySearchTree<T> leftLink;
 
-	private TernarySearchTree rightLink;
+	private TernarySearchTree<T> rightLink;
 
-	private TernarySearchTree midLink;
+	private TernarySearchTree<T> midLink;
 
-	private TernarySearchTree root;
+	private TernarySearchTree<T> root;
 
 	private boolean isFirstword;
 
-	public TernarySearchTree() {
+	private boolean isEOW;
 
+	public TernarySearchTree() {
+		isEOW = false;
 	}
 
 	public TernarySearchTree getRoot() {
 		return root;
 	}
 
-	public void setRoot(TernarySearchTree root) {
+	private void setRoot(TernarySearchTree root) {
 		this.root = root;
 	}
 
-	public char getData() {
+	private char getData() {
 		return data;
 	}
 
-	public void setData(char data) {
+	private void setData(char data) {
 		this.data = data;
 	}
 
-	public TernarySearchTree getLeftLink() {
+	public TernarySearchTree<T> getLeftLink() {
 		return leftLink;
 	}
 
-	public void setLeftLink(TernarySearchTree leftLink) {
+	private void setLeftLink(TernarySearchTree leftLink) {
 		this.leftLink = leftLink;
 	}
 
-	public TernarySearchTree getRightLink() {
+	public TernarySearchTree<T> getRightLink() {
 		return rightLink;
 	}
 
-	public void setRightLink(TernarySearchTree rightLink) {
+	private void setRightLink(TernarySearchTree rightLink) {
 		this.rightLink = rightLink;
 	}
 
-	public TernarySearchTree getMidLink() {
+	public TernarySearchTree<T> getMidLink() {
 		return midLink;
 	}
 
-	public void setMidLink(TernarySearchTree midLink) {
+	private void setMidLink(TernarySearchTree midLink) {
 		this.midLink = midLink;
 	}
 
@@ -94,6 +96,7 @@ public class TernarySearchTree<T> {
 
 		if (index >= word.length()) {
 			parentNode.setObj(val);
+			parentNode.isEOW = true;
 			return;
 		}
 
@@ -171,12 +174,12 @@ public class TernarySearchTree<T> {
 
 	}
 
-	private T findValFromKey(String key, TernarySearchTree node, int index) {
+	private T findValFromKey(String key, TernarySearchTree<T> node, int index) {
 		T val = null;
 		if (node != null && index < key.length()) {
 			if (node.getData() == key.charAt(index)) {
 				if (index == key.length() - 1)
-					return (T) node.getObj();
+					return node.getObj();
 				else
 					val = findValFromKey(key, node.getMidLink(), index + 1);
 			} else if (node.data > key.charAt(index))
@@ -189,4 +192,30 @@ public class TernarySearchTree<T> {
 		return val;
 	}
 
+	public boolean containsKey(String key) {
+		boolean isKeyPresent = false;
+
+		isKeyPresent = findKey(root, key, 0);
+
+		return isKeyPresent;
+
+	}
+
+	private boolean findKey(TernarySearchTree<T> node, String key, int index) {
+		boolean isPresent = false;
+		if (node != null && index < key.length()) {
+			if (node.getData() == key.charAt(index)) {
+				if (index == key.length() - 1 && node.isEOW)
+					return true;
+				else if (index < key.length())
+					isPresent = findKey(node.getMidLink(), key, index + 1);
+			} else if (node.data > key.charAt(index))
+				isPresent = findKey(node.getLeftLink(), key, index);
+			else
+				isPresent = findKey(node.getRightLink(), key, index);
+
+		}
+
+		return isPresent;
+	}
 }

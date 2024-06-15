@@ -1,5 +1,7 @@
 package com.ds.al.stringalgo.entity;
 
+import java.util.ArrayList;
+
 public class TernarySearchTree<T> {
 
 	private char data;
@@ -17,6 +19,8 @@ public class TernarySearchTree<T> {
 	private boolean isFirstword;
 
 	private boolean isEOW;
+
+	private int counter = 0;
 
 	public TernarySearchTree() {
 		isEOW = false;
@@ -217,5 +221,24 @@ public class TernarySearchTree<T> {
 		}
 
 		return isPresent;
+	}
+
+	public ArrayList<String> getAllWords() {
+		ArrayList<String> wordLst = new ArrayList<String>();
+		getWordLst(wordLst, root,"");
+	return wordLst;
+	}
+
+	private void getWordLst(ArrayList<String> wordLst, TernarySearchTree<T> node, String Letter) {
+		if (node == null)
+			return;
+		if (node.isEOW) {
+			wordLst.add(counter, Letter + node.getData());
+			counter++;
+		}
+		getWordLst(wordLst, node.getMidLink(), Letter + node.getData());
+		getWordLst(wordLst, node.getRightLink(), Letter);
+		getWordLst(wordLst, node.getLeftLink(), Letter);
+
 	}
 }

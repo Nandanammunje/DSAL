@@ -22,15 +22,17 @@ public class TernarySearchTree<T> {
 
 	private int counter = 0;
 
+	private int maxWordLength;
+
 	public TernarySearchTree() {
 		isEOW = false;
 	}
 
-	public TernarySearchTree getRoot() {
+	public TernarySearchTree<T> getRoot() {
 		return root;
 	}
 
-	private void setRoot(TernarySearchTree root) {
+	private void setRoot(TernarySearchTree<T> root) {
 		this.root = root;
 	}
 
@@ -46,7 +48,7 @@ public class TernarySearchTree<T> {
 		return leftLink;
 	}
 
-	private void setLeftLink(TernarySearchTree leftLink) {
+	private void setLeftLink(TernarySearchTree<T> leftLink) {
 		this.leftLink = leftLink;
 	}
 
@@ -54,7 +56,7 @@ public class TernarySearchTree<T> {
 		return rightLink;
 	}
 
-	private void setRightLink(TernarySearchTree rightLink) {
+	private void setRightLink(TernarySearchTree<T> rightLink) {
 		this.rightLink = rightLink;
 	}
 
@@ -62,7 +64,7 @@ public class TernarySearchTree<T> {
 		return midLink;
 	}
 
-	private void setMidLink(TernarySearchTree midLink) {
+	private void setMidLink(TernarySearchTree<T> midLink) {
 		this.midLink = midLink;
 	}
 
@@ -76,7 +78,7 @@ public class TernarySearchTree<T> {
 
 	public void addWord(String word, T val) {
 		if (root == null) {
-			root = new TernarySearchTree();
+			root = new TernarySearchTree<T>();
 			root.setMidLink(null);
 			root.setLeftLink(null);
 			root.setRightLink(null);
@@ -84,7 +86,7 @@ public class TernarySearchTree<T> {
 
 		}
 
-		TernarySearchTree treeNode = root;
+		TernarySearchTree<T> treeNode = root;
 		if (isFirstword)
 			TraverseAddChar(treeNode, 0, treeNode, word, 0, val);
 		else {
@@ -95,7 +97,7 @@ public class TernarySearchTree<T> {
 		isFirstword = false;
 	}
 
-	private void TraverseAddChar(TernarySearchTree treeNode, int index, TernarySearchTree parentNode, String word,
+	private void TraverseAddChar(TernarySearchTree<T> treeNode, int index, TernarySearchTree<T> parentNode, String word,
 			int compare, T val) {
 
 		if (index >= word.length()) {
@@ -110,7 +112,7 @@ public class TernarySearchTree<T> {
 				TraverseAddChar(treeNode.getMidLink(), index + 1, treeNode, word, 0, val);
 			} else {
 				if (treeNode == null) {
-					treeNode = new TernarySearchTree();
+					treeNode = new TernarySearchTree<T>();
 					treeNode.setData(word.charAt(index));
 					parentNode.setMidLink(treeNode);
 					TraverseAddChar(treeNode.getMidLink(), index + 1, treeNode, word, 0, val);
@@ -130,7 +132,7 @@ public class TernarySearchTree<T> {
 
 			} else {
 				if (treeNode == null) {
-					treeNode = new TernarySearchTree();
+					treeNode = new TernarySearchTree<T>();
 					treeNode.setData(word.charAt(index));
 					if (compare == 0)
 						parentNode.setMidLink(treeNode);
@@ -147,13 +149,13 @@ public class TernarySearchTree<T> {
 
 	}
 
-	public boolean containsWord(String txt) {
+	public boolean startsWithWord(String txt) {
 		boolean isExist = true;
 		isExist = findTernaryNode(root, 0, txt);
 		return isExist;
 	}
 
-	private boolean findTernaryNode(TernarySearchTree node, int index, String word) {
+	private boolean findTernaryNode(TernarySearchTree<T> node, int index, String word) {
 		boolean isExist = true;
 		if (index >= word.length() && node == null)
 			return true;
@@ -225,8 +227,8 @@ public class TernarySearchTree<T> {
 
 	public ArrayList<String> getAllWords() {
 		ArrayList<String> wordLst = new ArrayList<String>();
-		getWordLst(wordLst, root,"");
-	return wordLst;
+		getWordLst(wordLst, root, "");
+		return wordLst;
 	}
 
 	private void getWordLst(ArrayList<String> wordLst, TernarySearchTree<T> node, String Letter) {
@@ -239,6 +241,24 @@ public class TernarySearchTree<T> {
 		getWordLst(wordLst, node.getMidLink(), Letter + node.getData());
 		getWordLst(wordLst, node.getRightLink(), Letter);
 		getWordLst(wordLst, node.getLeftLink(), Letter);
+
+	}
+
+	public int getMaxWordLength() {
+		maxWordLength = 0;
+		getMaxWordLength(root, 0);
+		return maxWordLength;
+	}
+
+	private void getMaxWordLength(TernarySearchTree<T> node, int counter) {
+		if (node == null)
+			return;
+		if (node.isEOW && counter+1 > maxWordLength)
+			maxWordLength = counter+1;
+
+		getMaxWordLength(node.getMidLink(), counter + 1);
+		getMaxWordLength(node.getRightLink(), counter);
+		getMaxWordLength(node.getLeftLink(), counter);
 
 	}
 }

@@ -10,6 +10,8 @@ public class TrieSuffix {
 
 	private boolean isWord;
 
+	private int substrCount;
+
 	public TrieSuffix getRoot() {
 		return root;
 	}
@@ -17,6 +19,8 @@ public class TrieSuffix {
 	public void setRoot(TrieSuffix root) {
 		this.root = root;
 	}
+
+	
 
 	private TrieSuffix createNode() {
 		TrieSuffix node = new TrieSuffix();
@@ -56,11 +60,36 @@ public class TrieSuffix {
 				isSubstring = false;
 				break;
 			}
-			currNode=currNode.suffixMap.get(substr.charAt(i));
+			currNode = currNode.suffixMap.get(substr.charAt(i));
 
 		}
 
 		return isSubstring;
+	}
+
+	public int countSubstrRepeations(String substr) {
+		TrieSuffix currNode = root;
+		substrCount = 0;
+
+		for (int i = 0; i < substr.length(); i++) {
+
+			if (!currNode.suffixMap.containsKey(substr.charAt(i))) {
+				return 0;
+			}
+
+			currNode = currNode.suffixMap.get(substr.charAt(i));
+		}
+		findEOW(currNode);
+		return substrCount;
+	}
+
+	private void findEOW(TrieSuffix node) {
+		if (node.isWord) 
+			substrCount++;
+	      
+		node.suffixMap.forEach((k,v)->findEOW(v));
+		
+
 	}
 
 }

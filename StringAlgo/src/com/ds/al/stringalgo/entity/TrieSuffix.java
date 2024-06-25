@@ -12,6 +12,8 @@ public class TrieSuffix {
 
 	private int substrCount;
 
+	private String longstr = "";
+
 	public TrieSuffix getRoot() {
 		return root;
 	}
@@ -19,8 +21,6 @@ public class TrieSuffix {
 	public void setRoot(TrieSuffix root) {
 		this.root = root;
 	}
-
-	
 
 	private TrieSuffix createNode() {
 		TrieSuffix node = new TrieSuffix();
@@ -84,11 +84,44 @@ public class TrieSuffix {
 	}
 
 	private void findEOW(TrieSuffix node) {
-		if (node.isWord) 
+		if (node.isWord)
 			substrCount++;
-	      
-		node.suffixMap.forEach((k,v)->findEOW(v));
-		
+
+		node.suffixMap.forEach((k, v) -> findEOW(v));
+
+	}
+
+	public String countLongestRepeatingSubstr() {
+		String x = "";
+		findEOW(root, x);
+
+		return longstr;
+
+	}
+
+	private int findEOW(TrieSuffix node, String substr) {
+		int word = 0;
+		if (node.isWord) {
+			for (char i : node.suffixMap.keySet()) {
+
+				word = word + findEOW(node.suffixMap.get(i), substr + i);
+
+			}
+			word++;
+
+		} else {
+			for (char key : node.suffixMap.keySet()) {
+				word = word + findEOW(node.suffixMap.get(key), substr + key);
+				if (word > 2 && substr.length() > longstr.length())
+					longstr = substr;
+
+			}
+
+		}
+		if (word >= 2 && substr.length() > longstr.length())
+			longstr = substr;
+
+		return word;
 
 	}
 

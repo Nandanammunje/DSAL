@@ -11,6 +11,8 @@ public class TrieSuffix {
 	private boolean isWord;
 
 	private int substrCount;
+	
+	private TrieSuffix compressedRoot;
 
 	private String longstr = "";
 
@@ -123,6 +125,28 @@ public class TrieSuffix {
 
 		return word;
 
+	}
+	private void deepCopyMap(HashMap<Character,TrieSuffix> sourceMap,HashMap<Character,TrieSuffix> destMap)
+	{
+		for(Character charSeq:sourceMap.keySet())
+		{
+			destMap.put(charSeq,null);
+		}
+		
+		
+	}
+	private void compressSuffixTrie(TrieSuffix node,TrieSuffix compressedNode)
+	{
+		if(node.isWord || node.suffixMap.size()>=1)
+		{
+			if(compressedRoot==null)
+			{
+				compressedRoot=createNode();
+				deepCopyMap(node.suffixMap,compressedRoot.suffixMap );
+				
+			}
+		}
+		
 	}
 
 }

@@ -24,12 +24,14 @@ public class SuffixArr {
 		this.suffixStr = suffixStr;
 	}
 
-	public int[] getSuffixArr(String word) {
+	public String[] getSuffixArr(String word) {
 		suffxArrIndex = 0;
 		suffArr = new int[word.length()];
+		suffixStr=new String[word.length()];
+		
 		getSearchTree(word);
 		
-		return suffArr;
+		return suffixStr;
 
 	}
 
@@ -50,7 +52,7 @@ public class SuffixArr {
 
 		LexicalOrderTraversal(node.getLeftLink(), substr);
 		if (node.getObj() != null) {
-			
+			suffixStr[suffxArrIndex]=substr+node.getData(); 
 			suffArr[suffxArrIndex] = node.getObj();
 			suffxArrIndex++;
 		}

@@ -36,7 +36,7 @@ public class TernarySearchTree<T> {
 		this.root = root;
 	}
 
-	private char getData() {
+	public char getData() {
 		return data;
 	}
 
@@ -261,4 +261,7 @@ public class TernarySearchTree<T> {
 		getMaxWordLength(node.getLeftLink(), counter);
 
 	}
+	
+	
+	
 }

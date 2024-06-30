@@ -60,5 +60,18 @@ public class SuffixArr {
 		LexicalOrderTraversal(node.getRightLink(), substr);
 
 	}
+	
+	private boolean isSubStringPresent(int low,int high,String word)
+	{ boolean isPresent=true;;
+		
+		if(low > high)
+			return false;
+	  int mid=low+(high-low)/2;
+	  
+	  return isPresent;
+	}
+	
+	
+	
 
 }

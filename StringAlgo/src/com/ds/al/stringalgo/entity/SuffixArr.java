@@ -96,7 +96,7 @@ public class SuffixArr {
 	}
 
 	private int getOffset(int low, int high, int mid) {
-		int i = mid-1, j =mid+1, offset = -1;
+		int i = mid-1, j =mid+1, offset = 0;
 	
 		while (i >=0 && j < lcpSkipArr.length) {
 			if (lcpSkipArr[i] != -1 && lcpSkipArr[j] != -1) {
@@ -118,7 +118,7 @@ public class SuffixArr {
 		if (low > high)
 			return false;
 		int mid = low + (high - low) / 2;
-		int offset = -1;
+		int offset = 0;
 		offset = getOffset(low, high, mid);
 		int compareValue = areCharactersSameRange(suffixStr[mid], word, offset, lcpSkipArr, mid);
 		if (compareValue == 0)

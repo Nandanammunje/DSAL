@@ -23,7 +23,7 @@ public class StringAlgoUtility {
 	public static int areCharactersSameRange(String srcStr, String destStr, int offset, int skipArr[], int mid) {
 		int diffValue = 0;
 		int minLength = (destStr.length() > srcStr.length()) ? srcStr.length() : destStr.length();
-		for (int i = offset+1; i < minLength; i++) {
+		for (int i = offset; i < minLength; i++) {
 			diffValue = (destStr.charAt(i) == srcStr.charAt(i)) ? 0 : destStr.charAt(i) > srcStr.charAt(i) ? 1 : -1;
 			if (diffValue != 0) {
 				skipArr[mid] = i;
@@ -37,6 +37,18 @@ public class StringAlgoUtility {
 		}
 
 		return diffValue;
+	}
+
+	public static int getRepeatCharIndex(String charSeq) {
+		int index = -1;
+		for (int i = 0; i < charSeq.length() - 1; i++) {
+			if (charSeq.charAt(i) == charSeq.charAt(i + 1)) {
+				index = i;
+				break;
+			}
+		}
+		return index;
+
 	}
 
 }

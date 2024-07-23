@@ -65,7 +65,7 @@ public class StringAlgoOpsImpl implements StringAlgoOps {
 		// TODO Auto-generated method stub
 		Stack<Character> charStack = new Stack<Character>();
 		char stackTopChar = '\0';
-	    
+	    StringBuffer cb=new StringBuffer();
 	  
 		for (int i = 0; i < str.length(); i++) {
 			char charItr = str.charAt(i);
@@ -82,7 +82,8 @@ public class StringAlgoOpsImpl implements StringAlgoOps {
 
 		}
                if(!charStack.isEmpty())
-            	   charStack.stream().forEach((itr)->{System.out.println(itr);});
+            	   charStack.stream().forEach((itr)->cb.append(itr));
+               cb.toString();
 		
 	}
 }

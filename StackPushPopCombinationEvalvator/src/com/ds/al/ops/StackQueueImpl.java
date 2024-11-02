@@ -9,7 +9,6 @@ public class StackQueueImpl {
 
 		int[] nextSmallerElementRightIndexArr = nextSmallerElementRightIndex(nums);
 		int[] previousSmallElementleftIndexArr = previousSmallElementleftIndex(nums);
-		
 
 		int totalElement = 0;
 		for (int i = 0; i < nums.length; i++) {
@@ -25,9 +24,8 @@ public class StackQueueImpl {
 		return totalElement;
 
 	}
-	
-	public static int subArrRange(int nums[])
-	{
+
+	public static int subArrRange(int nums[]) {
 		int subArrMinSum = subArrMinSum(nums);
 		int[] nextLargerElmentRightIndex = nextLargerElmentRightIndex(nums);
 		int[] previousGreaterElementleftIndex = previousGreaterElementleftIndex(nums);
@@ -41,9 +39,9 @@ public class StackQueueImpl {
 			System.out.println("index " + i + " left " + leftElement + " right " + rightElement);
 			totalElement = totalElement + (leftElement * rightElement * nums[i]);
 		}
-       System.out.println(totalElement-subArrMinSum);
-		return totalElement-subArrMinSum;
-		
+		System.out.println(totalElement - subArrMinSum);
+		return totalElement - subArrMinSum;
+
 	}
 
 	private static int[] nextSmallerElementRightIndex(int nums[]) {
@@ -120,5 +118,75 @@ public class StackQueueImpl {
 
 		return nextGreaterLeftArr;
 	}
+
+	public Deque<Integer> AsteroidCollision(int asteroid[]) {
+		Deque<Integer> monStack = new LinkedList<Integer>();
+		boolean isPop = false, isPushed = false;
+		for (int i = 0; i < asteroid.length; i++) {
+			isPop = false;
+			isPushed = false;
+			if (monStack.isEmpty()) {
+				monStack.push(asteroid[i]);
+			} else {
+				if (monStack.peek() * asteroid[i] > 0 || monStack.peek() < 0) {
+					monStack.push(asteroid[i]);
+				} else {
+					while (!monStack.isEmpty() && Math.abs(monStack.peek()) <= Math.abs(asteroid[i])) {
+						if (monStack.peek() * asteroid[i] > 0) {
+							monStack.push(asteroid[i]);
+							isPushed = true;
+							break;
+						} else {
+							int topVal = monStack.peek();
+							monStack.pop();
+							if (topVal + asteroid[i] == 0) {
+								isPop = true;
+								break;
+							}
+						}
+					}
+					if ((monStack.isEmpty() && !isPop)
+							|| (monStack.isEmpty() && (monStack.peek() * asteroid[i]) > 0) && !isPushed && !isPop) {
+						monStack.push(asteroid[i]);
+					}
+				}
+
+			}
+		}
+		return monStack;
+
+	}
+
+	public int FindGreatestRectangleHistogram(int histogram[]) {
+		int totalArr = 0,leftWidth=0,rightWidth=0,area=0;
+		int rightArr[] = nextSmallerElementRightIndex(histogram);
+		int leftArr[] = previousSmallElementleftIndex(histogram);
+		leftArr[0] = -2;
+		rightArr[histogram.length-1]=-2;
+		
+		for (int i = 0; i < histogram.length; i++) {
+			if(leftArr[i]==-1)
+				leftWidth=i;
+			if(rightArr[i]==-1)
+				rightWidth=histogram.length-i-1;
+			
+			if(leftArr[i]==-2)
+			  leftWidth=0;
+			else if(leftArr[i]!=-1&&leftArr[i]!=-2)
+				leftWidth=i-leftArr[i]-1;
+			if(rightArr[i]==-2)
+				rightWidth=0;
+			else if(rightArr[i]!=-1&&rightArr[i]!=-2)
+				rightWidth=rightArr[i]-i-1;
+		
+				
+			
+			area=((leftWidth+rightWidth)*histogram[i])+histogram[i];
+			totalArr=Math.max(area, totalArr);
+		}
+		return totalArr;
+
+	}
+	
 
 }

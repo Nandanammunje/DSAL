@@ -194,40 +194,55 @@ public class StackQueueImpl {
 				previousSmallerStack.push(i);
 			} else {
 				while (!previousSmallerStack.isEmpty() && histogram[previousSmallerStack.peek()] >= histogram[i]) {
-                           int nextVal = previousSmallerStack.pop();
-                           int prevVal=(previousSmallerStack.isEmpty())?-1:previousSmallerStack.peek();
-                           if(prevVal==-1)
-                        	   leftWidth=nextVal;
-                           else
-                        	   leftWidth=nextVal-prevVal-1;
-                           rightWidth=i-nextVal-1;
-                         
-                           area = ((leftWidth + rightWidth) * histogram[nextVal]) + histogram[nextVal];
-                           totalArr = Math.max(area, totalArr);	                   
-                          
-					  
-					
+					int nextVal = previousSmallerStack.pop();
+					int prevVal = (previousSmallerStack.isEmpty()) ? -1 : previousSmallerStack.peek();
+					if (prevVal == -1)
+						leftWidth = nextVal;
+					else
+						leftWidth = nextVal - prevVal - 1;
+					rightWidth = i - nextVal - 1;
+
+					area = ((leftWidth + rightWidth) * histogram[nextVal]) + histogram[nextVal];
+					totalArr = Math.max(area, totalArr);
+
 				}
-				 previousSmallerStack.push(i);
+				previousSmallerStack.push(i);
 
 			}
 
 		}
-		while(!previousSmallerStack.isEmpty())
-		{
-			
-			int currentIndex=previousSmallerStack.pop();
-			int nextIndex=(previousSmallerStack.isEmpty())?-1:previousSmallerStack.peek();
-			rightWidth=histogram.length-currentIndex-1;
-			if(nextIndex==-1)
-				 leftWidth=currentIndex ;
+		while (!previousSmallerStack.isEmpty()) {
+
+			int currentIndex = previousSmallerStack.pop();
+			int nextIndex = (previousSmallerStack.isEmpty()) ? -1 : previousSmallerStack.peek();
+			rightWidth = histogram.length - currentIndex - 1;
+			if (nextIndex == -1)
+				leftWidth = currentIndex;
 			else
-			 leftWidth=currentIndex-nextIndex-1;
-			area=((leftWidth + rightWidth) * histogram[currentIndex]) + histogram[currentIndex];
-			 totalArr = Math.max(area, totalArr);	  
+				leftWidth = currentIndex - nextIndex - 1;
+			area = ((leftWidth + rightWidth) * histogram[currentIndex]) + histogram[currentIndex];
+			totalArr = Math.max(area, totalArr);
 		}
-		
-        return totalArr;
+
+		return totalArr;
+	}
+
+	public int findMaximumRectangleMatrix(int rectMarix[][]) {
+		int maxArea = 0, area = 0;
+		int rowArr[] = new int[rectMarix[0].length];
+		for (int i = 0; i < rectMarix.length; i++) {
+			for (int j = 0; j < rectMarix[0].length; j++) {
+				if (rectMarix[i][j] == 0)
+					rowArr[j] = 0;
+				else {
+					rowArr[j] = rowArr[j]+1;
+				}
+			}
+			area = FindGreatestRectangleHistogramOptimized(rowArr);
+			maxArea = Math.max(area, maxArea);
+		}
+
+		return maxArea;
 	}
 
 }

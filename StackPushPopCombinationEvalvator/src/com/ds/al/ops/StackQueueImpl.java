@@ -235,7 +235,7 @@ public class StackQueueImpl {
 				if (rectMarix[i][j] == 0)
 					rowArr[j] = 0;
 				else {
-					rowArr[j] = rowArr[j]+1;
+					rowArr[j] = rowArr[j] + 1;
 				}
 			}
 			area = FindGreatestRectangleHistogramOptimized(rowArr);
@@ -243,6 +243,49 @@ public class StackQueueImpl {
 		}
 
 		return maxArea;
+	}
+
+	public Deque<Integer> removeKDigits(String numbSequence, int k) {
+		Deque<Integer> numbDigit = new LinkedList<Integer>();
+		for (int i = 0; i < numbSequence.length(); i++) {
+
+			if (numbDigit.isEmpty())
+
+				numbDigit.push((numbSequence.charAt(i) - 48));
+			else {
+				while (numbDigit.peek() > (numbSequence.charAt(i) - 48) && k > 0) {
+					k--;
+					numbDigit.pop();
+				}
+				numbDigit.push((numbSequence.charAt(i) - 48));
+
+			}
+
+		}
+		while (!numbDigit.isEmpty() && numbDigit.peekLast() == 0) {
+			numbDigit.pollLast();
+		}
+		StringBuilder sb = new StringBuilder();
+		while (!numbDigit.isEmpty()) {
+			int digit = numbDigit.pop();
+			if (k > 0) {
+				if (digit == 0)
+					sb.append(digit);
+				else {
+					k--;
+					continue;
+				}
+			} else {
+				sb.append(digit);
+			}
+		}
+		if(sb.capacity()<=0)
+		{
+			sb.append("0");
+		}
+
+		return numbDigit;
+
 	}
 
 }

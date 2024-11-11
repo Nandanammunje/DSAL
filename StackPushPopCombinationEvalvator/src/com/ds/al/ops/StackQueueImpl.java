@@ -279,13 +279,31 @@ public class StackQueueImpl {
 				sb.append(digit);
 			}
 		}
-		if(sb.capacity()<=0)
-		{
+		if (sb.capacity() <= 0) {
 			sb.append("0");
 		}
 
 		return numbDigit;
 
+	}
+
+	public int stockMaxSpan(int stockPlan[]) {
+		int span, maxSpan = 1;
+		Deque<Integer> stockQueue = new LinkedList<Integer>();
+		for (int i = 0; i < stockPlan.length; i++) {
+			if (stockQueue.isEmpty())
+				stockQueue.push(i);
+			else {
+				while (!stockQueue.isEmpty() && stockPlan[stockQueue.peek()] <= stockPlan[i]) {
+					stockQueue.pop();
+				}
+				span = (stockQueue.isEmpty()) ? i : i - stockQueue.peek();
+				maxSpan = Math.max(span, maxSpan);
+				stockQueue.push(i);
+			}
+
+		}
+		return maxSpan; 
 	}
 
 }

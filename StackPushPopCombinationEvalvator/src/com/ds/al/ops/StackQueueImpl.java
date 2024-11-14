@@ -303,7 +303,37 @@ public class StackQueueImpl {
 			}
 
 		}
-		return maxSpan; 
+		return maxSpan;
+	}
+
+	public static int[] slidingWindow(int numberWin[], int winLen) {
+		int slidingWindow[] = new int[numberWin.length - winLen+1];
+		int slidingWindowItr = 0;
+		Deque<Integer> windowDeque = new LinkedList<Integer>();
+		for (int i = 0; i < numberWin.length; i++) {
+			if (windowDeque.isEmpty())
+				windowDeque.add(i);
+			else {
+				System.out.println(numberWin[windowDeque.peek()]);
+				while (!windowDeque.isEmpty() && numberWin[windowDeque.peekLast()] < numberWin[i]) {
+					windowDeque.pollLast();
+				}
+				windowDeque.add(i);
+				if ((i + 1) >= winLen ) {
+					int index=windowDeque.getFirst();
+					slidingWindow[slidingWindowItr]=numberWin[index];
+					if(index<=i-winLen+1)
+						windowDeque.pollFirst();
+					slidingWindowItr++;
+		        }
+				
+
+			}
+
+		}
+
+		return slidingWindow;
+
 	}
 
 }

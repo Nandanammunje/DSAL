@@ -307,7 +307,7 @@ public class StackQueueImpl {
 	}
 
 	public static int[] slidingWindow(int numberWin[], int winLen) {
-		int slidingWindow[] = new int[numberWin.length - winLen+1];
+		int slidingWindow[] = new int[numberWin.length - winLen + 1];
 		int slidingWindowItr = 0;
 		Deque<Integer> windowDeque = new LinkedList<Integer>();
 		for (int i = 0; i < numberWin.length; i++) {
@@ -319,14 +319,13 @@ public class StackQueueImpl {
 					windowDeque.pollLast();
 				}
 				windowDeque.add(i);
-				if ((i + 1) >= winLen ) {
-					int index=windowDeque.getFirst();
-					slidingWindow[slidingWindowItr]=numberWin[index];
-					if(index<=i-winLen+1)
+				if ((i + 1) >= winLen) {
+					int index = windowDeque.getFirst();
+					slidingWindow[slidingWindowItr] = numberWin[index];
+					if (index <= i - winLen + 1)
 						windowDeque.pollFirst();
 					slidingWindowItr++;
-		        }
-				
+				}
 
 			}
 
@@ -336,4 +335,171 @@ public class StackQueueImpl {
 
 	}
 
+	public int findCelebrity(int celebMatrix[][]) {
+		Deque<Integer> knownLst = new LinkedList<Integer>();
+		boolean isCelebrity = false;
+		boolean isCelebriyPresent = true;
+		int processedIndex = 0;
+		for (int i = 0; i < celebMatrix.length; i++) {
+			isCelebrity = true;
+			isCelebriyPresent = true;
+			if (!knownLst.isEmpty())
+				break;
+			processedIndex = i;
+			for (int j = 0; j < celebMatrix[0].length; j++) {
+				if (i == j)
+					continue;
+				if (celebMatrix[i][j] == 0 && isCelebrity) {
+					if (celebMatrix[j][i] == 0) {
+						isCelebrity = false;
+						isCelebriyPresent = false;
+
+					}
+				} else {
+
+					if (celebMatrix[i][j] == 1) {
+						knownLst.add(j);
+						isCelebrity = false;
+						isCelebriyPresent = true;
+					}
+
+				}
+				if (j == celebMatrix[0].length - 1 && isCelebrity) {
+					return i;
+				}
+
+			}
+			if (!isCelebriyPresent)
+				return -1;
+
+		}
+		int celebIndex = findCelebrityKnownListy(knownLst, processedIndex, celebMatrix);
+		return celebIndex;
+	}
+
+	private int findCelebrityKnownListy(Deque<Integer> knownLst, int processedIndex, int celebMatrix[][]) {
+		int celebIndex = -1;
+		while (!knownLst.isEmpty()) {
+			int index = knownLst.pop();
+			for (int i = processedIndex + 1; i < celebMatrix[0].length; i++) {
+				celebIndex = index;
+				if (i == index)
+					continue;
+				if (celebMatrix[index][i] != 0 && celebMatrix[i][index] != 1) {
+					celebIndex = -1;
+					break;
+				}
+			}
+			if (celebIndex != -1)
+				break;
+		}
+		return celebIndex;
+	}
+
+	
+	public boolean isValidBinaryTree(String sequence) {
+		Deque<Integer> preOrderDq = new LinkedList<Integer>();
+		String treeNode[] = sequence.split(",");
+		int nodeArr[] = new int[treeNode.length];
+		boolean isValidBT = true;
+		if (treeNode[0].equals("#")) {
+			return false;
+		}
+		preOrderDq.push(0);
+		for (int i = 1; i < treeNode.length; i++) {
+			if (preOrderDq.isEmpty()) {
+				isValidBT = false;
+				break;
+			} else {
+				int parentIndex = preOrderDq.peek();
+				nodeArr[parentIndex] = nodeArr[parentIndex] + 1;
+
+				if (nodeArr[parentIndex] == 2)
+					preOrderDq.pop();
+
+				if (!treeNode[i].equals("#")) {
+					preOrderDq.push(i);
+
+				}
+
+			}
+
+		}
+		if (!preOrderDq.isEmpty()) {
+			isValidBT = false;
+		}
+
+		return isValidBT;
+
+	}
+
+	public String decodeString(String s) {
+
+		Deque<String> charStack = new LinkedList<String>();
+		Deque<Integer> intStack = new LinkedList<Integer>();
+		Deque<String> rStrBlock=new LinkedList<String>();
+		boolean isNumStart = true;
+		int startIndex = 0;
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < s.length(); i++) {
+
+			char charAtIndex = s.charAt(i);
+			switch (charAtIndex) {
+
+			case '[':
+				isNumStart = true;
+				Integer alphaCount = Integer.parseInt(s.substring(startIndex, i));
+				intStack.push(alphaCount);
+				charStack.push("[");
+				break;
+			case ']':
+				StringBuffer strRpt = new StringBuffer();
+				while (!charStack.isEmpty() && !charStack.peek().equals("[")) {
+					rStrBlock.push(charStack.pop());
+				}
+				while(!rStrBlock.isEmpty())
+				{
+					strRpt.append(rStrBlock.pop());
+				}
+				charStack.pop();
+				String rpt = strRpt.toString();
+				int repeatIndex = intStack.pop();
+				for (int j = 0; j < repeatIndex - 1; j++)
+					strRpt.append(rpt);
+				if (charStack.isEmpty())
+					sb.append(strRpt);
+				else
+					charStack.push(strRpt.toString());
+				break;
+			default:
+				int charInt = (int) charAtIndex;
+				if ((charInt >= 97 && charInt <= 122)) {
+					if (charStack.isEmpty()) {
+						sb.append(charAtIndex);
+					} else {
+
+						charStack.push(Character.toString(charAtIndex));
+					}
+
+				} else {
+					if (isNumStart) {
+						startIndex = i;
+						isNumStart = false;
+					}
+
+				}
+
+			}
+
+		}
+		return sb.toString();
+	}
+
+	public static boolean isNum(String s) {
+		int charInt = (int) s.charAt(0);
+		if (charInt >= 48 && charInt <= 57)
+			return true;
+		else
+			return false;
+	}
 }
